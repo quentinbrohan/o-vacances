@@ -15,5 +15,7 @@
 | `/trip/[i:idTrip]` | `PATCH` | `TripController` | `update` | Modification du voyage | Trip Update | idTrip is the id of the trip, nameTrip is the name of the trip|
 | `/trip/[i:idTrip]` | `DELETE` | `TripController` | `delete` | Suppression du voyage | Trip Delete | idTrip is the id of the trip, nameTrip is the name of the trip|
 | `/trip/create` | `POST` | `TripController` | `create` | Creation du voyage | Trip Creation | - |
+| `/trip/activities` | `POST` | `TripController` | `create` | Creation d'une activité | Activity Creation | - |
+| `/trip/activities` | `PATCH` | `TripController` | `update` | Modification d'une activité | Activity Update | - |
 | `/contact` | `GET` | `MainController` | `contact` | formulaire de contact | contact form | - |
 | `/error` | `GET` | `MainController` | `error` | page d'erreur | error page | - |
