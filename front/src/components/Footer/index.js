@@ -5,8 +5,12 @@ const Footer = () => (
 
   <footer>
     <ul className="footer-nav">
-      <li className="footer-nav-item">Contact</li>
-      <li className="footer-nav-item">Qui sommes nous ?</li>
+      <li className="footer-nav-item">
+        <a href="#">Contact</a>
+      </li>
+      <li className="footer-nav-item">
+         <a href="#">Qui sommes nous ?</a>
+      </li>
     </ul>
   </footer>
 );
