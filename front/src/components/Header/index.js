@@ -1,4 +1,6 @@
 import React from 'react';
+import { Button } from 'semantic-ui-react';
+import 'semantic-ui-css/semantic.min.css';
 
 import './header.scss';
 
@@ -12,8 +14,8 @@ const Header = () => (
         <li><a href="">Mon profil</a></li>
       </ul>
       <div className="connection">
-        <button type="button">Connexion</button>
-        <button type="button">Déconnexion</button>
+        <Button>Se connecter</Button>
+        <Button>Sinscrire</Button>
       </div>
     </nav>
   </header>

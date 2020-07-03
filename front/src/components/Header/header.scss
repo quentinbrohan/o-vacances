@@ -6,7 +6,6 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   .navigation {
     display: flex;
     align-items: center;
@@ -14,6 +13,8 @@ header {
       display: flex;
       li {
         margin-left: $gutter;
+        a {
+        }
       }
     }
   }
