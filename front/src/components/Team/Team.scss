@@ -1,9 +1,28 @@
-.team-cards{
-  width:80%;
-  margin: 5rem auto;
+@import 'src/styles/vars';
 
-  ul{
-    margin:0.5rem;
+.team-cards{
+  display: flex;
+
+  .team-card{
+    border: solid 0.04*$gutter $blackColor;
+    border-radius: 0.3*$gutter;
+    margin: $gutter;
+    padding: $gutter;
+    background-color: rgb(214, 214, 214);
+
+    h2{
+      font-weight: bold;
+      margin: 0.5*$gutter;
+    }
+
+    li{
+      padding: 0.1*$gutter;
+
+      a{
+        margin-left: 0.4*$gutter;
+      }
+    }
   }
+ 
   
 }
