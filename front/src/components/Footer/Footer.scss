@@ -5,6 +5,11 @@ footer {
   position: fixed;
   bottom: 0;
   width: 100%;
+  padding: 2rem;
+  .footer-container {
+    max-width: 1152px;
+    margin: 0 auto;
+  }
 
   .footer-nav{
     color: white;
@@ -15,7 +20,7 @@ footer {
     .footer-nav-item{
 
       display: inline-block;
-      padding: 2rem;
+      margin-right: 2rem;
       
       a{ 
 
