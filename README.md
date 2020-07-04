@@ -1,5 +1,7 @@
 # o-vacances
 
+## pour installer symfony 
+en ldc dans le dossier "ovacances/back" : composer install
 
 ## pour avoir la BDD penser à créer le .env.local  en modifiant les informations sur user - password - db_name  et faire la commande en LDC ci-dessous
 .env.local
