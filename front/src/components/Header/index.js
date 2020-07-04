@@ -6,6 +6,8 @@ import './header.scss';
 
 const Header = () => (
   <header>
+  <div className="header-container">
+
     <a href="/">LOGO</a>
     <nav className="navigation">
       <div className="mobile">
@@ -27,6 +29,9 @@ const Header = () => (
             <button type="button">
               <a href="/">Déconnexion</a>
             </button>
+            <button type="button">
+              <a href="/">Inscription</a>
+            </button>
           </div>
         </Menu>
       </div>
@@ -43,9 +48,13 @@ const Header = () => (
           <button type="button">
             <a href="/">Déconnexion</a>
           </button>
+          <button type="button">
+            <a href="/">Inscription</a>
+          </button>
         </div>
       </div>
     </nav>
+  </div>
   </header>
 );
 
