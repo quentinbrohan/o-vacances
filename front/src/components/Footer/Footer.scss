@@ -1,5 +1,7 @@
+@import "src/styles/vars";
+
 footer {
-  background-color: black;
+  background-color: $blackColor;
   position: fixed;
   bottom: 0;
   width: 100%;
