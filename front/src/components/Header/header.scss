@@ -11,12 +11,8 @@ header {
     outline: none;
     border: none;
     background-color: initial;
-    @media (min-width: $tablet) {
-      display: none;
-    }
-    svg {
-      font-size: 2rem;
-    }
+    font-size: 1rem;
+    color: $blackColor;
   }
 
   .mobile {
@@ -32,7 +28,10 @@ header {
     .menu {
       display: none;
       @media (min-width: $tablet) {
-        display: block;
+        display: flex;
+        button:first-child {
+          margin-left: 1rem;
+        }
         ul {
           display: flex;
           li {
@@ -43,21 +42,23 @@ header {
     }
   }
   .connection {
-    display: flex !important;
-    flex-direction: column !important;
     @media (min-width: $tablet) {
-      display: block;
+      display: flex;
     }
-    margin-left: $gutter;
-    button {
-      outline: 0;
-      border: 1px solid black;
-      background-color: #fff;
-      padding: 0.5rem 1rem;
-      font-size: 1rem;
-      margin-bottom: 1rem;
+    &-mobile {
+      display: flex !important;
+      flex-direction: column !important;
       @media (min-width: $tablet) {
-        //
+        display: block;
+      }
+      margin-left: $gutter;
+      button {
+        outline: 0;
+        border: 1px solid black;
+        background-color: #fff;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        margin-bottom: 1rem;
       }
     }
   }

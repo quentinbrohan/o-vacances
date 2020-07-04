@@ -20,7 +20,7 @@ const Header = () => (
           <a href="">Créer un voyage</a>
           <a href="">Mon profil</a>
 
-          <div className="connection">
+          <div className="connection-mobile">
             <button type="button">
               <a href="/">Connexion</a>
             </button>
@@ -37,8 +37,12 @@ const Header = () => (
           <li><a href="">Mon profil</a></li>
         </ul>
         <div className="connection">
-          {/* <Button>Se connecter</Button> */}
-          {/* <Button>Sinscrire</Button> */}
+          <button type="button">
+            <a href="/">Connexion</a>
+          </button>
+          <button type="button">
+            <a href="/">Déconnexion</a>
+          </button>
         </div>
       </div>
     </nav>
