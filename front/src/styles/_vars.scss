@@ -1,11 +1,14 @@
 // Variables
 $primaryColor: #8ec5b6;
-$primaryColor-1: #E9F6F3;
-$primaryColor-2: #BFE2D8;
-$primaryColor-3: #5EA390;
-$primaryColor-4: #388771;
-$secondaryColor: #1b1c1d;
+$primaryColorLighter: #bfe2d8;
+$primaryColorDarker: #388771;
+$blackColor: #2a2c34;
+$whiteColor: #f3f5f9;
 $gutter: 2rem;
+// Typo
+$fontTitle: 'Quicksand', sans-serif;
+$fontBody: 'Nunito', sans-serif;
+
 
 // Media Queries
 $sm-mobile: "320px";

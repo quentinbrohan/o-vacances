@@ -3,5 +3,15 @@
 @import 'vars';
 
 body {
-  font-family: 'Nunito', sans-serif;
+  font-family: $fontBody;
+  color: $blackColor;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $fontTitle;
 }
