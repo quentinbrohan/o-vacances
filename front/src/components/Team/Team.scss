@@ -2,13 +2,18 @@
 
 .team-cards{
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
 
   .team-card{
-    border: solid 0.04*$gutter $blackColor;
     border-radius: 0.3*$gutter;
-    margin: $gutter;
-    padding: $gutter;
-    background-color: rgb(214, 214, 214);
+    padding: 0.5*$gutter;
+    background-color: $whiteColor;
+    align-items: center;
+  
+  
+
 
     h2{
       font-weight: bold;
