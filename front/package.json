@@ -1,5 +1,9 @@
 {
   "name": "o-vacances-front",
+  "version": "0.1.0",
+  "description": "O'Vacances, plan your trip with friends",
+  "author": "O'Vacances Team",
+  "license": "",
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.dev.js",
     "build": "cross-env NODE_ENV=production webpack --config config/webpack.prod.js",
@@ -61,8 +65,6 @@
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",
-    "redux-devtools-extension": "^2.13.8",
-    "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^0.88.2"
+    "redux-devtools-extension": "^2.13.8"
   }
 }
