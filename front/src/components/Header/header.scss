@@ -1,4 +1,4 @@
-@import 'src/styles/vars';
+@import "src/styles/vars";
 
 header {
   background-color: #fff;
@@ -7,17 +7,47 @@ header {
   justify-content: space-between;
   align-items: center;
 
+  button {
+    outline: none;
+    border: none;
+    background-color: initial;
+    @media (min-width: $tablet) {
+      display: none;
+    }
+    svg {
+      font-size: 2rem;
+    }
+  }
+
+  .mobile {
+    display: block;
+    @media (min-width: $tablet) {
+      display: none;
+    }
+  }
   .navigation {
     display: flex;
     align-items: center;
-    ul {
-      display: flex;
-      li {
-        margin-left: $gutter;
+
+    .menu {
+      display: none;
+      @media (min-width: $tablet) {
+        display: block;
+        ul {
+          display: flex;
+          li {
+            margin-left: $gutter;
+          }
+        }
       }
     }
   }
   .connection {
+    display: flex !important;
+    flex-direction: column !important;
+    @media (min-width: $tablet) {
+      display: block;
+    }
     margin-left: $gutter;
     button {
       outline: 0;
@@ -25,7 +55,64 @@ header {
       background-color: #fff;
       padding: 0.5rem 1rem;
       font-size: 1rem;
-      margin-right: 1.5rem;
+      margin-bottom: 1rem;
+      @media (min-width: $tablet) {
+        //
+      }
     }
+  }
+
+  /* Color/shape of burger icon bars */
+  .bm-burger-bars {
+    background: $blackColor;
+  }
+
+
+  /* Position and sizing of clickable cross button */
+  .bm-cross-button {
+    position: absolute;
+    top: 2rem !important;
+    right: 2rem !important;
+    height: 2rem !important;
+    width: 2rem !important;
+  }
+
+  /* Color/shape of close button cross */
+  .bm-cross {
+    color: $whiteColor;
+  }
+
+  /*
+Sidebar wrapper styles
+Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
+*/
+  .bm-menu-wrap {
+    top: 0;
+    position: fixed;
+    height: 100%;
+  }
+  /* General sidebar styles */
+  .bm-menu {
+    background: $blackColor;
+    padding: 2.5rem 1rem 0;
+    font-size: 1.15em;
+  }
+
+  /* Wrapper for item list */
+  .bm-item-list {
+    color: $whiteColor;
+    padding: 0.8em;
+    text-align: center;
+    a:last-child {
+      margin-bottom: 2rem;
+    }
+  }
+
+  /* Individual item */
+  .bm-item {
+    display: inline-block;
+    font-size: 1.4rem;
+    margin: 0;
+    margin-bottom: 1rem;
   }
 }
