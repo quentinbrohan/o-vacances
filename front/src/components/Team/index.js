@@ -9,34 +9,41 @@ import {
 } from 'react-feather';
 import './Team.scss';
 
-const Team = ({ persons }) => (
+// Component to present the team
 
-  <div className="team-cards">
-    {persons.map((person) => (
-      <article key={person.name} className="team-card">
-        <img src="" alt="" />
-        <h2>{person.name}</h2>
-        <ul>
-          <li>
-            <Linkedin />
-            <a href="#">Linkedin</a>
-          </li>
-          <li>
-            <GitHub />
-            <a href="#">Github</a>
-          </li>
-          <li>
-            <Link />
-            <a href="#">Lien portfolio</a>
-          </li>
-          <li>
-            <UserPlus />
-            <a href="#">Autre</a>
-          </li>
-        </ul>
-      </article>
-    ))}
-  </div>
+const Team = ({ persons }) => (
+  <>
+    <h2>L'équipe</h2>
+    <div className="team-cards">
+      {persons.map((person) => (
+        <article key={person.name} className="team-card">
+          <div className="team-card-img">
+            <img src={person.picture} alt={person.name} />
+          </div>
+          <div className="team-card-text">
+            <h3>{person.name}</h3>
+            <p>
+              {person.role}
+            </p>
+            <ul>
+              <li>
+                <a href="#"><Linkedin /></a>
+              </li>
+              <li>
+                <a href="#"><GitHub /></a>
+              </li>
+              <li>
+                <a href="#"><Link /></a>
+              </li>
+              <li>
+                <a href="#"><UserPlus /></a>
+              </li>
+            </ul>
+          </div>
+        </article>
+      ))}
+    </div>
+  </>
 );
 
 Team.propTypes = {

@@ -1,5 +1,10 @@
 @import 'src/styles/vars';
 
+h2{
+  font-size: 2*$gutter;
+  text-align: center;
+  margin-bottom: 2*$gutter;
+}
 .team-cards{
   display: flex;
   flex-wrap: wrap;
@@ -8,25 +13,61 @@
 
   .team-card{
     border-radius: 0.3*$gutter;
-    padding: 0.5*$gutter;
     background-color: $whiteColor;
+    width:210px;
+    text-align: center;
     align-items: center;
+    transition: all 200ms ease-in;
+    transform: scale(0.8);  
+    overflow: hidden;
+    
+
+    &:hover{
+      box-shadow: -15px 17px 31px rgba(0, 0, 0, 0.2);
+      z-index: 2;
+      transition: all 200ms ease-in;
+      transform: scale(1);
+    }
   
   
+    .team-card-img{
+      height: 230px;
+      overflow: hidden;
 
+    img{
+      max-width: 100%;
+      
+    }
+  }
 
-    h2{
+    h3{
       font-weight: bold;
+      font-size: 0.8*$gutter;
       margin: 0.5*$gutter;
+    
+    }
+
+    .team-card-text{
+      padding: 0*5*$gutter;
+      margin-bottom: 0.8*$gutter;
+
+    p{
+      margin: $gutter 0; 
     }
 
     li{
-      padding: 0.1*$gutter;
+      display: inline-block;
 
       a{
         margin-left: 0.4*$gutter;
+    
+        &:hover{
+          color: $primaryColorDarker;
+        }
       }
+
     }
+  }
   }
  
   
