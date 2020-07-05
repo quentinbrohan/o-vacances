@@ -10,7 +10,7 @@ const HomeVisitor = () => {
     <div className="home-visitor">
       {/* Slideshow Images/Text */}
       <Slideshow />
-      <div id="one">
+      <div id="features-split">
         Fonctionnalité 1
       </div>
 

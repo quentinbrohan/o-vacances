@@ -58,12 +58,12 @@ const Slideshow = () => {
         </div>
       </div>
 
-      <button
+      <a
         className="show-features"
-        type="button"
+        href="#features-split"
       >
         Voir les fonctionnalités <ArrowDownCircle />
-      </button>
+      </a>
     </>
   );
 };
