@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { ArrowDownCircle } from 'react-feather';
 
 import slideshowData from 'src/data/homeVisitorData';
-import './homeVisitor.scss';
+import './slideshow.scss';
 
 const Slideshow = () => {
   // console.log(slideshowData);
@@ -38,7 +38,7 @@ const Slideshow = () => {
           ))}
         </div>
         <div className="slideshow-content">
-          <p className="intro-title">Plannifer vos vacances{' '}
+          <h1 className="intro-title">Plannifer vos vacances{' '}
             {slideshowData.map(({ name }, i) => (
               <span
                 key={i}
@@ -51,7 +51,7 @@ const Slideshow = () => {
             ))}
             {' '}
             devient facile.
-          </p>
+          </h1>
           <p className="intro-content">Partir seul ou à plusieurs, gérer ses activités, échanger entre amis avec O'Vacances. <br />
             Tomber amoureux du voyage à nouveau.
           </p>

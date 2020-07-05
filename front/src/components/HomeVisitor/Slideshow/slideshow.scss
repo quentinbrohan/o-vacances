@@ -1,0 +1,66 @@
+@import 'src/styles/vars';
+
+.home-visitor {
+  .slideshow {
+    // position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    z-index: -1;
+    color: $whiteColor;
+    &-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100vw;
+      z-index: -1;
+      object-fit: contain;
+      background-size: cover;
+      background-position: center;
+    }
+    &-content {
+      margin: auto;
+      position: absolute;
+      width: 90%;
+      top: 50%;
+      left: 50%;
+      transform: translateY(-50%) translateX(-50%);
+    }
+    h1.intro-title {
+      z-index: 1;
+      font-size: 4.4rem;
+      font-weight: 500;
+    }
+    p.intro-content {
+      margin-top: $gutter;
+      font-size: 2rem;
+    }
+    span.trip-type {
+      font-weight: 900;
+      // font-size: 5.2rem;
+    }
+  }
+  
+  a.show-features {
+    top: 80vh;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    outline: none;
+    background-color: transparent;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 1.6rem;
+    color: $whiteColor;
+    display: flex;
+    align-items: center;
+    svg {
+      height: 1.6rem;
+      width: 1.6rem;
+      color: $primaryColor;
+    }
+  }  
+}
