@@ -2,10 +2,51 @@
 
 .home-visitor {
   .features-split {
-    h3.title {
+    margin: 0 auto;
+    h2.title {
       text-align: center;
-      font-size: 2rem;
     }
-  
+
+    p {
+      margin-top: 1rem;
+      margin-bottom: 3rem;
+      font-size: 1.2rem;
+    }
+
+    .split {
+      margin-top: 1rem;
+      padding-bottom: $gutter * 2;
+
+      .split-item {
+        margin-top: 1rem;
+        margin-bottom: $gutter;
+        display: flex;
+        flex-direction: column;
+
+        .split-item-content {
+          text-align: center;
+          margin-bottom: 0;
+
+          p {
+            font-size: 1.2rem;
+          }
+        }
+
+        .split-item-image {
+          position: relative;
+          margin: 0 auto;
+          // width: 100%;
+
+          img,
+          svg,
+          video {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            overflow: visible;
+          }
+        }
+      }
+    }
   }
 }
