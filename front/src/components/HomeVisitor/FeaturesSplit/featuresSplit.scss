@@ -1,7 +1,11 @@
+@import 'src/styles/vars';
+
 .home-visitor {
   .features-split {
+    h3.title {
+      text-align: center;
+      font-size: 2rem;
+    }
   
   }
 }
-
-

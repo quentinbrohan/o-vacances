@@ -1,6 +1,7 @@
 @import 'reset';
 @import 'fonts';
 @import 'vars';
+@import 'typography';
 
 html,
 body {
@@ -12,19 +13,6 @@ body {
   color: $blackColor;
 }
 
-:root * {
-  box-sizing: border-box;
-}
-
 p {
   line-height: 150%;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: $fontTitle;
 }
