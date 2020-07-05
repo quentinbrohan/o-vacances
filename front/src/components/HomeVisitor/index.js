@@ -8,7 +8,7 @@ import './homeVisitor.scss';
 const HomeVisitor = () => {
   // console.log(slideshowData);
   // Duration in ms for each slide
-  const time = 5000;
+  const time = 7000;
   const [index, set] = useState(0);
   useEffect(() => {
     const interval = setInterval(() => set((index + 1) % 2), time);
@@ -64,6 +64,9 @@ const HomeVisitor = () => {
       >
         Voir les fonctionnalités <ArrowDownCircle />
       </button>
+      <div id="one">
+        Fonctionnalité 1
+      </div>
 
     </div>
   );
