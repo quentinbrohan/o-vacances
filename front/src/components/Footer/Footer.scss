@@ -3,7 +3,7 @@
 footer {
   background-color: $blackColor;
   position: fixed;
-  bottom: 0;
+  bottom: -1px;
   width: 100%;
   padding: 2rem;
   .footer-container {

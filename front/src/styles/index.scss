@@ -12,9 +12,12 @@ body {
   color: $blackColor;
 }
 
-:root {
-  line-height: 150%;
+:root * {
   box-sizing: border-box;
+}
+
+p {
+  line-height: 150%;
 }
 
 h1,

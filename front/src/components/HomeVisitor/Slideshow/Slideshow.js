@@ -9,18 +9,28 @@ const Slideshow = () => {
   // console.log(slideshowData);
   // Duration in ms for each slide
   const time = 7000;
-  const [index, set] = useState(0);
+  const [index, setIndex] = useState(0);
+
+  // setIndex + reset Index onClick if on last type
+  const changeType = () => {
+    setIndex(index + 1);
+    if (index === (slideshowData.length - 1)) {
+      setIndex(0);
+    }
+  };
+
   useEffect(() => {
-    const interval = setInterval(() => set((index + 1) % 2), time);
+    const interval = setInterval(() => changeType(), time);
     return () => clearInterval(interval);
   }, [index]);
 
   const ref = useRef();
-  // useEffect(() => {
-  //   ref.current.style.animation = 'none';
-  //   void ref.current.offsetHeight;
-  //   ref.current.style.animation = `changewidth ${time / 1000}s linear`;
-  // }, [index]);
+  useEffect(() => {
+    ref.current.style.animation = 'none';
+    // eslint-disable-next-line no-void
+    void ref.current.offsetHeight;
+    ref.current.style.animation = `changewidth ${time / 1000}s linear`;
+  }, [index]);
 
   return (
     <>
@@ -32,24 +42,32 @@ const Slideshow = () => {
               key={i}
               hidden={i !== index || undefined}
               style={{ backgroundImage: `url('${image}')` }}
-              className="slideshow-image"
+              className="slideshow-image transition horizontal"
               alt="Voyage"
             />
           ))}
         </div>
         <div className="slideshow-content">
           <h1 className="intro-title">Plannifer vos vacances{' '}
-            {slideshowData.map(({ name }, i) => (
-              <span
-                key={i}
-                hidden={i !== index || undefined}
-                className="trip-type"
-              >
-                {name}
-              </span>
+            <a href="#" onClick={() => changeType()}>
+              <div
+                ref={ref}
+                className="progress"
+              />
+              {slideshowData.map(({ name }, i) => (
+                <span
+                  key={i}
+                  hidden={i !== index || undefined}
+                  className="trip-type transition vertical"
+                >
+                  {name}
+                </span>
 
-            ))}
+              ))}
+            </a>
             {' '}
+          </h1>
+          <h1 className="intro-title">
             devient facile.
           </h1>
           <p className="intro-content">Partir seul ou à plusieurs, gérer ses activités, échanger entre amis avec O'Vacances. <br />
