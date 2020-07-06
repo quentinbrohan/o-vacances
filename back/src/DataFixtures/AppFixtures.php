@@ -16,13 +16,14 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $users = ['Alexandre', 'Audrey', 'Cécilia', 'Loic', 'Quentin'];
+        $pass = ['$argon2id$v=19$m=65536,t=4,p=1$WSTGqZLJQpBk9QmVDMltwQ$LjlXVpbjWTRUIZhxG1uBtR1h3ZxefZ0T+rpxhHD0Xco', '$argon2id$v=19$m=65536,t=4,p=1$DrrWWl/hRnIYCwKZNdKtww$/duqkLA4649la3mcD0y731BWkr74vj4iclmbGSUIFYc', '$argon2id$v=19$m=65536,t=4,p=1$iPlgMd6MfnO6tnSnokGKvA$fJ2B4/1ImVoWoev1+8PZSFv803QcbIIu57dhClhh4Tk', '$argon2id$v=19$m=65536,t=4,p=1$yP16EySapB8P20P+2UwBKQ$synTEM7TM54rAFTfDsBR5HYwffif4TBS+FB/1MzBLYY', '$argon2id$v=19$m=65536,t=4,p=1$VoWg+roPWyl6kf9c50FpNQ$kkmypy4SGs05hRJ+eRd8S7iaGU1+qrmQceOZ/tfvqb4' ];
         
         for ($i = 0; $i < 5; $i++) {
             $user = new User();
             $user->setEmail($user.'gmail.com');
             $user->setFirstname($users[$i]);
             $user->setLastname($users[$i]);
-            $user->setPassword($users[$i]);
+            $user->setPassword($pass[$i]);
 
             
             $manager->persist($user);
