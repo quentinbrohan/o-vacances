@@ -7,7 +7,7 @@ const Contact = () => (
   <div className="contact">
     <h2>Contactez-nous</h2>
     <div className="contact-text">
-      <h3>Vous souhaitez nous faire part d'un remarque? </h3>
+      <h3>Vous souhaitez nous faire part d'une remarque? Vous avez besoin d'un renseignement? </h3>
       <p>
         Vous pouvez joindre l'un des membres de l'équipe sur la page <a href="#">Qui sommes nous ?</a>
       </p>
