@@ -30,7 +30,7 @@ class Disponibility
     private $end_date;
 
     /**
-     * @ORM\OneToMany(targetEntity=User::class, mappedBy="disponibility")
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="disponibility")
      */
     private $users;
 
@@ -86,7 +86,7 @@ class Disponibility
     {
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
-            $user->setDisponibility($this);
+            $user->addDisponibility($this);
         }
 
         return $this;
@@ -98,7 +98,7 @@ class Disponibility
             $this->users->removeElement($user);
             // set the owning side to null (unless already changed)
             if ($user->getDisponibility() === $this) {
-                $user->setDisponibility(null);
+                $user->addDisponibility(null);
             }
         }
 

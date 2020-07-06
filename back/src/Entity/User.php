@@ -50,7 +50,7 @@ class User
     private $suggestion;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Disponibility::class, inversedBy="users")
+     * @ORM\ManyToMany(targetEntity=Disponibility::class, inversedBy="users")
      */
     private $disponibility;
 
@@ -69,6 +69,7 @@ class User
         $this->suggestion = new ArrayCollection();
         $this->trip = new ArrayCollection();
         $this->activity = new ArrayCollection();
+        $this->disponibility = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -167,14 +168,33 @@ class User
         return $this;
     }
 
-    public function getDisponibility(): ?Disponibility
+    /**
+     * @return Collection|Suggestion[]
+     */
+    public function getDisponibility(): Collection
     {
         return $this->disponibility;
     }
 
-    public function setDisponibility(?Disponibility $disponibility): self
+    public function addDisponibility(Disponibility $disponibility): self
     {
-        $this->disponibility = $disponibility;
+        if (!$this->disponibility->contains($disponibility)) {
+            $this->disponibility[] = $disponibility;
+            $disponibility->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDisponibility(Disponibility $disponibility): self
+    {
+        if ($this->disponibility->contains($disponibility)) {
+            $this->disponibility->removeElement($disponibility);
+            // set the owning side to null (unless already changed)
+            if ($disponibility->getUser() === $this) {
+                $disponibility->addUser(null);
+            }
+        }
 
         return $this;
     }

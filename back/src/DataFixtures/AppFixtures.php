@@ -20,7 +20,7 @@ class AppFixtures extends Fixture
         
         for ($i = 0; $i < 5; $i++) {
             $user = new User();
-            $user->setEmail($user.'gmail.com');
+            $user->setEmail($user."gmail.com");
             $user->setFirstname($users[$i]);
             $user->setLastname($users[$i]);
             $user->setPassword($pass[$i]);
@@ -29,7 +29,7 @@ class AppFixtures extends Fixture
             $manager->persist($user);
         }
 
-        $trips = ['Anniversaire', 'Eté 2020', 'EVG', 'Eté 2015'];
+      /*   $trips = ['Anniversaire', 'Eté 2020', 'EVG', 'Eté 2015'];
         $descriptions = ['Le voyage à dos de dromadaires prendra 4 heures la matinée et 2 heures le soir.
         Le matin, après le petit déjeuner, lorsque la caravane est prête, le départ vers le cœur du désert aura lieu. Après 3  heures de marche, avec quelques pauses de 15 ou 20 minutes pour prendre des photos, la caravane s\'arrête, les cuisiniers se chargent de préparer le déjeuner (couscous, soupe de blé, ...).'];
         $locations = ['Londres', 'Ile de Ré', 'Croatie', 'Espagne' ];
@@ -48,9 +48,9 @@ class AppFixtures extends Fixture
             $activity = new Activity();
             $activity->setTitle($trips[$i]);
             $activity->setDescription($descriptions[$i]);
-            $activity->setCreator(rand(0, 5));
-            $activity->setCategory(rand(0, 5));
-            $activity->setTrip(rand(0, 4));
+            $activity->setCreator($users[mt_rand(0, 4)]);
+            $activity->setCategory(mt_rand(0, 4));
+            $activity->setTrip(mt_rand(0, 3));
 
             $manager->persist($activity);
         }
@@ -88,7 +88,7 @@ class AppFixtures extends Fixture
         }
 
 
-
+ */
 
         $manager->flush();
     }
