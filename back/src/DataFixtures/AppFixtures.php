@@ -31,7 +31,7 @@ class AppFixtures extends Fixture
         $trips = ['Anniversaire', 'Eté 2020', 'EVG', 'Eté 2015'];
         $descriptions = ['Le voyage à dos de dromadaires prendra 4 heures la matinée et 2 heures le soir.
         Le matin, après le petit déjeuner, lorsque la caravane est prête, le départ vers le cœur du désert aura lieu. Après 3  heures de marche, avec quelques pauses de 15 ou 20 minutes pour prendre des photos, la caravane s\'arrête, les cuisiniers se chargent de préparer le déjeuner (couscous, soupe de blé, ...).'];
-        $locations = ['Londres', 'Ile de Ré', 'Croatie', 'Espagne' ]
+        $locations = ['Londres', 'Ile de Ré', 'Croatie', 'Espagne' ];
         
         for ($i = 0; $i < 4; $i++) {
             $trip = new Trip();
@@ -42,7 +42,7 @@ class AppFixtures extends Fixture
             $manager->persist($trip);
         }
 
-        $activities = ['canoé', 'chateau', 'boite', 'bistrot de France', 'foot', 'plage', 'rando de 7h' ]
+        $activities = ['canoé', 'chateau', 'boite', 'bistrot de France', 'foot', 'plage', 'rando de 7h' ];
         for ($i = 0; $i < 7; $i++) {
             $activity = new Activity();
             $activity->setTitle($trips[$i]);
@@ -54,7 +54,7 @@ class AppFixtures extends Fixture
             $manager->persist($activity);
         }
 
-        $categories = ['restaurant', 'sortie nocturne', 'sport', 'visite culturelle', 'point d\'eau' ]
+        $categories = ['restaurant', 'sortie nocturne', 'sport', 'visite culturelle', 'point d\'eau' ];
         for ($i = 0; $i < 5; $i++) {
             $category = new Category();
             $category->setName($categories[$i]);
@@ -68,14 +68,14 @@ class AppFixtures extends Fixture
         for ($i = 0; $i < 4; $i++) {
             $disponibility = new Disponibility();
             $disponibility->setStartDate(new \DateTime($start[$i]));
-            $disponibility->setEndDate((new \DateTime($end[$i]));
+            $disponibility->setEndDate(new \DateTime($end[$i]));
             $disponibility->setTrip(rand(0, 4));
 
             $manager->persist($disponibility);
         }
 
         
-        $suggestions = ['jeux', 'raclette vendredi soir', 'on en parle à Gerard?', 'footing le matin pour ceux qui veulent']
+        $suggestions = ['jeux', 'raclette vendredi soir', 'on en parle à Gerard?', 'footing le matin pour ceux qui veulent'];
         for ($i = 0; $i < 4; $i++) {
             $suggestion = new Suggestion();
             $suggestion->setTitle($suggestions[$i]);
