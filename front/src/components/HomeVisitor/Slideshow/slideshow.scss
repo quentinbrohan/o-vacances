@@ -1,0 +1,129 @@
+@import 'src/styles/vars';
+
+.home-visitor {
+  .slideshow {
+    // position: absolute;
+    top: 0;
+    left: 0;
+    height: 90vh;
+    width: 100%;
+    z-index: -1;
+    color: $whiteColor;
+    &-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100%;
+      z-index: -1;
+      object-fit: contain;
+      background-size: cover;
+      background-position: center;
+    }
+    &-content {
+      margin: auto;
+      position: absolute;
+      width: 100%;
+      max-width: 1152px;
+      top: 50%;
+      left: 50%;
+      transform: translateY(-50%) translateX(-50%);
+      padding: 0 1rem;
+      @media (min-width: $desktop) {
+        padding: 0;
+      }
+    }
+    h1.intro-title {
+      z-index: 1;
+      font-size: 4.4rem;
+      font-weight: 500;
+      display: initial;
+      @media (min-width: $desktop) {
+        display: inherit;
+      }
+    }
+    p.intro-content {
+      margin-top: $gutter;
+      font-size: 2rem;
+    }
+    span.trip-type {
+      font-weight: 900;
+      // margin-left: 1rem;
+      // font-size: 5.2rem;
+      @media (min-width: $mobile) {
+        margin-left: 0;
+      }
+      @media (min-width: $desktop) {
+        margin-left: 1rem;
+        display: inline-block;
+        position: absolute;
+        // Avoid 2 lines span
+        // BUT word end out of layout
+        white-space: nowrap;
+      }
+    }
+
+    // Animations
+    .progress {
+      position: absolute;
+      left: 0;
+      top: -0.5rem;
+      // bottom: 0;
+      height: 0.25rem;
+      opacity: 0.5;
+      background: $whiteColor;
+    }
+    @keyframes changewidth {
+      from {
+        width: 0%;
+      }
+      to {
+        width: 100%;
+      }
+    }
+    
+    .transition {
+      // display: inline-block;
+      transition: all 0.5s ease;
+      transition-property: opacity, transform;
+      @media (min-width: $desktop) {
+      position: absolute !important;
+      }
+    }
+    
+    .transition.vertical[hidden] {
+      transition-delay: 0s;
+      opacity: 0;
+      transform: translate3d(0, -20px, 0) !important;
+    }
+    
+    .transition.horizontal[hidden] {
+      transition-delay: 0s;
+      opacity: 0;
+      transform: translate3d(30px, 0, 0) !important;
+    }
+
+  }
+  
+  // See Features button
+  a.show-features {
+    top: 80vh;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    outline: none;
+    background-color: transparent;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 1.6rem;
+    color: $whiteColor;
+    display: flex;
+    align-items: center;
+    svg {
+      height: 1.6rem;
+      width: 1.6rem;
+      color: $primaryColor;
+    }
+  }  
+}

@@ -1,21 +1,22 @@
 @import 'reset';
 @import 'fonts';
 @import 'vars';
+@import 'typography';
+
+html,
+body {
+  scroll-behavior: smooth;
+}
 
 body {
   font-family: $fontBody;
   color: $blackColor;
 }
 
-:root {
-  line-height: 150%;
+*, *:before, *:after {
+  box-sizing: inherit;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: $fontTitle;
+p {
+  line-height: 150%;
 }
