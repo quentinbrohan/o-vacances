@@ -14,7 +14,7 @@ const App = () => (
   <div className="app">
     <Header />
     <div className="container">
-      <Contact />
+      
     </div>
     <Footer />
   </div>
