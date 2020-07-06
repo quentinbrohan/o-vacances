@@ -3,9 +3,9 @@
 footer {
   background-color: $blackColor;
   position: fixed;
-  bottom: 0;
+  bottom: -1px;
   width: 100%;
-  padding: 2rem;
+  padding: 1rem;
   .footer-container {
     max-width: 1152px;
     margin: 0 auto;
