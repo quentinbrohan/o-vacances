@@ -1,7 +1,9 @@
 import React from 'react';
 
+import './login.scss';
+
 const Login = () => (
-  <div className="Login">
+  <div className="login">
     <h1>Bon retour parmis nous.</h1>
     <div className="login-form">
       <form>

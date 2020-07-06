@@ -1,0 +1,46 @@
+@import 'src/styles/vars';
+
+.login{
+  text-align: center;
+
+  h1{
+    margin-top: 0.5*$gutter;
+    margin-bottom: $gutter;
+  }
+
+  .login-form{
+
+    input, button {
+      width: 300px;
+      padding: 0.4*$gutter;
+      margin: 0.3*$gutter;
+      border: solid 1px $greyDarker;
+      border-radius: 0.1*$gutter;
+    }
+    button{
+      border: none;
+
+      &:hover{
+        background-color: $primaryColorDarker;
+        
+      }
+    }
+  }
+  .login-layout{
+    p{
+      margin: $gutter 0;
+
+      a{
+        color: $primaryColor;
+
+        &:hover{
+          color: $primaryColorDarker;
+        }
+      }
+
+    }
+    hr{
+      width: 300px;
+    }
+  }
+}
