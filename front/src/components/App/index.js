@@ -15,7 +15,7 @@ const App = () => (
     <Header />
     <div className="container">
       <Contact />
-    </div> />
+    </div>
     <Footer />
   </div>
 );

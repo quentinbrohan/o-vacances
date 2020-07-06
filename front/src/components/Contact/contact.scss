@@ -4,6 +4,9 @@
 
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
+  
+  
 
   h2 {
     width:100%;
@@ -14,36 +17,70 @@
 
 
   .contact-text{
-    width: 400px;
+    width: 100%;
+    margin-right: $gutter;
 
-    
+    @media (min-width: $tablet) {
+        width:50%
+      }
+    }
 
     p, h3 {
-      padding-right: $gutter;
+      
       margin-bottom: 0.5*$gutter;
+    
     }
 
     a{
       color: $primaryColorDarker;
+      &:hover{
+        color: $primaryColor;
+      }
     }
   }
 
   .contact-form{
-      display: flex;
+    width: 100%;
 
-      div {
-        width: 100%;
-
+    @media (min-width: $tablet) {
+        width:40%
+    }
         input, textarea {
 
           width:100%;
           margin-bottom: 0.5*$gutter;
-          border: solid 1px $blackColor;
+          border: none;
           border-radius: 0.1*$gutter;
+          background-color: $whiteColor;
+          padding: 0.3*$gutter;
+      
+
+          &::placeholder{
+            color: $greyDarker;
+            font-style: $fontBody;
+          }
+
+          
+        }
+        textarea{
+            height: 3*$gutter;
         }
       }
+
+      button{
+        background: $primaryColor;
+        border: none;
+        padding: 0.3*$gutter;
+        border-radius: 0.2*$gutter;
+
+        &:hover{
+          background-color: $primaryColorDarker;
+        }
+      
+        
 
       
   }
   
-}
+
+
