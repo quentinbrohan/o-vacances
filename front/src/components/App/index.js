@@ -13,6 +13,8 @@ import Header from 'src/components/Header';
 import Contact from 'src/components/Contact';
 import HomeVisitor from 'src/components/HomeVisitor';
 import Team from 'src/components/Team';
+import Login from 'src/components/Login';
+
 // Data
 import persons from 'src/data/teamData';
 
@@ -37,6 +39,10 @@ const App = () => (
           path="/team"
           render={() => <Team persons={persons} />}
 
+        />
+        <Route
+          path="/connexion"
+          component={Login}
         />
       </Switch>
     </div>

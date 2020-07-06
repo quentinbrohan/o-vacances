@@ -1,6 +1,7 @@
 import React from 'react';
 import { slide as Menu } from 'react-burger-menu';
 import { Menu as MenuIcon, X as CloseIcon } from 'react-feather';
+import { Link } from 'react-router-dom';
 
 import './header.scss';
 
@@ -24,7 +25,7 @@ const Header = () => (
 
             <div className="connection-mobile">
               <button type="button">
-                <a href="/">Connexion</a>
+                <Link to="/connexion">Connexion</Link>
               </button>
               <button type="button">
                 <a href="/">Déconnexion</a>
@@ -43,7 +44,7 @@ const Header = () => (
           </ul>
           <div className="connection">
             <button type="button">
-              <a href="/">Connexion</a>
+              <Link to="/connexion">Connexion</Link>
             </button>
             <button type="button">
               <a href="/">Déconnexion</a>
