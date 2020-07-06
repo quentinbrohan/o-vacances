@@ -6,7 +6,7 @@ import Header from 'src/components/Header';
 import Footer from 'src/components/Footer';
 import Team from 'src/components/Team';
 
-import Persons from 'src/assets/data/teamData';
+import Persons from 'src/data/teamData';
 
 import './styles.scss';
 
