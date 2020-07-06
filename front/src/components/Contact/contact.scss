@@ -12,13 +12,14 @@
     width:100%;
     font-size: $gutter;
     font-weight: bold;
-    margin-bottom: $gutter;
+    margin-bottom: 2*$gutter;
+
   }
 
 
   .contact-text{
     width: 100%;
-    
+   
 
     @media (min-width: $tablet) {
         width:50%
