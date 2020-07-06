@@ -9,7 +9,10 @@
 
     p {
       margin-top: 1rem;
-      margin-bottom: 3rem;
+      margin-bottom: $gutter * 3;
+      @media (min-width: $tablet) {
+        margin-bottom: 6rem;
+      }
       font-size: 1.2rem;
       text-align: center;
     }
@@ -18,15 +21,30 @@
       margin-top: 1rem;
       padding-bottom: $gutter * 2;
 
-      .split-item {
+      .split-item,
+      .split-item-inverted {
         margin-top: 1rem;
-        margin-bottom: $gutter;
+        margin-bottom: $gutter * 2;
         display: flex;
         flex-direction: column;
+        @media (min-width: $tablet) {
+          padding: 0 1rem;
+          flex-direction: row;
+          flex-wrap: nowrap;
+          align-items: center;
+        }
 
         .split-item-content {
           text-align: center;
           margin-bottom: 0;
+          width: 100%;
+          @media (min-width: $tablet) {
+            margin-right: 4rem;
+            h3,
+            p {
+              text-align: left;
+            }
+          }
 
           p {
             font-size: 1.2rem;
@@ -41,10 +59,30 @@
           img,
           svg,
           video {
-            width: auto;
+            width: 100%;
             height: auto;
             max-width: 100%;
             overflow: visible;
+          }
+        }
+        @media (min-width: $tablet) {
+          &-inverted {
+            flex-direction: row-reverse;
+
+            .split-item-content {
+              margin-right: 0;
+              margin-left: 4rem;
+            }
+          }
+
+          &-inverted {
+            @media (min-width: $tablet) {
+              flex-direction: row-reverse;
+            }
+            .split-item-content {
+              margin-right: 0;
+              margin-left: 4rem;
+            }
           }
         }
       }

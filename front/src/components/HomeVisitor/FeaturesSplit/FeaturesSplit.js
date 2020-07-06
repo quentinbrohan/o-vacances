@@ -19,7 +19,7 @@ const FeaturesSplit = () => (
         </div>
       </div>
 
-      <div className="split-item">
+      <div className="split-item-inverted">
         <div className="split-item-content">
           <h3>Organisation simplifiée</h3>
           <p>
@@ -43,7 +43,7 @@ const FeaturesSplit = () => (
         </div>
       </div>
 
-      <div className="split-item">
+      <div className="split-item-inverted">
         <div className="split-item-content">
           <h3>"Qui amène quoi ?" (prochainement)</h3>
           <p>Fini les listes papiers qui se perdent,

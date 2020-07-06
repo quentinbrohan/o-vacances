@@ -9,6 +9,9 @@ const HomeVisitor = () => (
     {/* Slideshow Images/Text */}
     <Slideshow />
     <FeaturesSplit />
+    <button type="button">
+      <a href="">Je m'inscris</a>
+    </button>
 
   </div>
 );
