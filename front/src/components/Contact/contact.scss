@@ -1,0 +1,49 @@
+@import 'src/styles/vars';
+
+.contact{
+
+  display: flex;
+  flex-wrap: wrap;
+
+  h2 {
+    width:100%;
+    font-size: $gutter;
+    font-weight: bold;
+    margin-bottom: $gutter;
+  }
+
+
+  .contact-text{
+    width: 400px;
+
+    
+
+    p, h3 {
+      padding-right: $gutter;
+      margin-bottom: 0.5*$gutter;
+    }
+
+    a{
+      color: $primaryColorDarker;
+    }
+  }
+
+  .contact-form{
+      display: flex;
+
+      div {
+        width: 100%;
+
+        input, textarea {
+
+          width:100%;
+          margin-bottom: 0.5*$gutter;
+          border: solid 1px $blackColor;
+          border-radius: 0.1*$gutter;
+        }
+      }
+
+      
+  }
+  
+}
