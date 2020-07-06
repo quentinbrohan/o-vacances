@@ -12,6 +12,8 @@ import Footer from 'src/components/Footer';
 // Pages
 import HomeVisitor from '../HomeVisitor';
 
+import Contact from 'src/components/Contact';
+
 import './styles.scss';
 
 // == Composant
