@@ -6,8 +6,10 @@ import {
 } from 'react-router-dom';
 
 // == Import
+// Layout
 import Header from 'src/components/Header';
 import Footer from 'src/components/Footer';
+// Pages
 import HomeVisitor from '../HomeVisitor';
 
 import './styles.scss';
