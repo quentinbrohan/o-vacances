@@ -1,12 +1,18 @@
 @import 'src/styles/vars';
 
 .app {
-  margin: 0 auto;
+  margin: 0 auto 2rem auto;
+  margin-top: 0;
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 100%;
+  height: 100%;
   .container {
   margin: 0 auto;
   padding: 2rem 1rem;
   max-width: 1152px;
   min-height: 100%;
+  height: 100%;
   @media (min-width: $desktop) {
     padding: 2rem 0rem;
   }
