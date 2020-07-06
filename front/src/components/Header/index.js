@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { slide as Menu } from 'react-burger-menu';
 import { Menu as MenuIcon, X as CloseIcon } from 'react-feather';
 
@@ -18,38 +19,40 @@ const Header = () => (
             customBurgerIcon={<MenuIcon />}
             customCrossIcon={<CloseIcon />}
           >
-            <a href="">Mes voyages</a>
-            <a href="">Créer un voyage</a>
-            <a href="">Mon profil</a>
+            <Link to="/">Mes voyages</Link>
+            <Link to="/">Créer un voyage</Link>
+            <Link to="/">Mon profil</Link>
 
             <div className="connection-mobile">
               <button type="button">
-                <a href="/">Connexion</a>
+                <Link to="/login">Connexion</Link>
               </button>
               <button type="button">
-                <a href="/">Déconnexion</a>
+                <Link to="/logout">Déconnexion</Link>
+
               </button>
               <button type="button">
-                <a href="/">Inscription</a>
+                <Link to="/signin">Inscription</Link>
               </button>
             </div>
           </Menu>
         </div>
         <div className="menu">
           <ul>
-            <li><a href="">Mes voyages</a></li>
-            <li><a href="">Créer un voyage</a></li>
-            <li><a href="">Mon profil</a></li>
+            <li><Link to="/">Mes voyages</Link></li>
+            <li><Link to="/">Créer un voyage</Link></li>
+            <li><Link to="/">Mon profil</Link></li>
           </ul>
           <div className="connection">
             <button type="button">
-              <a href="/">Connexion</a>
+              <Link to="/login">Connexion</Link>
             </button>
             <button type="button">
-              <a href="/">Déconnexion</a>
+              <Link to="/logout">Déconnexion</Link>
+
             </button>
             <button type="button">
-              <a href="/">Inscription</a>
+              <Link to="/signin">Inscription</Link>
             </button>
           </div>
         </div>

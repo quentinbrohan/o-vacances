@@ -14,7 +14,6 @@ const Signin = ({
 }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log('handleSubmit');
     handleSignin();
   };
 
@@ -60,15 +59,6 @@ const Signin = ({
       </form>
     </div>
   );
-};
-
-Signin.propTypes = {
-  firstname: PropTypes.string.isRequired,
-  lastname: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired,
-  changeField: PropTypes.func.isRequired,
-  handleSignin: PropTypes.func.isRequired,
 };
 
 Signin.propTypes = {
