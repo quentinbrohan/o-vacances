@@ -1,21 +1,24 @@
 @import 'reset';
 @import 'fonts';
 @import 'vars';
+@import 'typography';
+
+html,
+body {
+  scroll-behavior: smooth;
+}
 
 body {
   font-family: $fontBody;
   color: $blackColor;
+  height: 100%;
+  min-height: 100%;
 }
 
-:root {
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+p {
   line-height: 150%;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: $fontTitle;
 }
