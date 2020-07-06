@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Footer.scss';
 
 const Footer = () => (
@@ -7,7 +8,7 @@ const Footer = () => (
     <div className="footer-container">
       <ul className="footer-nav">
         <li className="footer-nav-item">
-          <a href="#">Contact</a>
+          <Link to="/contact">Contact</Link>
         </li>
         <li className="footer-nav-item">
           <a href="#">Qui sommes nous ?</a>

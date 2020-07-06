@@ -10,9 +10,8 @@ import {
 import Header from 'src/components/Header';
 import Footer from 'src/components/Footer';
 // Pages
-import HomeVisitor from '../HomeVisitor';
-
 import Contact from 'src/components/Contact';
+import HomeVisitor from '../HomeVisitor';
 
 import './styles.scss';
 
@@ -26,6 +25,10 @@ const App = () => (
           exact
           path="/"
           component={HomeVisitor}
+        />
+        <Route
+          path="/contact"
+          component={Contact}
         />
       </Switch>
     </div>
