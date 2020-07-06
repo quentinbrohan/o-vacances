@@ -12,6 +12,7 @@ import Header from 'src/components/Header';
 // Pages
 import Contact from 'src/components/Contact';
 import HomeVisitor from 'src/components/HomeVisitor';
+import Signin from 'src/components/Signin';
 import Team from 'src/components/Team';
 // Data
 import persons from 'src/data/teamData';
@@ -36,6 +37,11 @@ const App = () => (
         <Route
           path="/team"
           render={() => <Team persons={persons} />}
+
+        />
+        <Route
+          path="/signin"
+          component={Signin}
 
         />
       </Switch>

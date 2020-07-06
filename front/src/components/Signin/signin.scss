@@ -1,0 +1,31 @@
+@import 'src/styles/vars';
+
+.signin {
+  h1 {
+    text-align: center;
+  }
+
+  .signin-form {
+    width: 50%;
+  }
+  .signin-form-element {
+  margin: $gutter 0;
+}
+  .signin-form-button {
+    width: 100%;
+    margin-top: 1rem;
+    font-weight: 700;
+    font-size: 1rem;
+    color: $whiteColor;
+    background-color: $primaryColor;
+    border-radius: 0.1rem;
+    border: 0;
+    padding: .5em;
+    height: 2em;
+  }
+
+  form {
+    margin-top: $gutter;
+    margin: 0 auto;
+  }
+}
