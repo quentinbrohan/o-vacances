@@ -9,9 +9,13 @@ import {
 // Layout
 import Header from 'src/components/Header';
 import Footer from 'src/components/Footer';
+import Team from 'src/components/Team';
+
+import Persons from 'src/data/teamData';
 // Pages
 import Contact from 'src/components/Contact';
 import HomeVisitor from '../HomeVisitor';
+
 
 import './styles.scss';
 

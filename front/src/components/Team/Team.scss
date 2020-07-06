@@ -28,15 +28,17 @@ h2{
       box-shadow: -7px 8px 17px rgba(0, 0, 0, 0.3);
       z-index: 2;
       transition: all 200ms ease-in;
-      transform: scale(1.2);
+      transform: scale(1.03);
     }
   
   
     .team-card-img{
       height: 230px;
+      overflow: hidden;
 
     img{
       max-width: 100%;
+      
     }
   }
 
