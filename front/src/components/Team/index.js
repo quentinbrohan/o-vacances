@@ -27,13 +27,13 @@ const Team = ({ persons }) => (
             </p>
             <ul>
               <li>
-                <a href="#"><Linkedin /></a>
+                <a href={person.linkedin}><Linkedin /></a>
               </li>
               <li>
-                <a href="#"><GitHub /></a>
+                <a href={person.github}><GitHub /></a>
               </li>
               <li>
-                <a href="#"><Link /></a>
+                <a href={person.portfolio}><Link /></a>
               </li>
               <li>
                 <a href="#"><UserPlus /></a>
