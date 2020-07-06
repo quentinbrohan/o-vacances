@@ -11,6 +11,8 @@ body {
 body {
   font-family: $fontBody;
   color: $blackColor;
+  height: 100%;
+  min-height: 100%;
 }
 
 *, *:before, *:after {
