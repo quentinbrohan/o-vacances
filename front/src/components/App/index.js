@@ -11,9 +11,10 @@ import Footer from 'src/components/Footer';
 import Header from 'src/components/Header';
 // Pages
 import Contact from 'src/components/Contact';
+import HomeVisitor from 'src/components/HomeVisitor';
 import Team from 'src/components/Team';
 // Data
-import HomeVisitor from '../HomeVisitor';
+import persons from 'src/data/teamData';
 
 import './styles.scss';
 
@@ -34,7 +35,8 @@ const App = () => (
         />
         <Route
           path="/team"
-          component={Team}
+          render={() => <Team persons={persons} />}
+
         />
       </Switch>
     </div>
