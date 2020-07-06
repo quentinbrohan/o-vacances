@@ -13,7 +13,7 @@ import Header from 'src/components/Header';
 import Contact from 'src/components/Contact';
 import HomeVisitor from 'src/components/HomeVisitor';
 import Team from 'src/components/Team';
-import Login from 'src/components/Login';
+import Login from 'src/containers/Login';
 
 // Data
 import persons from 'src/data/teamData';
