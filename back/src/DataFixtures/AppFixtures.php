@@ -16,7 +16,7 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $users = [];
-        $userName = ['Alexandre', 'Audrey', 'Cecilia', 'Loic', 'Quentin'];
+        $userName = ['Alexandre', 'Audrey', 'Cécilia', 'Loic', 'Quentin'];
         $pass = ['$argon2id$v=19$m=65536,t=4,p=1$WSTGqZLJQpBk9QmVDMltwQ$LjlXVpbjWTRUIZhxG1uBtR1h3ZxefZ0T+rpxhHD0Xco', '$argon2id$v=19$m=65536,t=4,p=1$DrrWWl/hRnIYCwKZNdKtww$/duqkLA4649la3mcD0y731BWkr74vj4iclmbGSUIFYc', '$argon2id$v=19$m=65536,t=4,p=1$iPlgMd6MfnO6tnSnokGKvA$fJ2B4/1ImVoWoev1+8PZSFv803QcbIIu57dhClhh4Tk', '$argon2id$v=19$m=65536,t=4,p=1$yP16EySapB8P20P+2UwBKQ$synTEM7TM54rAFTfDsBR5HYwffif4TBS+FB/1MzBLYY', '$argon2id$v=19$m=65536,t=4,p=1$VoWg+roPWyl6kf9c50FpNQ$kkmypy4SGs05hRJ+eRd8S7iaGU1+qrmQceOZ/tfvqb4' ];
         $mails = ['Alexandre.gmail.com', 'Audrey.gmail.com', 'Cecilia.gmail.com', 'Loic.gmail.com', 'Quentin.gmail.com'];
 
@@ -43,6 +43,7 @@ class AppFixtures extends Fixture
             $trip->setDescription($descriptions[0]);
             $trip->setLocation($locations[$i]);
             $trip->addUser($users[mt_rand(0, 4)], $users[mt_rand(0, 4)]);
+            $trip->setCreator($userName[$i]);
             $trips[]=$trip;
 
             $manager->persist($trip);
