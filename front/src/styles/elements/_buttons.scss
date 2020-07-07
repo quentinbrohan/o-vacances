@@ -1,0 +1,322 @@
+@import 'src/styles/vars';
+// Settings
+// Buttons and Forms (shared settings)
+$button-form--height: 			3rem;		// height of buttons and forms
+$button-form-sm--height: 		2.25rem;		// height of buttons and forms (small)
+$button-form--border-width: 	0.16rem;		// border width (if you wish not to display any border, just set colors to null instead of changing this value)
+$button-form--border-style: 	solid;		// border style
+$button-form--group-padding: 	0.75rem;		// padding separating input from button in a form group (.form-group). Prefer null over 0
+
+// Buttons: text color
+$button--color: (
+	button-light: 		$primaryColor,
+	button-dark: 		$primaryColorDarker,
+	button-primary: 	$primaryColorLighter,
+	button-secondary:	$whiteColor,
+	button-disabled: 	$primaryColorDarker
+);
+
+// Buttons: background color
+$button--bg: (
+	button-light: 			$primaryColorLighter,
+	button-light-hover: 	lighten($primaryColorLighter, 8%),
+	button-dark: 			$primaryColorDarker,
+	button-dark-hover: 		lighten($primaryColorDarker, 3%),
+	button-primary: 		$primaryColor,
+	button-primary-hover: 	lighten($primaryColor, 3%),
+	button-secondary: 		$greyColorDarker,
+	button-secondary-hover:	lighten($greyColorDarker, 3%),
+	button-disabled: 		$greyColor
+);
+
+// Buttons: border color
+$button--border: (
+	button-light: 			transparent,	// button-light is default (.button), so if it's transparent you can set all other values to null
+	button-light-hover: 	null,
+	button-dark: 			null,
+	button-dark-hover: 		null,
+	button-primary: 		null,
+	button-primary-hover: 	null,
+	button-secondary: 		null,
+	button-secondary-hover: null,
+	button-disabled: 		null
+);
+
+// Buttons: font size
+$button--size: (
+	button:	1rem
+);
+
+// Buttons: font weight
+$button--weight: (
+	button:	600
+);
+
+// More buttons settings
+$button--padding-h: 			2rem;		// button, left and right padding
+$button-sm--padding-h:			1.5rem;		// button (small), left and right padding
+$button-w-form--padding-h:		1.5rem;		// button, left and right padding in a form group (.form-group) - Overrides button default padding
+$button-sm-w-form--padding-h:	null;		// button (small), left and right padding in a form group (.form-group) - Overrides button default padding
+$button--radius: 				0.25rem;		// button radius (never use null)
+$button--transform: 			uppercase;	// button text-transform property (null is allowed)
+$button--max-size-mobile: 		17,5rem;		// button max width on mobile (.button-wide-mobile)
+$button-group-padding: 			1rem;		// padding between sibling buttons (nested into .button-group)
+$button-loading--thickness:		2px;		// button loading spinner, stroke width (.button.is-loading)
+
+// Forms: color
+$form--color: (
+	input: 						$greyColorLighter,
+	input-placeholder:		 	$greyColorLighter,
+	label: 						$greyColorLighter,
+	check-radio: 				$greyColorLighter,
+	// ↓ Inverted colors
+	input-inverse: 				$greyColorDarker,
+	input-placeholder-inverse:	null,
+	label-inverse: 				$greyColorDarker,
+	check-radio-inverse: 		$greyColorDarker
+);
+
+// Forms: background color
+$form--bg: (
+	input: 							transparent,
+	input-focus: 					null,
+	input-disabled: 				$greyColorDarker,
+	check-radio-checked: 			$primaryColor,
+	switch:							$greyColorDarker,
+	switch-checked:					$primaryColor,
+	// ↓ Inverted colors
+	input-inverse: 					null,
+	input-focus-inverse: 			null,
+	input-disabled-inverse: 		$greyColorLighter,
+	check-radio-checked-inverse:	null,
+	switch-inverse:					null,
+	switch-checked-inverse:			null
+);
+
+// Forms: border color
+$form--border: (
+	input: 						$greyColorDarker,
+	input-hover: 				$greyColorLighter,
+	input-focus: 				$primaryColor,
+	input-disabled: 			$greyColorLighter,
+	// ↓ Inverted colors
+	input-inverse: 				$greyColorLighter,
+	input-hover-inverse: 		null,
+	input-focus-inverse: 		null,
+	input-disabled-inverse:		null
+);
+
+// Forms: background color
+$form--icon: (
+	select-arrow:			$greyColorLighter,
+	// ↓ Inverted colors
+	select-arrow-inverse:	$greyColorDarker
+);
+
+// Forms: font size
+$form--size: (
+	input:			1rem,
+	label: 			1.2rem,
+	check-radio:	1rem,
+	hint: 			0.8rem
+);
+
+// Forms: font weight
+$form--weight: (
+	input: 			null,
+	label: 			600,
+	check-radio:	null
+);
+
+// More forms settings
+$form--padding-h: 	 1rem;		// form, inner left and right padding
+$form-sm--padding-h: 0.75rem;		// form (small), inner left and right padding
+$form--radius: 		 0;			// form radius (never use null)
+$form-hint--margin:  0.5rem;		// .form-hint top margin
+
+
+// Styles
+button,
+.button {
+  display: inline-flex;
+  font-size: 1rem;
+  font-weight: 600;
+padding: (($button-form--height - 1 - ($button-form--border-width * 2)) / 2) ($button--padding-h - $button-form--border-width);
+height: $button-form--height;
+  text-decoration: none !important;
+text-transform: $button--transform;
+color: color(button-light);
+  background-color: color-bg(button-light);
+  border-width: $button-form--border-width;
+border-style: $button-form--border-style;
+border-color: color-border(button-light);
+  border-radius: $button--radius;
+  cursor: pointer;
+  justify-content: center;
+  text-align: center;
+  letter-spacing: inherit;
+  white-space: nowrap;
+transition: background .15s ease;
+//
+box-shadow: 0 0.5rem 1rem rgba($primaryColorDarker, .12);
+
+&:not(.button-dark):not(.button-primary):not(.button-secondary) {
+  background: linear-gradient(65deg, $primaryColorLighter 0, rgba($primaryColorLighter, .8) 100%);
+  background-origin: border-box;
+
+  &:hover {
+    background-color: color-bg(button-light-hover);
+  }
+}
+
+
+  &:active {
+      outline: 0;
+  }
+
+&:hover {
+  background-color: color-bg(button-light-hover);
+  border-color: color-border(button-light-hover);
+}
+
+&.is-loading {
+  position: relative;
+  color: transparent!important;
+  pointer-events: none;
+
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 1;
+    height: 1;
+    margin-left: -(1 / 2);
+    margin-top: -(1 / 2);
+    top: 50%;
+    left: 50%;
+    border: $button-loading--thickness solid color(button-light);
+    border-radius: 50%;
+    border-right-color: transparent !important;
+    border-top-color: transparent !important;
+    z-index: 1;
+    animation: button-loading .6s infinite linear;
+  }
+}
+
+&[disabled] {
+  cursor: not-allowed;
+  color: color(button-disabled);
+  background-color: color-bg(button-disabled) !important;
+  border-color: color-border(button-disabled);
+
+  &.is-loading {
+
+    &::after {
+      border-color: color(button-disabled);
+    }
+  }
+}
+}
+
+.button-sm {
+  padding: (($button-form-sm--height - 1 - ($button-form--border-width * 2)) / 2) ($button-sm--padding-h - $button-form--border-width);
+height: $button-form-sm--height;
+}
+
+.button-dark {
+color: color(button-dark);
+  background-color: color-bg(button-dark);
+border-color: color-border(button-dark);
+
+  &:hover {
+      background-color: color-bg(button-dark-hover);
+  border-color: color-border(button-dark-hover);
+  }
+
+&.is-loading {
+
+  &::after {
+    border-color: color(button-dark);
+  }
+}
+}
+
+.button-primary {
+color: color(button-primary);
+  background-color: color-bg(button-primary);
+border-color: color-border(button-primary);
+
+  &:hover {
+      background-color: color-bg(button-primary-hover);
+  border-color: color-border(button-primary-hover);
+  }
+
+&.is-loading {
+
+  &::after {
+    border-color: color(button-primary);
+  }
+}
+}
+
+.button-secondary {
+color: color(button-secondary);
+  background-color: color-bg(button-secondary);
+border-color: color-border(button-secondary);
+
+  &:hover {
+      background-color: color-bg(button-secondary-hover);
+  border-color: color-border(button-secondary-hover);
+  }
+
+&.is-loading {
+
+  &::after {
+    border-color: color(button-secondary);
+  }
+}
+}
+
+.button-block {
+  display: flex;
+width: 100%;
+}
+
+.button-group {
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+margin-right: -($button-group-padding / 2);
+margin-left: -($button-group-padding / 2);
+margin-top: -($button-group-padding / 2);
+
+&:last-of-type {
+  margin-bottom: -($button-group-padding / 2);
+}
+
+&:not(:last-of-type) {
+  margin-bottom: ($button-group-padding / 2);
+}
+
+> [class*=button] {
+  margin: $button-group-padding / 2;
+}
+}
+
+@media (max-width: $lg-mobile) {
+
+.button-wide-mobile {
+  width: 100%;
+  max-width: $button--max-size-mobile;
+}
+}
+
+@keyframes button-loading {
+  0% {
+      transform: rotate(0);
+  }
+
+  100% {
+      transform: rotate(360deg);
+  }
+}
