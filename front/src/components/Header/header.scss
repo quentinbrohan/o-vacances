@@ -52,7 +52,7 @@ header {
 
   /* Color/shape of close button cross */
   .bm-cross {
-    color: $whiteColor;
+    color: $blackColor;
   }
 
   /*
@@ -63,17 +63,19 @@ Note: Beware of modifying this element as it can break the animations - you shou
     top: 0;
     position: fixed;
     height: 100%;
+    box-shadow: 0 0.25rem .5rem rgba(0, 0, 0, 0.3);
+
   }
   /* General sidebar styles */
   .bm-menu {
-    background: $blackColor;
+    background: #fff;
     padding: 2.5rem 1rem 0;
     font-size: 1.15em;
   }
 
   /* Wrapper for item list */
   .bm-item-list {
-    color: $whiteColor;
+    color: $blackColor;
     padding: 0.8em;
     text-align: center;
     a:last-child {
