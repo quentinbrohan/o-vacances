@@ -3,14 +3,15 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -20,9 +21,20 @@ class User
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=128)
+     * @ORM\Column(type="string", length=180, unique=true)
      */
     private $email;
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
+
+    /**
+     * @var string The hashed password
+     * @ORM\Column(type="string")
+     */
+    private $password;
 
     /**
      * @ORM\Column(type="string", length=128)
@@ -35,35 +47,27 @@ class User
     private $firstname;
 
     /**
-     * @ORM\Column(type="string", length=128)
-     */
-    private $password;
-
-    /**
      * @ORM\Column(type="string", length=128, nullable=true)
      */
     private $avatar;
 
-    /**
+/**
      * @ORM\OneToMany(targetEntity=Suggestion::class, mappedBy="user")
      */
     private $suggestion;
-
     /**
      * @ORM\ManyToMany(targetEntity=Disponibility::class, inversedBy="users")
      */
     private $disponibility;
-
     /**
      * @ORM\ManyToMany(targetEntity=Trip::class, inversedBy="users")
      */
     private $trip;
-
     /**
      * @ORM\OneToMany(targetEntity=Activity::class, mappedBy="creator")
      */
     private $activity;
-
+    
     public function __construct()
     {
         $this->suggestion = new ArrayCollection();
@@ -94,6 +98,67 @@ class User
         return $this;
     }
 
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUsername(): string
+    {
+        return (string) $this->email;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getPassword(): string
+    {
+        return (string) $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getSalt()
+    {
+        // not needed when using the "bcrypt" algorithm in security.yaml
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
     public function getLastname(): ?string
     {
         return $this->lastname;
@@ -118,18 +183,6 @@ class User
         return $this;
     }
 
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
     public function getAvatar(): ?string
     {
         return $this->avatar;
@@ -141,7 +194,6 @@ class User
 
         return $this;
     }
-
     /**
      * @return Collection|Suggestion[]
      */
@@ -149,17 +201,14 @@ class User
     {
         return $this->suggestion;
     }
-
     public function addSuggestion(Suggestion $suggestion): self
     {
         if (!$this->suggestion->contains($suggestion)) {
             $this->suggestion[] = $suggestion;
             $suggestion->setUser($this);
         }
-
         return $this;
     }
-
     public function removeSuggestion(Suggestion $suggestion): self
     {
         if ($this->suggestion->contains($suggestion)) {
@@ -169,7 +218,6 @@ class User
                 $suggestion->setUser(null);
             }
         }
-
         return $this;
     }
     /**
@@ -198,7 +246,6 @@ class User
         }
         return $this;
     }
-
     /**
      * @return Collection|Trip[]
      */
@@ -206,25 +253,20 @@ class User
     {
         return $this->trip;
     }
-
     public function addTrip(Trip $trip): self
     {
         if (!$this->trip->contains($trip)) {
             $this->trip[] = $trip;
         }
-
         return $this;
     }
-
     public function removeTrip(Trip $trip): self
     {
         if ($this->trip->contains($trip)) {
             $this->trip->removeElement($trip);
         }
-
         return $this;
     }
-
     /**
      * @return Collection|Activity[]
      */
@@ -232,17 +274,14 @@ class User
     {
         return $this->activity;
     }
-
     public function addActivity(Activity $activity): self
     {
         if (!$this->activity->contains($activity)) {
             $this->activity[] = $activity;
             $activity->setCreator($this);
         }
-
         return $this;
     }
-
     public function removeActivity(Activity $activity): self
     {
         if ($this->activity->contains($activity)) {
@@ -252,7 +291,6 @@ class User
                 $activity->setCreator(null);
             }
         }
-
         return $this;
     }
 }
