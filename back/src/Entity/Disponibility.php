@@ -77,16 +77,17 @@ class Disponibility
     /**
      * @return Collection|User[]
      */
-    public function getUsers(): Collection
+    public function getUser(): Collection
     {
         return $this->users;
     }
 
+    
     public function addUser(User $user): self
     {
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
-            $user->setDisponibility($this);
+            $user->addDisponibility($this);
         }
 
         return $this;
@@ -98,7 +99,7 @@ class Disponibility
             $this->users->removeElement($user);
             // set the owning side to null (unless already changed)
             if ($user->getDisponibility() === $this) {
-                $user->setDisponibility(null);
+                $user->addDisponibility(null);
             }
         }
 
