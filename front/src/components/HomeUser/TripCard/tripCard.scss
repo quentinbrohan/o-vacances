@@ -7,8 +7,14 @@
       text-align: left;
     }
   }
-  .my-trips,
-  .archived-trips {
+  h2 {
+    margin-top: $gutter * 2;
+    text-align: center;
+    @media (min-width: $tablet) {
+      text-align: left;
+    }
+  }
+  .my-trips {
     .trip-card {
       width:280px;
       height: 360px;
