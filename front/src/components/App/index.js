@@ -51,7 +51,7 @@ const App = () => (
           component={Login}
         />
         <Route
-          path="/profil"
+          path="/profile"
           component={Profile}
         />
       </Switch>
