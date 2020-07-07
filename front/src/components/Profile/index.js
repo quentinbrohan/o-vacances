@@ -21,23 +21,21 @@ const Profile = () => (
         <ProfileField />
       </div>
     </div>
-    <hr />
     <div className="profile-trip">
       <h2>J'organise un voyage</h2>
       <div className="profile-trip-information">
-        <p>Je créé un voygage. J'invite mes amis ou ma famille. On s'organise ensemble avec O'Vacances!
+        <p>Je créé un voygage. J'invite mes amis ou ma famille.
+          On s'organise ensemble avec O'Vacances!
           <br />
-          Agenda, lieux, activités, suggestions,... 
+          Agenda, lieux, activités, suggestions,...
         </p>
-        <button type="button">GO</button>
+        <button type="button">GO !</button>
       </div>
-      <hr />
       <div className="profile-trip-archive">
-        Résumés des anciens voyages
+        <h2>Mes anciens voyages</h2>
       </div>
     </div>
   </div>
-
 );
 
 export default Profile;

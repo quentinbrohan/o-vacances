@@ -3,14 +3,15 @@
 .profile-field{
   width: 100%;
   margin: 0 auto;
-  padding: 0.5*$gutter;
+  text-align: center;
+  
 
 
   label{
   }
 
   input{
-    width:50%;
+    width:60%;
     margin:0 1rem;
     padding: 0.3*$gutter;
     border:none;

@@ -1,24 +1,32 @@
 @import "src/styles/vars";
 
 .profile{
+  width:70%;
+  margin:0 auto;
 
-  h1{
-    text-align: center;
-    margin-bottom: 2rem;
+    h1{
+    margin-bottom: 2.5rem;
+
+    @media (max-width: $tablet) {
+      text-align: center;
+    }
   }
+  
   .profile-head {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
+  
 
-    @media (max-width: $lg-mobile) {
+    @media (max-width: $tablet) {
       flex-direction: column;
+      
     }
 
     .profile-head-img{
       width:40%;
 
-      @media (max-width: $lg-mobile) {
+      @media (max-width: $tablet) {
         width:100%;
       }
 
@@ -31,12 +39,12 @@
       button {
         width: 40%;
         display: block;
-        margin: $gutter auto;
         background-color: white;
         border: solid 1px $primaryColorLighter;
         font-size: 1rem;
         border-radius: 0.5rem;
         padding: 0.5rem;
+        margin: 2rem auto;
 
         &:hover {
           background-color: $primaryColorDarker;
@@ -46,24 +54,44 @@
 
     .profile-head-information {
         width:50%;
-        text-align: center;
 
-        @media (max-width: $lg-mobile) {
+        @media (max-width: $tablet) {
           width:100%;
         }
     }
   }
 
-  hr{
-    width:80%;
-    color: $greyLighter;
-  }
+
   .profile-trip{
     margin-top:2rem;
+    
+
+   h2{
+     text-align: left;
+    
+
+     @media (max-width: $tablet) {
+      text-align: center;
+      margin-left:0;
+    }
+    }
+
     .profile-trip-information{
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
+      justify-content: space-between;
+      margin-bottom: 2.5rem;
+
+      p{
+        width: 50%;
+        margin-bottom: 2rem;
+        
+
+        @media (max-width: $tablet){
+        width: 100%;
+        text-align: center;
+        }
+      }
 
       button{
         width: 100px;
@@ -72,21 +100,19 @@
         border-radius:50%;
         background-color: $primaryColorDarker;
         font-size: 1rem;
-        margin:2rem;
+        margin-right: 9rem;
+       
 
         &:hover {
           background-color: $primaryColorLighter;
         }
-      }
 
-      p{
-        width: 50%;
-        padding: 2rem;
-
-        @media (max-width: $lg-mobile){
-        width: 100%;
+        @media (max-width: $tablet){
+         margin: 0 auto;
         }
       }
+
+     
      }
   }
 }
