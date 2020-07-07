@@ -69,6 +69,11 @@ class Trip
      */
     private $suggestion;
 
+    /**
+     * @ORM\Column(type="string", length=128)
+     */
+    private $Creator;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -271,6 +276,18 @@ class Trip
                 $suggestion->setTrip(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreator(): ?string
+    {
+        return $this->Creator;
+    }
+
+    public function setCreator(string $Creator): self
+    {
+        $this->Creator = $Creator;
 
         return $this;
     }
