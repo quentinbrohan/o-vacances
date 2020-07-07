@@ -1,0 +1,31 @@
+.profile{
+  .profile-head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    .profile-head-img{
+      width:50%;
+
+      .profile-head-img-picture{
+        width:80%;
+        display: block;
+        margin: 0 auto;
+      }
+
+      button {
+        width: 80%;
+        display: block;
+        margin: 0 auto;
+      }
+    }
+
+    .profile-head-information {
+        width:50%;
+        text-align: center;
+      
+
+    }
+
+  }
+}

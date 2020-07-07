@@ -10,7 +10,7 @@ const Profile = () => (
   <div className="profile">
     <div className="profile-head">
       <div className="profile-head-img">
-        <img className="profile-head-img-picture" src="https://via.placeholder.com/400x400" alt="" />
+        <img className="profile-head-img-picture" src="https://via.placeholder.com/100x100" alt="" />
         <button type="button">Modifier la photo de profil</button>
       </div>
       <div className="profile-head-information">
