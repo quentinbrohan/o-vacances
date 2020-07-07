@@ -21,7 +21,6 @@ const RecipeSmall = ({
         style={{ backgroundImage: `url(${image})` }}
         className="trip-card-header"
       />
-      {/* <img src={image} alt="Voyage" className="trip-card-header"/> */}
       <div className="trip-card-body">
         <h4>{title}</h4>
         <div className="body-content">
