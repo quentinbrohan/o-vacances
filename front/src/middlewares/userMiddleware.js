@@ -2,6 +2,8 @@ import axios from 'axios';
 
 import {
   SIGN_IN,
+  LOG_IN,
+  saveUser,
 } from 'src/actions/user';
 
 const userMiddleware = (store) => (next) => (action) => {
@@ -23,6 +25,18 @@ const userMiddleware = (store) => (next) => (action) => {
       })
         .then((response) => {
           console.log(response);
+    case LOG_IN: {
+      const { email, password } = store.getState().user;
+
+      // withCredentials : autorisation d'accéder au cookie
+      axios.post('http://localhost:8000/user', {
+        email,
+        password,
+      }, {
+        withCredentials: true,
+      })
+        .then((response) => {
+          store.dispatch(saveUser(response.data.info, response.data.logged));
         })
         .catch((error) => {
           console.warn(error);
@@ -33,6 +47,7 @@ const userMiddleware = (store) => (next) => (action) => {
     }
 
     default:
+      // on passe l'action au suivant (middleware suivant ou reducer)
       next(action);
   }
 };

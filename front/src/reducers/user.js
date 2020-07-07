@@ -1,6 +1,7 @@
 import {
   UPDATE_USER_FIELD,
 } from 'src/actions/user';
+import { UPDATE_USER_FIELD, SAVE_USER } from 'src/actions/user';
 
 const initialState = {
   // ici l'état initial
@@ -9,6 +10,7 @@ const initialState = {
   email: '',
   password: '',
   info: {},
+  isLogged: false,
 };
 
 const user = (state = initialState, action = {}) => {
@@ -17,6 +19,15 @@ const user = (state = initialState, action = {}) => {
       return {
         ...state,
         [action.name]: action.newValue,
+      };
+
+    case SAVE_USER:
+      return {
+        ...state,
+        info: action.data,
+        isLogged: action.isLogged,
+        email: '',
+        password: '',
       };
 
     default: return state;

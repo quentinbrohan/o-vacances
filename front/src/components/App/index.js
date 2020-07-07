@@ -14,6 +14,8 @@ import Contact from 'src/components/Contact';
 import HomeVisitor from 'src/components/HomeVisitor';
 import Signin from 'src/containers/Signin';
 import Team from 'src/components/Team';
+import Login from 'src/containers/Login';
+
 // Data
 import persons from 'src/data/teamData';
 
@@ -42,6 +44,10 @@ const App = () => (
         <Route
           path="/signin"
           component={Signin}
+         />
+        <Route
+          path="/login"
+          component={Login}
         />
       </Switch>
     </div>
