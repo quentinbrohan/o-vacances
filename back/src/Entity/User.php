@@ -172,7 +172,6 @@ class User
 
         return $this;
     }
-
     /**
      * @return Collection|Suggestion[]
      */
