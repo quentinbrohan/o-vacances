@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "O'Vacances, plan your trip with friends",
   "author": "O'Vacances Team",
-  "license": "",
+  "license": "MIT",
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.dev.js",
     "build": "cross-env NODE_ENV=production webpack --config config/webpack.prod.js",
@@ -59,6 +59,7 @@
     "webpack-merge": "*"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "prop-types": "*",
     "react": "*",
     "react-burger-menu": "^2.6.17",

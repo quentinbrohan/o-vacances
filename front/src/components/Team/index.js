@@ -7,6 +7,7 @@ import {
   Link,
   UserPlus,
 } from 'react-feather';
+
 import './Team.scss';
 
 // Component to present the team
