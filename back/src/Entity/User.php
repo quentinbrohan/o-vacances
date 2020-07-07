@@ -180,17 +180,14 @@ class User
     {
         return $this->disponibility;
     }
-
     public function addDisponibility(Disponibility $disponibility): self
     {
         if (!$this->disponibility->contains($disponibility)) {
             $this->disponibility[] = $disponibility;
             $disponibility->addUser($this);
         }
-
         return $this;
     }
-
     public function removeDisponibility(Disponibility $disponibility): self
     {
         if ($this->disponibility->contains($disponibility)) {
@@ -200,7 +197,6 @@ class User
                 $disponibility->addUser(null);
             }
         }
-
         return $this;
     }
 
