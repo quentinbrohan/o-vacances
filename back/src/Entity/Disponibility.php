@@ -77,7 +77,7 @@ class Disponibility
     /**
      * @return Collection|User[]
      */
-    public function getUser(): Collection
+    public function getUsers(): Collection
     {
         return $this->users;
     }
