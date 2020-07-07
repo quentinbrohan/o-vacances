@@ -21,7 +21,7 @@ const Header = () => (
           >
             <Link to="/">Mes voyages</Link>
             <Link to="/">Créer un voyage</Link>
-            <Link to="/">Mon profil</Link>
+            <Link to="/profile">Mon profil</Link>
 
             <div className="connection-mobile">
               <button type="button">
@@ -41,7 +41,7 @@ const Header = () => (
           <ul>
             <li><Link to="/">Mes voyages</Link></li>
             <li><Link to="/">Créer un voyage</Link></li>
-            <li><Link to="/">Mon profil</Link></li>
+            <li><Link to="/profile">Mon profil</Link></li>
           </ul>
           <div className="connection">
             <button type="button">
