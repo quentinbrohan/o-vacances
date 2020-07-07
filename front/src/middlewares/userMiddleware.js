@@ -15,7 +15,7 @@ const userMiddleware = (store) => (next) => (action) => {
       } = store.getState().user;
 
       // Endpoint API for user creation through Symfony
-      axios.post('http://localhost:3001/api/v0/users', {
+      axios.post('http://localhost:8000/api/v0/users', {
         firstname,
         lastname,
         email,

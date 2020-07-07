@@ -35,6 +35,7 @@ const Signin = ({
         />
         <Field
           name="email"
+          type="email"
           placeholder="Adresse Email"
           onChange={changeField}
           value={email}
