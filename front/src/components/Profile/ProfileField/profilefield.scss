@@ -1,3 +1,26 @@
-.profil-field{
-  width: 80%;
+@import "src/styles/vars";
+
+.profile-field{
+  width: 100%;
+  margin: 0 auto;
+  padding: 0.5*$gutter;
+
+
+  label{
+  }
+
+  input{
+    width:50%;
+    margin:0 1rem;
+    padding: 0.3*$gutter;
+    border:none;
+  }
+
+  .pen{
+    color: $primaryColorDarker;
+
+    &:hover{
+      color: $primaryColor;
+    }
+  }
 }
