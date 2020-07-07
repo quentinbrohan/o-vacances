@@ -20,7 +20,13 @@ const Field = ({
   const inputId = `field-${name}`;
 
   return (
-    <div className={value.length > 0 ? 'field field--has-content' : 'field'}>
+    <div className="field">
+      <label
+        htmlFor={inputId}
+        className="field-label"
+      >
+        {placeholder}
+      </label>
       <input
         // React - state
         value={value}
@@ -32,12 +38,6 @@ const Field = ({
         placeholder={placeholder}
         name={name}
       />
-
-      <label
-        htmlFor={inputId}
-        className="field-label"
-      >
-      </label>
     </div>
   );
 };

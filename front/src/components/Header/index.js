@@ -25,7 +25,7 @@ const Header = () => (
 
             <div className="connection-mobile">
               <button type="button">
-                <Link to="/connexion">Connexion</Link>
+                <Link to="/login">Connexion</Link>
               </button>
               <button type="button">
                 <a href="/">Déconnexion</a>
@@ -44,7 +44,7 @@ const Header = () => (
           </ul>
           <div className="connection">
             <button type="button">
-              <Link to="/connexion">Connexion</Link>
+              <Link to="/login">Connexion</Link>
             </button>
             <button type="button">
               <a href="/">Déconnexion</a>

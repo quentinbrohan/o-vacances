@@ -41,7 +41,7 @@ const App = () => (
 
         />
         <Route
-          path="/connexion"
+          path="/login"
           component={Login}
         />
       </Switch>

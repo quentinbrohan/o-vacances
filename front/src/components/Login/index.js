@@ -18,48 +18,48 @@ const Login = ({
     handleLogin();
   };
 
-return (
+  return (
 
-  <div className="login">
-    <h1>Bon retour parmis nous.</h1>
-    {isLogged && (
+    <div className="login">
+      <h1>Bon retour parmis nous.</h1>
+      {isLogged && (
       <div>Vous êtes connecté</div>)}
 
-    {!isLogged && (
-    <div className="login-form">
-      <form
-        onSubmit={handleSubmit}
-      >
-        <Field
+      {!isLogged && (
+      <div className="login-form">
+        <form
+          onSubmit={handleSubmit}
+        >
+          <Field
             name="email"
             placeholder="Adresse Email"
             onChange={changeField}
             value={email}
           />
-           <Field
+          <Field
             name="password"
             type="password"
             placeholder="Mot de passe"
             onChange={changeField}
             value={password}
           />
-        <div>
-          <button type="submit">CONNEXION</button>
-        </div>
-      </form>
-    
-    <div>
-      <div className="login-layout">
-        <p>J'ai oublié mon mot de passe</p>
-        <hr />
-        <p>Pas encore de compte? <a>Inscription</a></p>
-      </div>
-    </div>
-    </div>
-    )}
-  </div>
-)};
+          <div>
+            <button type="submit">CONNEXION</button>
+          </div>
+        </form>
 
+        <div>
+          <div className="login-layout">
+            <p>J'ai oublié mon mot de passe</p>
+            <hr />
+            <p>Pas encore de compte? <a>Inscription</a></p>
+          </div>
+        </div>
+      </div>
+      )}
+    </div>
+  );
+};
 
 Login.propTypes = {
   email: PropTypes.string.isRequired,

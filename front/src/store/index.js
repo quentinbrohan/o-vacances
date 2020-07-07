@@ -6,11 +6,10 @@ import reducer from 'src/reducers';
 
 import userMiddleware from 'src/middlewares/userMiddleware';
 
-// on combine devTools avec les middlewares
 const enhancers = composeWithDevTools(
   applyMiddleware(
     userMiddleware,
-    
+
   ),
 );
 
