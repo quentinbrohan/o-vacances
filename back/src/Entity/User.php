@@ -196,7 +196,7 @@ class User
         if ($this->disponibility->contains($disponibility)) {
             $this->disponibility->removeElement($disponibility);
             // set the owning side to null (unless already changed)
-            if ($disponibility->getUser() === $this) {
+            if ($disponibility->getUsers() === $this) {
                 $disponibility->addUser(null);
             }
         }
