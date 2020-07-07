@@ -44,7 +44,7 @@ const App = () => (
         <Route
           path="/signin"
           component={Signin}
-         />
+        />
         <Route
           path="/login"
           component={Login}
