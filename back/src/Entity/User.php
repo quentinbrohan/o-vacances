@@ -72,6 +72,11 @@ class User
         $this->disponibility = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->getEmail();
+    }
+    
     public function getId(): ?int
     {
         return $this->id;
