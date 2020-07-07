@@ -12,6 +12,7 @@ import Header from 'src/components/Header';
 // Pages
 import Contact from 'src/components/Contact';
 import HomeVisitor from 'src/components/HomeVisitor';
+import Signin from 'src/containers/Signin';
 import Team from 'src/components/Team';
 import Login from 'src/containers/Login';
 
@@ -40,6 +41,10 @@ const App = () => (
           render={() => <Team persons={persons} />}
 
         />
+        <Route
+          path="/signin"
+          component={Signin}
+         />
         <Route
           path="/login"
           component={Login}

@@ -1,12 +1,30 @@
 import axios from 'axios';
 
 import {
+  SIGN_IN,
   LOG_IN,
   saveUser,
 } from 'src/actions/user';
 
 const userMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
+    case SIGN_IN: {
+      const {
+        firstname,
+        lastname,
+        email,
+        password,
+      } = store.getState().user;
+
+      // Endpoint API for user creation through Symfony
+      axios.post('http://localhost:8000/api/v0/users', {
+        firstname,
+        lastname,
+        email,
+        password,
+      })
+        .then((response) => {
+          console.log(response);
     case LOG_IN: {
       const { email, password } = store.getState().user;
 

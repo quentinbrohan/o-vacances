@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import Slideshow from './Slideshow/Slideshow';
 import FeaturesSplit from './FeaturesSplit/FeaturesSplit';
@@ -10,7 +11,7 @@ const HomeVisitor = () => (
     <Slideshow />
     <FeaturesSplit />
     <button type="button">
-      <a href="">Je m'inscris</a>
+      <Link to="/signin">Je m'inscris</Link>
     </button>
 
   </div>

@@ -9,7 +9,7 @@ import userMiddleware from 'src/middlewares/userMiddleware';
 const enhancers = composeWithDevTools(
   applyMiddleware(
     userMiddleware,
-
+    // middleware
   ),
 );
 
