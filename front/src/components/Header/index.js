@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { slide as Menu } from 'react-burger-menu';
 import { Menu as MenuIcon, X as CloseIcon } from 'react-feather';
-import { Link } from 'react-router-dom';
 
 import './header.scss';
 

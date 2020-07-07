@@ -24,7 +24,15 @@ const userMiddleware = (store) => (next) => (action) => {
         password,
       })
         .then((response) => {
-          console.log(response);
+          store.dispatch(saveUser(response.data.info, response.data.logged));
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
+
+      next(action);
+      break;
+    }
     case LOG_IN: {
       const { email, password } = store.getState().user;
 

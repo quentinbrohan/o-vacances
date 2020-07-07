@@ -11,6 +11,8 @@ export const updateUserField = (newValue, name) => ({
 
 export const signIn = () => ({
   type: SIGN_IN,
+});
+
 export const logIn = () => ({
   type: LOG_IN,
 });

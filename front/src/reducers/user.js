@@ -1,7 +1,7 @@
 import {
   UPDATE_USER_FIELD,
+  SAVE_USER,
 } from 'src/actions/user';
-import { UPDATE_USER_FIELD, SAVE_USER } from 'src/actions/user';
 
 const initialState = {
   // ici l'état initial
