@@ -17,61 +17,75 @@ class Trip
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups("apiV0_list")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=64)
+     * @Groups("apiV0_list")
      */
     private $title;
 
+    
     /**
      * @ORM\Column(type="text", nullable=true)
-    */
-    private $description;
+     * @Groups("apiV0_list")
+     *
+     * /
+     private $description;
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Groups("apiV0_list")
      */
     private $startDate;
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Groups("apiV0_list")
      */
     private $endDate;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups("apiV0_list")
      */
     private $location;
 
     /**
      * @ORM\Column(type="string", length=128, nullable=true)
+     * @Groups("apiV0_list")
      */
     private $picture;
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="trip")
+     * @Groups("apiV0_list")
      */
     private $users;
 
     /**
      * @ORM\OneToMany(targetEntity=Activity::class, mappedBy="trip")
+     * @Groups("apiV0_list")
      */
     private $activities;
 
     /**
      * @ORM\OneToMany(targetEntity=Disponibility::class, mappedBy="trip")
+     * @Groups("apiV0_list")
      */
     private $disponibility;
 
     /**
      * @ORM\OneToMany(targetEntity=Suggestion::class, mappedBy="trip")
+     * @Groups("apiV0_list")
      */
     private $suggestion;
 
     /**
      * @ORM\Column(type="string", length=128)
+     * @Groups("apiV0_list")
      */
     private $creator;
 
