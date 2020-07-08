@@ -124,6 +124,7 @@ class TripController extends AbstractController
      
         return $this->json((string) $form->getErrors(true, false), 400);
     }
+    
     /**
      * @Route("/api/v0/trips", name="api_v0_trips_new", methods="POST")
      */
