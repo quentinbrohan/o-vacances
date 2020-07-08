@@ -16,27 +16,32 @@ class Disponibility
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups("apiV0_list)
      */
     private $id;
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Groups("apiV0_list)
      */
     private $start_date;
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Groups("apiV0_list)
      */
     private $end_date;
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="disponibility")
+     * @Groups("apiV0_list)
      */
     private $users;
 
     /**
      * @ORM\ManyToOne(targetEntity=Trip::class, inversedBy="disponibility")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups("apiV0_list)
      */
     private $trip;
 
