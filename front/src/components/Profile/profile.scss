@@ -20,7 +20,6 @@
 
     @media (max-width: $tablet) {
       flex-direction: column;
-      
     }
 
     .profile-head-img{
@@ -31,32 +30,26 @@
       }
 
       .profile-head-img-picture{
-        width:40%;
+        width:200px;
+        height:200px;
         display: block;
         margin: 0 auto;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-bottom: 2rem;
       }
 
-      button {
-        width: 40%;
-        display: block;
-        background-color: white;
-        border: solid 1px $primaryColorLighter;
-        font-size: 1rem;
-        border-radius: 0.5rem;
-        padding: 0.5rem;
-        margin: 2rem auto;
-
-        &:hover {
-          background-color: $primaryColorDarker;
-        }
+      button{
+        width:100%;
       }
     }
 
     .profile-head-information {
-        width:50%;
+        
 
         @media (max-width: $tablet) {
           width:100%;
+          margin: 2rem auto;
         }
     }
   }

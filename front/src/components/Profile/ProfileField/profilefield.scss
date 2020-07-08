@@ -1,20 +1,38 @@
 @import "src/styles/vars";
 
 .profile-field{
-  width: 100%;
-  margin: 0 auto;
-  
-  label{
-    width: 100px;
-  }
-  input{
 
-    margin:0 1rem;
-    padding: 0.3*$gutter;
+  @media (max-width: $tablet) {
+    margin:0 auto
+  }
+  
+  .profile-field-label{
+    display: block;
+    width: 310px;
+    font-weight: bold;
+
+    @media (max-width: $laptop) {
+      width:220px;
+    }
+
+  }
+
+  input{
+    width: 280px;
     border:none;
+    margin-bottom: $gutter;
+    font-size: 1rem;
+   
     
     &:disabled{
       background-color: white;
+    }
+
+    @media (max-width: $laptop) {
+      width:220px;
+    }
+    @media (max-width: $tablet) {
+      width: 80%
     }
     
   }
@@ -26,6 +44,10 @@
     &:hover{
       color: $primaryColor;
       cursor: pointer;
+    }
+
+    @media (max-width: $tablet) {
+      width: 20%
     }
   }
 }

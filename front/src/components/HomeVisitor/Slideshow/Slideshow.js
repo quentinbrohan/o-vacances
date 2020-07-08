@@ -1,6 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import React, { useState, useEffect, useRef } from 'react';
 import { ArrowDownCircle } from 'react-feather';
+import Button from 'src/components/elements/Button';
 
 import slideshowData from 'src/data/homeVisitorData';
 import './slideshow.scss';
@@ -76,12 +77,14 @@ const Slideshow = () => {
         </div>
       </div>
 
-      <a
-        className="show-features"
-        href="#features-split"
-      >
-        Voir les fonctionnalités <ArrowDownCircle />
-      </a>
+      <Button color="secondary" size="sm" haveClassName="show-features">
+        <a
+          href="#features-split"
+        >
+          Voir les fonctionnalités <ArrowDownCircle />
+        </a>
+
+      </Button>
     </>
   );
 };

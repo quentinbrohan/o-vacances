@@ -8,7 +8,6 @@ import './header.scss';
 const Header = () => (
   <header>
     <div className="header-container">
-
       <a href="/">LOGO</a>
       <nav className="navigation">
         <div className="mobile">

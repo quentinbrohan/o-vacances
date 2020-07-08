@@ -11,7 +11,7 @@ import './profile.scss';
 // component to contact form
 const Profile = ({ isDisabled }) => {
 // simulation de récupération de l'utilisateur avec son id
-  const user = users.find((one) => one.id === '3');
+  const user = users.find((one) => one.id === '2');
 
   return (
     <div className="profile">
@@ -22,10 +22,30 @@ const Profile = ({ isDisabled }) => {
           <button type="button">Modifier la photo</button>
         </div>
         <div className="profile-head-information">
-          <ProfileField userInformation={user.firstname} userTitle="Prénom" isDisabled={isDisabled} />
-          <ProfileField userInformation={user.lastname} userTitle="Nom" isDisabled={isDisabled} />
-          <ProfileField userInformation={user.email} userTitle="Email" isDisabled={isDisabled} />
-          <ProfileField userInformation={user.password} userTitle="Mot de passe" isDisabled={isDisabled} />
+          <ProfileField
+            userInformation={user.firstname}
+            userTitle="Prénom"
+            type="text"
+            isDisabled={isDisabled}
+          />
+          <ProfileField
+            userInformation={user.lastname}
+            userTitle="Nom"
+            type="text"
+            isDisabled={isDisabled}
+          />
+          <ProfileField
+            userInformation={user.email}
+            userTitle="Email"
+            type="text"
+            isDisabled={isDisabled}
+          />
+          <ProfileField
+            userInformation={user.password}
+            userTitle="Mot de passe"
+            type="password"
+            isDisabled={isDisabled}
+          />
         </div>
       </div>
       <div className="profile-trip">
@@ -48,6 +68,10 @@ const Profile = ({ isDisabled }) => {
 
 Profile.propTypes = {
   isDisabled: PropTypes.bool.isRequired,
+  // avatar: PropTypes.string,
 };
 
+/* Profile.defaultProps = {
+  avatar: 'src/assets/svg/user',
+}; */
 export default Profile;

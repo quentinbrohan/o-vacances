@@ -10,21 +10,22 @@ import './profilefield.scss';
 const ProfileField = ({
   userInformation,
   userTitle,
+  type,
   isDisabled,
 }) => (
 
   <div className="profile-field">
-    <label htmlFor="input">{userTitle}</label>
+    <label className="profile-field-label" htmlFor={userInformation}>{userTitle}</label>
     {isDisabled && (
       <input
         disabled
-        type="text"
+        type={type}
         defaultValue={userInformation}
       />
     )}
     {!isDisabled && (
       <input
-        type="text"
+        type={type}
         value={userInformation}
         onChange=""
       />
@@ -38,6 +39,7 @@ ProfileField.propTypes = {
   userTitle: PropTypes.string.isRequired,
   userInformation: PropTypes.string.isRequired,
   isDisabled: PropTypes.bool.isRequired,
+  type: PropTypes.string.isRequired,
 
 };
 

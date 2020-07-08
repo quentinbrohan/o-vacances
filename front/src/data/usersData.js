@@ -1,3 +1,7 @@
+import avatarUser from 'src/assets/images/svg/user.svg';
+import imgQuentin from 'src/assets/images/team/quentin-brohan.jpg';
+import imgAlex from 'src/assets/images/team/alexandre-quezel.jpg';
+
 export default [
   {
     id: '1',
@@ -5,7 +9,7 @@ export default [
     lastname: 'Man',
     email: 'ironman@hero.com',
     password: 'ironhero',
-    avatar: ' ',
+    avatar: imgQuentin,
   },
   {
     id: '2',
@@ -13,7 +17,7 @@ export default [
     lastname: 'Widow',
     email: 'blackwidow@hero.com',
     password: 'blackhero',
-    avatar: ' ',
+    avatar: avatarUser,
   },
   {
     id: '3',
@@ -21,7 +25,7 @@ export default [
     lastname: 'America',
     email: 'captainamerica@hero.com',
     password: 'captainhero',
-    avatar: ' ',
+    avatar: imgAlex,
   },
 
 ];
