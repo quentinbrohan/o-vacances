@@ -23,7 +23,7 @@
         "symfony/process": "5.1.*",
         "symfony/security-bundle": "5.1.*",
         "symfony/serializer": "5.1.*",
-        "symfony/serializer-pack": "*",
+        "symfony/serializer-pack": "^1.0",
         "symfony/string": "5.1.*",
         "symfony/translation": "5.1.*",
         "symfony/twig-pack": "*",
