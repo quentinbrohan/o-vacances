@@ -1,9 +1,11 @@
 @import 'src/styles/vars';
 
 .trip-details {
-  .my-trips {
+  .trip-activities {
     .activity-card {
       width:280px;
+      max-width: 100%;
+      // max-width: 560px;
       height: 360px;
       display: block;
       margin: $gutter;

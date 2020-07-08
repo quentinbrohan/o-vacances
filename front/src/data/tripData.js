@@ -34,17 +34,31 @@ export default {
   activities: [
     {
       id: 1,
-      name: 'Rencontre du 3e type',
-      image: 'https://www.actugaming.net/wp-content/uploads/2019/06/doom-eternal-1-1.jpg',
+      name: 'Randonnée',
+      image: 'https://api.time.com/wp-content/uploads/2015/09/the-martian-mars-in-movies.jpg?quality=85&w=1012&h=569&crop=1',
       startDate: '27 mars 2025',
       endDate: '29 mars 2025',
     },
     {
       id: 2,
-      name: 'Randonnée',
-      image: 'https://api.time.com/wp-content/uploads/2015/09/the-martian-mars-in-movies.jpg?quality=85&w=1012&h=569&crop=1',
-      startDate: '07 juillet 2025 ',
-      endDate: '11 juillet 2025',
+      name: 'Découverte inquiètante',
+      image: 'https://pbs.twimg.com/media/ESvTZ6cXgAACQ4F.jpg',
+      startDate: '01 avril 2025',
+      endDate: '02 avril 2025',
+    },
+    {
+      id: 3,
+      name: 'Rencontre du 3e type',
+      image: 'https://www.actugaming.net/wp-content/uploads/2019/06/doom-eternal-1-1.jpg',
+      startDate: '03 avril 2025',
+      endDate: '07 avril 2025',
+    },
+    {
+      id: 4,
+      name: 'Vite, dans le vaisseau !',
+      image: 'https://1.bp.blogspot.com/-w0qjoss4w_M/VL5KCXcQJVI/AAAAAAAAOfg/VYGsP5BtgoI/s1600/Alien-DerelictShip.jpg',
+      startDate: '15 avril 2025',
+      endDate: '15 avril 2025',
     },
   ],
 };

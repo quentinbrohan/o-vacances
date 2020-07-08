@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Calendar, MapPin } from 'react-feather';
 
-import ActivityCard from './ActivityCard';
 import tripData from 'src/data/tripData';
+import ActivityCard from './ActivityCard';
 import './trip.scss';
 
 const Trip = () => {
@@ -89,17 +89,15 @@ const Trip = () => {
 
       </div>
       <section>
-      <h2>Mes activités</h2>
-      <div className="trip-activities">
-      {tripData.activities.map((activity) => (
-        <ActivityCard {...activity} key={activity.id} />
-      ))}
-      </div>
+        <h2>Mes activités</h2>
+        <div className="trip-activities">
+          {tripData.activities.map((activity) => (
+            <ActivityCard {...activity} key={activity.id} />
+          ))}
+        </div>
       </section>
       <h2>Suggestions</h2>
-      <div className="trip-suggestions">
-
-      </div>
+      <div className="trip-suggestions" />
       {/* Suggestion component (h2 + card) */}
 
     </main>
