@@ -3,6 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Activity;
+use App\Entity\Category;
+use App\Entity\Trip;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,9 +19,19 @@ class ActivityType extends AbstractType
             ->add('description')
             ->add('startDate')
             ->add('endDate')
-            ->add('creator')
-            ->add('category')
-            ->add('trip')
+            ->add('creator',
+            EntityType::class, [
+                "class" => Activity::class,
+                "required" => false
+            ])
+            ->add('category',
+            EntityType::class, [
+                "class" => Category::class
+            ])
+            ->add('trip',
+            EntityType::class, [
+                "class" => Trip::class
+            ])
            
         ;
     }

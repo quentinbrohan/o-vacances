@@ -2,6 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\Activity;
+use App\Entity\Disponibility;
+use App\Entity\Suggestion;
+use App\Entity\Trip;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -18,8 +22,27 @@ class UserType extends AbstractType
             ->add('lastname')
             ->add('firstname')
             ->add('avatar')
-            ->add('disponibility')
-            ->add('trip')
+            ->add('suggestions',
+                EntityType::class, [
+                    "class" => Suggestion::class,
+                    "required" => false
+                ])
+            ->add('disponibility',
+                EntityType::class, [
+                    "class" => Disponibility::class,
+                    "required" => false
+                ])
+            ->add('trip',
+                EntityType::class, [
+                    "class" => Trip::class,
+                    "required" => false
+                ])
+            ->add('activities',
+                EntityType::class, [
+                    "class" => Activity::class,
+                    "required" => false
+                ])
+
         ;
     }
 

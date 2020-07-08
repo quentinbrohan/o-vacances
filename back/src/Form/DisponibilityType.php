@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Disponibility;
+use App\Entity\Trip;
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,8 +16,14 @@ class DisponibilityType extends AbstractType
         $builder
             ->add('startDate')
             ->add('endDate')
-            ->add('users')
-            ->add('trip')
+            ->add('users',
+            EntityType::class, [
+                "class" => User::class
+            ])
+            ->add('trip',
+            EntityType::class, [
+                "class" => Trip::class
+            ])
           
         ;
     }

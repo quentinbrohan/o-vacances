@@ -33,12 +33,12 @@ class Trip
     /**
      * @ORM\Column(type="date", nullable=true)
      */
-    private $start_date;
+    private $startDate;
 
     /**
      * @ORM\Column(type="date", nullable=true)
      */
-    private $end_date;
+    private $endDate;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
