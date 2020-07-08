@@ -16,10 +16,10 @@
       display: block;
       margin: $gutter;
       transition: .3s;
-      border: 1px solid $greyLighter;
+      border: 1px solid $greyColorLighter;
       border-radius: 0.5rem;
       overflow: hidden;
-      background-color: $greyLighter;
+      background-color: $greyColorLighter;
       
       &:hover {
         // cursor: pointer;
