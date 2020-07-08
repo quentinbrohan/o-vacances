@@ -1,7 +1,7 @@
 export default {
 
   id: '666',
-  title: 'Week-end détente sur Mars',
+  title: 'Exploration spatiale',
   image: 'https://unsplash.com/photos/kGtFjYdm7DI/download?force=true&w=1920',
   startDate: '01 janvier 2025',
   endDate: '31 décembre 2025',
@@ -29,6 +29,24 @@ export default {
           endDate: '28 décembre 2025',
         },
       ],
+    },
+  ],
+  activities: [
+    {
+      id: 1,
+      name: 'Rencontre du 3e type',
+      image: '',
+      category: '',
+      startDate: '',
+      endDate: '',
+    },
+    {
+      id: 1,
+      name: 'Rencontre du 3e type',
+      image: '',
+      category: '',
+      startDate: '',
+      endDate: '',
     },
   ],
 };

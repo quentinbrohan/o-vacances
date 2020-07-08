@@ -1,67 +1,109 @@
-@import 'src/styles/vars';
+@import "src/styles/vars";
 
 .trip-details {
   img.trip-photo {
-      height: 400px;
-      width: 100%;
-      padding: 0;
-      object-fit: cover;
-      object-position: center;
-      z-index: -1;
-      // Avoid container width restriction = full page photo for immersion
-      position: relative;
-      width: 100vw;
-      margin: -2rem -50vw 0;
-      left: 50%;
-      right: 50%;
-    }
-  .trip-info {
-    .trip-info-header {
-      .date,
-      .location {
-        margin-top: 0.5rem;
-        margin-bottom: 1rem;
-        display: flex;
-        font-size: 1.4rem;
-        svg {
-          height: 2rem;
-          width: 2rem;
-          margin-right: 0.5rem;
-          color: $primaryColor;
-        }
-      }
-    }
+    height: 400px;
+    width: 100%;
+    padding: 0;
+    object-fit: cover;
+    object-position: center;
+    z-index: -1;
+    // Avoid container width restriction = full page photo for immersion
+    position: relative;
+    width: 100vw;
+    margin: -2rem -50vw 0;
+    left: 50%;
+    right: 50%;
+  }
 
-    .trip-info-aside {
-      .participants {
-        .text {
-          font-size: 1.2rem;
-          font-weight: bold;
-        }
-        .avatars {
-          padding-left: 1.5rem;
+  .trip-info {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    @media (min-width: $tablet) {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    .left {
+      width: 100%;
+      @media (min-width: $tablet) {
+        display: flex;
+        flex-direction: column;
+        margin-right: 4rem;
+      }
+      .trip-info-header {
+        order: -1;
+        width: 100%;
+        .date,
+        .location {
+          margin-top: 0.5rem;
+          margin-bottom: 1rem;
           display: flex;
-          img.avatar {
-            position: relative;
-            z-index: 1;
-            left: -0.5rem;
-            margin-left: -1.5rem;
-            width: 3.5rem;
-            height: 3.5rem;
-            border-radius: 50%;
-            border: 2px solid $primaryColor;
+          font-size: 1.2rem;
+          svg {
+            height: 2rem;
+            width: 2rem;
+            margin-right: 0.5rem;
+            color: $primaryColor;
           }
         }
       }
 
-      .disponibilities {
-        font-weight: bold;
+      .trip-info-description {
+        order: 0;
+        padding: 1rem;
+        width: 100%;
+        background-color: $greyColorLighter;
+        border-radius: 0.5rem;
+        @media (min-width: $tablet) {
+          order: 1;
+          margin-top: $gutter;
+        }
       }
+    }
 
-      .trip-access {
+    .right {
+      @media (min-width: $tablet) {
+        display: flex;
+        flex-direction: column;
+      }
+      .trip-info-aside {
+        order: 1;
+        margin-top: $gutter;
+        .participants {
+          margin-bottom: 1rem;
+          .text {
+            font-size: 1.2rem;
+            font-weight: bold;
+          }
+          .avatars {
+            padding-left: 1.5rem;
+            display: flex;
+            img.avatar {
+              position: relative;
+              z-index: 1;
+              left: -0.5rem;
+              margin-left: -1.5rem;
+              width: 3.5rem;
+              height: 3.5rem;
+              border-radius: 50%;
+              border: 2px solid $primaryColor;
+            }
+          }
+        }
+
+        .disponibilities {
+          margin-bottom: 1rem;
+          font-weight: bold;
+        }
+
+        .trip-access {
+          margin-bottom: 1rem;
           display: flex;
           flex-direction: column;
           .trip-password {
+            margin-bottom: 1rem;
+
             font-size: 1.2rem;
             font-weight: bold;
             input {
@@ -76,6 +118,7 @@
               font-size: 1rem;
             }
           }
+        }
       }
     }
   }
