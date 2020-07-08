@@ -107,19 +107,15 @@
   }
   
   // See Features button
-  a.show-features {
+  .show-features {
     top: 80vh;
     left: 50%;
     transform: translateX(-50%);
     position: absolute;
-    outline: none;
-    background-color: transparent;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
     font-size: 1.6rem;
-    color: $whiteColor;
+    color: $blackColor;
     display: flex;
+    justify-content: center;
     align-items: center;
     svg {
       height: 1.6rem;

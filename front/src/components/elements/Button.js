@@ -11,6 +11,7 @@ const Button = ({
   wideMobile,
   tag,
   disabled,
+  haveClassName,
   ...props
 }) => {
   const classes = classNames(
@@ -20,6 +21,7 @@ const Button = ({
     loading && 'is-loading',
     wide && 'button-block',
     wideMobile && 'button-wide-mobile',
+    haveClassName && `${haveClassName}`,
     className,
   );
 
@@ -34,7 +36,8 @@ const Button = ({
 };
 
 Button.propTypes = {
-  className: PropTypes.string.isRequired,
+  className: PropTypes.string,
+  haveClassName: PropTypes.string,
   color: PropTypes.string,
   size: PropTypes.string,
   loading: PropTypes.bool,
@@ -45,6 +48,8 @@ Button.propTypes = {
 };
 
 Button.defaultProps = {
+  className: '',
+  haveClassName: '',
   tag: 'button',
   color: '',
   size: '',
