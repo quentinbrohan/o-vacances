@@ -17,75 +17,63 @@ class Trip
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups("apiV0_list)
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=64)
-     * @Groups("apiV0_list)
      */
     private $title;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups("apiV0_list)
-     */
+    */
     private $description;
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Groups("apiV0_list)
      */
     private $start_date;
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Groups("apiV0_list)
      */
     private $end_date;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups("apiV0_list)
      */
     private $location;
 
     /**
      * @ORM\Column(type="string", length=128, nullable=true)
-     * @Groups("apiV0_list)
      */
     private $picture;
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="trip")
-     * @Groups("apiV0_list)
      */
     private $users;
 
     /**
      * @ORM\OneToMany(targetEntity=Activity::class, mappedBy="trip")
-     * @Groups("apiV0_list)
      */
     private $activities;
 
     /**
      * @ORM\OneToMany(targetEntity=Disponibility::class, mappedBy="trip")
-     * @Groups("apiV0_list)
      */
     private $disponibility;
 
     /**
      * @ORM\OneToMany(targetEntity=Suggestion::class, mappedBy="trip")
-     * @Groups("apiV0_list)
      */
     private $suggestion;
 
     /**
      * @ORM\Column(type="string", length=128)
-     * @Groups("apiV0_list)
      */
-    private $Creator;
+    private $creator;
 
     public function __construct()
     {
@@ -126,24 +114,24 @@ class Trip
 
     public function getStartDate(): ?\DateTimeInterface
     {
-        return $this->start_date;
+        return $this->startDate;
     }
 
-    public function setStartDate(?\DateTimeInterface $start_date): self
+    public function setStartDate(?\DateTimeInterface $startDate): self
     {
-        $this->start_date = $start_date;
+        $this->startDate = $startDate;
 
         return $this;
     }
 
     public function getEndDate(): ?\DateTimeInterface
     {
-        return $this->end_date;
+        return $this->endDate;
     }
 
-    public function setEndDate(?\DateTimeInterface $end_date): self
+    public function setEndDate(?\DateTimeInterface $endDate): self
     {
-        $this->end_date = $end_date;
+        $this->endDate = $endDate;
 
         return $this;
     }
@@ -293,12 +281,12 @@ class Trip
         return $this;
     }
 
-    public function getCreator(): ?string
+    public function getcreator(): ?string
     {
         return $this->Creator;
     }
 
-    public function setCreator(string $Creator): self
+    public function setcreator(string $Creator): self
     {
         $this->Creator = $Creator;
 
