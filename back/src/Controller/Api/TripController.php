@@ -17,7 +17,7 @@ class TripController extends AbstractController
      */
     public function list(TripRepository $tripRepository, ObjectNormalizer $normalizer)
     {
-        // On demande à Doctrine toutes les animes
+        // On demande à Doctrine tous les voyages
         $trips = $tripRepository->findAll();
 
         // On instancie un serializer en lui précisant un normalizer adapté aux objets PHP
@@ -36,7 +36,7 @@ class TripController extends AbstractController
         
         $trip = new Trip();
         
-        $form = $this->createForm(TripType::class, $trip, ['csrf_protection' => false]);
+        $form = $this->createForm(TripType::class, $trip);
 
         // On extrait de la requête le json reçu
         $jsonText = $request->getContent();
@@ -66,4 +66,21 @@ class TripController extends AbstractController
      
         return $this->json((string) $form->getErrors(true, false), 400);
     }
+   /**
+     * @Route("/api/v0/trips/{id}", name="api_v0_trips_show", methods="GET")
+     */
+    public function show(TripRepository $tripRepository, ObjectNormalizer $normalizer, $id)
+    {
+            
+        // On demande à Doctrine le voyage
+        $trips = $tripRepository->find($id);
+
+        // On instancie un serializer en lui précisant un normalizer adapté aux objets PHP
+        $serializer = new Serializer([$normalizer]);
+        // Parce qu'on a précisé le normalizer, on peut normaliser selon un groupe
+        $normalizedTrips = $serializer->normalize($trips, null, ['groups' => 'apiV0_list']);
+
+        return $this->json($normalizedTrips);
+    }
+
 }
