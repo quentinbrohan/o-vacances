@@ -1,16 +1,21 @@
-@import "src/styles/vars";
+@import 'src/styles/vars';
 
-.team {
-  h2 {
-    font-size: $gutter;
+.home-user {
+  h1 {
     text-align: center;
-    margin-bottom: 2 * $gutter;
+    @media (min-width: $tablet) {
+      text-align: left;
+    }
   }
-  .team-cards {
-    display: flex;
-    justify-content: center;
-    flex-flow: wrap;
-    .team-card {
+  h2 {
+    margin-top: $gutter * 2;
+    text-align: center;
+    @media (min-width: $tablet) {
+      text-align: left;
+    }
+  }
+  .my-trips {
+    .trip-card {
       width:280px;
       height: 360px;
       display: block;
@@ -19,16 +24,15 @@
       border: 1px solid $greyLighter;
       border-radius: 0.5rem;
       overflow: hidden;
-      background-color: $greyLighter;
       
       &:hover {
         // cursor: pointer;
-        box-shadow:  -0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.3);
-        transform: scale(1.04);
+        transform: translateY(-0.25rem);
+        box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.3);
       }
     }
     
-    .team-card-header {
+    .trip-card-header {
       height: 200px;
       width: 100%;
       padding: 1rem;
@@ -39,8 +43,7 @@
       overflow: hidden;
     }
     
-    .team-card-body {
-      text-align: center;
+    .trip-card-body {
       padding: 1rem;
       width:100%;
       height: 100%;
@@ -51,18 +54,14 @@
       }
     }
     
-    .links {
-      margin-top: 1.5rem;
-      font-size: 1rem;
+    .date,
+    .location {
+      margin-top: 0.5rem;
       display: flex;
-      justify-content: space-around;
-      align-items: center;
+      font-size: 1rem;
       svg {
-        color: $blackColor;
-        &:hover {
-          transition: color ease 0.1s;
-          color: $whiteColor;
-        }
+        margin-right: 0.5rem;
+        color: $primaryColor;
       }
     }
     
@@ -73,6 +72,7 @@
     }
     
   }
-
+  
 }
 
+//
