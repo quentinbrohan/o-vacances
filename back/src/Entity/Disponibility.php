@@ -6,6 +6,7 @@ use App\Repository\DisponibilityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=DisponibilityRepository::class)
@@ -16,27 +17,32 @@ class Disponibility
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups("apiV0_list")
      */
     private $id;
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Groups("apiV0_list")
      */
-    private $start_date;
+    private $startDate;
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Groups("apiV0_list")
      */
-    private $end_date;
+    private $endDate;
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="disponibility")
+     * @Groups("apiV0_list")
      */
     private $users;
 
     /**
      * @ORM\ManyToOne(targetEntity=Trip::class, inversedBy="disponibility")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups("apiV0_list")
      */
     private $trip;
 
@@ -52,24 +58,24 @@ class Disponibility
 
     public function getStartDate(): ?\DateTimeInterface
     {
-        return $this->start_date;
+        return $this->startDate;
     }
 
-    public function setStartDate(?\DateTimeInterface $start_date): self
+    public function setStartDate(?\DateTimeInterface $startDate): self
     {
-        $this->start_date = $start_date;
+        $this->startDate = $startDate;
 
         return $this;
     }
 
     public function getEndDate(): ?\DateTimeInterface
     {
-        return $this->end_date;
+        return $this->endDate;
     }
 
-    public function setEndDate(?\DateTimeInterface $end_date): self
+    public function setEndDate(?\DateTimeInterface $endDate): self
     {
-        $this->end_date = $end_date;
+        $this->endDate = $endDate;
 
         return $this;
     }

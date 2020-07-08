@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\SuggestionRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=SuggestionRepository::class)
@@ -14,27 +15,32 @@ class Suggestion
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups("apiV0_list")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=64)
+     * @Groups("apiV0_list")
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
+     * 
      */
     private $description;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="suggestion")
+     * @Groups("apiV0_list")
      */
     private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity=Trip::class, inversedBy="suggestion")
      * @ORM\JoinColumn(nullable=false)
+     * 
      */
     private $trip;
 
