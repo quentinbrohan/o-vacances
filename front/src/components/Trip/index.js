@@ -16,7 +16,7 @@ const Trip = () => {
         src={tripData.image}
       />
       <div className="trip-info">
-        <div className="left">
+        <div className="trip-info-header">
           <h1>{tripData.title}</h1>
           <div className="date">
             <Calendar />
@@ -31,9 +31,55 @@ const Trip = () => {
             </p>
           </div>
         </div>
-        <div className="right">
-          <div className="participants"></div>
+
+        <div className="trip-info-aside">
+          <div className="participants">
+            <p className="text">{`${tripData.participants.length} participants`}</p>
+            <div className="avatars">
+              {tripData.participants.map((participant) => (
+                <img
+                  key={participant.firstname}
+                  src={participant.avatar}
+                  alt={participant.firstname}
+                  className="avatar"
+                />
+              ))}
+            </div>
+          </div>
+
+          <div className="disponibilities">
+            [Liste ? Intégration calendrier avec selector]
+          </div>
+
+          <div className="trip-access">
+            <div className="trip-password">
+              <p>Mot de passe voyage:</p>
+              <input
+                type="text"
+                name="trip-password"
+                id="trip-password"
+                value="Excalibur"
+                disabled
+              />
+            </div>
+            <div className="trip-link">
+              <p>Lien du voyage:</p>
+              <a
+                href="#"
+                className="link"
+              >
+                http://o-vacances.fr/trip/:id
+              </a>
+            </div>
+          </div>
+          {/* OnClick copy Link to Clipboard ? */}
         </div>
+      </div>
+
+      <div className="trip-info-description">
+        <p className="description">
+          {tripData.description}
+        </p>
       </div>
     </main>
   );

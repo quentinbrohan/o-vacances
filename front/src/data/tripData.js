@@ -11,11 +11,9 @@ export default {
     {
       id: 1,
       firstname: 'Elon',
+      avatar: 'https://via.placeholder.com/100',
       disponibilities: [
         {
-          id: 1,
-          firstname: 'Elon',
-          avatar: 'https://via.placeholder.com/100',
           startDate: '12 février 2025',
           endDate: '7 décembre 2025',
         },
@@ -24,11 +22,9 @@ export default {
     {
       id: 5,
       firstname: 'Musk',
+      avatar: 'https://via.placeholder.com/100',
       disponibilities: [
         {
-          id: 7,
-          firstname: 'Musk',
-          avatar: 'https://via.placeholder.com/100',
           startDate: '05 mars 2025',
           endDate: '28 décembre 2025',
         },
