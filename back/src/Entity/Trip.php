@@ -6,6 +6,7 @@ use App\Repository\TripRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=TripRepository::class)
@@ -26,18 +27,18 @@ class Trip
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     */
+    */
     private $description;
 
     /**
      * @ORM\Column(type="date", nullable=true)
      */
-    private $start_date;
+    private $startDate;
 
     /**
      * @ORM\Column(type="date", nullable=true)
      */
-    private $end_date;
+    private $endDate;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -68,6 +69,11 @@ class Trip
      * @ORM\OneToMany(targetEntity=Suggestion::class, mappedBy="trip")
      */
     private $suggestion;
+
+    /**
+     * @ORM\Column(type="string", length=128)
+     */
+    private $creator;
 
     public function __construct()
     {
@@ -108,24 +114,24 @@ class Trip
 
     public function getStartDate(): ?\DateTimeInterface
     {
-        return $this->start_date;
+        return $this->startDate;
     }
 
-    public function setStartDate(?\DateTimeInterface $start_date): self
+    public function setStartDate(?\DateTimeInterface $startDate): self
     {
-        $this->start_date = $start_date;
+        $this->startDate = $startDate;
 
         return $this;
     }
 
     public function getEndDate(): ?\DateTimeInterface
     {
-        return $this->end_date;
+        return $this->endDate;
     }
 
-    public function setEndDate(?\DateTimeInterface $end_date): self
+    public function setEndDate(?\DateTimeInterface $endDate): self
     {
-        $this->end_date = $end_date;
+        $this->endDate = $endDate;
 
         return $this;
     }
@@ -271,6 +277,18 @@ class Trip
                 $suggestion->setTrip(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getcreator(): ?string
+    {
+        return $this->Creator;
+    }
+
+    public function setcreator(string $Creator): self
+    {
+        $this->Creator = $Creator;
 
         return $this;
     }

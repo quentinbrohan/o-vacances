@@ -9,7 +9,7 @@
 |lastname|VARCHAR|NOT NULL|Le nom de l'utilisateur|
 |firstname|VARCHAR|NOT NULL|Le prénom de l'utilisateur|
 |password|VARCHAR|NOT NULL|Le mot de passe de connexion de l'utilisateur|
-|avatar|TIMESTAMP|NULL, DEFAULT|L'avatar de l'utilisateur'|
+|avatar|VARCHAR|NULL, DEFAULT|L'avatar de l'utilisateur'|
 
 
 ## Voyage (`trip`)
