@@ -3,25 +3,27 @@
 .profile-field{
   width: 100%;
   margin: 0 auto;
-  text-align: center;
   
-
-
-  label{
-  }
 
   input{
     width:60%;
     margin:0 1rem;
     padding: 0.3*$gutter;
     border:none;
+    
+    &:disabled{
+      background-color: white;
+    }
+    
   }
+  
 
   .pen{
     color: $primaryColorDarker;
 
     &:hover{
       color: $primaryColor;
+      cursor: pointer;
     }
   }
 }

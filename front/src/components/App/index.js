@@ -15,7 +15,7 @@ import HomeVisitor from 'src/components/HomeVisitor';
 import Signin from 'src/containers/Signin';
 import Team from 'src/components/Team';
 import Login from 'src/containers/Login';
-import Profile from 'src/components/Profile';
+import Profile from 'src/containers/Profile';
 
 // Data
 import persons from 'src/data/teamData';
