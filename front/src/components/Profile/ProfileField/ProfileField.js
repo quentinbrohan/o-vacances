@@ -8,38 +8,54 @@ import './profilefield.scss';
 
 // component to change profil user
 const ProfileField = ({
-  userInformation,
+  inputId,
+  value,
   userTitle,
   type,
   isDisabled,
+  onClick,
 }) => (
 
   <div className="profile-field">
-    <label className="profile-field-label" htmlFor={userInformation}>{userTitle}</label>
-    {isDisabled && (
+    <form
+      className="signin-form-element"
+      onSubmit={(event) => {
+        event.preventDefault();
+      }}
+    >
+      <label className="profile-field-label" htmlFor={inputId}>{userTitle}</label>
+      {isDisabled && (
       <input
         disabled
         type={type}
-        defaultValue={userInformation}
+        defaultValue={value}
       />
-    )}
-    {!isDisabled && (
+      )}
+      {!isDisabled && (
       <input
         type={type}
-        value={userInformation}
-        onChange=""
+        value={value}
+        onChange={(event) => {
+          console.log(event.currentTarget.value);
+        }}
       />
-    )}
-    <Edit2 className="pen" onClick={() => (console.log('coucou'))} />
+      )}
+      <Edit2
+        className="pen"
+        onClick={onClick}
+      />
+    </form>
   </div>
 );
 
 ProfileField.propTypes = {
 
   userTitle: PropTypes.string.isRequired,
-  userInformation: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
   isDisabled: PropTypes.bool.isRequired,
   type: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+  inputId: PropTypes.number.isRequired,
 
 };
 

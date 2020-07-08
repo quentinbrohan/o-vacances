@@ -1,3 +1,5 @@
+import { DELETE_DISABLED_INPUT } from 'src/actions/settings';
+
 const initialState = {
   // ici l'état initial
   isDisabled: true,
@@ -5,6 +7,12 @@ const initialState = {
 
 const settings = (state = initialState, action = {}) => {
   switch (action.type) {
+    case DELETE_DISABLED_INPUT:
+      return {
+        ...state,
+        isDisabled: false,
+      };
+
     default: return state;
   }
 };
