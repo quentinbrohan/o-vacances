@@ -15,6 +15,7 @@ import HomeVisitor from 'src/components/HomeVisitor';
 import Signin from 'src/containers/Signin';
 import Team from 'src/components/Team';
 import Login from 'src/containers/Login';
+import Trip from 'src/components/Trip';
 
 // Data
 import persons from 'src/data/teamData';
@@ -48,6 +49,10 @@ const App = () => (
         <Route
           path="/login"
           component={Login}
+        />
+        <Route
+          path="/trip/:id"
+          component={Trip}
         />
       </Switch>
     </div>

@@ -1,0 +1,33 @@
+@import 'src/styles/vars';
+
+.trip-details {
+  img.trip-photo {
+      height: 400px;
+      width: 100%;
+      padding: 0;
+      object-fit: cover;
+      object-position: center;
+      z-index: -1;
+      // Avoid container width restriction = full page photo for immersion
+      position: relative;
+      width: 100vw;
+      margin: -2rem -50vw 0;
+      left: 50%;
+      right: 50%;
+    }
+  .trip-info {
+    .date,
+    .location {
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
+      display: flex;
+      font-size: 1.4rem;
+      svg {
+        height: 2rem;
+        width: 2rem;
+        margin-right: 0.5rem;
+        color: $primaryColor;
+      }
+    }
+  }
+}
