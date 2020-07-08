@@ -17,54 +17,65 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups("apiV0_list)
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Groups("apiV0_list)
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
+     * @Groups("apiV0_list)
      */
     private $roles = [];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Groups("apiV0_list)
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=128)
+     * @Groups("apiV0_list)
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="string", length=128)
+     * @Groups("apiV0_list)
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=128, nullable=true)
+     * @Groups("apiV0_list)
      */
     private $avatar;
 
 /**
      * @ORM\OneToMany(targetEntity=Suggestion::class, mappedBy="user")
+     * @Groups("apiV0_list)
      */
     private $suggestion;
     /**
      * @ORM\ManyToMany(targetEntity=Disponibility::class, inversedBy="users")
+     * @Groups("apiV0_list)
      */
     private $disponibility;
     /**
      * @ORM\ManyToMany(targetEntity=Trip::class, inversedBy="users")
+     * @Groups("apiV0_list)
      */
     private $trip;
     /**
      * @ORM\OneToMany(targetEntity=Activity::class, mappedBy="creator")
+     * @Groups("apiV0_list)
      */
     private $activity;
     
