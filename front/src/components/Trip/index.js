@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Calendar, MapPin } from 'react-feather';
 
+import ActivityCard from './ActivityCard';
 import tripData from 'src/data/tripData';
 import './trip.scss';
 
@@ -87,9 +88,18 @@ const Trip = () => {
         </div>
 
       </div>
+      <section>
       <h2>Mes activités</h2>
-      {/* Activites component (h2 + card) */}
+      <div className="trip-activities">
+      {tripData.activities.map((activity) => (
+        <ActivityCard {...activity} key={activity.id} />
+      ))}
+      </div>
+      </section>
       <h2>Suggestions</h2>
+      <div className="trip-suggestions">
+
+      </div>
       {/* Suggestion component (h2 + card) */}
 
     </main>
