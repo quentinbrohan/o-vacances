@@ -5,7 +5,7 @@ import { Calendar, MapPin } from 'react-feather';
 
 import './tripCard.scss';
 
-const RecipeSmall = ({
+const TripCard = ({
   id,
   title,
   startDate,
@@ -44,7 +44,7 @@ const RecipeSmall = ({
   </Link>
 );
 
-RecipeSmall.propTypes = {
+TripCard.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
@@ -53,4 +53,4 @@ RecipeSmall.propTypes = {
   location: PropTypes.string.isRequired,
 };
 
-export default RecipeSmall;
+export default TripCard;

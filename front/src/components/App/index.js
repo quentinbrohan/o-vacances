@@ -51,11 +51,11 @@ const App = () => (
           path="/login"
           component={Login}
         />
-        <Route component={ErrorPage} />
         <Route
           path="/home-user"
           component={HomeUser}
         />
+        <Route component={ErrorPage} />
       </Switch>
     </div>
     <Footer />
