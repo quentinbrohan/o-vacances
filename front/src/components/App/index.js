@@ -15,6 +15,8 @@ import HomeVisitor from 'src/components/HomeVisitor';
 import Signin from 'src/containers/Signin';
 import Team from 'src/components/Team';
 import Login from 'src/containers/Login';
+import ErrorPage from 'src/components/ErrorPage';
+import HomeUser from 'src/components/HomeUser';
 
 // Data
 import persons from 'src/data/teamData';
@@ -49,6 +51,11 @@ const App = () => (
           path="/login"
           component={Login}
         />
+        <Route
+          path="/home-user"
+          component={HomeUser}
+        />
+        <Route component={ErrorPage} />
       </Switch>
     </div>
     <Footer />
