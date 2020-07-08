@@ -15,7 +15,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserController extends AbstractController
 {
-  /**
+     /**
      * @Route("/api/v0/users", name="api_v0_user_list", methods="GET")
      */
     public function list(UserRepository $userRepository, ObjectNormalizer $normalizer)
@@ -26,7 +26,7 @@ class UserController extends AbstractController
         // On instancie un serializer en lui précisant un normalizer adapté aux objets PHP
         $serializer = new Serializer([$normalizer]);
         // Parce qu'on a précisé le normalizer, on peut normaliser selon un groupe
-        $normalizedUsers = $serializer->normalize($users, null, ['groups' => 'apiV0']);
+        $normalizedUsers = $serializer->normalize($users, null, ['groups' => 'apiV0_list']);
 
 
         return $this->json($normalizedUsers);
@@ -35,15 +35,19 @@ class UserController extends AbstractController
     }
 
      /**
-     * @Route("/api/v0/users", name="api_v0_user_new", methods={"GET","POST"})
+     * @Route("/api/v0/users/login", name="api_v0_user_new", methods={"GET","POST"})
      */
-    public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
+    public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder, ObjectNormalizer $normalizer): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
+        $jsonText = $request->getContent();
+        
+        $jsonArray = json_decode($jsonText, true);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        $form->submit($jsonArray);
+
+        if ($form->isValid()) {
             // On a besoin d'hasher le mot de passe avant de le stocker en base de données
             // On récupère donc le mot de passe dans $user
             $password = $user->getPassword();
@@ -57,9 +61,14 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
+            $serializer = new Serializer([$normalizer]);
+
+            $normalizerNewUser = $serializer->normalize($user, null, ['groups'=> 'apiV0_list']);
             //rentrer le nom de la route où l'on veut rediriger
-            return $this->redirectToRoute('');
+            return $this->json($normalizerNewUser, 201);
         }
+        
+        return $this->json((string) $form->getErrors(true, false), 400);
     }
 
     /**

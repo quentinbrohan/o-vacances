@@ -16,14 +16,14 @@ class SuggestionController extends AbstractController
     /**
          * @Route("/api/v0/trips/{id}/suggestions", name="api_v0_suggestions_list", methods="GET")
          */
-    public function list(SuggestionRepository $suggestionRepository, ObjectNormalizer $normalizer)
+    public function list(SuggestionRepository $suggestionRepository, ObjectNormalizer $normalizer, $id)
     {
-        $suggestions = $suggestionRepository->findAll();
+        $suggestions = $suggestionRepository->find($id);
 
         // On instancie un serializer en lui précisant un normalizer adapté aux objets PHP
         $serializer = new Serializer([$normalizer]);
         // Parce qu'on a précisé le normalizer, on peut normaliser selon un groupe
-        $normalizedSuggestions = $serializer->normalize($suggestions, null, ['groups' => 'apiV0']);
+        $normalizedSuggestions = $serializer->normalize($suggestions, null, ['groups' => 'apiV0_list']);
 
         // dd($normalizedAnimes);
 
@@ -31,7 +31,7 @@ class SuggestionController extends AbstractController
     }
 
     /**
-     * @Route("api/v0/trips/{id}/suggestions", name="api_v0_suggestions_new", methods="POST")
+     * @Route("api/v0/trips/{id}/suggestions/new", name="api_v0_suggestions_new", methods="POST")
      */
     public function new(Request $request)
     {
@@ -57,7 +57,7 @@ class SuggestionController extends AbstractController
     }
 
     /**
-     * @Route("api/v0/trips/{id}/suggestions/{id}/update", name="api_v0_suggestions_update", methods="PATCH")
+     * @Route("api/v0/trips/{id}/suggestions/update", name="api_v0_suggestions_update", methods="PATCH")
      */
     public function update(Request $request, Suggestion $suggestion)
     {
@@ -77,7 +77,7 @@ class SuggestionController extends AbstractController
     }
 
     /**
-     * @Route("api/v0/trips/{id}/suggestions/{id}/delete", name="api_v0_suggestions_delete", methods={"DELETE"})
+     * @Route("api/v0/trips/{id}/suggestions/delete", name="api_v0_suggestions_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Suggestion $suggestion): Response
     {
