@@ -12,7 +12,6 @@ import './profile.scss';
 const Profile = ({ isDisabled }) => {
 // simulation de récupération de l'utilisateur avec son id
   const user = users.find((one) => one.id === '3');
-  console.log(isDisabled);
 
   return (
     <div className="profile">
@@ -26,7 +25,7 @@ const Profile = ({ isDisabled }) => {
           <ProfileField userInformation={user.firstname} userTitle="Prénom" isDisabled={isDisabled} />
           <ProfileField userInformation={user.lastname} userTitle="Nom" isDisabled={isDisabled} />
           <ProfileField userInformation={user.email} userTitle="Email" isDisabled={isDisabled} />
-          <ProfileField userInformation={user.password} userTitle="Mot de passe" disabled={isDisabled} />
+          <ProfileField userInformation={user.password} userTitle="Mot de passe" isDisabled={isDisabled} />
         </div>
       </div>
       <div className="profile-trip">

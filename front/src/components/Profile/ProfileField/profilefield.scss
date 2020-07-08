@@ -4,9 +4,11 @@
   width: 100%;
   margin: 0 auto;
   
-
+  label{
+    width: 100px;
+  }
   input{
-    width:60%;
+
     margin:0 1rem;
     padding: 0.3*$gutter;
     border:none;

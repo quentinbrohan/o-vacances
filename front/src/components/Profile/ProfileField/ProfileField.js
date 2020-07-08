@@ -6,7 +6,7 @@ import { Edit2 } from 'react-feather';
 
 import './profilefield.scss';
 
-// component to contact form
+// component to change profil user
 const ProfileField = ({
   userInformation,
   userTitle,
@@ -17,9 +17,9 @@ const ProfileField = ({
     <label htmlFor="input">{userTitle}</label>
     {isDisabled && (
       <input
-        type="text"
-        value={userInformation}
         disabled
+        type="text"
+        defaultValue={userInformation}
       />
     )}
     {!isDisabled && (
@@ -29,7 +29,7 @@ const ProfileField = ({
         onChange=""
       />
     )}
-    <Edit2 className="pen" onClick={() => (console.log('coucou'))}/>
+    <Edit2 className="pen" onClick={() => (console.log('coucou'))} />
   </div>
 );
 
@@ -37,12 +37,8 @@ ProfileField.propTypes = {
 
   userTitle: PropTypes.string.isRequired,
   userInformation: PropTypes.string.isRequired,
-  isDisabled: PropTypes.bool,
+  isDisabled: PropTypes.bool.isRequired,
 
-};
-
-ProfileField.defaultProps = {
-  isDisabled: false,
 };
 
 export default ProfileField;

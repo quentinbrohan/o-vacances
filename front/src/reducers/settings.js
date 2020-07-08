@@ -1,6 +1,6 @@
 const initialState = {
   // ici l'état initial
-  isDisabled: false,
+  isDisabled: true,
 };
 
 const settings = (state = initialState, action = {}) => {
