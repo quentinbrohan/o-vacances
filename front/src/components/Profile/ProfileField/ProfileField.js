@@ -12,49 +12,43 @@ const ProfileField = ({
   value,
   userTitle,
   type,
-  isDisabled,
-  onClick,
-}) => (
+}) => {
+  const isDisabled = true;
+  return (
 
-  <div className="profile-field">
-    <form
-      className="signin-form-element"
-      onSubmit={(event) => {
-        event.preventDefault();
-      }}
-    >
+    <div className="profile-field">
       <label className="profile-field-label" htmlFor={inputId}>{userTitle}</label>
-      {isDisabled && (
-      <input
-        disabled
-        type={type}
-        defaultValue={value}
-      />
-      )}
-      {!isDisabled && (
-      <input
-        type={type}
-        value={value}
-        onChange={(event) => {
-          console.log(event.currentTarget.value);
-        }}
-      />
-      )}
-      <Edit2
-        className="pen"
-        onClick={onClick}
-      />
-    </form>
-  </div>
-);
+      <form action="">
+        {isDisabled && (
+        <input
+          disabled
+          type={type}
+          defaultValue={value}
+        />
+
+        )}
+        {!isDisabled && (
+        <input
+          type={type}
+          defaultValue={value}
+          onChange=""
+        />
+        )}
+        <Edit2
+          className="pen"
+          onClick=""
+        />
+
+      </form>
+    </div>
+  );
+};
 
 ProfileField.propTypes = {
 
   userTitle: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
-  isDisabled: PropTypes.bool.isRequired,
   type: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
   inputId: PropTypes.number.isRequired,
 
 };

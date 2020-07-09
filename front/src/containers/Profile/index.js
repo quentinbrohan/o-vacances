@@ -14,8 +14,8 @@ const mapStateToProps = (state) => ({
 // eslint-disable-next-line no-unused-vars
 const mapDispatchToProps = (dispatch) => ({
 
-  deleteDisabledInput: () => {
-    dispatch(deleteDisabledInput());
+  deleteDisabledInput: (status) => {
+    dispatch(deleteDisabledInput(status));
   },
 });
 

@@ -9,9 +9,9 @@ import ProfileField from './ProfileField/ProfileField';
 import './profile.scss';
 
 // component to contact form
-const Profile = ({ isDisabled, deleteDisabledInput }) => {
+const Profile = () => {
 // simulation de récupération de l'utilisateur avec son id
-  const user = users.find((one) => one.id === '2');
+  const user = users.find((one) => one.id === '3');
 
   return (
     <div className="profile">
@@ -27,32 +27,24 @@ const Profile = ({ isDisabled, deleteDisabledInput }) => {
             value={user.firstname}
             userTitle="Prénom"
             type="text"
-            isDisabled={isDisabled}
-            onClick={deleteDisabledInput}
           />
           <ProfileField
             inputId={2}
             value={user.lastname}
             userTitle="Nom"
             type="text"
-            isDisabled={isDisabled}
-            onClick={deleteDisabledInput}
           />
           <ProfileField
             inputId={3}
             value={user.email}
             userTitle="Email"
             type="text"
-            isDisabled={isDisabled}
-            onClick={deleteDisabledInput}
           />
           <ProfileField
             inputId={4}
             value={user.password}
             userTitle="Mot de passe"
             type="password"
-            isDisabled={isDisabled}
-            onClick={deleteDisabledInput}
           />
         </div>
       </div>
@@ -74,14 +66,4 @@ const Profile = ({ isDisabled, deleteDisabledInput }) => {
   );
 };
 
-Profile.propTypes = {
-  isDisabled: PropTypes.bool,
-  deleteDisabledInput: PropTypes.func.isRequired,
-  // avatar: PropTypes.string,
-};
-
-Profile.defaultProps = {
-  // avatar: 'src/assets/svg/user',
-  isDisabled: true,
-};
 export default Profile;
