@@ -1,9 +1,11 @@
+/* eslint-disable react/jsx-curly-brace-presence */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Calendar, MapPin } from 'react-feather';
 
 import tripData from 'src/data/tripData';
 import ActivityCard from './ActivityCard';
+import PlusCard from './PlusCard';
 import './trip.scss';
 
 const Trip = () => {
@@ -89,11 +91,16 @@ const Trip = () => {
 
       </div>
       <section>
-        <h2>Mes activités</h2>
+        <h2>Mes activités {''}
+
+          <span>({tripData.activities.length})</span>
+        </h2>
         <div className="trip-activities">
-          {tripData.activities.map((activity) => (
+          {tripData.activities.slice(0, 5).map((activity) => (
             <ActivityCard {...activity} key={activity.id} />
           ))}
+          {(tripData.activities.length > 5)
+          && (<PlusCard id={tripData.id} />)}
         </div>
       </section>
       <h2>Suggestions</h2>

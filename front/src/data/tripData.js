@@ -60,5 +60,12 @@ export default {
       startDate: '15 avril 2025',
       endDate: '15 avril 2025',
     },
+    {
+      id: 4,
+      name: 'Vite, dans le vaisseau !',
+      image: 'https://1.bp.blogspot.com/-w0qjoss4w_M/VL5KCXcQJVI/AAAAAAAAOfg/VYGsP5BtgoI/s1600/Alien-DerelictShip.jpg',
+      startDate: '15 avril 2025',
+      endDate: '15 avril 2025',
+    },
   ],
 };
