@@ -20,13 +20,13 @@ $button--color: (
 // Buttons: background color
 $button--bg: (
   button-light: $primaryColorLighter,
-  button-light-hover: lighten($primaryColorLighter, 8%),
+  button-light-hover: lighten($primaryColorLighter, 16%),
   button-dark: $primaryColorDarker,
-  button-dark-hover: lighten($primaryColorDarker, 3%),
+  button-dark-hover: lighten($primaryColorDarker, 6%),
   button-primary: $primaryColor,
-  button-primary-hover: lighten($primaryColor, 3%),
+  button-primary-hover: lighten($primaryColor, 6%),
   button-secondary: $greyColorDarker,
-  button-secondary-hover: lighten($greyColorDarker, 3%),
+  button-secondary-hover: lighten($greyColorDarker, 6%),
   button-disabled: $greyColor,
 );
 
@@ -161,7 +161,7 @@ button,
     background-origin: border-box;
 
     &:hover {
-      background-color: lighten($primaryColorLighter, 8%);
+      background-color: lighten($primaryColorLighter, 16%);
     }
   }
 
@@ -170,8 +170,8 @@ button,
   }
 
   &:hover {
-    background-color: lighten($primaryColorLighter, 8%);
-    border-color: lighten($primaryColorLighter, 8%);
+    background-color: lighten($primaryColorLighter, 16%);
+    border-color: lighten($primaryColorLighter, 16%);
   }
 
   &.is-loading {
@@ -226,8 +226,8 @@ button,
   border-color: $primaryColorDarker;
 
   &:hover {
-    background-color: lighten($primaryColorDarker, 3%);
-    border-color: lighten($primaryColorDarker, 3%);
+    background-color: lighten($primaryColorDarker, 6%);
+    border-color: lighten($primaryColorDarker, 6%);
   }
 
   &.is-loading {
@@ -243,8 +243,8 @@ button,
   border-color: $primaryColor;
 
   &:hover {
-    background-color: lighten($primaryColor, 3%);
-    border-color: lighten($primaryColor, 3%);
+    background-color: lighten($primaryColor, 6%);
+    border-color: lighten($primaryColor, 6%);
   }
 
   &.is-loading {
@@ -260,8 +260,8 @@ button,
   border-color: $whiteColor;
 
   &:hover {
-    background-color: lighten($whiteColor, 3%);
-    border-color: lighten($whiteColor, 3%);
+    background-color: lighten($whiteColor, 6%);
+    border-color: lighten($whiteColor, 6%);
   }
 
   &.is-loading {

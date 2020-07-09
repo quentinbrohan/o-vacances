@@ -40,17 +40,17 @@ const Header = ({
 
               <div className="connection-mobile">
                 {isLogged ? (
-                  <button type="button">
+                  <button type="button" className="button-header">
                     <Link to="/logout" onClick={() => handleMenuState()}>Déconnexion</Link>
                   </button>
                 )
                   : (
                     <>
-                      <button type="button">
+                      <button type="button" className="button-header">
                         <Link to="/login" onClick={() => handleMenuState()}>Connexion</Link>
                       </button>
 
-                      <button type="button">
+                      <button type="button" className="button-header">
                         <Link to="/signin" onClick={() => handleMenuState()}>Inscription</Link>
                       </button>
                     </>
@@ -73,17 +73,17 @@ const Header = ({
               )}
             <div className="connection">
               {isLogged ? (
-                <button type="button">
+                <button type="button" className="button-header">
                   <Link to="/logout">Déconnexion</Link>
                 </button>
               )
                 : (
                   <>
-                    <button type="button">
+                    <button type="button" className="button-header">
                       <Link to="/login">Connexion</Link>
                     </button>
 
-                    <button type="button">
+                    <button type="button" className="button-header">
                       <Link to="/signin">Inscription</Link>
                     </button>
                   </>
