@@ -40,7 +40,7 @@ const App = () => (
           component={Contact}
         />
         <Route
-          path="/team"
+          path="/qui-sommes-nous"
           render={() => <Team persons={persons} />}
 
         />
@@ -57,7 +57,7 @@ const App = () => (
           component={Trip}
         />
         <Route
-          path="/home-user"
+          path="/mes-voyages"
           component={HomeUser}
         />
         <Route component={ErrorPage} />

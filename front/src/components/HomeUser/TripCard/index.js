@@ -14,7 +14,7 @@ const TripCard = ({
   location,
 }) => (
   <Link
-    to={`/trip/${id}`}
+    to={`/voyage/${id}`}
   >
     <article className="trip-card">
       <header

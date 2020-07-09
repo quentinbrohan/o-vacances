@@ -57,12 +57,13 @@
       display: flex;
       justify-content: space-around;
       align-items: center;
-      svg {
+      a {
         color: $blackColor;
+        cursor: pointer;
         &:hover {
           transition: color ease 0.1s;
           color: $whiteColor;
-        }
+        }    
       }
     }
     
