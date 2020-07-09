@@ -15,6 +15,7 @@ import HomeVisitor from 'src/components/HomeVisitor';
 import Signin from 'src/containers/Signin';
 import Team from 'src/components/Team';
 import Login from 'src/containers/Login';
+import Profile from 'src/containers/Profile';
 import Trip from 'src/components/Trip';
 import ErrorPage from 'src/components/ErrorPage';
 import HomeUser from 'src/components/HomeUser';
@@ -53,7 +54,11 @@ const App = () => (
           component={Login}
         />
         <Route
-          path="/trip"
+          path="/mon-profil"
+          component={Profile}
+        />
+        <Route
+          path="/voyage/:id"
           component={Trip}
         />
         <Route

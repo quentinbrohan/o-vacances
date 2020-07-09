@@ -1,0 +1,43 @@
+@import "src/styles/vars";
+
+.profile-field{
+
+  @media (max-width: $tablet) {
+    margin:0 auto
+  }
+  
+  .profile-field-label{
+    display: block;
+    width: 310px;
+    font-weight: bold;
+
+    @media (max-width: $laptop) {
+      width:220px;
+    }
+  }
+
+  label{
+    margin: 0.5*$gutter 0 0.2*$gutter;
+  }
+
+  input{
+    width: 280px;
+    border:none;
+    font-size: 1rem;
+   
+    
+    &:disabled{
+      background-color: white;
+    }
+
+    @media (max-width: $laptop) {
+      width:220px;
+    }
+    @media (max-width: $tablet) {
+      width: 80%
+    }
+    
+  }
+ 
+  
+}
