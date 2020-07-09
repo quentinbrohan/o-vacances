@@ -10,7 +10,7 @@ const HomeVisitor = () => (
     {/* Slideshow Images/Text */}
     <Slideshow />
     <FeaturesSplit />
-    <button type="button">
+    <button type="button" className="button-home-signin">
       <Link to="/signin">Je m'inscris</Link>
     </button>
 

@@ -1,10 +1,13 @@
 @import 'src/styles/vars';
 
 .home-visitor {
-
+  .button-home-signin {
+    display: block;
+    margin: 0 auto;
+  }
 }
 
-#features-split {
+#fonctionnalites {
   height: 100%;
   width: 100%;
 }

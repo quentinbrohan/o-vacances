@@ -19,6 +19,7 @@
       object-fit: contain;
       background-size: cover;
       background-position: center;
+      filter: brightness(0.7);
     }
     &-content {
       margin: auto;

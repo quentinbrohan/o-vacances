@@ -4,6 +4,7 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 // == Import
 // Layout
@@ -26,7 +27,7 @@ import persons from 'src/data/teamData';
 import './styles.scss';
 
 // == Composant
-const App = () => (
+const App = ({ isLogged }) => (
   <div className="app">
     <Header />
     <div className="container">
@@ -43,7 +44,6 @@ const App = () => (
         <Route
           path="/qui-sommes-nous"
           render={() => <Team persons={persons} />}
-
         />
         <Route
           path="/signin"
@@ -58,6 +58,7 @@ const App = () => (
           component={Profile}
         />
         <Route
+          exact
           path="/voyage/:id"
           component={Trip}
         />
@@ -71,6 +72,10 @@ const App = () => (
     <Footer />
   </div>
 );
+
+App.propTypes = {
+  isLogged: PropTypes.bool.isRequired,
+};
 
 // == Export
 export default App;

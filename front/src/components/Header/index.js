@@ -64,10 +64,13 @@ const Header = ({
                 <li><Link to="/mes-voyages">Mes voyages</Link></li>
                 <li><Link to="/creer-un-voyage">Créer un voyage</Link></li>
                 <li><Link to="/mon-profil">Mon profil</Link></li>
-                <li><Link to="/contact">Contact</Link></li>
               </ul>
             )
-              : ''}
+              : (
+                <ul>
+                  <li><Link to="/contact">Contact</Link></li>
+                </ul>
+              )}
             <div className="connection">
               {isLogged ? (
                 <button type="button">
