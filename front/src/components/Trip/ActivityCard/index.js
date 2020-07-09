@@ -1,40 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Calendar, MapPin } from 'react-feather';
+import { Calendar } from 'react-feather';
 
-import './tripCard.scss';
+import './activityCard.scss';
 
-const TripCard = ({
+const ActivityCard = ({
   id,
-  title,
+  name,
+  image,
   startDate,
   endDate,
-  image,
-  location,
 }) => (
   <Link
-    to={`/voyage/${id}`}
+    to={`/voyage/${id}/activites`}
   >
-    <article className="trip-card">
+    <article className="activity-card">
       <header
         style={{ backgroundImage: `url(${image})` }}
-        className="trip-card-header"
+        className="activity-card-header"
       />
-      <div className="trip-card-body">
-        <h4>{title}</h4>
+      <div className="activity-card-body">
+        <h4>{name}</h4>
         <div className="body-content">
           <div className="date">
             <Calendar />
             <p>
               Du {startDate} <br />
               au { endDate}
-            </p>
-          </div>
-          <div className="location">
-            <MapPin />
-            <p>
-              {location}
             </p>
           </div>
         </div>
@@ -44,13 +37,12 @@ const TripCard = ({
   </Link>
 );
 
-TripCard.propTypes = {
+ActivityCard.propTypes = {
   id: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   startDate: PropTypes.string.isRequired,
   endDate: PropTypes.string.isRequired,
-  location: PropTypes.string.isRequired,
 };
 
-export default TripCard;
+export default ActivityCard;
