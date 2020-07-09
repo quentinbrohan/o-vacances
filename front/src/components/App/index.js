@@ -53,7 +53,7 @@ const App = () => (
           component={Login}
         />
         <Route
-          path="/trip/:id"
+          path="/trip"
           component={Trip}
         />
         <Route
