@@ -81,7 +81,7 @@ const Trip = () => {
                   href="#"
                   className="link"
                 >
-                  http://o-vacances.fr/trip/:id
+                  http://o-vacances.fr/voyage/:id
                 </a>
               </div>
             </div>
