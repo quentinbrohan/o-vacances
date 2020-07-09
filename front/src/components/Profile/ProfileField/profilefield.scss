@@ -37,17 +37,4 @@
     
   }
   
-
-  .pen{
-    color: $primaryColorDarker;
-
-    &:hover{
-      color: $primaryColor;
-      cursor: pointer;
-    }
-
-    @media (max-width: $tablet) {
-      width: 20%
-    }
-  }
 }
