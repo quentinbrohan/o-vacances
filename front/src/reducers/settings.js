@@ -10,7 +10,7 @@ const settings = (state = initialState, action = {}) => {
     case DELETE_DISABLED_INPUT:
       return {
         ...state,
-        isDisabled: settings.status,
+        isDisabled: action.status,
       };
 
     default: return state;

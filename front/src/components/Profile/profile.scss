@@ -40,7 +40,12 @@
       }
 
       button{
-        width:100%;
+        width:50%;
+        font-size: 0.8rem;
+        display: block;
+        margin: 0 auto;
+        text-align: center;
+        padding: 0;
       }
     }
 
@@ -51,6 +56,31 @@
           width:100%;
           margin: 2rem auto;
         }
+    }
+
+    form{
+
+      .icon{
+        color: $primaryColorDarker;
+        display: block;
+        margin: 0 2*$gutter 0 auto;
+        width: 40px;
+        height: 40px;
+    
+        &:hover{
+          color: $primaryColor;
+          cursor: pointer;
+        }
+    
+        @media (max-width: $tablet) {
+          width: 20%
+        }
+      }
+
+      .last-input{
+        margin-bottom: 0;
+
+      }
     }
   }
 
