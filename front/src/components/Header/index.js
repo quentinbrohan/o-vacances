@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { slide as Menu } from 'react-burger-menu';
 import { Menu as MenuIcon, X as CloseIcon } from 'react-feather';
 
 import './header.scss';
 
-const Header = () => {
+const Header = ({
+  isLogged,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
+  console.log(isLogged);
 
   // Handle BurgerMenu close onClick
   useEffect(() => {
@@ -73,6 +77,10 @@ const Header = () => {
       </div>
     </header>
   );
+};
+
+Header.propTypes = {
+  isLogged: PropTypes.bool.isRequired,
 };
 
 export default Header;
