@@ -10,7 +10,7 @@ export default {
   participants: [
     {
       id: 1,
-      firstname: 'Elon',
+      firstName: 'Elon',
       avatar: 'https://via.placeholder.com/100',
       disponibilities: [
         {
@@ -21,7 +21,7 @@ export default {
     },
     {
       id: 5,
-      firstname: 'Musk',
+      firstName: 'Musk',
       avatar: 'https://via.placeholder.com/100',
       disponibilities: [
         {
@@ -60,12 +60,21 @@ export default {
       startDate: '15 avril 2025',
       endDate: '15 avril 2025',
     },
+  ],
+  suggestions: [
     {
-      id: 4,
-      name: 'Vite, dans le vaisseau !',
-      image: 'https://1.bp.blogspot.com/-w0qjoss4w_M/VL5KCXcQJVI/AAAAAAAAOfg/VYGsP5BtgoI/s1600/Alien-DerelictShip.jpg',
-      startDate: '15 avril 2025',
-      endDate: '15 avril 2025',
+      id: 1,
+      firstName: 'Elon',
+      avatar: 'https://via.placeholder.com/100',
+      date: '11/02/2025 22:22',
+      content: 'Je m\'occupe d\'ammener des jeux de sociétés ! J\'ai Cluedo, SOS Ouistiti, Monopoly Lovecraft, Mikado, Uno...',
+    },
+    {
+      id: 2,
+      firstName: 'Musk',
+      avatar: 'https://via.placeholder.com/100',
+      date: '02/01/2025 19:11',
+      content: 'Quelqu\'un sait si on peut louer une jeep sur place ? Pas fan de la marche, mais si on peut faire un road trip j\'y suis à 200% !',
     },
   ],
 };

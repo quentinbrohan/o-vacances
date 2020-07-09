@@ -77,15 +77,24 @@
             font-weight: bold;
           }
           .avatars {
-            padding-left: 1.5rem;
+            padding: 0;
+            // padding-left: 2.5rem;
             display: flex;
             img.avatar {
               position: relative;
               z-index: 1;
-              left: -0.5rem;
-              margin-left: -1.5rem;
-              width: 3.5rem;
-              height: 3.5rem;
+              width: 2.5rem;
+              height: 2.5rem;
+              border-radius: 50%;
+              border: 2px solid $primaryColor;
+            }
+            img.avatar:not(:first-child) {
+              position: relative;
+              z-index: 2;
+              left: -2rem;
+              margin-left: 0.5rem;
+              width: 2.5rem;
+              height: 2.5rem;
               border-radius: 50%;
               border: 2px solid $primaryColor;
             }
@@ -123,8 +132,19 @@
     }
   }
 
-  .trip-activities {
-    display: flex;
-    flex-wrap: wrap;
+  section.activities {
+    margin-top: $gutter * 2;
+    .trip-activities {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+
+  section.suggestions {
+    margin-top: $gutter * 2;
+    .trip-suggestions {
+      display: flex;
+      flex-direction: column;
+    }
   }
 }

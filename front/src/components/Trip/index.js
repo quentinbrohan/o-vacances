@@ -6,6 +6,7 @@ import { Calendar, MapPin } from 'react-feather';
 import tripData from 'src/data/tripData';
 import ActivityCard from './ActivityCard';
 import PlusCard from './PlusCard';
+import Suggestion from './Suggestion';
 import './trip.scss';
 
 const Trip = () => {
@@ -50,9 +51,9 @@ const Trip = () => {
               <div className="avatars">
                 {tripData.participants.map((participant) => (
                   <img
-                    key={participant.firstname}
+                    key={participant.firstName}
                     src={participant.avatar}
-                    alt={participant.firstname}
+                    alt={participant.firstName}
                     className="avatar"
                   />
                 ))}
@@ -90,7 +91,7 @@ const Trip = () => {
         </div>
 
       </div>
-      <section>
+      <section className="activities">
         <h2>Mes activités {''}
 
           <span>({tripData.activities.length})</span>
@@ -103,9 +104,16 @@ const Trip = () => {
           && (<PlusCard id={tripData.id} />)}
         </div>
       </section>
-      <h2>Suggestions</h2>
-      <div className="trip-suggestions" />
-      {/* Suggestion component (h2 + card) */}
+
+      <section className="suggestions">
+        <h2>Suggestions</h2>
+        <div className="trip-suggestions">
+          {/* Suggestion component (h2 + card) */}
+          {tripData.suggestions.map((suggestion) => (
+            <Suggestion {...suggestion} key={suggestion.id} />
+          ))}
+        </div>
+      </section>
 
     </main>
   );
