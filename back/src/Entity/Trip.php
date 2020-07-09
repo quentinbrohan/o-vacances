@@ -17,75 +17,75 @@ class Trip
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups("apiV0_list")
+     * @Groups("apiV0_trip")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=64)
-     * @Groups("apiV0_list")
+     * @Groups("apiV0_trip")
      */
     private $title;
 
     
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups("apiV0_list")
+     * @Groups("apiV0_trip")
      *
-     * /
+     */
     private $description;
 
-    /**
+    /** 
      * @ORM\Column(type="date", nullable=true)
-     * @Groups("apiV0_list")
+     * @Groups("apiV0_trip")
      */
     private $startDate;
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Groups("apiV0_list")
+     * @Groups("apiV0_trip")
      */
     private $endDate;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups("apiV0_list")
+     * @Groups("apiV0_trip")
      */
     private $location;
 
     /**
      * @ORM\Column(type="string", length=128, nullable=true)
-     * @Groups("apiV0_list")
+     * @Groups("apiV0_trip")
      */
     private $picture;
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="trip")
-     * @Groups("apiV0_list")
+     * @Groups("apiV0_trip")
      */
     private $users;
 
     /**
      * @ORM\OneToMany(targetEntity=Activity::class, mappedBy="trip")
-     * @Groups("apiV0_list")
+     * @Groups("apiV0_trip")
      */
     private $activities;
 
     /**
      * @ORM\OneToMany(targetEntity=Disponibility::class, mappedBy="trip")
-     * @Groups("apiV0_list")
+     * @Groups("apiV0_trip")
      */
     private $disponibility;
 
     /**
      * @ORM\OneToMany(targetEntity=Suggestion::class, mappedBy="trip")
-     * @Groups("apiV0_list")
+     * @Groups("apiV0_trip")
      */
     private $suggestion;
 
     /**
      * @ORM\Column(type="string", length=128)
-     * @Groups("apiV0_list")
+     * @Groups("apiV0_trip")
      */
     private $creator;
 
@@ -96,6 +96,22 @@ class Trip
         $this->disponibility = new ArrayCollection();
         $this->suggestion = new ArrayCollection();
     }
+
+    // /**
+    //  * @Groups("apiV0_trip")
+    //  * je créé une fonction custom qui va parcourir mes entites2 et j'en ressort ce que j'en souhaite
+    //  * ci dessous un exemple possible mais tu es libre sur le retour 
+    //  * Note: groupe n'est pas uniquement applicable sur les propriété ;) 
+    //  */
+    // public function getUsersDetails(){
+    //     $tableauAretourner = [];
+            
+    //     foreach ($this->users as $user) {
+    //         $tableauAretourner[] = $user->getEmail();
+    //     };
+
+    //     return implode(',', $tableauAretourner);
+    // }
 
     public function getId(): ?int
     {
@@ -295,14 +311,14 @@ class Trip
         return $this;
     }
 
-    public function getcreator(): ?string
+    public function getCreator(): ?string
     {
-        return $this->Creator;
+        return $this->creator;
     }
 
-    public function setcreator(string $Creator): self
+    public function setCreator(string $creator): self
     {
-        $this->Creator = $Creator;
+        $this->creator = $creator;
 
         return $this;
     }
