@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Suggestion;
+use App\Form\SuggestionType;
 use App\Repository\SuggestionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;

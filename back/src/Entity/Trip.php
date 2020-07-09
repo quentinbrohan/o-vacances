@@ -31,7 +31,6 @@ class Trip
     /**
      * @ORM\Column(type="text", nullable=true)
      * @Groups("apiV0_list")
-     *
      * /
      private $description;
 
@@ -295,14 +294,14 @@ class Trip
         return $this;
     }
 
-    public function getcreator(): ?string
+    public function getCreator(): ?string
     {
-        return $this->Creator;
+        return $this->creator;
     }
 
-    public function setcreator(string $Creator): self
+    public function setCreator(string $creator): self
     {
-        $this->Creator = $Creator;
+        $this->creator = $creator;
 
         return $this;
     }

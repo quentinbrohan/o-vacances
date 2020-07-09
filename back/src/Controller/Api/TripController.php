@@ -3,6 +3,7 @@
 namespace App\Controller\Api;
 
 use App\Entity\Trip;
+use App\Form\TripType;
 use App\Repository\TripRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

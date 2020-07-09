@@ -66,7 +66,7 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=Suggestion::class, mappedBy="user")
      * 
      */
-    private $suggestion;
+    private $suggestions;
     /**
      * @ORM\ManyToMany(targetEntity=Disponibility::class, inversedBy="users")
      * 
@@ -212,22 +212,22 @@ class User implements UserInterface
     /**
      * @return Collection|Suggestion[]
      */
-    public function getSuggestion(): Collection
+    public function getSuggestions(): Collection
     {
-        return $this->suggestion;
+        return $this->suggestions;
     }
-    public function addSuggestion(Suggestion $suggestion): self
+    public function addSuggestions(Suggestion $suggestion): self
     {
-        if (!$this->suggestion->contains($suggestion)) {
-            $this->suggestion[] = $suggestion;
+        if (!$this->suggestions->contains($suggestion)) {
+            $this->suggestions[] = $suggestion;
             $suggestion->setUser($this);
         }
         return $this;
     }
     public function removeSuggestion(Suggestion $suggestion): self
     {
-        if ($this->suggestion->contains($suggestion)) {
-            $this->suggestion->removeElement($suggestion);
+        if ($this->suggestions->contains($suggestion)) {
+            $this->suggestions->removeElement($suggestion);
             // set the owning side to null (unless already changed)
             if ($suggestion->getUser() === $this) {
                 $suggestion->setUser(null);

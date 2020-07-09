@@ -9,6 +9,7 @@ use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\UserRepository;
 use App\Entity\User;
+use App\Form\UserType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -107,7 +108,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("api/v0/user/{id}/delete", name="api_user_delete", methods={"DELETE"})
+     * @Route("api/v0/user/{id}/delete", name="api_user_delete", methods={"DELETE")
      */
     public function delete(Request $request, User $user): Response
     {
