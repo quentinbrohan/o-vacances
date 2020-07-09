@@ -258,6 +258,7 @@ button,
   color: $whiteColor;
   background-color: $whiteColor;
   border-color: $whiteColor;
+  box-shadow:   0 0.25rem 0.25rem rgba($blackColor, 0.15); 
 
   &:hover {
     background-color: lighten($whiteColor, 6%);

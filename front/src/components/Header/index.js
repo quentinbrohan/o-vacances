@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { slide as Menu } from 'react-burger-menu';
 import { Menu as MenuIcon, X as CloseIcon } from 'react-feather';
+import Button from 'src/components/elements/Button';
 
 import './header.scss';
 
@@ -40,19 +41,18 @@ const Header = ({
 
               <div className="connection-mobile">
                 {isLogged ? (
-                  <button type="button" className="button-header">
+                  <Button color="secondary" size="sm" haveClassName="button-header">
                     <Link to="/logout" onClick={() => handleMenuState()}>Déconnexion</Link>
-                  </button>
+                  </Button>
                 )
                   : (
                     <>
-                      <button type="button" className="button-header">
+                      <Button color="secondary" size="sm" haveClassName="button-header">
                         <Link to="/login" onClick={() => handleMenuState()}>Connexion</Link>
-                      </button>
-
-                      <button type="button" className="button-header">
+                      </Button>
+                      <Button color="secondary" size="sm" haveClassName="button-header">
                         <Link to="/signin" onClick={() => handleMenuState()}>Inscription</Link>
-                      </button>
+                      </Button>
                     </>
                   )}
               </div>
@@ -79,13 +79,12 @@ const Header = ({
               )
                 : (
                   <>
-                    <button type="button" className="button-header">
+                    <Button color="secondary" haveClassName="button-header">
                       <Link to="/login">Connexion</Link>
-                    </button>
-
-                    <button type="button" className="button-header">
+                    </Button>
+                    <Button color="secondary" haveClassName="button-header">
                       <Link to="/signin">Inscription</Link>
-                    </button>
+                    </Button>
                   </>
                 )}
             </div>
