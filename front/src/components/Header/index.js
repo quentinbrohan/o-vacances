@@ -10,8 +10,6 @@ const Header = ({
   isLogged,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  console.log(isLogged);
-
   // Handle BurgerMenu close onClick
   useEffect(() => {
     setIsOpen(false);
@@ -41,36 +39,52 @@ const Header = ({
               <Link to="/mon-profil" onClick={() => handleMenuState()}>Mon profil</Link>
 
               <div className="connection-mobile">
-                <button type="button">
-                  <Link to="/login" onClick={() => handleMenuState()}>Connexion</Link>
-                </button>
-                <button type="button">
-                  <Link to="/logout" onClick={() => handleMenuState()}>Déconnexion</Link>
+                {isLogged ? (
+                  <button type="button">
+                    <Link to="/logout" onClick={() => handleMenuState()}>Déconnexion</Link>
+                  </button>
+                )
+                  : (
+                    <>
+                      <button type="button">
+                        <Link to="/login" onClick={() => handleMenuState()}>Connexion</Link>
+                      </button>
 
-                </button>
-                <button type="button">
-                  <Link to="/signin" onClick={() => handleMenuState()}>Inscription</Link>
-                </button>
+                      <button type="button">
+                        <Link to="/signin" onClick={() => handleMenuState()}>Inscription</Link>
+                      </button>
+                    </>
+                  )}
               </div>
             </Menu>
           </div>
           <div className="menu">
-            <ul>
-              <li><Link to="/mes-voyages">Mes voyages</Link></li>
-              <li><Link to="/creer-un-voyage">Créer un voyage</Link></li>
-              <li><Link to="/mon-profil">Mon profil</Link></li>
-            </ul>
+            {isLogged ? (
+              <ul>
+                <li><Link to="/mes-voyages">Mes voyages</Link></li>
+                <li><Link to="/creer-un-voyage">Créer un voyage</Link></li>
+                <li><Link to="/mon-profil">Mon profil</Link></li>
+                <li><Link to="/contact">Contact</Link></li>
+              </ul>
+            )
+              : ''}
             <div className="connection">
-              <button type="button">
-                <Link to="/login">Connexion</Link>
-              </button>
-              <button type="button">
-                <Link to="/logout">Déconnexion</Link>
+              {isLogged ? (
+                <button type="button">
+                  <Link to="/logout">Déconnexion</Link>
+                </button>
+              )
+                : (
+                  <>
+                    <button type="button">
+                      <Link to="/login">Connexion</Link>
+                    </button>
 
-              </button>
-              <button type="button">
-                <Link to="/signin">Inscription</Link>
-              </button>
+                    <button type="button">
+                      <Link to="/signin">Inscription</Link>
+                    </button>
+                  </>
+                )}
             </div>
           </div>
         </nav>
