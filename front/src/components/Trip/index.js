@@ -1,7 +1,12 @@
 /* eslint-disable react/jsx-curly-brace-presence */
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Calendar, MapPin } from 'react-feather';
+// React Dates
+import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates';
+import 'react-dates/lib/css/_datepicker.css';
+import './react_dates_overrides.scss';
+import moment from 'moment';
 
 import tripData from 'src/data/tripData';
 import ActivityCard from './ActivityCard';
@@ -11,6 +16,8 @@ import './trip.scss';
 
 const Trip = () => {
   console.log(tripData);
+  const [focusedInput, setFocusedInput] = useState('startDate');
+  const DATE_FORMAT_MOMENT = 'YYYY-MM-DD';
 
   return (
     <main className="trip-details">
@@ -62,6 +69,33 @@ const Trip = () => {
 
             <div className="disponibilities">
               [Liste ? Intégration calendrier avec selector]
+              <label htmlFor="disponibilities">Disponibilités</label>
+              <select name="disponibilities" id="disponibilities">
+                {tripData.participants.map((participant) => {
+                  <option value={participant.firstName} key={participant.firstName}>
+                    {`${participant.disponibilities.startDate} - ${participant.disponibilities.endDate}`}
+                  </option>;
+                })}
+              </select>
+              <DateRangePicker
+                startDate={moment('2025-01-01')}
+                endDate={moment('2025-01-09')}
+                startDateId="start"
+                endDateId="end"
+                // withPortal
+                // withFullScreenPortal
+                small
+                onDatesChange={({ startDate, endDate }) => {
+                  if (startDate && endDate) {
+                    setDates({
+                      start: startDate.format(DATE_FORMAT_MOMENT),
+                      end: endDate.format(DATE_FORMAT_MOMENT),
+                    });
+                  }
+                }}
+                focusedInput={focusedInput}
+                onFocusChange={(focusedInput) => setFocusedInput(focusedInput)}
+              />
             </div>
 
             <div className="trip-access">
