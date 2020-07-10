@@ -69,11 +69,13 @@ final class Versions
   'symfony/string' => 'v5.1.2@ac70459db781108db7c6d8981dd31ce0e29e3298',
   'symfony/var-dumper' => 'v5.1.2@46a942903059b0b05e601f00eb64179e05578c0f',
   'symfony/var-exporter' => 'v5.1.2@eabaabfe1485ca955c5b53307eade15ccda57a15',
-<<<<<<< HEAD
+
   '__root__' => 'dev-back-api-trip@93ce8909dff9e567ba034908e87e1431cf0458eb',
-=======
+
   '__root__' => 'dev-back-api-trip@f884229575d469fbf0aea09a52aff62796219fa5',
->>>>>>> 4c9b26890cc80a589391804a80fbf716cf099b78
+
+  '__root__' => 'dev-master@1976955a9f0276991b27765e425f66fc681866d7',
+
 );
 
     private function __construct()
