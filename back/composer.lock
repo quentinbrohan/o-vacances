@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-
+    "content-hash": "d503230fc8f2fc6ffa12f7774109c2d1",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -155,7 +155,6 @@
                 "redis",
                 "xcache"
             ],
-
             "funding": [
                 {
                     "url": "https://www.doctrine-project.org/sponsorship.html",
@@ -170,7 +169,6 @@
                     "type": "tidelift"
                 }
             ],
-
             "time": "2020-07-07T18:54:01+00:00"
         },
         {
@@ -2651,7 +2649,6 @@
                 "interoperability",
                 "standards"
             ],
-
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -2666,7 +2663,6 @@
                     "type": "tidelift"
                 }
             ],
-
             "time": "2020-07-06T13:23:11+00:00"
         },
         {
@@ -2979,7 +2975,6 @@
             ],
             "description": "A generic function and convention to trigger deprecation notices",
             "homepage": "https://symfony.com",
-
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -2994,7 +2989,6 @@
                     "type": "tidelift"
                 }
             ],
-
             "time": "2020-06-06T08:49:21+00:00"
         },
         {
@@ -3399,7 +3393,6 @@
                 "interoperability",
                 "standards"
             ],
-
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -3414,7 +3407,6 @@
                     "type": "tidelift"
                 }
             ],
-
             "time": "2020-07-06T13:23:11+00:00"
         },
         {
@@ -4068,7 +4060,6 @@
                 "interoperability",
                 "standards"
             ],
-
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -4083,7 +4074,6 @@
                     "type": "tidelift"
                 }
             ],
-
             "time": "2020-07-06T13:23:11+00:00"
         },
         {
@@ -6401,7 +6391,6 @@
                 "interoperability",
                 "standards"
             ],
-
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -6416,7 +6405,6 @@
                     "type": "tidelift"
                 }
             ],
-
             "time": "2020-07-06T13:23:11+00:00"
         },
         {
@@ -6719,7 +6707,6 @@
                 "interoperability",
                 "standards"
             ],
-
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -6734,7 +6721,6 @@
                     "type": "tidelift"
                 }
             ],
-
             "time": "2020-07-06T13:23:11+00:00"
         },
         {
@@ -8355,6 +8341,20 @@
                 "generator",
                 "scaffold",
                 "scaffolding"
+            ],
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
             ],
             "time": "2020-07-06T00:27:41+00:00"
         },

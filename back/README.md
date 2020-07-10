@@ -26,12 +26,14 @@ php bin/console doctrine:fixtures:load
 
 ## LexikJWTAuthenticationBundle (JWT)
 composer install (pour recuperer le bundle)
+ou
+php composer.phar require "lexik/jwt-authentication-bundle"
 
 https://github.com/lexik/LexikJWTAuthenticationBundle/blob/master/Resources/doc/index.md#getting-started
 
 pour installer le dossier JWT et avoir les tokens, faire les 3 commandes ci dessous en ldc l'une après l'autre
     - mkdir -p config/jwt  (création du dossier JWT dans config)
-    - openssl genpkey -out config/jwt/private.pem -aes256 -algorithm rsa -pkeyopt rsa_keygen_bits:4096     
+    - openssl genpkey -out config/jwt/private.pem -aes256 -algorithm rsa -pkeyopt rsa_keygen_bits:4096
         (il demande 2 fois un mot de passe. On trouve ce mot de passe dans le fichier .env, dans la rubrique 'lexik/jwt-authentication-bundle' à coté de JWT_PASSPHRASE)
     - openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem -pubout
         (il redemande un mot de passe, remettre le même)
