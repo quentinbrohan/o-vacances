@@ -37,7 +37,7 @@ const userMiddleware = (store) => (next) => (action) => {
       const { email, password } = store.getState().user;
 
       // withCredentials : autorisation d'accéder au cookie
-      axios.post('/api/v0/users/login', {
+      axios.post('http://localhost:8000/api/v0/users/login', {
         email,
         password,
       }, {

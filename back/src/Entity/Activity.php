@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ActivityRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ActivityRepository::class)
@@ -14,37 +15,44 @@ class Activity
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups("apiV0_trip")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=64)
+     * @Groups("apiV0_trip")
      */
     private $title;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups("apiV0_trip")
      */
     private $description;
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Groups("apiV0_trip")
      */
-    private $start_date;
+    private $startDate;
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Groups("apiV0_trip")
      */
-    private $end_date;
+    private $endDate;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="activity")
+     * @Groups("apiV0_trip")
      */
     private $creator;
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="activities")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups("apiV0_trip")
      */
     private $category;
 
@@ -85,24 +93,24 @@ class Activity
 
     public function getStartDate(): ?\DateTimeInterface
     {
-        return $this->start_date;
+        return $this->startDate;
     }
 
-    public function setStartDate(?\DateTimeInterface $start_date): self
+    public function setStartDate(?\DateTimeInterface $startDate): self
     {
-        $this->start_date = $start_date;
+        $this->startDate = $startDate;
 
         return $this;
     }
 
     public function getEndDate(): ?\DateTimeInterface
     {
-        return $this->end_date;
+        return $this->endDate;
     }
 
-    public function setEndDate(?\DateTimeInterface $end_date): self
+    public function setEndDate(?\DateTimeInterface $endDate): self
     {
-        $this->end_date = $end_date;
+        $this->endDate = $endDate;
 
         return $this;
     }

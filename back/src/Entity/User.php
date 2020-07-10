@@ -3,10 +3,13 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use App\Entity\Suggestion;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Security\Core\User\UserInterface;
+
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -17,60 +20,78 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups("apiV0_list")
+     * @Groups("apiV0_trip")
+     * @Groups("apiV0_Suggestion")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Groups("apiV0_list")
+     * @Groups("apiV0_trip")
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
+     * @Groups("apiV0_list")
+     * @Groups("apiV0_trip")
+     * 
      */
     private $roles = [];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * 
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=128)
+     * @Groups("apiV0_trip")
+     * 
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="string", length=128)
+     * @Groups("apiV0_trip")
+     * @Groups("apiV0_Suggestion")
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=128, nullable=true)
+     * @Groups("apiV0_trip")
      */
     private $avatar;
 
 /**
      * @ORM\OneToMany(targetEntity=Suggestion::class, mappedBy="user")
+     * 
      */
-    private $suggestion;
+    private $suggestions;
     /**
      * @ORM\ManyToMany(targetEntity=Disponibility::class, inversedBy="users")
+     * 
      */
     private $disponibility;
     /**
      * @ORM\ManyToMany(targetEntity=Trip::class, inversedBy="users")
+     * 
      */
     private $trip;
     /**
      * @ORM\OneToMany(targetEntity=Activity::class, mappedBy="creator")
+     * 
      */
     private $activity;
     
     public function __construct()
     {
-        $this->suggestion = new ArrayCollection();
+        $this->suggestions = new ArrayCollection();
         $this->trip = new ArrayCollection();
         $this->activity = new ArrayCollection();
         $this->disponibility = new ArrayCollection();
@@ -197,22 +218,22 @@ class User implements UserInterface
     /**
      * @return Collection|Suggestion[]
      */
-    public function getSuggestion(): Collection
+    public function getSuggestions(): Collection
     {
-        return $this->suggestion;
+        return $this->suggestions;
     }
-    public function addSuggestion(Suggestion $suggestion): self
+    public function addSuggestions(Suggestion $suggestion): self
     {
         if (!$this->suggestion->contains($suggestion)) {
-            $this->suggestion[] = $suggestion;
+            $this->addSuggestions[] = $suggestion;
             $suggestion->setUser($this);
         }
         return $this;
     }
     public function removeSuggestion(Suggestion $suggestion): self
     {
-        if ($this->suggestion->contains($suggestion)) {
-            $this->suggestion->removeElement($suggestion);
+        if ($this->suggestions->contains($suggestion)) {
+            $this->suggestions->removeElement($suggestion);
             // set the owning side to null (unless already changed)
             if ($suggestion->getUser() === $this) {
                 $suggestion->setUser(null);
