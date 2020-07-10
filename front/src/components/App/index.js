@@ -18,6 +18,7 @@ import Login from 'src/containers/Login';
 import Trip from 'src/components/Trip';
 import ErrorPage from 'src/components/ErrorPage';
 import HomeUser from 'src/components/HomeUser';
+import TripForm from 'src/components/TripForm';
 
 // Data
 import persons from 'src/data/teamData';

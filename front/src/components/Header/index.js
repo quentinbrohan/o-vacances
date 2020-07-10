@@ -33,7 +33,7 @@ const Header = () => {
               customCrossIcon={<CloseIcon />}
             >
               <Link to="/" onClick={() => handleMenuState()}>Mes voyages</Link>
-              <Link to="/" onClick={() => handleMenuState()}>Créer un voyage</Link>
+              <Link to="/trip-form" onClick={() => handleMenuState()}>Créer un voyage</Link>
               <Link to="/" onClick={() => handleMenuState()}>Mon profil</Link>
 
               <div className="connection-mobile">
@@ -53,7 +53,7 @@ const Header = () => {
           <div className="menu">
             <ul>
               <li><Link to="/">Mes voyages</Link></li>
-              <li><Link to="/">Créer un voyage</Link></li>
+              <li><Link to="/trip-form">Créer un voyage</Link></li>
               <li><Link to="/">Mon profil</Link></li>
             </ul>
             <div className="connection">
