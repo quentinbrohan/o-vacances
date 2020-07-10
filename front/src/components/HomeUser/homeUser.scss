@@ -1,0 +1,13 @@
+@import 'src/styles/vars';
+
+.home-user {
+  h1 {
+    margin-bottom: $gutter;
+  }
+
+  .my-trips {
+    display: flex;
+    justify-content: center;
+    flex-flow: wrap;
+  }
+}

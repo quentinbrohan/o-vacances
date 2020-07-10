@@ -65,7 +65,7 @@ class UserController extends AbstractController
             $serializer = new Serializer([$normalizer]);
 
             $normalizerNewUser = $serializer->normalize($user, null, ['groups'=> 'apiV0_list']);
-            //rentrer le nom de la route où l'on veut rediriger
+           
             return $this->json($normalizerNewUser, 201);
         }
         
@@ -108,7 +108,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("api/v0/user/{id}/delete", name="api_user_delete", methods={"DELETE")
+     * @Route("api/v0/user/{id}/delete", name="api_user_delete", methods="DELETE")
      */
     public function delete(Request $request, User $user): Response
     {

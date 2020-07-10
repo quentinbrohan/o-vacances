@@ -7,15 +7,15 @@ use App\Form\ActivityType;
 use App\Repository\ActivityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
-
 class ActivityController extends AbstractController
 {
     /**
-     * @Route("/api/v0/user/{id}/activities", name="api_v0_activity_list", methods="GET")
+     * @Route("/api/v0/trips/{id}/activities", name="api_v0_activities_list", methods="GET")
      */
     public function list(ActivityRepository $activityRepository, ObjectNormalizer $normalizer)
     {
@@ -32,7 +32,7 @@ class ActivityController extends AbstractController
     }
 
     /**
-     * @Route("/api/v0/user/{id}/activities/new", name="api_v0_activities_new", methods="POST")
+     * @Route("/api/v0/trips/{id}/activities/new", name="api_v0_activities_new", methods="POST")
      */
     public function new(ObjectNormalizer $normalizer, Request $request)
     {
@@ -60,13 +60,13 @@ class ActivityController extends AbstractController
     }
 
     /**
-     * @Route("/api/v0/user/{id}/activities/update", name="api_v0_activities_update", methods="PATCH")
+     * @Route("/api/v0/trips/{id}/activities/update", name="api_v0_activities_update", methods="PATCH")
      */
     public function update(Request $request, Activity $activity)
     {
         $form = $this->createForm(ActivityType::class, $activity, ['csrf_protection' => false]);
         $form->handleRequest($request);
-        if ($form->isSubmitted()&& $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $manager = $this->getDoctrine()->getManager();
             $this->$manager->flush();
             return $this->redirectToRoute('activity_view', ["id" => $activity->getId()]);
@@ -74,7 +74,7 @@ class ActivityController extends AbstractController
     }
 
     /**
-     * @Route("api/v0/user/{id}/activities/delete", name="api_activity_delete", methods="DELETE")
+     * @Route("api/v0/trips/{id}/activities/delete", name="api_v0_activities_delete", methods="DELETE")
      */
     public function deleteActivity(Activity $activity)
     {
@@ -83,6 +83,6 @@ class ActivityController extends AbstractController
         $manager->flush();
 
         $this->addFlash("warning", "L'activité a bien été supprimée");
-        return $this->redirectToRoute('api_activity_delete');
+        return $this->redirectToRoute('api_activity_list');
     }
 }

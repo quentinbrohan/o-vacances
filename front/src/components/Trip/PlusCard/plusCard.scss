@@ -1,0 +1,19 @@
+@import 'src/styles/vars';
+
+.trip-details {
+  .trip-activities {
+    .activity-card.activity-card-plus {
+      .activity-card-header {
+        background-color: $greyColorDarker;
+      }
+      .activity-card-body {
+        background-color: $whiteColor;
+        h2 {
+          margin: 0;
+          padding: 1rem;
+          line-height: 125%;
+        }
+      }
+    }
+  }
+}

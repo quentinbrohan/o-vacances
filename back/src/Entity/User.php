@@ -22,18 +22,21 @@ class User implements UserInterface
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      * @Groups("apiV0_list")
+     * 
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Groups("apiV0_list")
+     * 
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
      * @Groups("apiV0_list")
+     * 
      */
     private $roles = [];
 
@@ -85,7 +88,7 @@ class User implements UserInterface
     
     public function __construct()
     {
-        $this->suggestion = new ArrayCollection();
+        $this->suggestions = new ArrayCollection();
         $this->trip = new ArrayCollection();
         $this->activity = new ArrayCollection();
         $this->disponibility = new ArrayCollection();
@@ -94,6 +97,7 @@ class User implements UserInterface
     public function __toString()
     {
         return $this->getEmail();
+               $this->getPassword();
     }
     
     public function getId(): ?int
@@ -218,8 +222,8 @@ class User implements UserInterface
     }
     public function addSuggestions(Suggestion $suggestion): self
     {
-        if (!$this->suggestions->contains($suggestion)) {
-            $this->suggestions[] = $suggestion;
+        if (!$this->suggestion->contains($suggestion)) {
+            $this->addSuggestions[] = $suggestion;
             $suggestion->setUser($this);
         }
         return $this;
