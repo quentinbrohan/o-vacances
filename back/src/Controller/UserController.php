@@ -48,7 +48,7 @@ class UserController extends AbstractController
 
         $form->submit($jsonArray);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             // On a besoin d'hasher le mot de passe avant de le stocker en base de données
             // On récupère donc le mot de passe dans $user
             $password = $user->getPassword();
@@ -64,9 +64,9 @@ class UserController extends AbstractController
 
             $serializer = new Serializer([$normalizer]);
 
-            $normalizerNewUser = $serializer->normalize($user, null, ['groups'=> 'apiV0_list']);
+            $normalizerUser = $serializer->normalize($user, null, ['groups'=> 'apiV0_list']);
            
-            return $this->json($normalizerNewUser, 201);
+            return $this->json($normalizerUser, 201);
         }
         
         return $this->json((string) $form->getErrors(true, false), 400);
