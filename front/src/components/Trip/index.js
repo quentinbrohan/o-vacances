@@ -18,6 +18,8 @@ const Trip = () => {
   console.log(tripData);
   const [focusedInput, setFocusedInput] = useState('startDate');
   const DATE_FORMAT_MOMENT = 'YYYY-MM-DD';
+  console.log(tripData.participants[0].disponibilities.startDate);
+  
 
   return (
     <main className="trip-details">
