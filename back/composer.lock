@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "content-hash": "d503230fc8f2fc6ffa12f7774109c2d1",
+=======
+    "content-hash": "31d21e70221008dc51af4cc4cdd2a966",
+>>>>>>> eb221b23fe969a860eb462c05fa9961bf9fa3d53
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -210,7 +214,11 @@
                 "redis",
                 "xcache"
             ],
+<<<<<<< HEAD
             "time": "2020-07-07T18:54:01+00:00"
+=======
+            "time": "2020-05-27T16:24:54+00:00"
+>>>>>>> eb221b23fe969a860eb462c05fa9961bf9fa3d53
         },
         {
             "name": "doctrine/collections",
@@ -275,7 +283,11 @@
                 "iterators",
                 "php"
             ],
+<<<<<<< HEAD
             "time": "2020-06-22T19:14:02+00:00"
+=======
+            "time": "2020-05-25T19:24:35+00:00"
+>>>>>>> eb221b23fe969a860eb462c05fa9961bf9fa3d53
         },
         {
             "name": "doctrine/common",
@@ -612,7 +624,11 @@
                 "migrations",
                 "schema"
             ],
+<<<<<<< HEAD
             "time": "2019-11-13T12:57:41+00:00"
+=======
+            "time": "2020-06-15T06:04:38+00:00"
+>>>>>>> eb221b23fe969a860eb462c05fa9961bf9fa3d53
         },
         {
             "name": "doctrine/event-manager",
@@ -966,7 +982,11 @@
                 "migrations",
                 "php"
             ],
+<<<<<<< HEAD
             "time": "2019-12-04T06:09:14+00:00"
+=======
+            "time": "2020-06-21T08:55:42+00:00"
+>>>>>>> eb221b23fe969a860eb462c05fa9961bf9fa3d53
         },
         {
             "name": "doctrine/orm",
@@ -1559,6 +1579,7 @@
                 "psr-3"
             ],
             "time": "2020-05-22T08:12:19+00:00"
+<<<<<<< HEAD
         },
         {
             "name": "namshi/jose",
@@ -1622,6 +1643,8 @@
                 "token"
             ],
             "time": "2016-12-05T07:27:31+00:00"
+=======
+>>>>>>> eb221b23fe969a860eb462c05fa9961bf9fa3d53
         },
         {
             "name": "nelmio/cors-bundle",
@@ -2426,7 +2449,11 @@
                 "interoperability",
                 "standards"
             ],
+<<<<<<< HEAD
             "time": "2020-07-06T13:23:11+00:00"
+=======
+            "time": "2020-05-20T17:43:50+00:00"
+>>>>>>> eb221b23fe969a860eb462c05fa9961bf9fa3d53
         },
         {
             "name": "symfony/config",
@@ -2696,7 +2723,11 @@
             ],
             "description": "A generic function and convention to trigger deprecation notices",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
             "time": "2020-06-06T08:49:21+00:00"
+=======
+            "time": "2020-05-27T08:34:37+00:00"
+>>>>>>> eb221b23fe969a860eb462c05fa9961bf9fa3d53
         },
         {
             "name": "symfony/doctrine-bridge",
@@ -3044,7 +3075,11 @@
                 "interoperability",
                 "standards"
             ],
+<<<<<<< HEAD
             "time": "2020-07-06T13:23:11+00:00"
+=======
+            "time": "2020-05-20T17:43:50+00:00"
+>>>>>>> eb221b23fe969a860eb462c05fa9961bf9fa3d53
         },
         {
             "name": "symfony/expression-language",
@@ -3599,7 +3634,11 @@
                 "interoperability",
                 "standards"
             ],
+<<<<<<< HEAD
             "time": "2020-07-06T13:23:11+00:00"
+=======
+            "time": "2020-05-25T17:37:45+00:00"
+>>>>>>> eb221b23fe969a860eb462c05fa9961bf9fa3d53
         },
         {
             "name": "symfony/http-foundation",
@@ -5539,7 +5578,11 @@
                 "interoperability",
                 "standards"
             ],
+<<<<<<< HEAD
             "time": "2020-07-06T13:23:11+00:00"
+=======
+            "time": "2020-05-20T17:43:50+00:00"
+>>>>>>> eb221b23fe969a860eb462c05fa9961bf9fa3d53
         },
         {
             "name": "symfony/stopwatch",
@@ -5799,7 +5842,11 @@
                 "interoperability",
                 "standards"
             ],
+<<<<<<< HEAD
             "time": "2020-07-06T13:23:11+00:00"
+=======
+            "time": "2020-05-20T17:43:50+00:00"
+>>>>>>> eb221b23fe969a860eb462c05fa9961bf9fa3d53
         },
         {
             "name": "symfony/twig-bridge",
@@ -7180,7 +7227,11 @@
                 "scaffold",
                 "scaffolding"
             ],
+<<<<<<< HEAD
             "time": "2020-07-06T00:27:41+00:00"
+=======
+            "time": "2020-05-29T14:47:30+00:00"
+>>>>>>> eb221b23fe969a860eb462c05fa9961bf9fa3d53
         },
         {
             "name": "symfony/phpunit-bridge",

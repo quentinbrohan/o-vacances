@@ -31,7 +31,10 @@ class Trip
     /**
      * @ORM\Column(type="text", nullable=true)
      * @Groups("apiV0_list")
+<<<<<<< HEAD
      *
+=======
+>>>>>>> eb221b23fe969a860eb462c05fa9961bf9fa3d53
      */
      private $description;
 
