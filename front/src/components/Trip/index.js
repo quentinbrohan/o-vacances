@@ -1,10 +1,10 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/jsx-curly-brace-presence */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Calendar, MapPin } from 'react-feather';
 // React Dates
-import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates';
-import 'react-dates/lib/css/_datepicker.css';
+import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates'; import 'react-dates/lib/css/_datepicker.css';
 import './react_dates_overrides.scss';
 import moment from 'moment';
 
@@ -15,11 +15,20 @@ import Suggestion from './Suggestion';
 import './trip.scss';
 
 const Trip = () => {
-  console.log(tripData);
   const [focusedInput, setFocusedInput] = useState('startDate');
-  const DATE_FORMAT_MOMENT = 'YYYY-MM-DD';
-  console.log(tripData.participants[0].disponibilities.startDate);
-  
+  const DATE_FORMAT_MOMENT = 'DD-MM-YYYY';
+  // Trip's dates
+  const [datesTrip, setDatesTrip] = useState({
+    startDate: tripData.startDate,
+    endDate: tripData.endDate,
+  });
+  // Participant's dates (default = user)
+  const [datesParticipant, setDatesParticipant] = useState({
+    startDate: '01-01-2025',
+    endDate: '27-12-2025',
+  });
+  console.log(datesParticipant);
+  console.log(focusedInput);
 
   return (
     <main className="trip-details">
@@ -70,28 +79,41 @@ const Trip = () => {
             </div>
 
             <div className="disponibilities">
-              [Liste ? Intégration calendrier avec selector]
-              <label htmlFor="disponibilities">Disponibilités</label>
+              {/* Liste ? Intégration calendrier avec selector */}
+              <label htmlFor="disponibilities">Calendrier des disponibilités</label>
               <select name="disponibilities" id="disponibilities">
-                {tripData.participants.map((participant) => {
-                  <option value={participant.firstName} key={participant.firstName}>
-                    {`${participant.disponibilities.startDate} - ${participant.disponibilities.endDate}`}
-                  </option>;
-                })}
+                <option disabled defaultValue>Participants</option>
+                {tripData.participants.map((participant) => (
+                  <option
+                    value={participant.firstName}
+                    key={participant.firstName}
+                    onChange={(participant) => {
+                      setDatesParticipant({
+                        start: participant.disponibilities.startDate,
+                        end: participant.disponibilities.endDate,
+                      });
+                    }}
+                  >
+                    {participant.firstName}
+                  </option>
+                ))}
               </select>
+              {/* if logged user => able to edit own disponibilities */}
               <DateRangePicker
-                startDate={moment('2025-01-01')}
-                endDate={moment('2025-01-09')}
+                startDate={moment('01-01-2025', 'DD-MM-YYYY', true)}
+                endDate={moment('01-09-2025', 'DD-MM-YYYY', true)}
                 startDateId="start"
                 endDateId="end"
+                firstDayOfWeek={1}
+                anchorDirection="right"
                 // withPortal
                 // withFullScreenPortal
-                small
+                regular
                 onDatesChange={({ startDate, endDate }) => {
                   if (startDate && endDate) {
-                    setDates({
-                      start: startDate.format(DATE_FORMAT_MOMENT),
-                      end: endDate.format(DATE_FORMAT_MOMENT),
+                    setDatesParticipant({
+                      startDate: startDate.format(DATE_FORMAT_MOMENT),
+                      endDate: endDate.format(DATE_FORMAT_MOMENT),
                     });
                   }
                 }}

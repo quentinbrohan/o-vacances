@@ -104,6 +104,17 @@
         .disponibilities {
           margin-bottom: 1rem;
           font-weight: bold;
+
+          label {
+            font-size: 1.2em;
+            display: block;
+            margin-bottom: 0.5rem;
+          }
+          select {
+            margin-bottom: 0.5rem;
+            display: block;
+            width: 100%;
+          }
         }
 
         .trip-access {
