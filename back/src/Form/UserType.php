@@ -26,22 +26,26 @@ class UserType extends AbstractType
             ->add('suggestions',
                 EntityType::class, [
                     "class" => Suggestion::class,
-                    "required" => false
+                    "required" => false,
+                    'multiple' => true
                 ])
             ->add('disponibility',
                 EntityType::class, [
                     "class" => Disponibility::class,
-                    "required" => false
+                    "required" => false,
+                    'multiple' => true
                 ])
             ->add('trip',
                 EntityType::class, [
                     "class" => Trip::class,
-                    "required" => false
+                    "required" => false,
+                    'multiple' => true
                 ])
-            ->add('activities',
+            ->add('activity',
                 EntityType::class, [
                     "class" => Activity::class,
-                    "required" => false
+                    "required" => false,
+                    'multiple' => true
                 ])
 
         ;
@@ -51,6 +55,7 @@ class UserType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'multiple' => true
         ]);
     }
 }

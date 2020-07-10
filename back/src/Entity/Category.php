@@ -22,11 +22,13 @@ class Category
 
     /**
      * @ORM\Column(type="string", length=64)
+     * @Groups("apiV0_trip")
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=128)
+     * @Groups("apiV0_trip")
      */
     private $picture;
 

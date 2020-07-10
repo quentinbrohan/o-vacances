@@ -155,6 +155,7 @@
                 "redis",
                 "xcache"
             ],
+
             "funding": [
                 {
                     "url": "https://www.doctrine-project.org/sponsorship.html",
@@ -169,6 +170,7 @@
                     "type": "tidelift"
                 }
             ],
+
             "time": "2020-07-07T18:54:01+00:00"
         },
         {
@@ -2649,6 +2651,7 @@
                 "interoperability",
                 "standards"
             ],
+
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -2663,6 +2666,7 @@
                     "type": "tidelift"
                 }
             ],
+
             "time": "2020-07-06T13:23:11+00:00"
         },
         {
@@ -2975,6 +2979,7 @@
             ],
             "description": "A generic function and convention to trigger deprecation notices",
             "homepage": "https://symfony.com",
+
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -2989,6 +2994,7 @@
                     "type": "tidelift"
                 }
             ],
+
             "time": "2020-06-06T08:49:21+00:00"
         },
         {
@@ -3393,6 +3399,7 @@
                 "interoperability",
                 "standards"
             ],
+
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -3407,6 +3414,7 @@
                     "type": "tidelift"
                 }
             ],
+
             "time": "2020-07-06T13:23:11+00:00"
         },
         {
@@ -4060,6 +4068,7 @@
                 "interoperability",
                 "standards"
             ],
+
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -4074,6 +4083,7 @@
                     "type": "tidelift"
                 }
             ],
+
             "time": "2020-07-06T13:23:11+00:00"
         },
         {
@@ -6391,6 +6401,7 @@
                 "interoperability",
                 "standards"
             ],
+
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -6405,6 +6416,7 @@
                     "type": "tidelift"
                 }
             ],
+
             "time": "2020-07-06T13:23:11+00:00"
         },
         {
@@ -6707,6 +6719,7 @@
                 "interoperability",
                 "standards"
             ],
+
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -6721,6 +6734,7 @@
                     "type": "tidelift"
                 }
             ],
+
             "time": "2020-07-06T13:23:11+00:00"
         },
         {

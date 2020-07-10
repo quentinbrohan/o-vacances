@@ -8,6 +8,7 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class SuggestionType extends AbstractType
 {
@@ -18,11 +19,13 @@ class SuggestionType extends AbstractType
             ->add('description')
             ->add('user',
             EntityType::class, [
-                "class" => User::class
+                'class' => User::class,
+                'allow_extra_fields' => true,
             ])
             ->add('trip',
             EntityType::class, [
-                "class" => Trip::class
+                'class' => Trip::class,
+                'allow_extra_fields' => true,
             ])
            
         ;
@@ -32,6 +35,7 @@ class SuggestionType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Suggestion::class,
+            'allow_extra_fields' => true,
         ]);
     }
 }
