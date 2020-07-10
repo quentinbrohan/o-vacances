@@ -32,10 +32,10 @@ class Trip
      * @ORM\Column(type="text", nullable=true)
      * @Groups("apiV0_list")
      *
-     * /
+     */
      private $description;
 
-    /**
+    /**  
      * @ORM\Column(type="date", nullable=true)
      * @Groups("apiV0_list")
      */
