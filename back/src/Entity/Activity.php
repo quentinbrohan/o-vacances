@@ -15,37 +15,44 @@ class Activity
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups("apiV0_trip")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=64)
+     * @Groups("apiV0_trip")
      */
     private $title;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups("apiV0_trip")
      */
     private $description;
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Groups("apiV0_trip")
      */
     private $startDate;
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Groups("apiV0_trip")
      */
     private $endDate;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="activity")
+     * @Groups("apiV0_trip")
      */
     private $creator;
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="activities")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups("apiV0_trip")
      */
     private $category;
 

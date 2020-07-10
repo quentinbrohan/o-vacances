@@ -20,8 +20,8 @@ class TripRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return Trip[] Returns an array of Trip objects
-    //  */
+    // * @return Trip[] Returns an array of Trip objects
+    // */
     /*
     public function findByExampleField($value)
     {

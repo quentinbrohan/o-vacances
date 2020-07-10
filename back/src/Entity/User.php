@@ -21,6 +21,7 @@ class User implements UserInterface
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      * @Groups("apiV0_list")
+     * @Groups("apiV0_trip")
      * @Groups("apiV0_Suggestion")
      */
     private $id;
@@ -28,13 +29,14 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Groups("apiV0_list")
-     * 
+     * @Groups("apiV0_trip")
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
      * @Groups("apiV0_list")
+     * @Groups("apiV0_trip")
      * 
      */
     private $roles = [];
@@ -48,19 +50,21 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=128)
+     * @Groups("apiV0_trip")
      * 
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="string", length=128)
+     * @Groups("apiV0_trip")
      * @Groups("apiV0_Suggestion")
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=128, nullable=true)
-     * 
+     * @Groups("apiV0_trip")
      */
     private $avatar;
 
