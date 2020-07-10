@@ -4,7 +4,7 @@ import React from 'react';
 import './featuresSplit.scss';
 
 const FeaturesSplit = () => (
-  <div className="features-split" id="features-split">
+  <div className="features-split" id="fonctionnalites">
     <h2 className="title">Le complexe rendu simple</h2>
     <p>Grâce à ses nombreuses fonctionnalités, O'Vacances vous aides dans vos démarches.</p>
     <div className="split">
