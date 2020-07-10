@@ -1,10 +1,11 @@
 @import "src/styles/vars";
 
-header {
+.app > header {
   background-color: #fff;
   padding: $gutter;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
   width: 100%;
+  z-index: 10;
   .header-container {
     display: flex;
     justify-content: space-between;
@@ -25,6 +26,71 @@ header {
     @media (min-width: $tablet) {
       display: none;
     }
+
+    .bm-burger-button {
+      position: absolute;
+      width: 2rem;
+      height: 2rem;
+      right: 2rem;
+      top: 2rem;
+    }
+
+      /* Color/shape of burger icon bars */
+  .bm-burger-bars {
+    background: $blackColor;
+  }
+
+
+  /* Position and sizing of clickable cross button */
+  .bm-cross-button {
+    position: absolute;
+    top: 2rem !important;
+    right: 2rem !important;
+    height: 2rem !important;
+    width: 2rem !important;
+  }
+
+  /* Color/shape of close button cross */
+  .bm-cross {
+    color: $blackColor;
+  }
+
+  /*
+Sidebar wrapper styles
+Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
+*/
+  .bm-menu-wrap {
+    top: 0;
+    position: fixed;
+    height: 100%;
+    box-shadow: 0 0.25rem .5rem rgba(0, 0, 0, 0.3);
+
+  }
+  /* General sidebar styles */
+  .bm-menu {
+    background: #fff;
+    padding: 2.5rem 1rem 0;
+    font-size: 1.15em;
+  }
+
+  /* Wrapper for item list */
+  .bm-item-list {
+    color: $blackColor;
+    padding: 0.8em;
+    text-align: center;
+    a:last-child {
+      margin-bottom: 2rem;
+    }
+  }
+
+  /* Individual item */
+  .bm-item {
+    display: inline-block;
+    font-size: 1.4rem;
+    margin: 0;
+    margin-bottom: 1rem;
+  }
+}
   }
   .navigation {
     display: flex;
@@ -68,58 +134,3 @@ header {
       }
     }
   }
-
-  /* Color/shape of burger icon bars */
-  .bm-burger-bars {
-    background: $blackColor;
-  }
-
-
-  /* Position and sizing of clickable cross button */
-  .bm-cross-button {
-    position: absolute;
-    top: 2rem !important;
-    right: 2rem !important;
-    height: 2rem !important;
-    width: 2rem !important;
-  }
-
-  /* Color/shape of close button cross */
-  .bm-cross {
-    color: $whiteColor;
-  }
-
-  /*
-Sidebar wrapper styles
-Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
-*/
-  .bm-menu-wrap {
-    top: 0;
-    position: fixed;
-    height: 100%;
-  }
-  /* General sidebar styles */
-  .bm-menu {
-    background: $blackColor;
-    padding: 2.5rem 1rem 0;
-    font-size: 1.15em;
-  }
-
-  /* Wrapper for item list */
-  .bm-item-list {
-    color: $whiteColor;
-    padding: 0.8em;
-    text-align: center;
-    a:last-child {
-      margin-bottom: 2rem;
-    }
-  }
-
-  /* Individual item */
-  .bm-item {
-    display: inline-block;
-    font-size: 1.4rem;
-    margin: 0;
-    margin-bottom: 1rem;
-  }
-}
