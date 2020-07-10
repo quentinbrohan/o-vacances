@@ -17,7 +17,7 @@ const userMiddleware = (store) => (next) => (action) => {
       } = store.getState().user;
 
       // Endpoint API for user creation through Symfony
-      axios.post('http://localhost:8000/api/v0/users', {
+      axios.post('/api/v0/users/login', {
         firstname,
         lastname,
         email,
@@ -37,13 +37,14 @@ const userMiddleware = (store) => (next) => (action) => {
       const { email, password } = store.getState().user;
 
       // withCredentials : autorisation d'accéder au cookie
-      axios.post('http://localhost:8000/user', {
+      axios.post('/api/v0/users/login', {
         email,
         password,
       }, {
         withCredentials: true,
       })
         .then((response) => {
+          console.log(response);
           store.dispatch(saveUser(response.data.info, response.data.logged));
         })
         .catch((error) => {

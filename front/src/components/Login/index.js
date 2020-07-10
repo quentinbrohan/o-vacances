@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import Field from './Field';
 
@@ -52,7 +53,9 @@ const Login = ({
           <div className="login-layout">
             <p>J'ai oublié mon mot de passe</p>
             <hr />
-            <p>Pas encore de compte? <a>Inscription</a></p>
+            <p>Pas encore de compte?
+              <Link to="/signin">Inscription</Link>
+            </p>
           </div>
         </div>
       </div>
