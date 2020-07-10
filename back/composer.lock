@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "eaa5047535a0361e0a90d43548bfe2ca",
-
+    "content-hash": "50735a7894b6d6f065ee4f9eebe87a22",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -156,6 +155,7 @@
                 "redis",
                 "xcache"
             ],
+
             "funding": [
                 {
                     "url": "https://www.doctrine-project.org/sponsorship.html",
@@ -170,6 +170,7 @@
                     "type": "tidelift"
                 }
             ],
+
             "time": "2020-07-07T18:54:01+00:00"
         },
         {
@@ -235,23 +236,7 @@
                 "iterators",
                 "php"
             ],
-
-            "funding": [
-                {
-                    "url": "https://www.doctrine-project.org/sponsorship.html",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://www.patreon.com/phpdoctrine",
-                    "type": "patreon"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/doctrine%2Fcollections",
-                    "type": "tidelift"
-                }
-            ],
             "time": "2020-06-22T19:14:02+00:00"
-
         },
         {
             "name": "doctrine/common",
@@ -1362,16 +1347,6 @@
                 "JWS",
                 "jwt"
             ],
-            "funding": [
-                {
-                    "url": "https://github.com/lcobucci",
-                    "type": "github"
-                },
-                {
-                    "url": "https://www.patreon.com/lcobucci",
-                    "type": "patreon"
-                }
-            ],
             "time": "2020-05-22T08:21:12+00:00"
         },
         {
@@ -1467,12 +1442,6 @@
                 "jwt",
                 "rest",
                 "symfony"
-            ],
-            "funding": [
-                {
-                    "url": "https://github.com/chalasr",
-                    "type": "github"
-                }
             ],
             "time": "2020-06-14T13:20:35+00:00"
         },
@@ -1619,6 +1588,63 @@
                 "token"
             ],
             "time": "2016-12-05T07:27:31+00:00"
+        },
+        {
+            "name": "nelmio/cors-bundle",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nelmio/NelmioCorsBundle.git",
+                "reference": "9683e6d30d000ef998919261329d825de7c53499"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nelmio/NelmioCorsBundle/zipball/9683e6d30d000ef998919261329d825de7c53499",
+                "reference": "9683e6d30d000ef998919261329d825de7c53499",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/framework-bundle": "^4.3 || ^5.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.2",
+                "symfony/phpunit-bridge": "^4.3 || ^5.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Nelmio\\CorsBundle\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nelmio",
+                    "homepage": "http://nelm.io"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://github.com/nelmio/NelmioCorsBundle/contributors"
+                }
+            ],
+            "description": "Adds CORS (Cross-Origin Resource Sharing) headers support in your Symfony application",
+            "keywords": [
+                "api",
+                "cors",
+                "crossdomain"
+            ],
+            "time": "2019-11-15T08:54:08+00:00"
         },
         {
             "name": "ocramius/package-versions",
@@ -2395,6 +2421,7 @@
                 "interoperability",
                 "standards"
             ],
+
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -2409,6 +2436,7 @@
                     "type": "tidelift"
                 }
             ],
+
             "time": "2020-07-06T13:23:11+00:00"
         },
         {
@@ -2679,6 +2707,7 @@
             ],
             "description": "A generic function and convention to trigger deprecation notices",
             "homepage": "https://symfony.com",
+
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -2693,6 +2722,8 @@
                     "type": "tidelift"
                 }
             ],
+
+
             "time": "2020-06-06T08:49:21+00:00"
         },
         {
@@ -3041,6 +3072,7 @@
                 "interoperability",
                 "standards"
             ],
+
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -3055,6 +3087,7 @@
                     "type": "tidelift"
                 }
             ],
+
             "time": "2020-07-06T13:23:11+00:00"
         },
         {
@@ -3610,6 +3643,7 @@
                 "interoperability",
                 "standards"
             ],
+
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -3624,6 +3658,7 @@
                     "type": "tidelift"
                 }
             ],
+
             "time": "2020-07-06T13:23:11+00:00"
         },
         {
@@ -5563,6 +5598,7 @@
                 "interoperability",
                 "standards"
             ],
+
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -5577,6 +5613,7 @@
                     "type": "tidelift"
                 }
             ],
+
             "time": "2020-07-06T13:23:11+00:00"
         },
         {
@@ -5837,6 +5874,7 @@
                 "interoperability",
                 "standards"
             ],
+
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -5851,6 +5889,7 @@
                     "type": "tidelift"
                 }
             ],
+
             "time": "2020-07-06T13:23:11+00:00"
         },
         {
@@ -6485,28 +6524,6 @@
                 "extra",
                 "twig"
             ],
-            "funding": [
-                {
-                    "url": "https://certification.symfony.com/",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://live.symfony.com/",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://symfony.com/cloud/",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/twig/twig",
-                    "type": "tidelift"
-                }
-            ],
             "time": "2020-05-21T09:56:39+00:00"
         },
         {
@@ -6568,28 +6585,6 @@
             "homepage": "https://twig.symfony.com",
             "keywords": [
                 "templating"
-            ],
-            "funding": [
-                {
-                    "url": "https://certification.symfony.com/",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://live.symfony.com/",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://symfony.com/cloud/",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/twig/twig",
-                    "type": "tidelift"
-                }
             ],
             "time": "2020-07-05T13:18:14+00:00"
         },
@@ -7212,16 +7207,16 @@
         },
         {
             "name": "symfony/maker-bundle",
-            "version": "v1.19.0",
+            "version": "v1.19.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/maker-bundle.git",
-                "reference": "bea8c3c959e48a2c952cc7c4f4f32964be8b8874"
+                "reference": "51c48ca9df84c16ed522a7781866900edf7c99f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/bea8c3c959e48a2c952cc7c4f4f32964be8b8874",
-                "reference": "bea8c3c959e48a2c952cc7c4f4f32964be8b8874",
+                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/51c48ca9df84c16ed522a7781866900edf7c99f8",
+                "reference": "51c48ca9df84c16ed522a7781866900edf7c99f8",
                 "shasum": ""
             },
             "require": {
@@ -7276,7 +7271,7 @@
                 "scaffold",
                 "scaffolding"
             ],
-            "time": "2020-05-29T14:47:30+00:00"
+            "time": "2020-07-06T00:27:41+00:00"
         },
         {
             "name": "symfony/phpunit-bridge",

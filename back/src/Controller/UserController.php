@@ -9,6 +9,7 @@ use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\UserRepository;
 use App\Entity\User;
+use App\Form\UserType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -47,7 +48,7 @@ class UserController extends AbstractController
 
         $form->submit($jsonArray);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             // On a besoin d'hasher le mot de passe avant de le stocker en base de données
             // On récupère donc le mot de passe dans $user
             $password = $user->getPassword();
@@ -63,9 +64,9 @@ class UserController extends AbstractController
 
             $serializer = new Serializer([$normalizer]);
 
-            $normalizerNewUser = $serializer->normalize($user, null, ['groups'=> 'apiV0_list']);
-            //rentrer le nom de la route où l'on veut rediriger
-            return $this->json($normalizerNewUser, 201);
+            $normalizerUser = $serializer->normalize($user, null, ['groups'=> 'apiV0_list']);
+           
+            return $this->json($normalizerUser, 201);
         }
         
         return $this->json((string) $form->getErrors(true, false), 400);

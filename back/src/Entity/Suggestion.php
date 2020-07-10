@@ -15,36 +15,32 @@ class Suggestion
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups("apiV0_list")
-     * @Groups("apiV0_trip")
+     * @Groups("apiV0_Suggestion")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=64)
-     * @Groups("apiV0_list")
-     * @Groups("apiV0_trip")
+     * @Groups("apiV0_Suggestion")
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups("apiV0_trip")
-     * 
+     * @Groups("apiV0_Suggestion")
      */
     private $description;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="suggestion")
-     * @Groups("apiV0_list")
-     * @ORM\JoinColumn(nullable=false)
+     * @Groups("apiV0_Suggestion")
      */
     private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity=Trip::class, inversedBy="suggestion")
      * @ORM\JoinColumn(nullable=false)
-     * 
+     * @Groups("apiV0_Suggestion")
      */
     private $trip;
 

@@ -18,12 +18,16 @@ class Trip
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      * @Groups("apiV0_trip")
+     * @Groups("apiV0_list")
+     * @Groups("apiV0_Suggestion")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=64)
      * @Groups("apiV0_trip")
+     * @Groups("apiV0_list")
+     * @Groups("apiV0_Suggestion")
      */
     private $title;
 
@@ -36,6 +40,11 @@ class Trip
     private $description;
 
     /** 
+     * @Groups("apiV0_list")
+     */
+     private $description;
+
+    /**  
      * @ORM\Column(type="date", nullable=true)
      * @Groups("apiV0_trip")
      */
@@ -95,6 +104,7 @@ class Trip
         $this->activities = new ArrayCollection();
         $this->disponibility = new ArrayCollection();
         $this->suggestion = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     // /**

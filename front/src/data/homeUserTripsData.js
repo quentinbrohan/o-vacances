@@ -1,0 +1,51 @@
+// Fake data for homepage User - trips
+export default [
+  {
+    id: 1,
+    title: 'TP O\'Clock',
+    image: 'https://i.imgur.com/0N3AoAU.jpg',
+    startDate: '10 oct. 2020.',
+    endDate: '11 oct. 2020',
+    location: 'Paris, France',
+  },
+  {
+    id: 2,
+    title: 'Anniversaire Audrey',
+    image: 'https://unsplash.com/photos/4hMET7vYTAQ/download?force=true&w=640',
+    startDate: '14 aoû. 2020',
+    endDate: '21 aoû. 2020',
+    location: 'Pérou',
+  },
+  {
+    id: 3,
+    title: 'Baptème de l\'air',
+    image: 'https://unsplash.com/photos/TWBkfxTQin8/download?force=true&w=640',
+    startDate: '11 sep. 2021',
+    endDate: 'néant',
+    location: 'New York, USA',
+  },
+  {
+    id: 4,
+    title: 'O\'Balmasqué',
+    image: 'https://unsplash.com/photos/LLHrZw0XDz0/download?force=true&w=640',
+    startDate: '31 déc. 2020',
+    endDate: '1er jan. 2021',
+    location: 'Suisse',
+  },
+  {
+    id: 5,
+    title: 'Voyage en Islande',
+    image: 'https://unsplash.com/photos/ABtmE3jhaPQ/download?force=true&w=640',
+    startDate: '5 jan. 2023',
+    endDate: '15 jan. 2023',
+    location: 'Islande',
+  },
+  {
+    id: 6,
+    title: 'Réunion Excalibur',
+    image: 'https://unsplash.com/photos/vWxE6Ejr9j0/download?force=true&w=640',
+    startDate: '27 juil. 2050',
+    endDate: '27 juil. 2050',
+    location: 'Bahamas',
+  },
+];

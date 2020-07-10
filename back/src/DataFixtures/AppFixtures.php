@@ -26,7 +26,9 @@ class AppFixtures extends Fixture
         $users = [];
         $userName = ['Alexandre', 'Audrey', 'Cécilia', 'Loic', 'Quentin'];
         $pass = ['alexandre', 'audrey', 'cecilia', 'loic', 'quentin'];
+
          $mails = ['alexandre@gmail.com', 'audrey@gmail.com', 'cecilia@gmail.com', 'loic@gmail.com', 'quentin@gmail.com'];
+
 
         for ($i = 0; $i < 5; $i++) {
             $user = new User();
@@ -34,6 +36,9 @@ class AppFixtures extends Fixture
             $user->setFirstname($userName[$i]);
             $user->setLastname($userName[$i]);
             $user->setPassword($this->passwordEncoder->encodePassword($user, $pass[$i]));
+
+
+
             $users [] = $user;
             
             $manager->persist($user);
