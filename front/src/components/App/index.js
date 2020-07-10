@@ -32,11 +32,21 @@ const App = ({ isLogged }) => (
     <Header />
     <div className="container">
       <Switch>
-        <Route
-          exact
-          path="/"
-          component={HomeVisitor}
-        />
+        {isLogged
+          ? (
+            <Route
+              exact
+              path="/"
+              component={HomeUser}
+            />
+          )
+          : (
+            <Route
+              exact
+              path="/"
+              component={HomeVisitor}
+            />
+          )}
         <Route
           path="/contact"
           component={Contact}
