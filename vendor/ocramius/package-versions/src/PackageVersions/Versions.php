@@ -68,7 +68,7 @@ final class Versions
   'symfony/string' => 'v5.1.2@ac70459db781108db7c6d8981dd31ce0e29e3298',
   'symfony/var-dumper' => 'v5.1.2@46a942903059b0b05e601f00eb64179e05578c0f',
   'symfony/var-exporter' => 'v5.1.2@eabaabfe1485ca955c5b53307eade15ccda57a15',
-  '__root__' => 'dev-back@53201a94282f2604f018b6f6113437ec53563cdf',
+  '__root__' => 'dev-master@1976955a9f0276991b27765e425f66fc681866d7',
 );
 
     private function __construct()
