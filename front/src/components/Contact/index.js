@@ -7,7 +7,7 @@ import './contact.scss';
 // component to contact form
 const Contact = () => (
   <div className="contact">
-    <h2>Contactez-nous</h2>
+    <h1>Contactez-nous</h1>
     <div className="contact-text">
       <h3>Vous souhaitez nous faire part d'une remarque? Vous avez besoin d'un renseignement? </h3>
       <p>
@@ -28,9 +28,7 @@ const Contact = () => (
         <div>
           <textarea id="msg" name="visitor-message" placeholder="Commentaire" />
         </div>
-        <div className="button">
-          <button type="submit">Envoyer le message</button>
-        </div>
+        <button type="submit">Envoyer le message</button>
       </form>
     </div>
   </div>
