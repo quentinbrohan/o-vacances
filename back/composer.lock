@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8a0d33b4b8d3587f632b827f4ee81af2",
+
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -8278,16 +8278,16 @@
         },
         {
             "name": "symfony/maker-bundle",
-            "version": "v1.19.0",
+            "version": "v1.19.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/maker-bundle.git",
-                "reference": "bea8c3c959e48a2c952cc7c4f4f32964be8b8874"
+                "reference": "51c48ca9df84c16ed522a7781866900edf7c99f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/bea8c3c959e48a2c952cc7c4f4f32964be8b8874",
-                "reference": "bea8c3c959e48a2c952cc7c4f4f32964be8b8874",
+                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/51c48ca9df84c16ed522a7781866900edf7c99f8",
+                "reference": "51c48ca9df84c16ed522a7781866900edf7c99f8",
                 "shasum": ""
             },
             "require": {
@@ -8342,7 +8342,7 @@
                 "scaffold",
                 "scaffolding"
             ],
-            "time": "2020-05-29T14:47:30+00:00"
+            "time": "2020-07-06T00:27:41+00:00"
         },
         {
             "name": "symfony/phpunit-bridge",

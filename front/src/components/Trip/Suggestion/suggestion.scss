@@ -1,0 +1,51 @@
+@import 'src/styles/vars';
+
+.trip-details {
+  section.suggestions {
+    .trip-suggestions {
+      .suggestion {
+        width: 100%;
+        max-width: 768px;
+        border-radius: 0.5rem;
+        overflow: hidden;
+        // padding: 1rem;
+        margin-bottom: 1rem;
+        
+        .suggestion-header {
+          padding: 0.5rem;
+          display: flex;
+          align-items: center;
+
+          .suggestion-header-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            .suggestion-author {
+              font-size: 1.2rem;
+              font-weight: 600;
+              color: $blackColor;
+            }
+            .suggestion-date {
+              color: $greyColor;
+            }
+          }
+
+          img {
+            height: 2.5rem;
+            width: 2.5rem;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+          }
+        }
+
+        .suggestion-body {
+          padding: 0.5rem;
+        }
+        .suggestion-content {
+          margin-left: 3rem;
+        }
+      }
+    }
+  }
+}
