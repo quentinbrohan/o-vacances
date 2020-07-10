@@ -20,7 +20,7 @@ import Profile from 'src/containers/Profile';
 import Trip from 'src/components/Trip';
 import ErrorPage from 'src/components/ErrorPage';
 import HomeUser from 'src/components/HomeUser';
-import TripForm from 'src/components/TripForm';
+import TripForm from 'src/containers/TripForm';
 
 // Data
 import persons from 'src/data/teamData';

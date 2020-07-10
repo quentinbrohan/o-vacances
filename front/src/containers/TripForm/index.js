@@ -6,7 +6,7 @@ import { addImagePreview } from 'src/actions/settings';
 
 const mapStateToProps = (state) => ({
   file: state.settings.file,
- 
+
 });
 
 const mapDispatchToProps = (dispatch) => ({

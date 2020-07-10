@@ -1,15 +1,19 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Field from './Field';
 import Image from './Image';
 
 import './tripForm.scss';
 
-const TripForm = () => (
+const TripForm = ({ addImagePreview }) => (
   <div className="trip-form">
     <h1>Mon nouveau voyage</h1>
     <form className="trip-form-element">
-      <Image className="trip-form-image" />
+      <Image
+        className="trip-form-image"
+        onChangeImage={addImagePreview}
+      />
       <Field
         name="title"
         placeholder="Nom du voyage"
@@ -39,5 +43,9 @@ const TripForm = () => (
   </div>
 
 );
+
+TripForm.propTypes = {
+  addImagePreview: PropTypes.func.isRequired,
+};
 
 export default TripForm;
