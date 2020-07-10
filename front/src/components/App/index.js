@@ -4,17 +4,19 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 // == Import
 // Layout
 import Footer from 'src/components/Footer';
-import Header from 'src/components/Header';
+import Header from 'src/containers/Header';
 // Pages
 import Contact from 'src/components/Contact';
 import HomeVisitor from 'src/components/HomeVisitor';
 import Signin from 'src/containers/Signin';
 import Team from 'src/components/Team';
 import Login from 'src/containers/Login';
+import Profile from 'src/containers/Profile';
 import Trip from 'src/components/Trip';
 import ErrorPage from 'src/components/ErrorPage';
 import HomeUser from 'src/components/HomeUser';
@@ -26,24 +28,33 @@ import persons from 'src/data/teamData';
 import './styles.scss';
 
 // == Composant
-const App = () => (
+const App = ({ isLogged }) => (
   <div className="app">
     <Header />
     <div className="container">
       <Switch>
-        <Route
-          exact
-          path="/"
-          component={HomeVisitor}
-        />
+        {isLogged
+          ? (
+            <Route
+              exact
+              path="/"
+              component={HomeUser}
+            />
+          )
+          : (
+            <Route
+              exact
+              path="/"
+              component={HomeVisitor}
+            />
+          )}
         <Route
           path="/contact"
           component={Contact}
         />
         <Route
-          path="/team"
+          path="/qui-sommes-nous"
           render={() => <Team persons={persons} />}
-
         />
         <Route
           path="/signin"
@@ -54,11 +65,16 @@ const App = () => (
           component={Login}
         />
         <Route
-          path="/trip"
+          path="/mon-profil"
+          component={Profile}
+        />
+        <Route
+          exact
+          path="/voyage/:id"
           component={Trip}
         />
         <Route
-          path="/home-user"
+          path="/mes-voyages"
           component={HomeUser}
         />
         <Route component={ErrorPage} />
@@ -67,6 +83,10 @@ const App = () => (
     <Footer />
   </div>
 );
+
+App.propTypes = {
+  isLogged: PropTypes.bool.isRequired,
+};
 
 // == Export
 export default App;
