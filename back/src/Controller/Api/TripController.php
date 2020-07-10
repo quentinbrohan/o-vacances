@@ -94,55 +94,55 @@ class TripController extends AbstractController
      */
     public function new(Request $request, SerializerInterface $serializer, EntityManagerInterface $em)
     {
-        $jsonRecu = $request->getContent();
+        // $jsonRecu = $request->getContent();
         
-        try {
-            $trip = $serializer->deserialize($jsonRecu, Trip::class, 'json');
+        // try {
+        //     $trip = $serializer->deserialize($jsonRecu, Trip::class, 'json');
 
             
             
-            $em->persist($trip);
-            $em->flush();
-
-            return $this->json($trip, 201, [], ['groups' => 'apiV0_trip']);
-        } catch(NotEncodableValueException $e) {
-            return $this->json([
-                'status' => 400,
-                'message' => $e->getMessage()
-            ], 400);
-        }
-
-        // $trip = new Trip();
-        
-        // $form = $this->createForm(TripType::class, $trip);
-
-        // // On extrait de la requête le json reçu
-        // $jsonText = $request->getContent();
-        // // On transforme ce json en array
-        // $jsonArray = json_decode($jsonText, true);
-
-        // // $jsonArray est un tableau contenant tous les champs du formulaire
-        // // Ces champs doivent être structurés comme dans le formulaire,
-        // // il faudra donc l'expliquer aux dev du front
-        // // On envoie ce tableau à la méthode submit()
-        // $form->submit($jsonArray);
-
-        // // On vérifie si le formulaire est valide, toutes les données reçues sont bonnes
-        // if ($form->isValid()) {
-        //     // Si c'est valide, on persiste et on flushe
-        //     $em = $this->getDoctrine()->getManager();
         //     $em->persist($trip);
         //     $em->flush();
 
-        //     // On retourne une 201 avec l'objet qu'on vient de créer
-        //     // On instancie un serializer en lui précisant un normalizer adapté aux objets PHP
-        //     $serializer = new Serializer([$normalizer]);
-        //     // Parce qu'on a précisé le normalizer, on peut normaliser selon un groupe
-        //     $normalizedTrip = $serializer->normalize($trip, null, ['groups' => 'apiV0_list']);
-        //     return $this->json($normalizedTrip, 201);
+        //     return $this->json($trip, 201, [], ['groups' => 'apiV0_trip']);
+        // } catch(NotEncodableValueException $e) {
+        //     return $this->json([
+        //         'status' => 400,
+        //         'message' => $e->getMessage()
+        //     ], 400);
         // }
+
+        $trip = new Trip();
+        
+        $form = $this->createForm(TripType::class, $trip);
+
+        // On extrait de la requête le json reçu
+        $jsonText = $request->getContent();
+        // On transforme ce json en array
+        $jsonArray = json_decode($jsonText, true);
+
+        // $jsonArray est un tableau contenant tous les champs du formulaire
+        // Ces champs doivent être structurés comme dans le formulaire,
+        // il faudra donc l'expliquer aux dev du front
+        // On envoie ce tableau à la méthode submit()
+        $form->submit($jsonArray);
+
+        // On vérifie si le formulaire est valide, toutes les données reçues sont bonnes
+        if ($form->isValid()) {
+            // Si c'est valide, on persiste et on flushe
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($trip);
+            $em->flush();
+
+            // On retourne une 201 avec l'objet qu'on vient de créer
+            // On instancie un serializer en lui précisant un normalizer adapté aux objets PHP
+            $serializer = new Serializer([$normalizer]);
+            // Parce qu'on a précisé le normalizer, on peut normaliser selon un groupe
+            $normalizedTrip = $serializer->normalize($trip, null, ['groups' => 'apiV0_list']);
+            return $this->json($normalizedTrip, 201);
+        }
      
-        // return $this->json((string) $form->getErrors(true, false), 400);
+        return $this->json((string) $form->getErrors(true, false), 400);
     }
     
     /**

@@ -37,6 +37,7 @@ class Suggestion
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="suggestion")
      * @Groups("apiV0_list")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
