@@ -77,6 +77,10 @@ const App = ({ isLogged }) => (
           path="/mes-voyages"
           component={HomeUser}
         />
+        <Route
+          path="/trip-form"
+          component={TripForm}
+        />
         <Route component={ErrorPage} />
       </Switch>
     </div>
