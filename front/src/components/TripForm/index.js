@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Field from './Field';
+import Image from './Image';
 
 import './tripForm.scss';
 
@@ -8,13 +9,7 @@ const TripForm = () => (
   <div className="trip-form">
     <h1>Mon nouveau voyage</h1>
     <form className="trip-form-element">
-      <Field
-        name="Image"
-        placeholder="Image"
-        type="file"
-        accept="image/png, image/jpeg"
-      />
-      />
+      <Image className="trip-form-image" />
       <Field
         name="title"
         placeholder="Nom du voyage"
