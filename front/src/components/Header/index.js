@@ -35,12 +35,18 @@ const Header = ({
               customBurgerIcon={<MenuIcon />}
               customCrossIcon={<CloseIcon />}
             >
-              <Link to="/" onClick={() => handleMenuState()}>Mes voyages</Link>
-              <Link to="/trip-form" onClick={() => handleMenuState()}>Créer un voyage</Link>
-              <Link to="/" onClick={() => handleMenuState()}>Mon profil</Link>
-              <Link to="/mes-voyages" onClick={() => handleMenuState()}>Mes voyages</Link>
-              <Link to="/creer-un-voyage" onClick={() => handleMenuState()}>Créer un voyage</Link>
-              <Link to="/mon-profil" onClick={() => handleMenuState()}>Mon profil</Link>
+              {isLogged ? (
+                <>
+                  <Link to="/mes-voyages" onClick={() => handleMenuState()}>Mes voyages</Link>
+                  <Link to="/creer-un-voyage" onClick={() => handleMenuState()}>Créer un voyage</Link>
+                  <Link to="/mon-profil" onClick={() => handleMenuState()}>Mon profil</Link>
+                  <Link to="/contact" onClick={() => handleMenuState()}>Contact</Link>
+                </>
+
+              )
+                : (
+                  <Link to="/contact" onClick={() => handleMenuState()}>Contact</Link>
+                )}
 
               <div className="connection-mobile">
                 {isLogged ? (
@@ -62,16 +68,12 @@ const Header = ({
             </Menu>
           </div>
           <div className="menu">
-            <ul>
-              <li><Link to="/">Mes voyages</Link></li>
-              <li><Link to="/trip-form">Créer un voyage</Link></li>
-              <li><Link to="/">Mon profil</Link></li>
-            </ul>
             {isLogged ? (
               <ul>
                 <li><Link to="/mes-voyages">Mes voyages</Link></li>
                 <li><Link to="/creer-un-voyage">Créer un voyage</Link></li>
                 <li><Link to="/mon-profil">Mon profil</Link></li>
+                <li><Link to="/contact">Contact</Link></li>
               </ul>
             )
               : (

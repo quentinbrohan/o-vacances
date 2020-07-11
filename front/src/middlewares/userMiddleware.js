@@ -6,6 +6,11 @@ import {
   saveUser,
 } from 'src/actions/user';
 
+const config = {
+  // headers: { Authorization: `Bearer ${token}` },
+  headers: { Authorization: 'Bearer mon-token' },
+};
+
 const userMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case SIGN_IN: {
@@ -17,7 +22,7 @@ const userMiddleware = (store) => (next) => (action) => {
       } = store.getState().user;
 
       // Endpoint API for user creation through Symfony
-      axios.post('/api/v0/users/login', {
+      axios.post('/api/v0/users/signin', {
         firstname,
         lastname,
         email,
@@ -37,11 +42,12 @@ const userMiddleware = (store) => (next) => (action) => {
       const { email, password } = store.getState().user;
 
       // withCredentials : autorisation d'accéder au cookie
-      axios.post('/api/v0/users/login', {
+      axios.post('http://localhost:8000/api/v0/users/login', {
         email,
         password,
       }, {
         withCredentials: true,
+        config,
       })
         .then((response) => {
           console.log(response);

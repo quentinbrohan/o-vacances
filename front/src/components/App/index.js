@@ -78,7 +78,7 @@ const App = ({ isLogged }) => (
           component={HomeUser}
         />
         <Route
-          path="/trip-form"
+          path="/creer-un-voyage"
           component={TripForm}
         />
         <Route component={ErrorPage} />

@@ -7,7 +7,6 @@ import TripCard from './TripCard';
 import './homeUser.scss';
 
 const HomeUser = () => {
-
   return (
     <div className="home-user">
       <h1>Mes Voyages</h1>
