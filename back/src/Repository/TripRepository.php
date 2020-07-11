@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Trip;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -17,6 +18,32 @@ class TripRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Trip::class);
+    }
+
+    /**
+     * @return Trip[] Returns an array of Trip objects
+     */
+    
+    public function findAllByUser($id)
+    {
+        $builder = $this->createQueryBuilder('trip');
+        // je souhaite sécuriser le parametre $id
+        $builder->where("trip.user_id = :userId");
+        // je precise au builder quelle valeur "injecter" dans le parametre :animeId
+        // Cette methode sécurise le contenu de la variable $id (echapment de car spéciaux ...)
+        $builder->setParameter("userId", $id);
+
+        // Je demande a doctrine de faire la jointure avec la relation ->categories
+    //    $builder->leftJoin('user.trip', 'trip');
+        // je demande a doctrien d'alimenter les objets de type Category dans mon objet Anime
+    //    $builder->addSelect('trip');
+
+        // on recupère la requete construite
+        $query = $builder->getQuery();
+
+        // je demande a doctrine d'éxecuter le requete et de me renvoyer les resultats
+        return $query->getOneOrNullResult();
+        ;
     }
 
     // /**

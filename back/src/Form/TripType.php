@@ -26,22 +26,26 @@ class TripType extends AbstractType
             ->add('users',
                 EntityType::class, [
                     "class" => User::class,
-                    "required" => false
+                    "required" => false,
+                    'multiple' => true
                 ])
             ->add('activities',
                 EntityType::class, [
                     "class" => Activity::class,
-                    "required" => false
+                    "required" => false,
+                    'multiple' => true
                 ])
             ->add('disponibility',
                 EntityType::class, [
                     "class" => Disponibility::class,
-                    "required" => false
+                    "required" => false,
+                    'multiple' => true
                 ])
             ->add('suggestion',
                 EntityType::class, [
                     "class" => Suggestion::class,
-                    "required" => false
+                    "required" => false,
+                    'multiple' => true
                 ])
             ->add('creator')
         ;
@@ -51,6 +55,7 @@ class TripType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Trip::class,
+            'csrf_protection' =>false,
         ]);
     }
 }
