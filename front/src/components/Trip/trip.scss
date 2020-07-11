@@ -82,7 +82,7 @@
             display: flex;
             img.avatar {
               position: relative;
-              z-index: 1;
+              z-index: 0;
               width: 2.5rem;
               height: 2.5rem;
               border-radius: 50%;
@@ -90,7 +90,7 @@
             }
             img.avatar:not(:first-child) {
               position: relative;
-              z-index: 2;
+              z-index: 1;
               left: -2rem;
               margin-left: 0.5rem;
               width: 2.5rem;
@@ -114,6 +114,18 @@
             margin-bottom: 0.5rem;
             display: block;
             width: 100%;
+            max-width: 286px;
+          }
+          button {
+            margin: 0.5rem;
+            color: $blackColor;
+            width: 100%;
+            max-width: calc(286px - 0.5rem);
+            box-sizing: border-box;
+            @media (min-width: $tablet) {
+              margin: 0.5rem 0 0 0;
+              max-width: 286px;
+            }
           }
         }
 

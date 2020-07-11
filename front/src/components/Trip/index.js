@@ -3,10 +3,13 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Calendar, MapPin } from 'react-feather';
+import Button from 'src/components/elements/Button';
 // React Dates
-import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates'; import 'react-dates/lib/css/_datepicker.css';
+import { DateRangePicker } from 'react-dates';
+import 'react-dates/lib/css/_datepicker.css';
 import './react_dates_overrides.scss';
 import moment from 'moment';
+import 'moment/locale/fr';
 
 import tripData from 'src/data/tripData';
 import ActivityCard from './ActivityCard';
@@ -15,20 +18,33 @@ import Suggestion from './Suggestion';
 import './trip.scss';
 
 const Trip = () => {
-  const [focusedInput, setFocusedInput] = useState('startDate');
-  const DATE_FORMAT_MOMENT = 'DD-MM-YYYY';
+  const [isCreator, setIsCreator] = useState(false);
+  const [focus, setFocus] = useState('startDate');
   // Trip's dates
   const [datesTrip, setDatesTrip] = useState({
     startDate: tripData.startDate,
     endDate: tripData.endDate,
   });
+
   // Participant's dates (default = user)
   const [datesParticipant, setDatesParticipant] = useState({
     startDate: '01-01-2025',
     endDate: '27-12-2025',
   });
-  console.log(datesParticipant);
-  console.log(focusedInput);
+
+  const { startDate, endDate } = datesParticipant;
+
+  // moment date format
+  const DATE_FORMAT_MOMENT = 'DD-MM-YYYY';
+
+  const manageDisponibilities = (currentDisponibilities) => {
+    // JSON to object
+    const disp = (JSON.parse(currentDisponibilities.value));
+    setDatesParticipant({
+      startDate: disp.startDate,
+      endDate: disp.endDate,
+    });
+  };
 
   return (
     <main className="trip-details">
@@ -81,18 +97,17 @@ const Trip = () => {
             <div className="disponibilities">
               {/* Liste ? Intégration calendrier avec selector */}
               <label htmlFor="disponibilities">Calendrier des disponibilités</label>
-              <select name="disponibilities" id="disponibilities">
+              <select
+                name="disponibilities"
+                id="disponibilities"
+                onChange={() => manageDisponibilities(disponibilities)}
+              >
                 <option disabled defaultValue>Participants</option>
                 {tripData.participants.map((participant) => (
                   <option
-                    value={participant.firstName}
+                    // Pass Object as JSON for value
+                    value={JSON.stringify(participant.disponibilities)}
                     key={participant.firstName}
-                    onChange={(participant) => {
-                      setDatesParticipant({
-                        start: participant.disponibilities.startDate,
-                        end: participant.disponibilities.endDate,
-                      });
-                    }}
                   >
                     {participant.firstName}
                   </option>
@@ -100,14 +115,23 @@ const Trip = () => {
               </select>
               {/* if logged user => able to edit own disponibilities */}
               <DateRangePicker
-                startDate={moment('01-01-2025', 'DD-MM-YYYY', true)}
-                endDate={moment('01-09-2025', 'DD-MM-YYYY', true)}
+                // minDate={moment(datesTrip.startDate)}
+                // maxDate={moment(datesTrip.endDate)}
+                startDate={moment(startDate, 'DD-MM-YYYY', true)}
+                endDate={moment(endDate, 'DD-MM-YYYY', true)}
                 startDateId="start"
                 endDateId="end"
-                firstDayOfWeek={1}
-                anchorDirection="right"
+
+                // disabled={!isCreator}
+                startDatePlaceholderText="Début disponibilité"
+                endDatePlaceholderText="Fin disponibilité"
+                // TODO: disable dates outside start/end Trip.
+                // isOutsideRange={(date) => date.isBefore(datesTrip.startDate, 'day') || date.isAfter(datesTrip.endDate, 'day')}
+                // isOutsideRange={(date) => !date.isBetween(datesTrip.startDate, datesTrip.endDate, 'day', true)}
                 // withPortal
-                // withFullScreenPortal
+                anchorDirection="right"
+                firstDayOfWeek={1}
+                hideKeyboardShortcutsPanel
                 regular
                 onDatesChange={({ startDate, endDate }) => {
                   if (startDate && endDate) {
@@ -117,9 +141,18 @@ const Trip = () => {
                     });
                   }
                 }}
-                focusedInput={focusedInput}
-                onFocusChange={(focusedInput) => setFocusedInput(focusedInput)}
+                focusedInput={focus}
+                onFocusChange={(focus) => setFocus(focus)}
               />
+              {/* If Calendar === user show button => axios post new dates */}
+              <Button
+                color="secondary"
+                size="smg"
+                type="submit"
+                onClick={() => manageDisponibilities()}
+              >
+                Modifier mes disponibilités
+              </Button>
             </div>
 
             <div className="trip-access">
