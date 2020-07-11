@@ -19,6 +19,7 @@ import './trip.scss';
 
 const Trip = () => {
   const [isCreator, setIsCreator] = useState(false);
+  const [isOwnUser, setisOwnUser] = useState(false);
   const [focus, setFocus] = useState('startDate');
   // Trip's dates
   const [datesTrip, setDatesTrip] = useState({
@@ -125,6 +126,7 @@ const Trip = () => {
                 // disabled={!isCreator}
                 startDatePlaceholderText="Début disponibilité"
                 endDatePlaceholderText="Fin disponibilité"
+                // disabled={!isOwnUser}
                 // TODO: disable dates outside start/end Trip.
                 // isOutsideRange={(date) => date.isBefore(datesTrip.startDate, 'day') || date.isAfter(datesTrip.endDate, 'day')}
                 // isOutsideRange={(date) => !date.isBetween(datesTrip.startDate, datesTrip.endDate, 'day', true)}
