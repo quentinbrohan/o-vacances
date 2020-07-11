@@ -129,44 +129,5 @@ class TripController extends AbstractController
     }
 
 
-    
-    /**
-     * @Route("/api/v0/trips/{id}", name="api_v0_trips_new", methods="DELETE")
-     */
-    public function delete(ObjectNormalizer $normalizer, Request $request, $id)
-    {
-        
-        $trip = new Trip();
-        
-        $form = $this->createForm(TripType::class, $trip);
-
-        // On extrait de la requête le json reçu
-        $jsonText = $request->getContent();
-        // On transforme ce json en array
-        $jsonArray = json_decode($jsonText, true);
-
-        // $jsonArray est un tableau contenant tous les champs du formulaire
-        // Ces champs doivent être structurés comme dans le formulaire,
-        // il faudra donc l'expliquer aux dev du front
-        // On envoie ce tableau à la méthode submit()
-        $form->submit($jsonArray);
-
-        // On vérifie si le formulaire est valide, toutes les données reçues sont bonnes
-        if ($form->isValid()) {
-            // Si c'est valide, on persiste et on flushe
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($trip);
-            $em->flush();
-
-            // On retourne une 201 avec l'objet qu'on vient de créer
-            // On instancie un serializer en lui précisant un normalizer adapté aux objets PHP
-            $serializer = new Serializer([$normalizer]);
-            // Parce qu'on a précisé le normalizer, on peut normaliser selon un groupe
-            $normalizedTrip = $serializer->normalize($trip, null, ['groups' => 'apiV0_trip']);
-            return $this->json($normalizedTrip, 201);
-        }
-     
-        return $this->json((string) $form->getErrors(true, false), 400);
-    }
-
+    // todo Fonction suppression de voyage - a voir plus tard si necessaire
 }

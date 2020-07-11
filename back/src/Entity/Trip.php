@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=TripRepository::class)
@@ -26,10 +27,13 @@ class Trip
 
     /**
      * @ORM\Column(type="string", length=64)
+     * @Assert\NotBlank
+     * @Assert\Length(max=64)
      * @Groups("apiV0_trip")
      * @Groups("apiV0_tripByUser")
      * @Groups("apiV0_list")
      * @Groups("apiV0_Suggestion")
+     * 
      */
     private $title;
 
@@ -58,6 +62,7 @@ class Trip
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255)
      * @Groups("apiV0_trip")
      * @Groups("apiV0_tripByUser")
      */
@@ -65,6 +70,7 @@ class Trip
 
     /**
      * @ORM\Column(type="string", length=128, nullable=true)
+     * @Assert\Length(max=128)
      * @Groups("apiV0_trip")
      * @Groups("apiV0_tripByUser")
      */
@@ -97,6 +103,8 @@ class Trip
 
     /**
      * @ORM\Column(type="string", length=128)
+     * @Assert\NotBlank
+     * @Assert\Length(max=128)
      * @Groups("apiV0_trip")
      * @Groups("apiV0_tripByUser")
      */
