@@ -21,6 +21,7 @@ import Trip from 'src/containers/Trip';
 import ErrorPage from 'src/components/ErrorPage';
 import HomeUser from 'src/components/HomeUser';
 // import TripForm from 'src/components/TripForm';
+import Activities from 'src/components/Activities';
 
 // Data
 import persons from 'src/data/teamData';
@@ -72,6 +73,11 @@ const App = ({ isLogged }) => (
           exact
           path="/voyage/:id"
           component={Trip}
+        />
+        <Route
+          exact
+          path="/voyage/:id/activites"
+          component={Activities}
         />
         <Route
           path="/mes-voyages"
