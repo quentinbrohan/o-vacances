@@ -19,7 +19,7 @@
       object-fit: contain;
       background-size: cover;
       background-position: center;
-      filter: brightness(0.7);
+      filter: brightness(0.75);
     }
     &-content {
       margin: auto;
@@ -39,6 +39,7 @@
       font-size: 4.4rem;
       font-weight: 500;
       display: initial;
+      text-shadow: 0.15rem 0.15rem 0.25rem rgba(0, 0, 0, 0.6);
       @media (min-width: $desktop) {
         display: inherit;
       }
@@ -46,9 +47,12 @@
     p.intro-content {
       margin-top: $gutter;
       font-size: 2rem;
+      text-shadow: 0.15rem 0.15rem 0.25rem rgba(0, 0, 0, 0.6);
     }
     span.trip-type {
       font-weight: 900;
+      text-shadow: 0.15rem 0.15rem 0.25rem rgba(0, 0, 0, 0.6);
+
       // margin-left: 1rem;
       // font-size: 5.2rem;
       @media (min-width: $mobile) {
