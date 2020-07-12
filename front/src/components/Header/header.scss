@@ -19,6 +19,9 @@
     background-color: initial;
     font-size: 1rem;
     color: $blackColor;
+    @media (min-width: $tablet) {
+      margin-left: 1rem;
+    }
   }
   .button-header {
     background: $whiteColor!important;
