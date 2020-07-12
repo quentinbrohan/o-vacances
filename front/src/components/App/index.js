@@ -17,7 +17,7 @@ import Signin from 'src/containers/Signin';
 import Team from 'src/components/Team';
 import Login from 'src/containers/Login';
 import Profile from 'src/containers/Profile';
-import Trip from 'src/components/Trip';
+import Trip from 'src/containers/Trip';
 import ErrorPage from 'src/components/ErrorPage';
 import HomeUser from 'src/components/HomeUser';
 // import TripForm from 'src/components/TripForm';

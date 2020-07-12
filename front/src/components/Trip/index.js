@@ -15,9 +15,14 @@ import tripData from 'src/data/tripData';
 import ActivityCard from './ActivityCard';
 import PlusCard from './PlusCard';
 import Suggestion from './Suggestion';
+import SuggestionForm from './SuggestionForm';
 import './trip.scss';
 
-const Trip = () => {
+const Trip = ({
+  changeSuggestion,
+  handleSuggestion,
+  suggestionContent,
+}) => {
   const [isCreator, setIsCreator] = useState(false);
   const [isOwnUser, setisOwnUser] = useState(false);
   const [focus, setFocus] = useState('startDate');
@@ -206,10 +211,22 @@ const Trip = () => {
             <Suggestion {...suggestion} key={suggestion.id} />
           ))}
         </div>
+        <SuggestionForm
+          onChange={changeSuggestion}
+          suggestionContent={suggestionContent}
+          handleSuggestion={handleSuggestion}
+
+        />
       </section>
 
     </main>
   );
+};
+
+Trip.propTypes = {
+  changeSuggestion: PropTypes.func.isRequired,
+  handleSuggestion: PropTypes.func.isRequired,
+  suggestionContent: PropTypes.string.isRequired,
 };
 
 export default Trip;
