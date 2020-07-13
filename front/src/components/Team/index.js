@@ -14,7 +14,7 @@ import './Team.scss';
 
 const Team = ({ persons }) => (
   <div className="team">
-    <h2>L'équipe</h2>
+    <h1>L'équipe</h1>
     <div className="team-cards">
       {persons.map((person) => (
         <article className="team-card" key={person.name}>
