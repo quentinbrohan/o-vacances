@@ -3,19 +3,24 @@
 .login{
   text-align: center;
 
-  h1{
-    margin-top: 0.5*$gutter;
-    margin-bottom: 4rem;
-  }
-
   .login-form{
+
+    form {
+      width: 100%;
+      @media (min-width: $tablet) {
+        max-width: 50%;
+        margin: 0 auto;
+      }
+    }
 
    
     button{
-      background-color: $primaryColor;
-      border: none;
-      padding: 0.5*$gutter;
-      width: 300px;
+      display: block;
+      width: 100%;
+      @media (min-width: $tablet) {
+        width: initial;
+      }
+      margin: 1rem auto 0;
 
       &:hover{
         background-color: $primaryColorDarker;

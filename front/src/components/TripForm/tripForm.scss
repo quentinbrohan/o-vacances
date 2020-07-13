@@ -1,20 +1,20 @@
 @import "src/styles/vars";
 
-.signin {
+.trip-form {
   h1 {
     text-align: center;
   }
-  .signin-form {
+  .trip-form {
     width: 50%;
   }
-  .signin-form-element {
+  .trip-form-element {
     width: 100%;
     @media (min-width: $tablet) {
       max-width: 50%;
       margin: 0 auto;
     }
   }
-  .signin-form-button {
+  .trip-form-button {
     display: block;
     width: 100%;
     @media (min-width: $tablet) {
