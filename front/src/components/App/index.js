@@ -23,6 +23,7 @@ import HomeUser from 'src/components/HomeUser';
 import Activities from 'src/components/Activities';
 import TripForm from 'src/containers/TripForm';
 import TripEdit from 'src/containers/TripEdit';
+import ActivityForm from 'src/components/ActivityForm';
 
 // Data
 import persons from 'src/data/teamData';
@@ -91,6 +92,10 @@ const App = ({ isLogged }) => (
         <Route
           path="/modifier-un-voyage"
           component={TripEdit}
+        />
+        <Route
+          path="/ajouter-une-activite"
+          component={ActivityForm}
         />
         <Route component={ErrorPage} />
       </Switch>

@@ -1,0 +1,16 @@
+@import 'src/styles/vars';
+
+
+.activity-form-modal {
+ 
+  width:50%;
+  margin: $gutter auto;
+  margin: 5*$gutter auto;
+  background-color: white;
+  
+ 
+}
+
+.overlay {
+  background-color: black;
+}

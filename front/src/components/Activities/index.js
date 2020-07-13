@@ -1,5 +1,8 @@
 import React from 'react';
 import Button from 'src/components/elements/Button';
+import { Link } from 'react-router-dom';
+
+import ActivityForm from 'src/components/ActivityForm';
 
 import tripData from 'src/data/tripData';
 import ActivityCard from './ActivityCard';
@@ -16,12 +19,12 @@ const Activities = () => {
       <div className="head">
         <h1>Activités</h1>
         <div className="cta">
-          <Button
+          <ActivityForm
             color="primary"
             size="sm"
           >
             Ajouter une activité
-          </Button>
+          </ActivityForm>
           <Button
             color="primary"
             size="sm"
