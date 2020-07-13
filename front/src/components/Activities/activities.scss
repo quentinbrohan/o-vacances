@@ -1,0 +1,35 @@
+@import 'src/styles/vars';
+
+main.trip-activities {
+  .head {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    @media (min-width: $tablet) {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    h1 {
+      margin-bottom: $gutter;
+    }
+    .cta {
+      display: flex;
+      flex-direction: column;
+      @media (min-width: $tablet) {
+        flex-direction: row;
+        align-items: baseline;
+      }
+      button{
+        color: $blackColor;
+        max-width: 256px;
+        &:last-child {
+          margin-top: 0.5rem;
+          margin-bottom: 2rem;
+          margin-left: 1rem;
+        }
+      }
+    }
+  }
+}

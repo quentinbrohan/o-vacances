@@ -9,6 +9,8 @@ import { Provider } from 'react-redux';
 import App from 'src/containers/App';
 // Store Redux
 import store from 'src/store';
+// React Dates
+import 'react-dates/initialize';
 
 // == Render
 // 1. Élément React racine (celui qui contient l'ensemble de l'app)
