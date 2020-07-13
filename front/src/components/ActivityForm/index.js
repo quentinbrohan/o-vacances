@@ -37,26 +37,32 @@ const ActivityForm = () => {
 
         <form className="activity-form-element" onSubmit="">
           <Field
-            name="firstname"
-            placeholder="Prénom"
+            name="Activité"
+            placeholder="Activité"
 
           />
           <Field
-            name="lastname"
-            placeholder="Nom"
+            name="start-date"
+            placeholder="Date de début"
+            type="date"
 
           />
           <Field
-            name="email"
-            type="email"
-            placeholder="Adresse Email"
+            name="end-date"
+            placeholder="Date de fin"
+            type="date"
+          />
+          <Field
+            name="lieux"
+            type="adress"
+            placeholder="Lieu"
             // onChange={changeField}
-            // value={email}
+            // value={password}
           />
           <Field
-            name="password"
-            type="password"
-            placeholder="Mot de passe"
+            name="description"
+            type="textarea"
+            placeholder="On fait quoi?"
             // onChange={changeField}
             // value={password}
           />
