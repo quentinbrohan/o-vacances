@@ -25,7 +25,7 @@ const Trip = ({
 }) => {
   const [isCreator, setIsCreator] = useState(false);
   const [isOwnUser, setisOwnUser] = useState(false);
-  const [focus, setFocus] = useState('startDate');
+  const [focus, setFocus] = useState(null);
   // Trip's dates
   const [datesTrip, setDatesTrip] = useState({
     startDate: tripData.startDate,
