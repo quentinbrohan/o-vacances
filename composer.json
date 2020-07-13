@@ -1,0 +1,8 @@
+{
+    "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.3"
+    },
+    "require": {
+        "symfony/serializer": "^5.1"
+    }
+}

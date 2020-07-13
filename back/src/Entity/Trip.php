@@ -6,6 +6,7 @@ use App\Repository\TripRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=TripRepository::class)
@@ -16,58 +17,81 @@ class Trip
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups("apiV0_trip")
+     * @Groups("apiV0_list")
+     * @Groups("apiV0_Suggestion")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=64)
+     * @Groups("apiV0_trip")
+     * @Groups("apiV0_list")
+     * @Groups("apiV0_Suggestion")
      */
     private $title;
 
+    
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups("apiV0_trip")
+     *
      */
     private $description;
 
-    /**
+    /**  
      * @ORM\Column(type="date", nullable=true)
+     * @Groups("apiV0_trip")
      */
-    private $start_date;
+    private $startDate;
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Groups("apiV0_trip")
      */
-    private $end_date;
+    private $endDate;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups("apiV0_trip")
      */
     private $location;
 
     /**
      * @ORM\Column(type="string", length=128, nullable=true)
+     * @Groups("apiV0_trip")
      */
     private $picture;
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="trip")
+     * @Groups("apiV0_trip")
      */
     private $users;
 
     /**
      * @ORM\OneToMany(targetEntity=Activity::class, mappedBy="trip")
+     * @Groups("apiV0_trip")
      */
     private $activities;
 
     /**
      * @ORM\OneToMany(targetEntity=Disponibility::class, mappedBy="trip")
+     * @Groups("apiV0_trip")
      */
     private $disponibility;
 
     /**
      * @ORM\OneToMany(targetEntity=Suggestion::class, mappedBy="trip")
+     * @Groups("apiV0_trip")
      */
     private $suggestion;
+
+    /**
+     * @ORM\Column(type="string", length=128)
+     * @Groups("apiV0_trip")
+     */
+    private $creator;
 
     public function __construct()
     {
@@ -75,7 +99,24 @@ class Trip
         $this->activities = new ArrayCollection();
         $this->disponibility = new ArrayCollection();
         $this->suggestion = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
+
+    // /**
+    //  * @Groups("apiV0_trip")
+    //  * je créé une fonction custom qui va parcourir mes entites2 et j'en ressort ce que j'en souhaite
+    //  * ci dessous un exemple possible mais tu es libre sur le retour 
+    //  * Note: groupe n'est pas uniquement applicable sur les propriété ;) 
+    //  */
+    // public function getUsersDetails(){
+    //     $tableauAretourner = [];
+            
+    //     foreach ($this->users as $user) {
+    //         $tableauAretourner[] = $user->getEmail();
+    //     };
+
+    //     return implode(',', $tableauAretourner);
+    // }
 
     public function getId(): ?int
     {
@@ -108,24 +149,24 @@ class Trip
 
     public function getStartDate(): ?\DateTimeInterface
     {
-        return $this->start_date;
+        return $this->startDate;
     }
 
-    public function setStartDate(?\DateTimeInterface $start_date): self
+    public function setStartDate(?\DateTimeInterface $startDate): self
     {
-        $this->start_date = $start_date;
+        $this->startDate = $startDate;
 
         return $this;
     }
 
     public function getEndDate(): ?\DateTimeInterface
     {
-        return $this->end_date;
+        return $this->endDate;
     }
 
-    public function setEndDate(?\DateTimeInterface $end_date): self
+    public function setEndDate(?\DateTimeInterface $endDate): self
     {
-        $this->end_date = $end_date;
+        $this->endDate = $endDate;
 
         return $this;
     }
@@ -271,6 +312,18 @@ class Trip
                 $suggestion->setTrip(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreator(): ?string
+    {
+        return $this->creator;
+    }
+
+    public function setCreator(string $creator): self
+    {
+        $this->creator = $creator;
 
         return $this;
     }
