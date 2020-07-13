@@ -13,7 +13,7 @@ const ActivityCard = ({
   endDate,
 }) => (
   <Link
-    to={`/voyage/${id}/activites`}
+    to={`/voyage/${id}/activites#activite-${id}`}
   >
     <article className="activity-card">
       <header
