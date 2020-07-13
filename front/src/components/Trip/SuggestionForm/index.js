@@ -35,8 +35,6 @@ const SuggestionForm = ({
         <Send />
 
       </Button>
-      {/* <button type="submit">
-      </button> */}
     </form>
   );
 };

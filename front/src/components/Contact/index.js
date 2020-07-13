@@ -1,6 +1,6 @@
 import React from 'react';
-
 import { Link } from 'react-router-dom';
+import Button from 'src/components/elements/Button';
 
 import './contact.scss';
 
@@ -28,7 +28,9 @@ const Contact = () => (
         <div>
           <textarea id="msg" name="visitor-message" placeholder="Commentaire" />
         </div>
-        <button type="submit">Envoyer le message</button>
+        <Button color="primary" type="submit">
+          Envoyer le message
+        </Button>
       </form>
     </div>
   </div>

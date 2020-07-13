@@ -83,9 +83,9 @@ const Header = ({
               )}
             <div className="connection">
               {isLogged ? (
-                <button type="button" className="button-header">
+                <Button color="secondary" size="sm" haveClassName="button-header">
                   <Link to="/logout">Déconnexion</Link>
-                </button>
+                </Button>
               )
                 : (
                   <>

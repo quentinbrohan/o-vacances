@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Button from 'src/components/elements/Button';
 
 import { Edit2, Check } from 'react-feather';
 
@@ -22,7 +23,7 @@ const Profile = ({ isDisabled, deleteDisabledInput }) => {
       <div className="profile-head">
         <div className="profile-head-img">
           <img className="profile-head-img-picture" src={user.avatar} alt={user.firstname} />
-          <button type="button">Modifier la photo</button>
+          <Button color="primary">Modifier la photo</Button>
         </div>
         <div className="profile-head-information">
           <form>
@@ -82,7 +83,12 @@ const Profile = ({ isDisabled, deleteDisabledInput }) => {
             <br />
             Agenda, lieux, activités, suggestions,...
           </p>
-          <button className="profil-trip-button" type="button">GO !</button>
+          <Button
+            color="primary"
+            haveClassName="profil-trip-button"
+          >
+            GO !
+          </Button>
         </div>
         <div className="profile-trip-archive">
           <h2>Mes anciens voyages</h2>

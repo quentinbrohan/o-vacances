@@ -14,17 +14,11 @@
     margin: 0 auto;
   }
   button {
-    outline: none;
-    border: none;
-    background-color: initial;
-    font-size: 1rem;
-    color: $blackColor;
     @media (min-width: $tablet) {
       margin-left: 1rem;
     }
   }
   .button-header {
-    background: $whiteColor!important;
     height: 100%;
   }
 
@@ -85,6 +79,10 @@ Note: Beware of modifying this element as it can break the animations - you shou
     color: $blackColor;
     padding: 0.8em;
     text-align: center;
+    > a {
+      display: block;
+      margin-bottom: 1rem;
+    }
   }
 
   /* Individual item */

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import Button from 'src/components/elements/Button';
 
 import Field from './Field';
 
@@ -45,7 +46,9 @@ const Login = ({
             value={password}
           />
           <div>
-            <button type="submit">CONNEXION</button>
+            <Button color="primary">
+              Connexion
+            </Button>
           </div>
         </form>
 

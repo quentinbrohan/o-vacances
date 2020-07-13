@@ -221,7 +221,7 @@ button,
 }
 
 .button-dark {
-  color: $primaryColorDarker;
+  color: $blackColor;
   background-color: $primaryColorDarker;
   border-color: $primaryColorDarker;
 
@@ -238,7 +238,7 @@ button,
 }
 
 .button-primary {
-  color: $primaryColor;
+  color: $blackColor;
   background-color: $primaryColor;
   border-color: $primaryColor;
 
@@ -255,7 +255,7 @@ button,
 }
 
 .button-secondary {
-  color: $whiteColor;
+  color: $blackColor;
   background-color: $whiteColor;
   border-color: $whiteColor;
   box-shadow:   0 0.25rem 0.25rem rgba($blackColor, 0.15); 

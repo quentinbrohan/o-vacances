@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Button from 'src/components/elements/Button';
 
 import Field from './Field';
 import Image from './Image';
@@ -41,12 +42,13 @@ const TripForm = ({ addImagePreview }) => {
           type="date"
           placeholder="Date de retour prévue"
         />
-        <button
+        <Button
+          color="primary"
           type="submit"
-          className="trip-form-button"
+          haveClassName="trip-form-button"
         >
           J'ajoute un voyage
-        </button>
+        </Button>
       </form>
     </div>
   );

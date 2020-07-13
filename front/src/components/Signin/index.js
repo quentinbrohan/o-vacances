@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Button from 'src/components/elements/Button';
 import Field from './Field';
 
 import './signin.scss';
@@ -47,12 +48,13 @@ const Signin = ({
           onChange={changeField}
           value={password}
         />
-        <button
+        <Button
+          color="primary"
           type="submit"
-          className="signin-form-button"
+          haveClassName="signin-form-button"
         >
           S'inscrire
-        </button>
+        </Button>
       </form>
     </div>
   );
