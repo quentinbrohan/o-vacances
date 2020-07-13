@@ -88,7 +88,7 @@ const App = ({ isLogged }) => (
           path="/creer-un-voyage"
           component={TripForm}
         />
-         <Route
+        <Route
           path="/modifier-un-voyage"
           component={TripEdit}
         />
