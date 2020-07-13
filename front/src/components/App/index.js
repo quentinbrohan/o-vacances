@@ -22,6 +22,7 @@ import ErrorPage from 'src/components/ErrorPage';
 import HomeUser from 'src/components/HomeUser';
 import Activities from 'src/components/Activities';
 import TripForm from 'src/containers/TripForm';
+import TripEdit from 'src/containers/TripEdit';
 
 // Data
 import persons from 'src/data/teamData';
@@ -86,6 +87,10 @@ const App = ({ isLogged }) => (
         <Route
           path="/creer-un-voyage"
           component={TripForm}
+        />
+         <Route
+          path="/modifier-un-voyage"
+          component={TripEdit}
         />
         <Route component={ErrorPage} />
       </Switch>
