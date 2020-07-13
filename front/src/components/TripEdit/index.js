@@ -1,23 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from 'src/components/elements/Button';
 
 import Field from './Field';
 import Image from './Image';
 
-import './tripForm.scss';
+import './tripEdit.scss';
 
-const TripForm = ({ addImagePreview }) => {
+const TripEdit = ({ addImagePreview }) => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    // IMAGE
-    // TODO: do something with state.file
+    // todo
     handleTripForm();
   };
 
   return (
     <div className="trip-edit">
-      <h1>Mon nouveau voyage</h1>
+      <h1>Je modifie mon voyage</h1>
       <form className="trip-edit-element" onSubmit={handleSubmit}>
         <Image
           className="trip-edit-image"
@@ -29,7 +27,7 @@ const TripForm = ({ addImagePreview }) => {
         />
         <Field
           name="description"
-          placeholder="Description du voyage"
+          placeholder="Descritption du voyage"
           type="text"
         />
         <Field
@@ -47,19 +45,19 @@ const TripForm = ({ addImagePreview }) => {
           type="password"
           placeholder="Mot de passe du voyage"
         />
-        <Button
-          color="primary"
-          haveClassName="trip-form-button"
+        <button
+          type="submit"
+          className="trip-edit-button"
         >
-          J'ajoute un voyage
-        </Button>
+          Je modifie mon voyage
+        </button>
       </form>
     </div>
   );
 };
 
-TripForm.propTypes = {
+TripEdit.propTypes = {
   addImagePreview: PropTypes.func.isRequired,
 };
 
-export default TripForm;
+export default TripEdit;
