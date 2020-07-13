@@ -6,10 +6,10 @@ import {
   saveUser,
 } from 'src/actions/user';
 
-const config = {
-  // headers: { Authorization: `Bearer ${token}` },
-  headers: { Authorization: 'Bearer mon-token' },
-};
+// const config = {
+// headers: { Authorization: `Bearer ${token}` },
+// headers: { Authorization: 'Bearer mon-token' },
+// };
 
 const userMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
@@ -47,7 +47,7 @@ const userMiddleware = (store) => (next) => (action) => {
         password,
       }, {
         withCredentials: true,
-        config,
+        // config,
       })
         .then((response) => {
           console.log(response);
