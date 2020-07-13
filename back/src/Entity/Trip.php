@@ -39,7 +39,6 @@ class Trip
      */
     private $description;
 
-
     /**  
      * @ORM\Column(type="date", nullable=true)
      * @Groups("apiV0_trip")
