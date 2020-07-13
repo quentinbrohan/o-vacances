@@ -36,6 +36,8 @@ export default {
       image: 'https://api.time.com/wp-content/uploads/2015/09/the-martian-mars-in-movies.jpg?quality=85&w=1012&h=569&crop=1',
       startDate: '27-03-2025',
       endDate: '29-03-2025',
+      location: 'Gorges du Verdon',
+      description: 'Dans le canyon des Gorges du Verdon la rivière prend des allures de torrent, elle permet ainsi aux plus sportifs de pratiquer des activités d’eaux vives telles que le rafting, le canoë kayak, la randonnée aquatique...',
     },
     {
       id: 2,
@@ -43,6 +45,8 @@ export default {
       image: 'https://pbs.twimg.com/media/ESvTZ6cXgAACQ4F.jpg',
       startDate: '01-04-2025',
       endDate: '02-04-2025',
+      location: 'Little Saint James',
+      description: 'Soirée posée chez Jeffrey Epstein.',
     },
     {
       id: 3,
@@ -50,6 +54,8 @@ export default {
       image: 'https://www.actugaming.net/wp-content/uploads/2019/06/doom-eternal-1-1.jpg',
       startDate: '03-04-2025',
       endDate: '07-04-2025',
+      location: 'Zone 51',
+      description: 'Paul ?',
     },
     {
       id: 4,
@@ -57,6 +63,8 @@ export default {
       image: 'https://1.bp.blogspot.com/-w0qjoss4w_M/VL5KCXcQJVI/AAAAAAAAOfg/VYGsP5BtgoI/s1600/Alien-DerelictShip.jpg',
       startDate: '15-04-2025',
       endDate: '15-04-2025',
+      location: 'Guiana Space Centre, Route de l\'espace, 97387, Kourou, French Guiana',
+      description: 'Vite fuyons ! Tiens, j\'ai trouvé des oeufs dans ce vaisseau échoué. Regarder ! On dirait que de l\'acide à fait fondre une partie du métal. Vite fuyons ! Tiens, j\'ai trouvé des oeufs dans ce vaisseau échoué. Regarder ! On dirait que de l\'acide à fait fondre une partie du métal.Vite fuyons ! Tiens, j\'ai trouvé des oeufs dans ce vaisseau échoué. Regarder ! On dirait que de l\'acide à fait fondre une partie du métal.Vite fuyons ! Tiens, j\'ai trouvé des oeufs dans ce vaisseau échoué. Regarder ! On dirait que de l\'acide à fait fondre une partie du métal.',
     },
   ],
   suggestions: [
