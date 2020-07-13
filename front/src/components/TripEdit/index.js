@@ -40,6 +40,11 @@ const TripEdit = ({ addImagePreview }) => {
           type="date"
           placeholder="Date de retour prévue"
         />
+        <Field
+          name="password"
+          type="password"
+          placeholder="Mot de passe du voyage"
+        />
         <button
           type="submit"
           className="trip-edit-button"

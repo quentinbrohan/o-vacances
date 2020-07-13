@@ -28,7 +28,7 @@ const TripForm = ({ addImagePreview }) => {
         />
         <Field
           name="description"
-          placeholder="Descritption du voyage"
+          placeholder="Description du voyage"
           type="text"
         />
         <Field
@@ -40,6 +40,11 @@ const TripForm = ({ addImagePreview }) => {
           name="end-date"
           type="date"
           placeholder="Date de retour prévue"
+        />
+        <Field
+          name="password"
+          type="password"
+          placeholder="Mot de passe du voyage"
         />
         <button
           type="submit"
