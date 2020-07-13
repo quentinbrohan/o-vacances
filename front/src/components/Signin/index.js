@@ -19,7 +19,7 @@ const Signin = ({
   };
 
   return (
-    <div className="signin">
+    <main className="signin">
       <h1>Bienvenue voyageur !</h1>
       <form className="signin-form-element" onSubmit={handleSubmit}>
         <Field
@@ -56,7 +56,7 @@ const Signin = ({
           S'inscrire
         </Button>
       </form>
-    </div>
+    </main>
   );
 };
 

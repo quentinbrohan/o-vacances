@@ -6,7 +6,7 @@ import './contact.scss';
 
 // component to contact form
 const Contact = () => (
-  <div className="contact">
+  <main className="contact">
     <h1>Contactez-nous</h1>
     <div className="contact-text">
       <h3>Vous souhaitez nous faire part d'une remarque? Vous avez besoin d'un renseignement? </h3>
@@ -33,7 +33,7 @@ const Contact = () => (
         </Button>
       </form>
     </div>
-  </div>
+  </main>
 );
 
 export default Contact;

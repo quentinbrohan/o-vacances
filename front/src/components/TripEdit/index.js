@@ -14,7 +14,7 @@ const TripEdit = ({ addImagePreview }) => {
   };
 
   return (
-    <div className="trip-edit">
+    <main className="trip-edit">
       <h1>Je modifie mon voyage</h1>
       <form className="trip-edit-element" onSubmit={handleSubmit}>
         <Image
@@ -52,7 +52,7 @@ const TripEdit = ({ addImagePreview }) => {
           Je modifie mon voyage
         </button>
       </form>
-    </div>
+    </main>
   );
 };
 

@@ -22,7 +22,7 @@ const Login = ({
 
   return (
 
-    <div className="login">
+    <main className="login">
       <h1>Bon retour parmis nous.</h1>
       {isLogged && (
       <div>Vous êtes connecté</div>)}
@@ -63,7 +63,7 @@ const Login = ({
         </div>
       </div>
       )}
-    </div>
+    </main>
   );
 };
 

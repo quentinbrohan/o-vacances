@@ -7,13 +7,13 @@ import FeaturesSplit from './FeaturesSplit/FeaturesSplit';
 import './homeVisitor.scss';
 
 const HomeVisitor = () => (
-  <div className="home-visitor">
+  <main className="home-visitor">
     {/* Slideshow Images/Text */}
     <Slideshow />
     <FeaturesSplit />
     <Button color="primary" haveClassName="button-home-signin">
       <Link to="/signin">Je m'inscris</Link>
     </Button>
-  </div>
+  </main>
 );
 export default HomeVisitor;

@@ -18,7 +18,7 @@ const Profile = ({ isDisabled, deleteDisabledInput }) => {
   console.log(isDisabled);
 
   return (
-    <div className="profile">
+    <main className="profile">
       <h1>Mon profil</h1>
       <div className="profile-head">
         <div className="profile-head-img">
@@ -94,7 +94,7 @@ const Profile = ({ isDisabled, deleteDisabledInput }) => {
           <h2>Mes anciens voyages</h2>
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 
