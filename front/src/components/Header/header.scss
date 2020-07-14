@@ -26,9 +26,9 @@
     li a {
       padding-bottom: 2.25rem;
       border-bottom: 0.25rem solid transparent;
-      transition: all ease 0.5s;
+      transition: all ease 0.3s;
     }
-    a:hover {
+    nav a:hover, li a:hover {
       color: lighten($blackColor, 20%);
       padding-bottom: 2.25rem;
       border-bottom: 0.25rem solid lighten($blackColor, 20%);
