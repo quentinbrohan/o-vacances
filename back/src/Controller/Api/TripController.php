@@ -6,6 +6,7 @@ use App\Entity\Trip;
 use App\Form\TripType;
 use App\Repository\TripRepository;
 use App\Repository\UserRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -46,17 +47,28 @@ class TripController extends AbstractController
         $jsonText = $request->getContent();
         // On transforme ce json en array
         $jsonArray = json_decode($jsonText, true);
+        
+//dump($jsonArray['startDate']); // on a bien la date qui s'affiche
 
-        // $jsonArray est un tableau contenant tous les champs du formulaire
-        // Ces champs doivent être structurés comme dans le formulaire,
-        // il faudra donc l'expliquer aux dev du front
+        $startDate = $jsonArray['startDate'];
+        $jsonArray['startDate'] = new DateTime($startDate);
+
+//dump($jsonArray);   // on a un object datetime qui s'affiche  
+        
         // On envoie ce tableau à la méthode submit()
-        $form->submit($jsonArray);
+        $form = $form->submit($jsonArray);
 
+//dd($form); // la date ne s'affiche plus.
+ 
+ //       dd($trip);
         // On vérifie si le formulaire est valide, toutes les données reçues sont bonnes
         if ($form->isValid()) {
+
+//            $newNamePicture = $jsonArray['title'].$jsonArray['creator'];
+// dd($newNamePicture);
+
             // Si c'est valide, on persiste et on flushe
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->getDoctrine()->getManager(); 
             $em->persist($trip);
             $em->flush();
 
@@ -74,10 +86,10 @@ class TripController extends AbstractController
     /**
      * @Route("/api/v0/trips/{id}", name="api_v0_trips_show", methods="GET")
      */
-    public function show(TripRepository $tripRepository, ObjectNormalizer $normalizer, $id)
+    public function show(TripRepository $tripRepository, ObjectNormalizer $normalizer, Trip $trip)
     {
         // On demande à Doctrine le voyage
-        $trip = $tripRepository->find($id);
+        $trip = $tripRepository->find($trip);
 
         // On instancie un serializer en lui précisant un normalizer adapté aux objets PHP
         $serializer = new Serializer([$normalizer]);
@@ -90,10 +102,10 @@ class TripController extends AbstractController
     /**
      * @Route("/api/v0/trips/{id}", name="api_v0_trips_edit", methods="PATCH")
      */
-    public function edit(TripRepository $tripRepository, ObjectNormalizer $normalizer, Request $request, $id)
+    public function edit(TripRepository $tripRepository, ObjectNormalizer $normalizer, Request $request, Trip $trip)
     {
         // On demande à Doctrine le voyage
-        $trip = $tripRepository->find($id);
+        $trip = $tripRepository->find($trip);
 
         if (!empty($trip)) {
 

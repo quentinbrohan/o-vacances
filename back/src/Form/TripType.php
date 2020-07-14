@@ -9,6 +9,9 @@ use App\Entity\Trip;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -19,10 +22,14 @@ class TripType extends AbstractType
         $builder
             ->add('title')
             ->add('description')
-            ->add('startDate')
+            ->add('startDate',
+                DateTimeType::class)
             ->add('endDate')
             ->add('location')
-            ->add('picture')
+            ->add('picture', 
+                FileType::class, [
+                    'mapped' => false
+            ])
             ->add('users',
                 EntityType::class, [
                     "class" => User::class,
