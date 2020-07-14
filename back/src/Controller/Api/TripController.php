@@ -17,23 +17,6 @@ use Symfony\Component\Serializer\SerializerInterface;
 class TripController extends AbstractController
 {
     /**
-     * @Route("/api/v0/trips?user_id={id}", name="api_v0_trips_list", methods="GET")
-     */
-    /*
-    public function list(TripRepository $tripRepository, ObjectNormalizer $normalizer, $id)
-    {
-        // On demande à Doctrine tous les voyages
-        $trips = $tripRepository->findTripWithUser($id);
-
-        // On instancie un serializer en lui précisant un normalizer adapté aux objets PHP
-        $serializer = new Serializer([$normalizer]);
-        // Parce qu'on a précisé le normalizer, on peut normaliser selon un groupe
-        $normalizedTrips = $serializer->normalize($trips, null, ['groups' => 'apiV0_list']);
-
-        return $this->json($normalizedTrips);
-    } */
-
-    /**
      * @Route("/api/v0/trips/{id}", name="api_v0_trips_show", methods="GET")
     */
     public function show(TripRepository $tripRepository, ObjectNormalizer $normalizer, $id)

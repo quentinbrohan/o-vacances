@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=DisponibilityRepository::class)
@@ -17,25 +18,36 @@ class Disponibility
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups("apiV0_dispoByTrip")
      * @Groups("apiV0_list")
+     * @Groups("apiV0")
      */
     private $id;
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Assert\DateTime
+     * @Groups("apiV0_dispoByTrip")
      * @Groups("apiV0_list")
+     * @Groups("apiV0")
+
      */
     private $startDate;
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Assert\DateTime
+     * @Groups("apiV0_dispoByTrip")
      * @Groups("apiV0_list")
+     * @Groups("apiV0")
      */
     private $endDate;
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="disponibility")
+     * @Groups("apiV0_dispoByTrip")
      * @Groups("apiV0_list")
+     * @Groups("apiV0")
      */
     private $users;
 
@@ -43,6 +55,7 @@ class Disponibility
      * @ORM\ManyToOne(targetEntity=Trip::class, inversedBy="disponibility")
      * @ORM\JoinColumn(nullable=false)
      * @Groups("apiV0_list")
+     * @Groups("apiV0")
      */
     private $trip;
 

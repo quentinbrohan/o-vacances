@@ -30,6 +30,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=180, unique=true)
      * @Groups("apiV0_list")
      * @Groups("apiV0_trip")
+     * @Groups("apiV0_dispoByTrip")
      */
     private $email;
 
@@ -51,6 +52,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=128)
      * @Groups("apiV0_trip")
+     * @Groups("apiV0_dispoByTrip")
      * 
      */
     private $lastname;
@@ -58,6 +60,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=128)
      * @Groups("apiV0_trip")
+     * @Groups("apiV0_dispoByTrip")
      * @Groups("apiV0_Suggestion")
      */
     private $firstname;
