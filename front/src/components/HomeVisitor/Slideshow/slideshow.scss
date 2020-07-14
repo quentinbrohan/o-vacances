@@ -123,10 +123,22 @@
     justify-content: center;
     align-items: center;
     border-radius: 4rem;
+    animation: featuresButton 4s linear infinite;
+    &:hover {
+      transform: translateX(-50%) translateY(-2px);
+    }
     svg {
       height: 1.6rem;
       width: 1.6rem;
       color: $primaryColor;
     }
   }  
+  // @keyframes featuresButton {
+  //   0%, 100% {
+  //     transform: translateX(-50%) translateY(0%);
+  //   }
+  //   50% {
+  //     transform: translateX(-50%) translateY(-16%);
+  //   }
+  // }
 }

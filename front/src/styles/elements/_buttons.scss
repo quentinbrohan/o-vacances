@@ -141,7 +141,6 @@ button,
   letter-spacing: inherit;
   white-space: nowrap;
   @include transitionFast;
-
   //
   box-shadow: 0 0.5rem 1rem rgba($primaryColorDarker, 0.12);
   > a {
