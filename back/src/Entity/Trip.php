@@ -18,6 +18,7 @@ class Trip
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      * @Groups("apiV0_dispoByTrip")
+     * @Groups("apiV0_dispoByUser")
      * @Groups("apiV0_trip")
      * @Groups("apiV0_list")
      * @Groups("apiV0_Suggestion")
@@ -27,6 +28,7 @@ class Trip
     /**
      * @ORM\Column(type="string", length=64)
      * @Groups("apiV0_dispoByTrip")
+     * @Groups("apiV0_dispoByUser")
      * @Groups("apiV0_trip")
      * @Groups("apiV0_list")
      * @Groups("apiV0_Suggestion")

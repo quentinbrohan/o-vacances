@@ -20,6 +20,7 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups("apiV0_dispoByUser")
      * @Groups("apiV0_list")
      * @Groups("apiV0_trip")
      * @Groups("apiV0_Suggestion")
@@ -31,6 +32,7 @@ class User implements UserInterface
      * @Groups("apiV0_list")
      * @Groups("apiV0_trip")
      * @Groups("apiV0_dispoByTrip")
+     * @Groups("apiV0_dispoByUser")
      */
     private $email;
 
@@ -53,6 +55,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=128)
      * @Groups("apiV0_trip")
      * @Groups("apiV0_dispoByTrip")
+     * @Groups("apiV0_dispoByUser")
      * 
      */
     private $lastname;
@@ -61,6 +64,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=128)
      * @Groups("apiV0_trip")
      * @Groups("apiV0_dispoByTrip")
+     * @Groups("apiV0_dispoByUser")
      * @Groups("apiV0_Suggestion")
      */
     private $firstname;
@@ -78,6 +82,7 @@ class User implements UserInterface
     private $suggestions;
     /**
      * @ORM\ManyToMany(targetEntity=Disponibility::class, inversedBy="users")
+     * @Groups("apiV0_dispoByUser")
      * 
      */
     private $disponibility;

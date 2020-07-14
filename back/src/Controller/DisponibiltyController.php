@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Disponibility;
 use App\Repository\DisponibilityRepository;
 use App\Repository\TripRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -33,19 +34,16 @@ class DisponibiltyController extends AbstractController
     }
 
     /**
-     * @Route("/api/v0/trips/{id}/disponibilities", name="api_v0_disponibilities_user_list", methods="GET")
+     * @Route("/api/v0/users/{id}/disponibilities", name="api_v0_disponibilities_user_list", methods="GET")
      */
-    public function listUserDisponibility(DisponibilityRepository $userRepository, ObjectNormalizer $normalizer)
+    public function listUserDisponibility(UserRepository $userRepository, SerializerInterface $serializer, $id)
     {
-        $users = $userRepository->findAll();
+        $disponibilities = $userRepository->findAllDispoByUsers($id);
 
-        // On instancie un serializer en lui précisant un normalizer adapté aux objets PHP
-        $serializer = new Serializer([$normalizer]);
-        // Parce qu'on a précisé le normalizer, on peut normaliser selon un groupe
-        $normalizedUsers = $serializer->normalize($users, null, ['groups' => 'apiV0']);
-
-
-        return $this->json($normalizedUsers);
+        $json = $serializer->serialize($disponibilities, 'json', ['groups' => 'apiV0_dispoByUser']);
+        
+        $response = new JsonResponse($json, 200, [], true);
+        return $response;
     }
 
     /**

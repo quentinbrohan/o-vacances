@@ -19,6 +19,7 @@ class Disponibility
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      * @Groups("apiV0_dispoByTrip")
+     * @Groups("apiV0_dispoByUser")
      * @Groups("apiV0_list")
      * @Groups("apiV0")
      */
@@ -28,6 +29,7 @@ class Disponibility
      * @ORM\Column(type="date", nullable=true)
      * @Assert\DateTime
      * @Groups("apiV0_dispoByTrip")
+     * @Groups("apiV0_dispoByUser")
      * @Groups("apiV0_list")
      * @Groups("apiV0")
 
@@ -38,6 +40,7 @@ class Disponibility
      * @ORM\Column(type="date", nullable=true)
      * @Assert\DateTime
      * @Groups("apiV0_dispoByTrip")
+     * @Groups("apiV0_dispoByUser")
      * @Groups("apiV0_list")
      * @Groups("apiV0")
      */
@@ -54,6 +57,7 @@ class Disponibility
     /**
      * @ORM\ManyToOne(targetEntity=Trip::class, inversedBy="disponibility")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups("apiV0_dispoByUser")
      * @Groups("apiV0_list")
      * @Groups("apiV0")
      */
