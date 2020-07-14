@@ -3,14 +3,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './field.scss';
+import './fieldSelect.scss';
 
 // == Import : local
 
 // == Composant
-const Field = ({
+const FieldSelect = ({
   value,
-  type,
   name,
   placeholder,
   onChange,
@@ -26,37 +25,29 @@ const Field = ({
       <label
         htmlFor={inputId}
         className="field-label"
-      >
-        {placeholder}
+      >{placeholder}
+        <select value={value} onChange={handleChange}>
+          <option value="Sport">Sport</option>
+          <option value="Musée">Musée</option>
+          <option value="Restaurant">Restaurant</option>
+          <option value="Plage-Piscine">Plage-Piscine</option>
+        </select>
       </label>
-      <input
-        // React - state
-        value={value}
-        onChange={handleChange}
-        // infos de base
-        id={inputId}
-        type={type}
-        className="field-input"
-        placeholder={placeholder}
-        name={name}
-        list={inputId}
-      />
     </div>
   );
 };
 
-Field.propTypes = {
+FieldSelect.propTypes = {
   value: PropTypes.string,
-  type: PropTypes.string,
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
 };
 
 // Valeurs par défaut pour les props
-Field.defaultProps = {
+FieldSelect.defaultProps = {
   value: '',
   type: 'text',
 };
 // == Export
-export default Field;
+export default FieldSelect;

@@ -4,6 +4,8 @@ import Modal from 'react-modal';
 
 import Field from './Field';
 
+import FieldSelect from './FieldSelect';
+
 import './activityForm.scss';
 
 const ActivityForm = () => {
@@ -28,25 +30,29 @@ const ActivityForm = () => {
         contentLabel="Example Modal"
         style={{
           overlay: {
-            backgroundColor: 'rgba(255, 255, 255, 0.4)',
+            backgroundColor: 'rgba(255, 255, 255, 0.3)',
           },
         }}
       >
-
+        <span className="activity-form-button-close" onClick={closeModal}>x</span>
         <h2 ref={subtitle}>Nouvelle activité</h2>
 
         <form className="activity-form-element" onSubmit="">
           <Field
-            name="Activité"
+            name="Activity"
             placeholder="Activité"
 
+          />
+          <FieldSelect
+            name="Category"
+            placeholder="Catégorie"
           />
           <Field
             name="start-date"
             placeholder="Date de début"
             type="date"
-
           />
+
           <Field
             name="end-date"
             placeholder="Date de fin"
@@ -67,7 +73,7 @@ const ActivityForm = () => {
             // value={password}
           />
         </form>
-        <Button onClick={closeModal}>j'ajoute</Button>
+        <Button className="activity-form-button" onClick={closeModal}>j'ajoute</Button>
       </Modal>
     </div>
 
