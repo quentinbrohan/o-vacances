@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { slide as Menu } from 'react-burger-menu';
 import { Menu as MenuIcon, X as CloseIcon } from 'react-feather';
 import Button from 'src/components/elements/Button';
@@ -37,15 +37,15 @@ const Header = ({
             >
               {isLogged ? (
                 <>
-                  <Link to="/mes-voyages" onClick={() => handleMenuState()}>Mes voyages</Link>
-                  <Link to="/creer-un-voyage" onClick={() => handleMenuState()}>Créer un voyage</Link>
-                  <Link to="/mon-profil" onClick={() => handleMenuState()}>Mon profil</Link>
-                  <Link to="/contact" onClick={() => handleMenuState()}>Contact</Link>
+                  <NavLink to="/mes-voyages" onClick={() => handleMenuState()} activeClassName="nav--active">Mes voyages</NavLink>
+                  <NavLink to="/creer-un-voyage" onClick={() => handleMenuState()} activeClassName="nav--active">Créer un voyage</NavLink>
+                  <NavLink to="/mon-profil" onClick={() => handleMenuState()} activeClassName="nav--active">Mon profil</NavLink>
+                  <NavLink to="/contact" onClick={() => handleMenuState()} activeClassName="nav--active">Contact</NavLink>
                 </>
 
               )
                 : (
-                  <Link to="/contact" onClick={() => handleMenuState()}>Contact</Link>
+                  <NavLink to="/contact" onClick={() => handleMenuState()} activeClassName="nav--active">Contact</NavLink>
                 )}
 
               <div className="connection-mobile">
@@ -70,15 +70,15 @@ const Header = ({
           <div className="menu">
             {isLogged ? (
               <ul>
-                <li><Link to="/mes-voyages">Mes voyages</Link></li>
-                <li><Link to="/creer-un-voyage">Créer un voyage</Link></li>
-                <li><Link to="/mon-profil">Mon profil</Link></li>
-                <li><Link to="/contact">Contact</Link></li>
+                <li><NavLink to="/mes-voyages" activeClassName="nav--active">Mes voyages</NavLink></li>
+                <li><NavLink to="/creer-un-voyage" activeClassName="nav--active">Créer un voyage</NavLink></li>
+                <li><NavLink to="/mon-profil" activeClassName="nav--active">Mon profil</NavLink></li>
+                <li><NavLink to="/contact" activeClassName="nav--active">Contact</NavLink></li>
               </ul>
             )
               : (
                 <ul>
-                  <li><Link to="/contact">Contact</Link></li>
+                  <li><NavLink to="/contact" activeClassName="nav--active">Contact</NavLink></li>
                 </ul>
               )}
             <div className="connection">
