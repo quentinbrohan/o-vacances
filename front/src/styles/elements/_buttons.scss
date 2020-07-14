@@ -140,7 +140,8 @@ button,
   text-align: center;
   letter-spacing: inherit;
   white-space: nowrap;
-  transition: background 0.15s ease;
+  @include transitionFast;
+
   //
   box-shadow: 0 0.5rem 1rem rgba($primaryColorDarker, 0.12);
   > a {
@@ -172,6 +173,8 @@ button,
   &:hover {
     background-color: lighten($primaryColorLighter, 16%);
     border-color: lighten($primaryColorLighter, 16%);
+    transform: translateY(-2px);
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0, 0.3);
   }
 
   &.is-loading {

@@ -14,7 +14,7 @@
       height: 360px;
       display: block;
       margin: $gutter;
-      transition: .3s;
+      @include transitionMedium;
       border: 1px solid $greyColorLighter;
       border-radius: 0.5rem;
       overflow: hidden;
@@ -58,9 +58,9 @@
       align-items: center;
       a {
         color: $blackColor;
+        @include transitionFast;
         cursor: pointer;
         &:hover {
-          transition: color ease 0.1s;
           color: $whiteColor;
         }    
       }

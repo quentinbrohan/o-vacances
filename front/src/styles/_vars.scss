@@ -30,3 +30,16 @@ $tablet: "768px";
 $laptop: "960px";
 $desktop: "1152px";
 // $widescreen: "1440px";
+
+// Transitions
+@mixin transitionFast {
+  transition: all ease 0.125s;
+}
+
+@mixin transitionMedium {
+  transition: all ease 0.25s;
+}
+
+@mixin transitionSlow {
+  transition: all ease 0.3s;
+}
