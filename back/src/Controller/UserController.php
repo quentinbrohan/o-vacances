@@ -77,7 +77,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("api/v0/user/{id}/edit", name="api_user_edit", methods={"PATCH"})
+     * @Route("api/v0/users/{id}/edit", name="api_user_edit", methods={"PATCH"})
      */
     public function edit(Request $request, User $user, UserRepository $userRepository, $id, ObjectNormalizer $normalizer): Response
     {

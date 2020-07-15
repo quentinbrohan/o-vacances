@@ -22,6 +22,7 @@ class User implements UserInterface
      * @ORM\Column(type="integer")
      * @Groups("apiV0_list")
      * @Groups("apiV0_trip")
+     * @Groups("apiV0_tripByUser")
      * @Groups("apiV0_Suggestion")
      */
     private $id;
@@ -30,6 +31,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=180, unique=true)
      * @Groups("apiV0_list")
      * @Groups("apiV0_trip")
+     * @Groups("apiV0_tripByUser")
      */
     private $email;
 
@@ -51,6 +53,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=128)
      * @Groups("apiV0_trip")
+     * @Groups("apiV0_tripByUser")
      * 
      */
     private $lastname;
@@ -58,6 +61,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=128)
      * @Groups("apiV0_trip")
+     * @Groups("apiV0_tripByUser")
      * @Groups("apiV0_Suggestion")
      */
     private $firstname;
@@ -65,10 +69,11 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=128, nullable=true)
      * @Groups("apiV0_trip")
+     * @Groups("apiV0_tripByUser")
      */
     private $avatar;
 
-/**
+    /**
      * @ORM\OneToMany(targetEntity=Suggestion::class, mappedBy="user")
      * 
      */
@@ -80,6 +85,7 @@ class User implements UserInterface
     private $disponibility;
     /**
      * @ORM\ManyToMany(targetEntity=Trip::class, inversedBy="users")
+     * @Groups("apiV0_tripByUser")
      * 
      */
     private $trip;
