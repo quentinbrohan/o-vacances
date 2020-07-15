@@ -53,8 +53,8 @@ const Login = ({
           <div className="login-layout">
             <p>J'ai oublié mon mot de passe</p>
             <hr />
-            <p>Pas encore de compte?
-              <Link to="/signin">Inscription</Link>
+            <p>
+              Pas encore de compte? <Link to="/signin">Inscription</Link>
             </p>
           </div>
         </div>
