@@ -79,7 +79,7 @@ const Slideshow = () => {
 
       <Button color="secondary" size="sm" haveClassName="show-features">
         <a
-          href="#features-split"
+          href="#fonctionnalites"
         >
           Voir les fonctionnalités <ArrowDownCircle />
         </a>

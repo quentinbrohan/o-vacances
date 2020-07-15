@@ -4,13 +4,15 @@ namespace App\Controller;
 
 use App\Entity\Suggestion;
 use App\Form\SuggestionType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Repository\SuggestionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 class SuggestionController extends AbstractController
 {
@@ -34,27 +36,33 @@ class SuggestionController extends AbstractController
     /**
      * @Route("api/v0/trips/{id}/suggestions/new", name="api_v0_suggestions_new", methods="POST")
      */
-    public function new(Request $request)
+    public function new(Request $request, ObjectNormalizer $normalizer)
     {
         // Je créer un objet vide qui sera géré (et rempli) par le formulaire
         $newSuggestion = new Suggestion();
         // je crée un ofrmulaire a partir de mon modèle (du Type) AnimeCategoryType
         // je fourni en meme temps a ce nouveau formulaire l'objet qu'il doit gérer
-        $form = $this->createForm(SuggestionType::class, $newSuggestion);
-        // je demande au form de verifier si des données ont été soumises
-        $form->handleRequest($request);
-        // Si des données ont été soumises ET qu'elles sont valides
+        $form = $this->createForm(SuggestionType::class, $newSuggestion, ['csrf_protection' => false]);
+        $jsonText = $request->getContent();
+       
+        $jsonArray = json_decode($jsonText, true);
+      
+        $form->submit($jsonArray);
+
         if ($form->isSubmitted() && $form->isValid()) {
             // on traite le formulaire
             // par exemple on l'envoi dans la BDD
-            $manager = $this->getDoctrine()->getManager();
-            $manager->persist($newSuggestion);
-            $manager->flush();
-            // puis on redirige sur une autre page, sinon le type va re tomber sur le form en pensant qu'il n'a pas marcher
-            $this->addFlash("success", " ");
-            //metre nom de route de view des dates ou du voyage
-            return $this->redirectToRoute(' ', ["id" => $newSuggestion ->getId()]);
+            $entitymanager = $this->getDoctrine()->getManager();
+            $entitymanager->persist($newSuggestion);
+            $entitymanager->flush();
+          
+            $serializer = new Serializer([$normalizer]);
+
+            $normalizerSuggestion = $serializer->normalize($newSuggestion, null, ['groups'=> 'apiV0_Suggestion']);
+           
+            return $this->json($normalizerSuggestion, 201);
         }
+        return $this->json((string) $form->getErrors(true, false), 400);
     }
 
     /**

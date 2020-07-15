@@ -18,8 +18,8 @@
       height: 2.5rem;
       padding: 0.75rem;
       font-size: 1rem;
-      border: 2px solid $greyColorLighter;
-      border-radius: 0.1rem;
+      border: 1px solid $greyColorDarker;
+      border-radius: 0.5rem;
       &:focus {
         border-color: $greyColorDarker;
       }

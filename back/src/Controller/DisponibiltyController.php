@@ -47,7 +47,7 @@ class DisponibiltyController extends AbstractController
     }
 
     /**
-     * @Route("/api/v0/dispinibilities", name="api_v0_animes_new", methods="POST")
+     * @Route("/api/v0/disponibilities", name="api_v0_animes_new", methods="POST")
      */
     public function new(ObjectNormalizer $normalizer, Request $request)
     {
