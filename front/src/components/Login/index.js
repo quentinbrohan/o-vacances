@@ -23,7 +23,7 @@ const Login = ({
   return (
 
     <main className="login">
-      <h1>Bon retour parmis nous.</h1>
+      <h1>Bon retour parmi nous.</h1>
       {isLogged && (
       <div>Vous êtes connecté</div>)}
 
