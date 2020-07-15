@@ -3,6 +3,7 @@
 .login {
   form {
     .field {
+      width: 100%;
       label {
         display: block;
         font-weight: bold;
@@ -10,12 +11,13 @@
       }
 
       input {
-        width: 100%;
-        padding: 0.4 * $gutter;
-        margin: 0.3 * $gutter;
+        width: 80%;
+        padding: 1rem;
+        margin: 0.5rem;
         border: solid 1px $greyColorDarker;
-        border-radius: 0.1 * $gutter;
+        border-radius: 0.5rem;
         margin-bottom: $gutter;
+        text-align: center;
         &:focus {
           border-color: $greyColorDarker;
         }

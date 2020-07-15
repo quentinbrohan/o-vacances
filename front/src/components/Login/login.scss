@@ -2,39 +2,52 @@
 
 .login {
   text-align: center;
+  .connection-container {
+    padding: $gutter 0;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem 0 rgba(60,66, 87, 0.12) ,
+    0 0.5rem 0.75rem 0 rgba(0, 0, 0, 0.12) ;
+    width: 100%;
+    margin: auto;
+    @media (min-width: $tablet) {
+      max-width: 50%;
+      margin: 0 auto;
+    }
 
-  .login-form {
-    form {
+    .login-form {
+      margin: 1rem 0;
       width: 100%;
-      @media (min-width: $tablet) {
-        max-width: 50%;
+      form {
+        width: 100%;
         margin: 0 auto;
       }
-    }
-
-    button {
-      display: block;
-      width: 100%;
-      @media (min-width: $tablet) {
-        width: initial;
+  
+      button {
+        display: block;
+        width: 80%;
+        @media (min-width: $tablet) {
+          width: initial;
+        }
+        margin: 1rem auto 0;
       }
-      margin: 1rem auto 0;
     }
-  }
-  .login-layout {
-    p {
-      margin: $gutter 0;
-
-      a {
-        color: $primaryColor;
-
-        &:hover {
-          color: $primaryColorDarker;
+    .login-layout {
+      p {
+        margin: $gutter 0;
+  
+        a {
+          color: $primaryColor;
+  
+          &:hover {
+            color: $primaryColorDarker;
+          }
         }
       }
+      hr {
+        width: 80%;
+      }
     }
-    hr {
-      width: 300px;
-    }
+  
   }
+
 }
