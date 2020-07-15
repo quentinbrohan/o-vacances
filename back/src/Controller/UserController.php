@@ -73,7 +73,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("api/v0/user/{id}/edit", name="api_user_edit", methods={"PATCH"})
+     * @Route("api/v0/users/{id}/edit", name="api_user_edit", methods={"PATCH"})
      */
     public function edit(Request $request, User $user, UserPasswordEncoderInterface $passwordEncoder): Response
     {
@@ -98,7 +98,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("api/v0/user/{id}", name="api_user_show", methods={"GET"})
+     * @Route("api/v0/users/{id}", name="api_user_show", methods={"GET"})
      */
     public function show(User $user): Response
     {
@@ -108,7 +108,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("api/v0/user/{id}/delete", name="api_user_delete", methods="DELETE")
+     * @Route("api/v0/users/{id}/delete", name="api_user_delete", methods={"DELETE"})
      */
     public function delete(Request $request, User $user): Response
     {
