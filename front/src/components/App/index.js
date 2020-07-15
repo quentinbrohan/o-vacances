@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 // Layout
 import Footer from 'src/components/Footer';
 import Header from 'src/containers/Header';
+import PrivateRoute from 'src/utils/PrivateRoute';
 // Pages
 import Contact from 'src/components/Contact';
 import HomeVisitor from 'src/components/HomeVisitor';
@@ -67,31 +68,38 @@ const App = ({ isLogged }) => (
           path="/login"
           component={Login}
         />
-        <Route
+        <PrivateRoute
+          exact
           path="/mon-profil"
           component={Profile}
+          isLogged={isLogged}
         />
-        <Route
+        <PrivateRoute
           exact
           path="/voyage/:id"
           component={Trip}
+          isLogged={isLogged}
         />
-        <Route
+        <PrivateRoute
           exact
           path="/voyage/:id/activites"
           component={Activities}
+          isLogged={isLogged}
         />
-        <Route
+        <PrivateRoute
           path="/mes-voyages"
           component={HomeUser}
+          isLogged={isLogged}
         />
-        <Route
+        <PrivateRoute
           path="/creer-un-voyage"
           component={TripForm}
+          isLogged={isLogged}
         />
-        <Route
+        <PrivateRoute
           path="/modifier-un-voyage"
           component={TripEdit}
+          isLogged={isLogged}
         />
         <Route
           path="/ajouter-une-activite"

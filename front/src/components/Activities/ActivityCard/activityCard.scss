@@ -10,7 +10,7 @@
       height: 360px;
       display: flex;
       margin: 1rem 0;
-      transition: 0.3s;
+      @include transitionMedium;
       border: 1px solid $greyColorLighter;
       border-radius: 0.5rem;
       overflow: hidden;

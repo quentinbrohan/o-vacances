@@ -1,10 +1,9 @@
-@import 'src/styles/vars';
+@import "src/styles/vars";
 
-.login{
+.login {
   text-align: center;
 
-  .login-form{
-
+  .login-form {
     form {
       width: 100%;
       @media (min-width: $tablet) {
@@ -13,35 +12,28 @@
       }
     }
 
-   
-    button{
+    button {
       display: block;
       width: 100%;
       @media (min-width: $tablet) {
         width: initial;
       }
       margin: 1rem auto 0;
-
-      &:hover{
-        background-color: $primaryColorDarker;
-        
-      }
     }
   }
-  .login-layout{
-    p{
+  .login-layout {
+    p {
       margin: $gutter 0;
 
-      a{
+      a {
         color: $primaryColor;
 
-        &:hover{
+        &:hover {
           color: $primaryColorDarker;
         }
       }
-
     }
-    hr{
+    hr {
       width: 300px;
     }
   }

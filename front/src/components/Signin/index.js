@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Button from 'src/components/elements/Button';
 import Field from './Field';
 
 import './signin.scss';
@@ -18,7 +19,7 @@ const Signin = ({
   };
 
   return (
-    <div className="signin">
+    <main className="signin">
       <h1>Bienvenue voyageur !</h1>
       <form className="signin-form-element" onSubmit={handleSubmit}>
         <Field
@@ -47,14 +48,15 @@ const Signin = ({
           onChange={changeField}
           value={password}
         />
-        <button
+        <Button
+          color="primary"
           type="submit"
-          className="signin-form-button"
+          haveClassName="signin-form-button"
         >
           S'inscrire
-        </button>
+        </Button>
       </form>
-    </div>
+    </main>
   );
 };
 

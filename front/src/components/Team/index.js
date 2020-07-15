@@ -13,8 +13,8 @@ import './Team.scss';
 // Component to present the team
 
 const Team = ({ persons }) => (
-  <div className="team">
-    <h2>L'équipe</h2>
+  <main className="team">
+    <h1>L'équipe</h1>
     <div className="team-cards">
       {persons.map((person) => (
         <article className="team-card" key={person.name}>
@@ -51,7 +51,7 @@ const Team = ({ persons }) => (
         </article>
       ))}
     </div>
-  </div>
+  </main>
 );
 
 Team.propTypes = {

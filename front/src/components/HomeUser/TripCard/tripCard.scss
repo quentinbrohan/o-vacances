@@ -20,7 +20,7 @@
       height: 360px;
       display: block;
       margin: $gutter;
-      transition: .3s;
+      @include transitionMedium;
       border: 1px solid $greyColorLighter;
       border-radius: 0.5rem;
       overflow: hidden;

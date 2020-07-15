@@ -8,7 +8,7 @@ import './homeUser.scss';
 
 const HomeUser = () => {
   return (
-    <div className="home-user">
+    <main className="home-user">
       <h1>Mes Voyages</h1>
       <div className="my-trips">
         {userTrips.map((trip) => (
@@ -22,7 +22,7 @@ const HomeUser = () => {
           <TripCard {...trip} key={trip.id} />
         ))}
       </div>
-    </div>
+    </main>
   );
 };
 

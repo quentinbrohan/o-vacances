@@ -7,6 +7,7 @@ import {
   Circle as Select,
   CheckCircle as Unselect,
 } from 'react-feather';
+import Button from 'src/components/elements/Button';
 
 import './activityCard.scss';
 
@@ -63,7 +64,7 @@ const ActivityCard = ({
           <p className="description">{description}</p>
         </div>
         <div className="activity-cta">
-          <button type="button">
+          <Button color="secondary" size="sm">
             {isSelected(id) ? (
               <Unselect
                 className="selector--selected"
@@ -78,13 +79,13 @@ const ActivityCard = ({
                 />
 
               )}
-          </button>
-          <button type="button">
+          </Button>
+          <Button color="secondary" size="sm">
             <Thrash
               className="delete"
               onClick={() => manageDeleteSingle(id)}
             />
-          </button>
+          </Button>
         </div>
       </div>
     </article>

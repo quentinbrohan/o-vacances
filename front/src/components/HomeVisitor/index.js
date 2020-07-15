@@ -1,19 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Button from 'src/components/elements/Button';
 
 import Slideshow from './Slideshow/Slideshow';
 import FeaturesSplit from './FeaturesSplit/FeaturesSplit';
 import './homeVisitor.scss';
 
 const HomeVisitor = () => (
-  <div className="home-visitor">
+  <main className="home-visitor">
     {/* Slideshow Images/Text */}
     <Slideshow />
     <FeaturesSplit />
-    <button type="button" className="button-home-signin">
+    <Button color="primary" haveClassName="button-home-signin">
       <Link to="/signin">Je m'inscris</Link>
-    </button>
-
-  </div>
+    </Button>
+  </main>
 );
 export default HomeVisitor;

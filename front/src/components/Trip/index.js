@@ -25,7 +25,7 @@ const Trip = ({
 }) => {
   const [isCreator, setIsCreator] = useState(false);
   const [isOwnUser, setisOwnUser] = useState(false);
-  const [focus, setFocus] = useState('startDate');
+  const [focus, setFocus] = useState(null);
   // Trip's dates
   const [datesTrip, setDatesTrip] = useState({
     startDate: tripData.startDate,
@@ -59,7 +59,7 @@ const Trip = ({
         alt={tripData.title}
         src={tripData.image}
       />
-      <div className="trip-info">
+      <section className="trip-info">
         <div className="left">
           <div className="trip-info-header">
             <h1>{tripData.title}</h1>
@@ -188,7 +188,7 @@ const Trip = ({
 
         </div>
 
-      </div>
+      </section>
       <section className="activities">
         <h2>Mes activités {''}
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Button from 'src/components/elements/Button';
 
 import Field from './Field';
 import Image from './Image';
@@ -15,7 +16,7 @@ const TripForm = ({ addImagePreview }) => {
   };
 
   return (
-    <div className="trip-edit">
+    <main className="trip-edit">
       <h1>Mon nouveau voyage</h1>
       <form className="trip-edit-element" onSubmit={handleSubmit}>
         <Image
@@ -46,14 +47,14 @@ const TripForm = ({ addImagePreview }) => {
           type="password"
           placeholder="Mot de passe du voyage"
         />
-        <button
-          type="submit"
-          className="trip-form-button"
+        <Button
+          color="primary"
+          haveClassName="trip-form-button"
         >
           J'ajoute un voyage
-        </button>
+        </Button>
       </form>
-    </div>
+    </main>
   );
 };
 
