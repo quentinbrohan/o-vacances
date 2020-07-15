@@ -40,7 +40,9 @@ class UserController extends AbstractController
      */
     public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder, ObjectNormalizer $normalizer): Response
     {
-        $user = new User();
+        
+        $user = $this->getUser();
+
         $form = $this->createForm(UserType::class, $user);
         $jsonText = $request->getContent();
         
@@ -48,7 +50,7 @@ class UserController extends AbstractController
 
         $form->submit($jsonArray);
 
-        dd($jsonArray);
+        
 
         if ($form->isValid()) {
             // On a besoin d'hasher le mot de passe avant de le stocker en base de données
@@ -113,7 +115,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("api/v0/user/{id}/profil", name="api_user_show", methods="GET")
+     * @Route("api/v0/user/{id}/profil", name="api_user_profil", methods="GET")
      */
     public function show(User $user, $id, UserRepository $userRepository, ObjectNormalizer $normalizer): Response
     {
