@@ -77,7 +77,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("api/v0/user/{id}/edit", name="api_user_edit", methods={"PATCH"})
+     * @Route("api/v0/users/{id}/edit", name="api_user_edit", methods={"PATCH"})
      */
     public function edit(Request $request, User $user, UserRepository $userRepository, $id, ObjectNormalizer $normalizer): Response
     {
@@ -115,7 +115,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("api/v0/user/{id}/profil", name="api_user_profil", methods="GET")
+     * @Route("api/v0/users/{id}", name="api_user_show", methods={"GET"})
      */
     public function show(User $user, $id, UserRepository $userRepository, ObjectNormalizer $normalizer): Response
     {
@@ -130,7 +130,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("api/v0/user/{id}/delete", name="api_user_delete", methods="DELETE")
+     * @Route("api/v0/users/{id}/delete", name="api_user_delete", methods={"DELETE"})
      */
     public function delete( User $user, UserRepository $userRepository, ObjectNormalizer $normalizer, $id): Response
     {

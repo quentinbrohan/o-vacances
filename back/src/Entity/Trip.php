@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=TripRepository::class)
@@ -18,6 +19,7 @@ class Trip
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      * @Groups("apiV0_trip")
+     * @Groups("apiV0_tripByUser")
      * @Groups("apiV0_list")
      * @Groups("apiV0_Suggestion")
      */
@@ -25,16 +27,22 @@ class Trip
 
     /**
      * @ORM\Column(type="string", length=64)
+     * @Assert\NotBlank
+     * @Assert\Length(max=64)
      * @Groups("apiV0_trip")
+     * @Groups("apiV0_tripByUser")
      * @Groups("apiV0_list")
      * @Groups("apiV0_Suggestion")
+     * 
      */
     private $title;
 
     
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups("apiV0_list")
      * @Groups("apiV0_trip")
+     * @Groups("apiV0_tripByUser")
      *
      */
     private $description;
@@ -42,30 +50,37 @@ class Trip
     /**  
      * @ORM\Column(type="date", nullable=true)
      * @Groups("apiV0_trip")
+     * @Groups("apiV0_tripByUser")
      */
     private $startDate;
 
     /**
      * @ORM\Column(type="date", nullable=true)
      * @Groups("apiV0_trip")
+     * @Groups("apiV0_tripByUser")
      */
     private $endDate;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255)
      * @Groups("apiV0_trip")
+     * @Groups("apiV0_tripByUser")
      */
     private $location;
 
     /**
      * @ORM\Column(type="string", length=128, nullable=true)
+     * @Assert\Length(max=128)
      * @Groups("apiV0_trip")
+     * @Groups("apiV0_tripByUser")
      */
     private $picture;
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="trip")
      * @Groups("apiV0_trip")
+     * 
      */
     private $users;
 
@@ -89,7 +104,10 @@ class Trip
 
     /**
      * @ORM\Column(type="string", length=128)
+     * @Assert\NotBlank
+     * @Assert\Length(max=128)
      * @Groups("apiV0_trip")
+     * @Groups("apiV0_tripByUser")
      */
     private $creator;
 
@@ -99,7 +117,6 @@ class Trip
         $this->activities = new ArrayCollection();
         $this->disponibility = new ArrayCollection();
         $this->suggestion = new ArrayCollection();
-        $this->users = new ArrayCollection();
     }
 
     // /**
