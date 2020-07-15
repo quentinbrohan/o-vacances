@@ -7,7 +7,7 @@ import {
 
 const initialState = {
   // ici l'état initial
-  trips: {},
+  trips: [],
   trip: {},
   suggestionContent: '',
 };

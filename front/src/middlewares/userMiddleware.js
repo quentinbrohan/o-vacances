@@ -5,6 +5,7 @@ import {
   LOG_IN,
   saveUser,
 } from 'src/actions/user';
+import { push } from 'react-burger-menu';
 
 // const config = {
 // headers: { Authorization: `Bearer ${token}` },
@@ -62,7 +63,11 @@ const userMiddleware = (store) => (next) => (action) => {
       })
         .then((response) => {
           console.log(response);
-          store.dispatch(saveUser(response.data.info, response.data.logged));
+          if (response.status === 200) {
+            const { token } = response.data;
+            // check services/authAPI.js
+            store.dispatch(saveUser(response.data.info, response.data.logged));
+          }
         })
         .catch((error) => {
           console.warn(error);

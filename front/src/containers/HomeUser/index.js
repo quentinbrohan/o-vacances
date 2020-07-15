@@ -8,7 +8,7 @@ import {
 } from 'src/actions/trip';
 
 const mapStateToProps = (state) => ({
-  info: state.trip.trips,
+  trips: state.trip.trips,
 });
 
 const mapDispatchToProps = (dispatch) => ({
