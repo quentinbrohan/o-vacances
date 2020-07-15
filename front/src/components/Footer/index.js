@@ -16,6 +16,9 @@ const Footer = () => (
         <li className="footer-nav-item">
           <Link to="/mentions-legales">Mentions Légales</Link>
         </li>
+        <li className="footer-nav-item copyright">
+          &copy; O'vacances
+        </li>
       </ul>
     </div>
   </footer>
