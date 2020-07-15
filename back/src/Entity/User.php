@@ -33,6 +33,7 @@ class User implements UserInterface
      * @Groups("apiV0_trip")
      * @Groups("apiV0_dispoByTrip")
      * @Groups("apiV0_dispoByUser")
+     * @Groups("apiV0-dispo")
      */
     private $email;
 
@@ -56,6 +57,7 @@ class User implements UserInterface
      * @Groups("apiV0_trip")
      * @Groups("apiV0_dispoByTrip")
      * @Groups("apiV0_dispoByUser")
+     * @Groups("apiV0-dispo")
      * 
      */
     private $lastname;
@@ -65,6 +67,7 @@ class User implements UserInterface
      * @Groups("apiV0_trip")
      * @Groups("apiV0_dispoByTrip")
      * @Groups("apiV0_dispoByUser")
+     * @Groups("apiV0-dispo")
      * @Groups("apiV0_Suggestion")
      */
     private $firstname;
@@ -72,25 +75,30 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=128, nullable=true)
      * @Groups("apiV0_trip")
+     * @Groups("apiV0_dispoByTrip")
+     * @Groups("apiV0-dispo")
      */
     private $avatar;
 
-/**
+    /**
      * @ORM\OneToMany(targetEntity=Suggestion::class, mappedBy="user")
      * 
      */
     private $suggestions;
+
     /**
      * @ORM\ManyToMany(targetEntity=Disponibility::class, inversedBy="users")
      * @Groups("apiV0_dispoByUser")
      * 
      */
     private $disponibility;
+
     /**
      * @ORM\ManyToMany(targetEntity=Trip::class, inversedBy="users")
      * 
      */
     private $trip;
+
     /**
      * @ORM\OneToMany(targetEntity=Activity::class, mappedBy="creator")
      * 

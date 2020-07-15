@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Disponibility;
+use App\Entity\Trip;
+use App\Entity\User;
 use App\Repository\DisponibilityRepository;
 use App\Repository\TripRepository;
 use App\Repository\UserRepository;
@@ -47,17 +49,26 @@ class DisponibiltyController extends AbstractController
     }
 
     /**
-     * @Route("/api/v0/disponibilities", name="api_v0_animes_new", methods="POST")
+     * @Route("/api/v0/users/{id}/disponibilities", name="api_v0_animes_new", methods="POST")
      */
-    public function new(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, ValidatorInterface $validator)
+    public function new(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, ValidatorInterface $validator, User $user, TripRepository $tripRepository)
     {
         // On extrait de la requête le json reçu
         $jsonText = $request->getContent();
+        $jsonArray = json_decode($jsonText, true);
+
+        $idTrip = $jsonArray['trip'];
+        $trip = $tripRepository->find($idTrip);
 
         try {
             // on crée une nouvelle entité Disponibility avec le serializer
             $disponibility = $serializer->deserialize($jsonText, Disponibility::class, 'json');
-            
+
+            $disponibility->addUser($user); 
+
+
+            $disponibility->setTrip($trip); 
+             
             // validation des données de $disponibility en fonction des Asserts des entités
             $errors = $validator->validate($disponibility);
 
@@ -68,35 +79,63 @@ class DisponibiltyController extends AbstractController
 
             $em->persist($disponibility);
             $em->flush();
-            return $this->json($disponibility, 201, [], ['groups' => 'apiV0']);
+            return $this->json($disponibility, 201, [], ['groups' => 'apiV0-dispo']);
 
         } catch(NotEncodableValueException $e) {
             return $this->json([
                 'status' => 400,
                 'message'=>$e->getMessage()
             ], 400);
-        
-            
         }
     }
 
     /**
-     * @Route("api/v0/user/{id}/disponibilities/update", name="api_v0_dispobinilities_user_update", methods="PATCH")
+     * @Route("api/v0/users/{idUser}/disponibilities/{id}", name="api_v0_dispobinilities_user_edit", methods="PATCH")
      */
-    public function update(Request $request, Disponibility $disponibility)
+    public function edit(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, ValidatorInterface $validator, $id, $idUser, Disponibility $disponibility, TripRepository $tripRepository, UserRepository $userRepository)
     {
-        $form = $this->createForm(DisponibilityType::class, $disponibility);
-        // je demande au form de verifier si des données ont été soumises
-        $form->handleRequest($request);
-        // Si des données ont été soumises ET qu'elles sont valides
-        if ($form->isSubmitted() && $form->isValid()) {
-            // on traite le formulaire
-            // par exemple on l'envoi dans la BDD
-            $manager = $this->getDoctrine()->getManager();
-            $manager->flush();
-            // puis on redirige sur une autre page, sinon le type va re tomber sur le form en pensant qu'il n'a pas marcher
-            $this->addFlash("succes", "");
-            return $this->redirectToRoute('category_view', ["id" => $disponibility->getId()]);
+        if (!empty($disponibility)) {
+            // On extrait de la requête le json reçu
+            $jsonText = $request->getContent();
+            $jsonArray = json_decode($jsonText, true);
+
+            $user = $userRepository->find($idUser);
+
+            $tripId = $jsonArray['trip'];
+            $trip = $tripRepository->find($tripId);
+
+            try {
+                // on crée une nouvelle entité Disponibility avec le serializer
+                $disponibility = $serializer->deserialize($jsonText, Disponibility::class, 'json');
+                
+// si le User n'est pas dans la liste, l'ajouter
+                if()
+                $disponibility->addUser($user);
+
+                $disponibility->setTrip($trip);
+                
+                // validation des données de $disponibility en fonction des Asserts des entités
+                $errors = $validator->validate($disponibility);
+
+                // s'il y a des erreurs
+                if (count($errors) > 0) {
+                    return $this->json($errors, 400);
+                }
+
+                $em->persist($disponibility);
+                $em->flush();
+                return $this->json($disponibility, 201, [], ['groups' => 'apiV0-dispo']);
+            } catch (NotEncodableValueException $e) {
+                return $this->json([
+                    'status' => 400,
+                    'message'=>$e->getMessage()
+                ], 400);
+            }
+        } else {
+            return $this->json([
+                'status' => 400,
+                'message'=>"Cet Disponibilité n'existe pas"
+            ], 400);
         }
     }
 
