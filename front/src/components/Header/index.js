@@ -8,7 +8,7 @@ import Button from 'src/components/elements/Button';
 import './header.scss';
 
 const Header = ({
-  isLogged,
+  isAuthenticated,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   // Handle BurgerMenu close onClick
@@ -35,7 +35,7 @@ const Header = ({
               customBurgerIcon={<MenuIcon />}
               customCrossIcon={<CloseIcon />}
             >
-              {isLogged ? (
+              {isAuthenticated ? (
                 <>
                   <NavLink to="/mes-voyages" onClick={() => handleMenuState()} activeClassName="nav--active">Mes voyages</NavLink>
                   <NavLink to="/creer-un-voyage" onClick={() => handleMenuState()} activeClassName="nav--active">Créer un voyage</NavLink>
@@ -49,7 +49,7 @@ const Header = ({
                 )}
 
               <div className="connection-mobile">
-                {isLogged ? (
+                {isAuthenticated ? (
                   <Button color="secondary" size="sm" haveClassName="button-header">
                     <Link to="/logout" onClick={() => handleMenuState()}>Déconnexion</Link>
                   </Button>
@@ -68,7 +68,7 @@ const Header = ({
             </Menu>
           </div>
           <div className="menu">
-            {isLogged ? (
+            {isAuthenticated ? (
               <ul>
                 <li><NavLink to="/mes-voyages" activeClassName="nav--active">Mes voyages</NavLink></li>
                 <li><NavLink to="/creer-un-voyage" activeClassName="nav--active">Créer un voyage</NavLink></li>
@@ -82,7 +82,7 @@ const Header = ({
                 </ul>
               )}
             <div className="connection">
-              {isLogged ? (
+              {isAuthenticated ? (
                 <Button color="secondary" size="sm" haveClassName="button-header">
                   <Link to="/logout">Déconnexion</Link>
                 </Button>
@@ -106,7 +106,7 @@ const Header = ({
 };
 
 Header.propTypes = {
-  isLogged: PropTypes.bool.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
 };
 
 export default Header;

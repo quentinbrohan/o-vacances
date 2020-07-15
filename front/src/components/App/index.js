@@ -33,12 +33,12 @@ import persons from 'src/data/teamData';
 import './styles.scss';
 
 // == Composant
-const App = ({ isLogged }) => (
+const App = ({ isAuthenticated }) => (
   <div className="app">
     <Header />
     <div className="container">
       <Switch>
-        {isLogged
+        {isAuthenticated
           ? (
             <Route
               exact
@@ -77,34 +77,34 @@ const App = ({ isLogged }) => (
           exact
           path="/mon-profil"
           component={Profile}
-          isLogged={isLogged}
+          isAuthenticated={isAuthenticated}
         />
         <PrivateRoute
           exact
           path="/voyage/:id"
           component={Trip}
-          isLogged={isLogged}
+          isAuthenticated={isAuthenticated}
         />
         <PrivateRoute
           exact
           path="/voyage/:id/activites"
           component={Activities}
-          isLogged={isLogged}
+          isAuthenticated={isAuthenticated}
         />
         <PrivateRoute
           path="/mes-voyages"
           component={HomeUser}
-          isLogged={isLogged}
+          isAuthenticated={isAuthenticated}
         />
         <PrivateRoute
           path="/creer-un-voyage"
           component={TripForm}
-          isLogged={isLogged}
+          isAuthenticated={isAuthenticated}
         />
         <PrivateRoute
           path="/modifier-un-voyage"
           component={TripEdit}
-          isLogged={isLogged}
+          isAuthenticated={isAuthenticated}
         />
         <Route
           path="/ajouter-une-activite"
@@ -118,7 +118,7 @@ const App = ({ isLogged }) => (
 );
 
 App.propTypes = {
-  isLogged: PropTypes.bool.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
 };
 
 // == Export

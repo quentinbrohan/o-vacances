@@ -10,7 +10,7 @@ const initialState = {
   email: '',
   password: '',
   info: {},
-  isLogged: false,
+  isAuthenticated: false,
 };
 
 const user = (state = initialState, action = {}) => {
@@ -25,7 +25,7 @@ const user = (state = initialState, action = {}) => {
       return {
         ...state,
         info: action.data,
-        isLogged: action.isLogged,
+        isAuthenticated: true,
         email: '',
         password: '',
       };

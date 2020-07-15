@@ -29,7 +29,15 @@ const userMiddleware = (store) => (next) => (action) => {
         password,
       })
         .then((response) => {
-          store.dispatch(saveUser(response.data.info, response.data.logged));
+          console.log(response);
+          if (response.status === 201) {
+            console.log('Inscription réussie');
+          }
+          else {
+            console.log('Erreur lors de l\'inscription');
+          }
+
+          // store.dispatch(saveUser(response.data.info, response.data.logged));
         })
         .catch((error) => {
           console.warn(error);
@@ -39,12 +47,15 @@ const userMiddleware = (store) => (next) => (action) => {
       break;
     }
     case LOG_IN: {
-      const { email, password } = store.getState().user;
+      const { email: username, password } = store.getState().user;
+      // const { username } = store.getState().user.email;
+      console.log(username, password);
 
       // withCredentials : autorisation d'accéder au cookie
       axios.post('http://localhost:8000/api/login_check', {
         password,
-        email,
+        // email,
+        username,
       }, {
         withCredentials: true,
         // config,
