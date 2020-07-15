@@ -9,6 +9,9 @@ use App\Entity\Trip;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -19,29 +22,37 @@ class TripType extends AbstractType
         $builder
             ->add('title')
             ->add('description')
-            ->add('startDate')
+            ->add('startDate',
+                DateTimeType::class)
             ->add('endDate')
             ->add('location')
-            ->add('picture')
+            ->add('picture', 
+                FileType::class, [
+                    'mapped' => false
+            ])
             ->add('users',
                 EntityType::class, [
                     "class" => User::class,
-                    "required" => false
+                    "required" => false,
+                    'multiple' => true
                 ])
             ->add('activities',
                 EntityType::class, [
                     "class" => Activity::class,
-                    "required" => false
+                    "required" => false,
+                    'multiple' => true
                 ])
             ->add('disponibility',
                 EntityType::class, [
                     "class" => Disponibility::class,
-                    "required" => false
+                    "required" => false,
+                    'multiple' => true
                 ])
             ->add('suggestion',
                 EntityType::class, [
                     "class" => Suggestion::class,
-                    "required" => false
+                    "required" => false,
+                    'multiple' => true
                 ])
             ->add('creator')
         ;
@@ -51,6 +62,7 @@ class TripType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Trip::class,
+            'csrf_protection' =>false,
         ]);
     }
 }

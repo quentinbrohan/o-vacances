@@ -36,6 +36,7 @@ class SuggestionType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Suggestion::class,
             'allow_extra_fields' => true,
+            'csrf_protection' => false
         ]);
     }
 }

@@ -11,6 +11,15 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\IsTrue;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class UserType extends AbstractType
 {
@@ -18,11 +27,13 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email')
-            ->add('roles')
-            ->add('password')
-            ->add('lastname')
-            ->add('firstname')
-            ->add('avatar')
+            ->add('roles', null, ['empty_data' => []])
+            ->add('password' 
+                  
+            )
+            ->add('lastname',)
+            ->add('firstname',)
+            ->add('avatar',)
             ->add('suggestions',
                 EntityType::class, [
                     "class" => Suggestion::class,
@@ -48,14 +59,31 @@ class UserType extends AbstractType
                     'multiple' => true
                 ])
 
+                ->addEventListener(FormEvents::POST_SET_DATA, function(FormEvent $event) {
+                    // On récupère le formulaire et l'objet associé
+                    $form = $event->getForm();
+                    $user = $event->getData();
+               
+                if ($user->getId() === null) {
+                  
+                    $form->remove('roles');
+                   
+                }
+
+            })
+
+            
         ;
+        
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => User::class,
-            'multiple' => true
+            'multiple' => true,
+            'csrf_protection' => false,
+            "allow_extra_fields" => true
         ]);
     }
 }
