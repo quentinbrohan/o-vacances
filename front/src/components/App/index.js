@@ -25,6 +25,7 @@ import Activities from 'src/components/Activities';
 import TripForm from 'src/containers/TripForm';
 import TripEdit from 'src/containers/TripEdit';
 import ActivityForm from 'src/components/ActivityForm';
+import LegacyMentions from 'src/components/LegacyMentions';
 
 // Data
 import persons from 'src/data/teamData';
@@ -59,6 +60,10 @@ const App = ({ isLogged }) => (
         <Route
           path="/qui-sommes-nous"
           render={() => <Team persons={persons} />}
+        />
+        <Route
+          path="/mentions-legales"
+          component={LegacyMentions}
         />
         <Route
           path="/signin"
