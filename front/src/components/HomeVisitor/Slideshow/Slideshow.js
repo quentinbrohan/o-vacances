@@ -81,7 +81,7 @@ const Slideshow = () => {
         <a
           href="#fonctionnalites"
         >
-          Voir les fonctionnalités <ArrowDownCircle />
+          <ArrowDownCircle />
         </a>
 
       </Button>
