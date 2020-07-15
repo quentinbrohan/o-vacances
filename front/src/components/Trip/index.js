@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/jsx-curly-brace-presence */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Calendar, MapPin } from 'react-feather';
 import Button from 'src/components/elements/Button';
@@ -22,7 +22,12 @@ const Trip = ({
   changeSuggestion,
   handleSuggestion,
   suggestionContent,
+  fetchTrip,
 }) => {
+  useEffect(() => {
+    fetchTrip();
+  }, []);
+
   const [isCreator, setIsCreator] = useState(false);
   const [isOwnUser, setisOwnUser] = useState(false);
   const [focus, setFocus] = useState(null);
@@ -227,6 +232,7 @@ Trip.propTypes = {
   changeSuggestion: PropTypes.func.isRequired,
   handleSuggestion: PropTypes.func.isRequired,
   suggestionContent: PropTypes.string.isRequired,
+  fetchTrip: PropTypes.func.isRequired,
 };
 
 export default Trip;

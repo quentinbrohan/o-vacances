@@ -2,7 +2,12 @@ import { connect } from 'react-redux';
 
 import Trip from 'src/components/Trip';
 
-import { updateSuggestionField, addSuggestion } from 'src/actions/trip';
+import {
+  updateSuggestionField,
+  addSuggestion,
+  fetchTrip,
+  saveTrip,
+} from 'src/actions/trip';
 
 const mapStateToProps = (state) => ({
   infos: state.user.infos,
@@ -15,6 +20,12 @@ const mapDispatchToProps = (dispatch) => ({
   },
   handleSuggestion: () => {
     dispatch(addSuggestion());
+  },
+  fetchTrip: () => {
+    dispatch(fetchTrip());
+  },
+  saveTrip: () => {
+    dispatch(saveTrip());
   },
 });
 

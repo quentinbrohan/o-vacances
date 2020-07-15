@@ -2,13 +2,13 @@ import {
   UPDATE_SUGGESTION_FIELD,
   ADD_SUGGESTION,
   SAVE_TRIPS,
+  SAVE_TRIP,
 } from 'src/actions/trip';
 
 const initialState = {
   // ici l'état initial
   trips: {},
-  activities: {},
-  suggestions: {},
+  trip: {},
   suggestionContent: '',
 };
 
@@ -27,11 +27,15 @@ const trip = (state = initialState, action = {}) => {
       };
 
     case SAVE_TRIPS:
-      console.log(action);
-
       return {
         ...state,
         trips: action.trips,
+      };
+
+    case SAVE_TRIP:
+      return {
+        ...state,
+        trip: action.trip,
       };
 
     default: return state;
