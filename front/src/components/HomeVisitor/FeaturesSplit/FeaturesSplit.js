@@ -23,7 +23,8 @@ const FeaturesSplit = () => (
         <div className="split-item-content">
           <h3>Centralisation des informations</h3>
           <p>
-            J'ai accès en un clic à toutes les informations de mon voyages et ce que je compte faire.
+            J'ai accès en un clic à toutes les informations de mon voyages
+            et ce que je compte faire.
           </p>
         </div>
         <div className="split-item-image">

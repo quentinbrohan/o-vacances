@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 import userTrips from 'src/data/homeUserTripsData';
 import userOldTrips from 'src/data/homeUserOldTripsData';
@@ -6,7 +7,11 @@ import TripCard from './TripCard';
 
 import './homeUser.scss';
 
-const HomeUser = () => {
+const HomeUser = ({ fetchTrips }) => {
+  useEffect(() => {
+    fetchTrips();
+  }, []);
+
   return (
     <main className="home-user">
       <h1>Mes Voyages</h1>
@@ -24,6 +29,10 @@ const HomeUser = () => {
       </div>
     </main>
   );
+};
+
+HomeUser.propTypes = {
+  fetchTrips: PropTypes.func.isRequired,
 };
 
 export default HomeUser;

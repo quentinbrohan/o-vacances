@@ -20,7 +20,7 @@ import Login from 'src/containers/Login';
 import Profile from 'src/containers/Profile';
 import Trip from 'src/containers/Trip';
 import ErrorPage from 'src/components/ErrorPage';
-import HomeUser from 'src/components/HomeUser';
+import HomeUser from 'src/containers/HomeUser';
 import Activities from 'src/components/Activities';
 import TripForm from 'src/containers/TripForm';
 import TripEdit from 'src/containers/TripEdit';

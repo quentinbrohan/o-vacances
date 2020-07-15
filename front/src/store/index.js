@@ -5,10 +5,12 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import reducer from 'src/reducers';
 
 import userMiddleware from 'src/middlewares/userMiddleware';
+import tripMiddleware from 'src/middlewares/tripMiddleware';
 
 const enhancers = composeWithDevTools(
   applyMiddleware(
     userMiddleware,
+    tripMiddleware,
     // middleware
   ),
 );
