@@ -71,23 +71,7 @@ class UserType extends AbstractType
                     // Pour notre projet ici, on n'est tout à fait logiques,
                     // on va se casse la tête et on veut
                     // un champs password qui s'appelle plainPassword et non password
-                    $form->remove('password');
-                    $form->add('plainPassword', PasswordType::class, [
-                        // instead of being set onto the object directly,
-                        // this is read and encoded in the controller
-                        'mapped' => false,
-                        'constraints' => [
-                            new NotBlank([
-                                'message' => 'Veuillez entrer un mot de passe',
-                            ]),
-                            new Length([
-                                'min' => 6,
-                                'minMessage' => 'Votre mot de passe doit contenir au minimum {{ limit }} charactere',
-                                // max length allowed by Symfony for security reasons
-                                'max' => 4096,
-                            ]),
-                        ],
-                    ]);
+                     ;
                   
                 }
 
