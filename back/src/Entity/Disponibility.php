@@ -18,18 +18,21 @@ class Disponibility
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      * @Groups("apiV0_list")
+     * @Groups("apiV0_trip")
      */
     private $id;
 
     /**
      * @ORM\Column(type="date", nullable=true)
      * @Groups("apiV0_list")
+     * @Groups("apiV0_trip")
      */
     private $startDate;
 
     /**
      * @ORM\Column(type="date", nullable=true)
      * @Groups("apiV0_list")
+     * @Groups("apiV0_trip")
      */
     private $endDate;
 
