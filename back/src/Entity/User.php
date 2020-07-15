@@ -94,6 +94,11 @@ class User implements UserInterface
      * 
      */
     private $activity;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Trip::class, mappedBy="creator")
+     */
+    private $trips;
     
     public function __construct()
     {
@@ -101,13 +106,14 @@ class User implements UserInterface
         $this->trip = new ArrayCollection();
         $this->activity = new ArrayCollection();
         $this->disponibility = new ArrayCollection();
+        $this->trips = new ArrayCollection();
     }
 
-    public function __toString()
+   public function __toString()
     {
         return $this->getEmail();
     }
-    
+   
     public function getId(): ?int
     {
         return $this->id;
@@ -319,5 +325,13 @@ class User implements UserInterface
             }
         }
         return $this;
+    }
+
+    /**
+     * @return Collection|Trip[]
+     */
+    public function getTrips(): Collection
+    {
+        return $this->trips;
     }
 }
