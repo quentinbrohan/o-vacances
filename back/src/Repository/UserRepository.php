@@ -50,6 +50,8 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         // je demande a doctrine d'alimenter les objets de type Trip dans mon objet User
         $builder->addSelect('trip');
 
+        $builder->orderBy('trip.startDate', 'ASC');
+
         // on recupère la requete construite
         $query = $builder->getQuery();
 
@@ -57,6 +59,24 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $query->getOneOrNullResult();
         ;
     }
+
+    public function findByEmail($email)
+    {
+        $builder = $this->createQueryBuilder('user');
+        // je souhaite sécuriser le parametre $id
+        $builder->where("user.email = :userEmail");
+        // je precise au builder quelle valeur "injecter" dans le parametre :userId
+        // Cette methode sécurise le contenu de la variable $id (echapment de car spéciaux ...)
+        $builder->setParameter("userEmail", $email);
+
+        // on recupère la requete construite
+        $query = $builder->getQuery();
+
+        // je demande a doctrine d'éxecuter le requete et de me renvoyer les resultats
+        return $query->getOneOrNullResult();
+        ;
+    }
+
 
 
     // /**

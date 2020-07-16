@@ -56,7 +56,7 @@ class AppFixtures extends Fixture
             $trip->setDescription($descriptions[0]);
             $trip->setLocation($locations[$i]);
             $trip->addUser($users[mt_rand(0, 4)], $users[mt_rand(0, 4)]);
-            $trip->setCreator($userName[$i]);
+            $trip->setCreator($users[mt_rand(0, 4)]);
             $trips[]=$trip;
     
             $manager->persist($trip);

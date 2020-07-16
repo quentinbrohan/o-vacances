@@ -102,13 +102,14 @@ class Trip
     private $suggestion;
 
     /**
-     * @ORM\Column(type="string", length=128)
-     * @Assert\NotBlank
-     * @Assert\Length(max=128)
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="trips")
+     * @ORM\JoinColumn(nullable=false)
      * @Groups("apiV0_trip")
-     * @Groups("apiV0_tripByUser")
+     * 
      */
     private $creator;
+
+    
 
     public function __construct()
     {
@@ -332,15 +333,16 @@ class Trip
         return $this;
     }
 
-    public function getCreator(): ?string
+    public function getCreator(): ?User
     {
         return $this->creator;
     }
 
-    public function setCreator(string $creator): self
+    public function setCreator(?User $creator): self
     {
         $this->creator = $creator;
 
         return $this;
     }
+
 }
