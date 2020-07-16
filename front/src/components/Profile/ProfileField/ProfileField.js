@@ -2,7 +2,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-
 import './profilefield.scss';
 
 // component to change profil user
@@ -12,27 +11,34 @@ const ProfileField = ({
   userTitle,
   type,
   isDisabled,
-}) => (
+  onChange,
+}) => {
+  const handleChange = (evt) => {
+    onChange(evt.target.value, inputId);
+  };
 
-  <div className="profile-field">
-    <label className="profile-field-label" htmlFor={inputId}>{userTitle}</label>
-    {isDisabled && (
-    <input
-      disabled
-      type={type}
-      defaultValue={value}
-    />
+  return (
 
-    )}
-    {!isDisabled && (
-    <input
-      type={type}
-      defaultValue={value}
-      onChange=""
-    />
-    )}
-  </div>
-);
+    <div className="profile-field">
+      <label className="profile-field-label" htmlFor={inputId}>{userTitle}</label>
+      {isDisabled && (
+      <input
+        disabled
+        type={type}
+        defaultValue={value}
+      />
+
+      )}
+      {!isDisabled && (
+      <input
+        type={type}
+        defaultValue={value}
+        onChange={handleChange}
+      />
+      )}
+    </div>
+  );
+};
 
 ProfileField.propTypes = {
 
@@ -41,6 +47,7 @@ ProfileField.propTypes = {
   type: PropTypes.string.isRequired,
   inputId: PropTypes.number.isRequired,
   isDisabled: PropTypes.bool.isRequired,
+  onChange: PropTypes.func.isrequired,
 
 };
 

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import { deleteDisabledInput } from 'src/actions/settings';
-import { fetchUser } from 'src/actions/user';
+import { fetchUser, editUser, updateUserField } from 'src/actions/user';
 
 // === on importe le composant de présentation
 import Profile from 'src/components/Profile';
@@ -24,6 +24,14 @@ const mapDispatchToProps = (dispatch) => ({
 
   fetchUser: () => {
     dispatch(fetchUser());
+  },
+
+  handleEditUser: () => {
+    dispatch(editUser());
+  },
+
+  changeField: (newValue, name) => {
+    dispatch(updateUserField(newValue, name));
   },
 });
 

@@ -4,6 +4,7 @@ export const LOG_IN = 'LOG_IN';
 export const SAVE_USER = 'SAVE_USER';
 export const FETCH_USER = 'FETCH_USER';
 export const UPDATE_USER_PROFIL = 'UPDATE_USER_PROFIL';
+export const EDIT_USER = 'EDIT_USER';
 
 export const updateUserField = (newValue, name) => ({
   type: UPDATE_USER_FIELD,
@@ -32,4 +33,8 @@ export const fetchUser = () => ({
 export const updateUserProfil = (data) => ({
   type: UPDATE_USER_PROFIL,
   data,
+});
+
+export const editUser = () => ({
+  type: EDIT_USER,
 });

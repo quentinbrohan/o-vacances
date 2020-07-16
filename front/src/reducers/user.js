@@ -34,8 +34,6 @@ const user = (state = initialState, action = {}) => {
       return {
         ...state,
         info: action.data,
-        email: action.data.email,
-        password: action.data.password,
         role: [action.data.roles],
       };
 

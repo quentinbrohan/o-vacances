@@ -6,6 +6,7 @@ import {
   saveUser,
   FETCH_USER,
   updateUserProfil,
+  EDIT_USER,
 } from 'src/actions/user';
 
 // const config = {
@@ -63,11 +64,40 @@ const userMiddleware = (store) => (next) => (action) => {
       break;
     }
     case FETCH_USER: {
-      // Endpoint fetch Trips list from user
+      // Endpoint fetch User Profil
       axios.get('http://localhost:8000/api/v0/user/2/profil')
         .then((response) => {
           console.log(response);
 
+          store.dispatch(updateUserProfil(response.data));
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
+
+      next(action);
+      break;
+    }
+    case EDIT_USER: {
+      const {
+        email,
+        password,
+        lastname,
+        firstname,
+      } = store.getState().user;
+
+      // withCredentials : autorisation d'accéder au cookie
+      axios.patch('http://localhost:8000/api/v0/users/2/edit', {
+        email,
+        password,
+        lastname,
+        firstname,
+      }, {
+        withCredentials: true,
+        // config,
+      })
+        .then((response) => {
+          console.log(response);
           store.dispatch(updateUserProfil(response.data));
         })
         .catch((error) => {

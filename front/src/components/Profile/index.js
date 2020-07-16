@@ -9,6 +9,7 @@ import { Edit2, Check } from 'react-feather';
 import ProfileField from './ProfileField/ProfileField';
 
 import './profile.scss';
+import { editUser } from '../../actions/user';
 
 // component to contact form
 const Profile = ({
@@ -16,12 +17,15 @@ const Profile = ({
   deleteDisabledInput,
   fetchUser,
   info,
+  changeField,
 }) => {
   useEffect(() => {
     fetchUser();
   }, []);
-  console.log(info);
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  };
   const avatar = (info.avatar ? info.avatar : AvatarDefault);
 
   return (
@@ -34,13 +38,14 @@ const Profile = ({
           <Button color="primary">Modifier la photo</Button>
         </div>
         <div className="profile-head-information">
-          <form>
+          <form onSubmit={handleSubmit}>
             <ProfileField
               inputId={1}
               value={info.firstname}
               userTitle="Prénom"
               type="text"
               isDisabled={isDisabled}
+              onChange={changeField}
             />
             <ProfileField
               inputId={2}
@@ -48,6 +53,7 @@ const Profile = ({
               userTitle="Nom"
               type="text"
               isDisabled={isDisabled}
+              onChange={changeField}
             />
             <ProfileField
               inputId={3}
@@ -55,6 +61,7 @@ const Profile = ({
               userTitle="Email"
               type="text"
               isDisabled={isDisabled}
+              onChange={changeField}
             />
             <ProfileField
               inputId={4}
@@ -62,6 +69,7 @@ const Profile = ({
               userTitle="Mot de passe"
               type="password"
               isDisabled={isDisabled}
+              onChange={changeField}
             />
             {isDisabled && (
             <Edit2
@@ -77,6 +85,7 @@ const Profile = ({
               onClick={() => {
                 deleteDisabledInput(true);
               }}
+              type="submit"
             />
             )}
           </form>
@@ -111,6 +120,7 @@ Profile.propTypes = {
   isDisabled: PropTypes.bool.isRequired,
   fetchUser: PropTypes.func.isRequired,
   info: PropTypes.object.isRequired,
+  changeField: PropTypes.func.isRequired,
 
 };
 
