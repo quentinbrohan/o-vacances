@@ -21,6 +21,7 @@
     "@babel/preset-env": "*",
     "@babel/preset-react": "*",
     "@babel/register": "*",
+    "@svgr/webpack": "^5.4.0",
     "babel-eslint": "*",
     "babel-loader": "*",
     "bundle-stats-webpack-plugin": "*",
