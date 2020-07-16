@@ -115,7 +115,7 @@ class DisponibiltyController extends AbstractController
     }
 
     /**
-     * @Route("api/v0/user/{id}/disponibilities", name="channel_delete", methods={"DELETE"})
+     * @Route("api/v0/user/{id}/disponibilities", name="channel_delete", methods="DELETE")
      */
     public function delete(Request $request, Disponibility $disponibility, ObjectNormalizer $normalizer): Response
     {

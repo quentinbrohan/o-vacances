@@ -9,6 +9,7 @@ use App\Entity\Trip;
 use App\Entity\User;
 use App\Form\ActivityType;
 use App\Repository\ActivityRepository;
+use App\Repository\TripRepository;
 use App\Repository\UserRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
@@ -55,15 +56,15 @@ class ActivityController extends AbstractController
         try {
             // on crée une nouvelle entité Activity avec le serializer
             $activity = $serializer->deserialize($jsonText, Activity::class, 'json');
-            
+
             // validation des données de $activity en fonction des Asserts des entités
             $errors = $validator->validate($activity);
 
             // s'il y a des erreurs
-            if(count($errors) > 0){
+            if (count($errors) > 0) {
                 return $this->json($errors, 400);
             }
-            
+
             $activity->setCreator($user);
             $activity->setCategory($category);
             $activity->setTrip($trip);
@@ -71,11 +72,10 @@ class ActivityController extends AbstractController
             $em->persist($activity);
             $em->flush();
             return $this->json($activity, 201, [], ['groups' => 'apiV0_activity']);
-
-        } catch(NotEncodableValueException $e) {
+        } catch (NotEncodableValueException $e) {
             return $this->json([
                 'status' => 400,
-                'message'=>$e->getMessage()
+                'message' => $e->getMessage()
             ], 400);
         }
     }
@@ -87,9 +87,9 @@ class ActivityController extends AbstractController
     {
         // On demande à Doctrine l'activité
         $activity = $activityRepository->find($id);
-        
 
-        if (!empty($activity)){
+
+        if (!empty($activity)) {
 
             // On extrait de la requête le json reçu
             $jsonText = $request->getContent();
@@ -97,40 +97,48 @@ class ActivityController extends AbstractController
             try {
                 // on crée une nouvelle entité Activity avec le serializer
                 $newActivity = $serializer->deserialize($jsonText, Activity::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $activity]);
-               
+
                 // validation des données de $activity en fonction des Asserts des entités
                 $errors = $validator->validate($newActivity);
 
                 // s'il y a des erreurs
-                if(count($errors) > 0){
+                if (count($errors) > 0) {
                     return $this->json($errors, 400);
                 }
-                
+
                 $em->flush();
                 return $this->json($newActivity, 201, [], ['groups' => 'apiV0_activity']);
-
-            } catch(NotEncodableValueException $e) {
+            } catch (NotEncodableValueException $e) {
                 return $this->json([
                     'status' => 400,
-                    'message'=>$e->getMessage()
+                    'message' => $e->getMessage()
                 ], 400);
             }
-        
         }
-
-    
     }
 
     /**
      * @Route("api/v0/trips/{id}/activities/delete", name="api_v0_activities_delete", methods="DELETE")
      */
-    public function deleteActivity(Activity $activity)
+    public function deleteDisponibility(Request $request, EntityManagerInterface $em, Activity $activity, UserRepository $userRepository)
     {
-        $manager = $this->getDoctrine()->getManager();
-        $manager->remove($activity);
-        $manager->flush();
-
-        $this->addFlash("warning", "L'activité a bien été supprimée");
-        return $this->redirectToRoute('api_v0_activities_list');
+        if (!empty($activity)){
+            try {
+                $em->remove($activity);
+                $em->flush();
+                return $this->json($activity, 201, [], ['groups' => 'apiv0_activity']);
+            } catch (NotEncodableValueException $e) {
+                return $this->json([
+                    'status' => 400,
+                    'message'=>$e->getMessage()
+                ], 400);
+            }
+        } else {
+            return $this->json([
+                'status' => 400,
+                'message'=>"Cette activité n'existe pas."
+            ], 400);
+        }
+        
     }
 }
