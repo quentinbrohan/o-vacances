@@ -33,7 +33,7 @@ class Trip
      * @Groups("apiV0_tripByUser")
      * @Groups("apiV0_list")
      * @Groups("apiV0_Suggestion")
-     * 
+     * @Groups("apiV0_user")
      */
     private $title;
 
