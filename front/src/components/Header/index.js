@@ -9,6 +9,7 @@ import './header.scss';
 
 const Header = ({
   isAuthenticated,
+  handleLogout,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   // Handle BurgerMenu close onClick
@@ -18,6 +19,16 @@ const Header = ({
 
   const handleMenuState = () => {
     setIsOpen(!isOpen);
+  };
+
+  const manageLogout = () => {
+    console.log('levrette');
+    handleLogout();
+  };
+
+  const manageLogoutMobile = () => {
+    setIsOpen(false);
+    handleLogout();
   };
 
   return (
@@ -50,8 +61,13 @@ const Header = ({
 
               <div className="connection-mobile">
                 {isAuthenticated ? (
-                  <Button color="secondary" size="sm" haveClassName="button-header">
-                    <Link to="/logout" onClick={() => handleMenuState()}>Déconnexion</Link>
+                  <Button
+                    color="secondary"
+                    size="sm"
+                    haveClassName="button-header"
+                    onClick={() => manageLogoutMobile()}
+                  >
+                    Déconnexion
                   </Button>
                 )
                   : (
@@ -83,8 +99,13 @@ const Header = ({
               )}
             <div className="connection">
               {isAuthenticated ? (
-                <Button color="secondary" size="sm" haveClassName="button-header">
-                  <Link to="/logout">Déconnexion</Link>
+                <Button
+                  color="secondary"
+                  size="sm"
+                  haveClassName="button-header"
+                  onClick={() => manageLogout()}
+                >
+                  Déconnexion
                 </Button>
               )
                 : (
@@ -107,6 +128,7 @@ const Header = ({
 
 Header.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
+  handleLogout: PropTypes.func.isRequired,
 };
 
 export default Header;

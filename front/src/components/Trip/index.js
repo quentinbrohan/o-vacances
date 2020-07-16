@@ -32,7 +32,6 @@ const Trip = ({
   useEffect(() => {
     fetchTrip();
     console.log(trip);
-    
   }, []);
 
   const [isCreator, setIsCreator] = useState(false);

@@ -1,14 +1,17 @@
 import axios from 'axios';
+import jwtDecode from 'jwt-decode';
 
 import {
   SIGN_IN,
   LOG_IN,
-  saveUser,
+  CHECK_AUTHENTICATION,
+  LOG_OUT,
+  logInUser,
+  logOut,
 } from 'src/actions/user';
 
 // const config = {
 // headers: { Authorization: `Bearer ${token}` },
-// headers: { Authorization: 'Bearer mon-token' },
 // };
 
 const userMiddleware = (store) => (next) => (action) => {
@@ -36,8 +39,6 @@ const userMiddleware = (store) => (next) => (action) => {
           else {
             console.log('Erreur lors de l\'inscription');
           }
-
-          // store.dispatch(saveUser(response.data.info, response.data.logged));
         })
         .catch((error) => {
           console.warn(error);
@@ -62,13 +63,60 @@ const userMiddleware = (store) => (next) => (action) => {
           console.log(response);
           if (response.status === 200) {
             const { token } = response.data;
-            // check services/authAPI.js
-            store.dispatch(saveUser(response.data.info, response.data.logged));
+
+            store.dispatch(logInUser());
+            // Store token in localStorage
+            window.localStorage.setItem('authToken', token);
+            // axios Global settings to forward header + token
+            axios.defaults.headers.Authorization = `Bearer + ${token}`;
+
+            // get userId
+            const jwtData = jwtDecode(token);
+            const currentUser = jwtData.username;
+            // 1. decode ID from JWT
+            console.log(currentUser);
+            // 2. For user info (not required) fetch data from ID ${currentUser}
+            // return axios.get('http://localhost:8000/api/v0/user/5/profil');
           }
         })
         .catch((error) => {
           console.warn(error);
         });
+
+      next(action);
+      break;
+    }
+
+    case CHECK_AUTHENTICATION: {
+      const token = window.localStorage.getItem('authToken');
+      // If token still valid
+      if (token) {
+        const jwtData = jwtDecode(token);
+        if (jwtData.exp * 1000 > new Date().getTime()) {
+          axios.defaults.headers.Authorization = `Bearer + ${token}`;
+          console.log('Token valide');
+          store.dispatch(logInUser());
+
+          next(action);
+          break;
+        }
+        else {
+          store.dispatch(logOut());
+          next(action);
+          break;
+        }
+      }
+
+      next(action);
+      break;
+    }
+
+    case LOG_OUT: {
+      // Remove token from localStoreage
+      window.localStorage.removeItem('authToken');
+      delete axios.defaults.headers.Authorization;
+
+      store.dispatch(logOut());
 
       next(action);
       break;

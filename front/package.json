@@ -62,6 +62,7 @@
     "@babel/runtime": "^7.10.4",
     "axios": "^0.19.2",
     "classnames": "^2.2.6",
+    "jwt-decode": "^2.2.0",
     "moment": "^2.27.0",
     "prop-types": "*",
     "react": "^16.13.1",

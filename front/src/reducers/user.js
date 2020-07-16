@@ -1,6 +1,8 @@
 import {
   UPDATE_USER_FIELD,
   SAVE_USER,
+  LOG_IN_USER,
+  LOG_OUT,
 } from 'src/actions/user';
 
 const initialState = {
@@ -10,7 +12,7 @@ const initialState = {
   email: 'quentin@gmail.com',
   password: 'quentin',
   info: {},
-  isAuthenticated: true,
+  isAuthenticated: false,
 };
 
 const user = (state = initialState, action = {}) => {
@@ -28,6 +30,23 @@ const user = (state = initialState, action = {}) => {
         isAuthenticated: true,
         email: '',
         password: '',
+      };
+
+    case LOG_IN_USER:
+      return {
+        ...state,
+        isAuthenticated: true,
+      };
+
+    case LOG_OUT:
+      return {
+        ...state,
+        firstName: '',
+        lastname: '',
+        info: {},
+        email: '',
+        password: '',
+        isAuthenticated: false,
       };
 
     default: return state;
