@@ -80,7 +80,7 @@ class Trip
      * @Groups("apiV0_trip")
      * @Groups("apiV0_tripByUser")
      */
-    private $picture;
+    private $image;
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="trip")
@@ -115,6 +115,11 @@ class Trip
      * 
      */
     private $creator;
+
+    /**
+     * @ORM\Column(type="string", length=64, nullable=true)
+     */
+    private $password;
 
     
 
@@ -207,14 +212,14 @@ class Trip
         return $this;
     }
 
-    public function getPicture(): ?string
+    public function getImage(): ?string
     {
-        return $this->picture;
+        return $this->image;
     }
 
-    public function setPicture(?string $picture): self
+    public function setImage(?string $image): self
     {
-        $this->picture = $picture;
+        $this->image = $image;
 
         return $this;
     }
@@ -348,6 +353,18 @@ class Trip
     public function setCreator(?User $creator): self
     {
         $this->creator = $creator;
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(?string $password): self
+    {
+        $this->password = $password;
 
         return $this;
     }
