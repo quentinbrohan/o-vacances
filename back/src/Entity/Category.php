@@ -30,7 +30,7 @@ class Category
      * @ORM\Column(type="string", length=128)
      * @Groups("apiV0_trip")
      */
-    private $picture;
+    private $image;
 
     /**
      * @ORM\OneToMany(targetEntity=Activity::class, mappedBy="category")
@@ -59,14 +59,14 @@ class Category
         return $this;
     }
 
-    public function getPicture(): ?string
+    public function getImage(): ?string
     {
-        return $this->picture;
+        return $this->image;
     }
 
-    public function setPicture(string $picture): self
+    public function setImage(string $image): self
     {
-        $this->picture = $picture;
+        $this->image = $image;
 
         return $this;
     }
