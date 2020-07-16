@@ -3,12 +3,14 @@
 namespace App\Controller\Api;
 
 use App\Entity\Trip;
+use App\Entity\User;
 use App\Form\TripType;
 use App\Repository\TripRepository;
 use App\Repository\UserRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Exception\NotEncodableValueException;
@@ -23,23 +25,22 @@ class TripController extends AbstractController
     /**
      * @Route("/api/v0/users/{id}/trips", name="api_v0_users_trips_list", methods="GET")
      */
-    public function list(UserRepository $userRepository, ObjectNormalizer $normalizer, $id)
+    public function list(UserRepository $userRepository, SerializerInterface $serializer, $id)
     {
         // On demande à Doctrine tous les voyages
         $trips = $userRepository->findAllTripsByUser($id);
 
-        // On instancie un serializer en lui précisant un normalizer adapté aux objets PHP
-        $serializer = new Serializer([$normalizer]);
-        // Parce qu'on a précisé le normalizer, on peut normaliser selon un groupe
-        $normalizedTrips = $serializer->normalize($trips, null, ['groups' => 'apiV0_tripByUser']);
+        $json = $serializer->serialize($trips, 'json', ['groups' => 'apiV0_tripByUser']);
+        
+        $response = new JsonResponse($json, 200, [], true);
 
-        return $this->json($normalizedTrips);
+        return $response;
     } 
 
     /**
-     * @Route("/api/v0/trips", name="api_v0_trips_new", methods="POST")
+     * @Route("/api/v0/users/{id}/trips", name="api_v0_trips_new", methods="POST")
      */
-    public function new(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, ValidatorInterface $validator)
+    public function new(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, ValidatorInterface $validator, User $user)
     {
         // On extrait de la requête le json reçu
         $jsonText = $request->getContent();
@@ -55,6 +56,8 @@ class TripController extends AbstractController
             if(count($errors) > 0){
                 return $this->json($errors, 400);
             }
+            
+            $trip->setCreator($user);
 
             $em->persist($trip);
             $em->flush();
@@ -71,17 +74,16 @@ class TripController extends AbstractController
     /**
      * @Route("/api/v0/trips/{id}", name="api_v0_trips_show", methods="GET")
      */
-    public function show(TripRepository $tripRepository, ObjectNormalizer $normalizer, Trip $trip)
+    public function show(TripRepository $tripRepository, SerializerInterface $serializer, Trip $trip)
     {
         // On demande à Doctrine le voyage
         $trip = $tripRepository->find($trip);
 
-        // On instancie un serializer en lui précisant un normalizer adapté aux objets PHP
-        $serializer = new Serializer([$normalizer]);
-        // Parce qu'on a précisé le normalizer, on peut normaliser selon un groupe
-        $normalizedTrips = $serializer->normalize($trip, null, ['groups' => 'apiV0_trip']);
+        $json = $serializer->serialize($trip, 'json', ['groups' => 'apiV0_trip']);
+        
+        $response = new JsonResponse($json, 200, [], true);
 
-        return $this->json($normalizedTrips);
+        return $response;
     }
 
     /**
@@ -100,7 +102,7 @@ class TripController extends AbstractController
             try {
                 // on crée une nouvelle entité Trip avec le serializer
                 $newTrip = $serializer->deserialize($jsonText, Trip::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $trip]);
-               
+             
                 // validation des données de $trips en fonction des Asserts des entités
                 $errors = $validator->validate($newTrip);
 
@@ -122,6 +124,35 @@ class TripController extends AbstractController
         }
 
     
+    }
+
+    /**
+     * @Route("/api/v0/trips/{id}/users", name="api_v0_trips_users_new", methods="POST")
+     */
+    public function newUsersToTrip(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, ValidatorInterface $validator, Trip $trip, UserRepository $userRepository)
+    {
+        // On extrait de la requête le json reçu
+        $jsonText = $request->getContent();
+
+        $jsonArray = json_decode($jsonText, true);
+        
+        try {
+            
+            foreach($jsonArray['email'] as $email){
+            $user = $userRepository->findByEmail($email);
+            $trip->addUser($user);
+            }
+
+            $em->persist($trip);
+            $em->flush();
+            return $this->json($trip, 201, [], ['groups' => 'apiV0_trip']);
+
+        } catch(NotEncodableValueException $e) {
+            return $this->json([
+                'status' => 400,
+                'message'=>$e->getMessage()
+            ], 400);
+         }
     }
 
 

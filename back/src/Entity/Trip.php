@@ -116,6 +116,8 @@ class Trip
      */
     private $creator;
 
+    
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -338,15 +340,16 @@ class Trip
         return $this;
     }
 
-    public function getCreator(): ?string
+    public function getCreator(): ?User
     {
         return $this->creator;
     }
 
-    public function setCreator(string $creator): self
+    public function setCreator(?User $creator): self
     {
         $this->creator = $creator;
 
         return $this;
     }
+
 }
