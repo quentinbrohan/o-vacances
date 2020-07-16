@@ -2,6 +2,8 @@ import { connect } from 'react-redux';
 
 import TripForm from 'src/components/TripForm';
 
+import { newTrip } from 'src/actions/trip';
+
 import { addImagePreview } from 'src/actions/settings';
 
 const mapStateToProps = (state) => ({

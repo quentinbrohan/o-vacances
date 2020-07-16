@@ -5,7 +5,6 @@ import {
   LOG_IN,
   saveUser,
 } from 'src/actions/user';
-import { push } from 'react-burger-menu';
 
 // const config = {
 // headers: { Authorization: `Bearer ${token}` },
