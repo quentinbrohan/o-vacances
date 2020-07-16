@@ -4,6 +4,8 @@ import {
   SIGN_IN,
   LOG_IN,
   saveUser,
+  FETCH_USER,
+  updateUserProfil,
 } from 'src/actions/user';
 
 // const config = {
@@ -60,7 +62,21 @@ const userMiddleware = (store) => (next) => (action) => {
       next(action);
       break;
     }
+    case FETCH_USER: {
+      // Endpoint fetch Trips list from user
+      axios.get('http://localhost:8000/api/v0/user/2/profil')
+        .then((response) => {
+          console.log(response);
 
+          store.dispatch(updateUserProfil(response.data));
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
+
+      next(action);
+      break;
+    }
     default:
       // on passe l'action au suivant (middleware suivant ou reducer)
       next(action);

@@ -1,16 +1,16 @@
 import {
   UPDATE_USER_FIELD,
   SAVE_USER,
+  UPDATE_USER_PROFIL,
 } from 'src/actions/user';
 
 const initialState = {
   // ici l'état initial
-  firstname: '',
-  lastname: '',
   email: '',
   password: '',
   info: {},
-  isLogged: false,
+  isLogged: true,
+  role: [],
 };
 
 const user = (state = initialState, action = {}) => {
@@ -28,6 +28,15 @@ const user = (state = initialState, action = {}) => {
         isLogged: action.isLogged,
         email: '',
         password: '',
+      };
+
+    case UPDATE_USER_PROFIL:
+      return {
+        ...state,
+        info: action.data,
+        email: action.data.email,
+        password: action.data.password,
+        role: [action.data.roles],
       };
 
     default: return state;

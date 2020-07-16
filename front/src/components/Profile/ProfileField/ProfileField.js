@@ -36,11 +36,15 @@ const ProfileField = ({
 ProfileField.propTypes = {
 
   userTitle: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.string,
   type: PropTypes.string.isRequired,
   inputId: PropTypes.number.isRequired,
   isDisabled: PropTypes.bool.isRequired,
 
+};
+
+ProfileField.defaultProps = {
+  value: '',
 };
 
 export default ProfileField;
