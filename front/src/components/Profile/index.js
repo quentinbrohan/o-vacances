@@ -2,13 +2,13 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Button from 'src/components/elements/Button';
 
-import { Edit2, Check, Info } from 'react-feather';
+import AvatarDefault from 'src/assets/images/svg/user.svg';
+
+import { Edit2, Check } from 'react-feather';
 
 import ProfileField from './ProfileField/ProfileField';
 
 import './profile.scss';
-
-import 'src/assets/images/svg/user.svg';
 
 // component to contact form
 const Profile = ({
@@ -21,13 +21,16 @@ const Profile = ({
     fetchUser();
   }, []);
   console.log(info);
+
+  const avatar = (info.avatar ? info.avatar : AvatarDefault);
+
   return (
 
     <main className="profile">
       <h1>Mon profil</h1>
       <div className="profile-head">
         <div className="profile-head-img">
-          <img className="profile-head-img-picture" src={info.avatar} alt={info.firstname} />
+          <img className="profile-head-img-picture" src={avatar} alt={info.firstname} />
           <Button color="primary">Modifier la photo</Button>
         </div>
         <div className="profile-head-information">
@@ -107,14 +110,8 @@ Profile.propTypes = {
   deleteDisabledInput: PropTypes.func.isRequired,
   isDisabled: PropTypes.bool.isRequired,
   fetchUser: PropTypes.func.isRequired,
-  info: PropTypes.shape({
-    avatar: PropTypes.string,
-  }).isRequired,
+  info: PropTypes.object.isRequired,
 
-};
-
-Info.defaultProps = {
-  avatar: 'src/assets/images/svg/user.svg',
 };
 
 export default Profile;
