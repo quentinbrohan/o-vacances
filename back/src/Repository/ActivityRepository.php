@@ -23,7 +23,7 @@ class ActivityRepository extends ServiceEntityRepository
      * @return Activity[] Returns an array of Activity objects
      */
     
-    public function findAllByTrip($id)
+    public function findAllActivitiesByTrip($id)
     {
         $builder = $this->createQueryBuilder('activity');
         // je souhaite sécuriser le parametre $id
