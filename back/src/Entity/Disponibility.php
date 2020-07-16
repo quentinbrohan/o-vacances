@@ -23,6 +23,7 @@ class Disponibility
      * @Groups("apiV0-dispo")
      * @Groups("apiV0_list")
      * @Groups("apiV0")
+     * @Groups("apiV0_trip")
      */
     private $id;
 
@@ -35,6 +36,7 @@ class Disponibility
      * @Groups("apiV0_list")
      * @Groups("apiV0")
 
+     * @Groups("apiV0_trip")
      */
     private $startDate;
 
@@ -46,6 +48,7 @@ class Disponibility
      * @Groups("apiV0-dispo")
      * @Groups("apiV0_list")
      * @Groups("apiV0")
+     * @Groups("apiV0_trip")
      */
     private $endDate;
 
