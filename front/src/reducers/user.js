@@ -7,10 +7,10 @@ const initialState = {
   // ici l'état initial
   firstname: '',
   lastname: '',
-  email: '',
-  password: '',
+  email: 'quentin@gmail.com',
+  password: 'quentin',
   info: {},
-  isAuthenticated: false,
+  isAuthenticated: true,
 };
 
 const user = (state = initialState, action = {}) => {
