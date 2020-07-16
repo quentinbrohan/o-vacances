@@ -39,7 +39,7 @@ const App = ({
 }) => {
   useEffect(() => {
     checkAuth();
-  }, []);
+  }, [isAuthenticated]);
 
   return (
     <div className="app">

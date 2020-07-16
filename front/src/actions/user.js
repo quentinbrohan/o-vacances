@@ -4,6 +4,7 @@ export const LOG_IN = 'LOG_IN';
 export const SAVE_USER = 'SAVE_USER';
 export const CHECK_AUTHENTICATION = 'CHECK_AUTHENTICATION';
 export const LOG_OUT = 'LOG_OUT';
+export const LOG_OUT_USER = 'LOG_OUT_USER';
 export const LOG_IN_USER = 'LOG_IN_USER';
 
 export const updateUserField = (newValue, name) => ({
@@ -32,6 +33,10 @@ export const checkAuthentication = () => ({
 
 export const logOut = () => ({
   type: LOG_OUT,
+});
+
+export const logOutUser = () => ({
+  type: LOG_OUT_USER,
 });
 
 export const logInUser = () => ({

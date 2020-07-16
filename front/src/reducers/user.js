@@ -2,7 +2,7 @@ import {
   UPDATE_USER_FIELD,
   SAVE_USER,
   LOG_IN_USER,
-  LOG_OUT,
+  LOG_OUT_USER,
 } from 'src/actions/user';
 
 const initialState = {
@@ -38,14 +38,9 @@ const user = (state = initialState, action = {}) => {
         isAuthenticated: true,
       };
 
-    case LOG_OUT:
+    case LOG_OUT_USER:
       return {
         ...state,
-        firstName: '',
-        lastname: '',
-        info: {},
-        email: '',
-        password: '',
         isAuthenticated: false,
       };
 

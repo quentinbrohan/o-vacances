@@ -7,7 +7,7 @@ import {
   CHECK_AUTHENTICATION,
   LOG_OUT,
   logInUser,
-  logOut,
+  logOutUser,
 } from 'src/actions/user';
 
 // const config = {
@@ -101,7 +101,7 @@ const userMiddleware = (store) => (next) => (action) => {
           break;
         }
         else {
-          store.dispatch(logOut());
+          store.dispatch(logOutUser());
           next(action);
           break;
         }
@@ -116,7 +116,7 @@ const userMiddleware = (store) => (next) => (action) => {
       window.localStorage.removeItem('authToken');
       delete axios.defaults.headers.Authorization;
 
-      store.dispatch(logOut());
+      store.dispatch(logOutUser());
 
       next(action);
       break;
