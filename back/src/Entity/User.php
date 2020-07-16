@@ -24,6 +24,7 @@ class User implements UserInterface
      * @Groups("apiV0_trip")
      * @Groups("apiV0_tripByUser")
      * @Groups("apiV0_Suggestion")
+     * @Groups("apiV0_user")
      */
     private $id;
 
@@ -32,6 +33,7 @@ class User implements UserInterface
      * @Groups("apiV0_list")
      * @Groups("apiV0_trip")
      * @Groups("apiV0_tripByUser")
+     * @Groups("apiV0_user")
      */
     private $email;
 
@@ -39,14 +41,15 @@ class User implements UserInterface
      * @ORM\Column(type="json")
      * @Groups("apiV0_list")
      * @Groups("apiV0_trip")
-     * 
+     * @Groups("apiV0_user")
      */
     private $roles = [];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
-     * 
+     * @Groups("apiV0_list")
+     * @Groups("apiV0_user")
      */
     private $password;
 
@@ -54,7 +57,8 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=128)
      * @Groups("apiV0_trip")
      * @Groups("apiV0_tripByUser")
-     * 
+     * @Groups("apiV0_list")
+     * @Groups("apiV0_user")
      */
     private $lastname;
 
@@ -63,6 +67,8 @@ class User implements UserInterface
      * @Groups("apiV0_trip")
      * @Groups("apiV0_tripByUser")
      * @Groups("apiV0_Suggestion")
+     * @Groups("apiV0_list")
+     * @Groups("apiV0_user")
      */
     private $firstname;
 
@@ -70,6 +76,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=128, nullable=true)
      * @Groups("apiV0_trip")
      * @Groups("apiV0_tripByUser")
+     * @Groups("apiV0_user")
      */
     private $avatar;
 
@@ -86,7 +93,7 @@ class User implements UserInterface
     /**
      * @ORM\ManyToMany(targetEntity=Trip::class, inversedBy="users")
      * @Groups("apiV0_tripByUser")
-     * 
+     * @Groups("apiV0_user")
      */
     private $trip;
     /**
