@@ -17,6 +17,7 @@ use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Exception\NotEncodableValueException;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -103,25 +104,51 @@ class DisponibiltyController extends AbstractController
 
             $tripId = $jsonArray['trip'];
             $trip = $tripRepository->find($tripId);
+            
 
             try {
-                // on crée une nouvelle entité Disponibility avec le serializer
-                $disponibility = $serializer->deserialize($jsonText, Disponibility::class, 'json');
-                
-// si le User n'est pas dans la liste, l'ajouter
-                if()
-                $disponibility->addUser($user);
+                // on mofifie l'entité Disponibility avec le serializer
+                $updatedDisponibility = $serializer->deserialize($jsonText, Disponibility::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $disponibility]);
+               
+                $updatedDisponibility->addUser($user);
 
-                $disponibility->setTrip($trip);
+                $updatedDisponibility->setTrip($trip);
                 
                 // validation des données de $disponibility en fonction des Asserts des entités
-                $errors = $validator->validate($disponibility);
+                $errors = $validator->validate($updatedDisponibility);
 
                 // s'il y a des erreurs
                 if (count($errors) > 0) {
                     return $this->json($errors, 400);
                 }
 
+                $em->persist($updatedDisponibility);
+                $em->flush();
+                return $this->json($updatedDisponibility, 201, [], ['groups' => 'apiV0-dispo']);
+            } catch (NotEncodableValueException $e) {
+                return $this->json([
+                    'status' => 400,
+                    'message'=>$e->getMessage()
+                ], 400);
+            }
+        } else {
+            return $this->json([
+                'status' => 400,
+                'message'=>"Cette Disponibilité n'existe pas"
+            ], 400);
+        }
+    }
+
+    /**
+     * @Route("api/v0/users/{idUser}/disponibilities/{id}", name="channel_delete", methods={"DELETE"})
+     */
+    public function delete(Request $request, EntityManagerInterface $em, Disponibility $disponibility, UserRepository $userRepository, $idUser)
+    {
+        $user = $userRepository->findAllDispoByUsers($idUser);
+
+        if (!empty($user)){
+            try {
+                $user->removeDisponibility($disponibility);
                 $em->persist($disponibility);
                 $em->flush();
                 return $this->json($disponibility, 201, [], ['groups' => 'apiV0-dispo']);
@@ -134,28 +161,35 @@ class DisponibiltyController extends AbstractController
         } else {
             return $this->json([
                 'status' => 400,
-                'message'=>"Cet Disponibilité n'existe pas"
+                'message'=>"Cette Disponibilité n'existe pas pour ce participant"
             ], 400);
         }
+        
     }
 
     /**
-     * @Route("api/v0/user/{id}/disponibilities", name="channel_delete", methods={"DELETE"})
+     * @Route("api/v0/disponibilities/{id}", name="channel_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Disponibility $disponibility, ObjectNormalizer $normalizer): Response
+    public function deleteDisponibility(Request $request, EntityManagerInterface $em, Disponibility $disponibility, UserRepository $userRepository)
     {
-        if ($this->isCsrfTokenValid('delete'.$disponibility->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($disponibility);
-            $entityManager->flush();
-
-            $serializer = new Serializer([$normalizer]);
-            // Parce qu'on a précisé le normalizer, on peut normaliser selon un groupe
-            $normalizedDisponibility = $serializer->normalize($disponibility, null, ['groups' => 'apiV0']);
-            
-            return $this->json($normalizedDisponibility, 201);
+        if (!empty($disponibility)){
+            try {
+                $em->remove($disponibility);
+                $em->flush();
+                return $this->json($disponibility, 201, [], ['groups' => 'apiV0-dispo']);
+            } catch (NotEncodableValueException $e) {
+                return $this->json([
+                    'status' => 400,
+                    'message'=>$e->getMessage()
+                ], 400);
+            }
+        } else {
+            return $this->json([
+                'status' => 400,
+                'message'=>"Cette Disponibilité n'existe pas pour ce participant"
+            ], 400);
         }
-
-        return $this->redirectToRoute('channel_index');
+        
     }
+
 }

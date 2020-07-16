@@ -20,6 +20,7 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups("apiV0-dispo")
      * @Groups("apiV0_dispoByUser")
      * @Groups("apiV0_list")
      * @Groups("apiV0_trip")

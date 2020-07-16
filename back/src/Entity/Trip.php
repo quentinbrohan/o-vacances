@@ -93,10 +93,12 @@ class Trip
      * @Groups("apiV0_trip")
      */
     private $suggestion;
-
+    
     /**
-     * @ORM\Column(type="string", length=128)
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="trips")
+     * @ORM\JoinColumn(nullable=false)
      * @Groups("apiV0_trip")
+     * 
      */
     private $creator;
 
