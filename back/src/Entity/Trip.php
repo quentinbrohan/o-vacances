@@ -18,6 +18,9 @@ class Trip
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups("apiV0_dispoByTrip")
+     * @Groups("apiV0_dispoByUser")
+     * @Groups("apiV0-dispo")
      * @Groups("apiV0_trip")
      * @Groups("apiV0_tripByUser")
      * @Groups("apiV0_list")
@@ -27,13 +30,16 @@ class Trip
 
     /**
      * @ORM\Column(type="string", length=64)
+     * @Groups("apiV0_dispoByTrip")
+     * @Groups("apiV0_dispoByUser")
+     * @Groups("apiV0-dispo")
      * @Assert\NotBlank
      * @Assert\Length(max=64)
      * @Groups("apiV0_trip")
      * @Groups("apiV0_tripByUser")
      * @Groups("apiV0_list")
      * @Groups("apiV0_Suggestion")
-     * 
+     * @Groups("apiV0_user")
      */
     private $title;
 
@@ -92,6 +98,7 @@ class Trip
     /**
      * @ORM\OneToMany(targetEntity=Disponibility::class, mappedBy="trip")
      * @Groups("apiV0_trip")
+     * @Groups("apiV0_dispoByTrip")
      */
     private $disponibility;
 
@@ -100,7 +107,7 @@ class Trip
      * @Groups("apiV0_trip")
      */
     private $suggestion;
-
+    
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="trips")
      * @ORM\JoinColumn(nullable=false)

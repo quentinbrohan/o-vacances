@@ -36,6 +36,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
+    
     public function findAllTripsByUser($id)
     {
         $builder = $this->createQueryBuilder('user');
@@ -77,6 +78,32 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         ;
     }
 
+    public function findAllDispoByUsers($id){
+
+        $builder = $this->createQueryBuilder('user');
+        // je souhaite sécuriser le parametre $id
+        $builder->where("user.id = :userId");
+        // je precise au builder quelle valeur "injecter" dans le parametre :userId
+        // Cette methode sécurise le contenu de la variable $id (echapment de car spéciaux ...)
+        $builder->setParameter("userId", $id);
+
+        // Je demande a doctrine de faire la jointure avec la relation ->disponibility
+        $builder->leftJoin('user.disponibility', 'disponibility');    
+        // je demande a doctrine d'alimenter les objets de type Disponibility dans mon objet Trip
+        $builder->addSelect('disponibility');
+
+        // Je demande a doctrine de faire la jointure avec la relation ->trip
+        $builder->leftJoin('disponibility.trip', 'trip');    
+        // je demande a doctrine d'alimenter les objets de type trip dans mon objet User
+        $builder->addSelect('trip');
+        
+
+        // on recupère la requete construite
+        $query = $builder->getQuery();
+
+        // je demande a doctrine d'éxecuter le requete et de me renvoyer les resultats
+        return $query->getOneOrNullResult();
+    }
 
 
     // /**
