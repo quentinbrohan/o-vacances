@@ -25,8 +25,9 @@ export const saveTrips = (trips) => ({
   trips,
 });
 
-export const fetchTrip = () => ({
+export const fetchTrip = (tripId) => ({
   type: FETCH_TRIP,
+  tripId,
 });
 
 export const saveTrip = (trip) => ({

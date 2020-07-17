@@ -12,6 +12,7 @@ import {
 const mapStateToProps = (state) => ({
   trip: state.trip.trip,
   suggestionContent: state.trip.suggestionContent,
+  isLoading: state.trip.isLoading,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -21,8 +22,8 @@ const mapDispatchToProps = (dispatch) => ({
   handleSuggestion: () => {
     dispatch(addSuggestion());
   },
-  fetchTrip: () => {
-    dispatch(fetchTrip());
+  fetchTrip: (tripId) => {
+    dispatch(fetchTrip(tripId));
   },
   saveTrip: () => {
     dispatch(saveTrip());

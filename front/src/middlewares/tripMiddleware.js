@@ -15,7 +15,7 @@ const tripMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case FETCH_TRIPS: {
       // Endpoint fetch Trips list from user
-      axios.get(`http://localhost:8000/api/v0/users/${currentUser()}/trips`)
+      axios.get('http://localhost:8000/api/v0/users/2/trips')
         .then((response) => {
           console.log(response);
 
@@ -30,8 +30,10 @@ const tripMiddleware = (store) => (next) => (action) => {
     }
 
     case FETCH_TRIP: {
+      const { tripId } = action;
+
       // Endpoint fetch Trips list from user
-      axios.get('http://localhost:8000/api/v0/trips/1')
+      axios.get(`http://localhost:8000/api/v0/users/2/trips/${tripId}`)
         .then((response) => {
           console.log(response);
 

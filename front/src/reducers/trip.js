@@ -31,12 +31,14 @@ const trip = (state = initialState, action = {}) => {
       return {
         ...state,
         trips: action.trips,
+        isLoading: false,
       };
 
     case SAVE_TRIP:
       return {
         ...state,
         trip: action.trip,
+        isLoading: false,
       };
 
     default: return state;

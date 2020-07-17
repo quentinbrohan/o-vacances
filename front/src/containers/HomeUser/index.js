@@ -9,6 +9,7 @@ import {
 
 const mapStateToProps = (state) => ({
   trips: state.trip.trips,
+  isLoading: state.trip.isLoading,
 });
 
 const mapDispatchToProps = (dispatch) => ({

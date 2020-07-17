@@ -3,7 +3,6 @@
 import React, {
   useState,
   useEffect,
-  Suspense,
 } from 'react';
 import PropTypes from 'prop-types';
 import { Calendar, MapPin } from 'react-feather';
@@ -14,6 +13,8 @@ import 'react-dates/lib/css/_datepicker.css';
 import './react_dates_overrides.scss';
 import moment from 'moment';
 import 'moment/locale/fr';
+import { useParams } from 'react-router-dom';
+import Loading from 'src/components/Loading';
 
 import tripData from 'src/data/tripData';
 import ActivityCard from './ActivityCard';
@@ -28,10 +29,13 @@ const Trip = ({
   suggestionContent,
   fetchTrip,
   trip,
+  isLoading,
 }) => {
+  const currentTrip = useParams().id;
+  const tripId = Number(currentTrip);
   useEffect(() => {
-    fetchTrip();
-    console.log(trip);
+    fetchTrip(tripId);
+    // console.log(trip);
   }, []);
 
   const [isCreator, setIsCreator] = useState(false);
@@ -65,7 +69,10 @@ const Trip = ({
 
   return (
     <main className="trip-details">
-      <Suspense fallback={<div>Chargement</div>}>
+
+      {isLoading && <Loading />}
+      {!isLoading && (
+      <>
         <img
           className="trip-photo"
           alt={trip.title}
@@ -230,7 +237,8 @@ const Trip = ({
             handleSuggestion={handleSuggestion}
           />
         </section>
-      </Suspense>
+      </>
+      )}
     </main>
   );
 };
@@ -241,6 +249,7 @@ Trip.propTypes = {
   suggestionContent: PropTypes.string.isRequired,
   fetchTrip: PropTypes.func.isRequired,
   trip: PropTypes.array.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 };
 
 export default Trip;
