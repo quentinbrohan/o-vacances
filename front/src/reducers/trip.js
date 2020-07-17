@@ -8,7 +8,7 @@ import {
 const initialState = {
   // ici l'état initial
   trips: [],
-  trip: {},
+  trip: [],
   suggestionContent: '',
   isLoading: true,
 };
@@ -35,6 +35,7 @@ const trip = (state = initialState, action = {}) => {
       };
 
     case SAVE_TRIP:
+      console.log(action);
       return {
         ...state,
         trip: action.trip,

@@ -33,10 +33,11 @@ const Trip = ({
 }) => {
   const currentTrip = useParams().id;
   const tripId = Number(currentTrip);
+
   useEffect(() => {
     fetchTrip(tripId);
-    // console.log(trip);
   }, []);
+  console.log(trip);
 
   const [isCreator, setIsCreator] = useState(false);
   const [isOwnUser, setisOwnUser] = useState(false);
@@ -71,8 +72,9 @@ const Trip = ({
     <main className="trip-details">
 
       {isLoading && <Loading />}
-      {!isLoading && (
+      {(!isLoading && trip.length !== 0) && (
       <>
+        {console.log('loaded')}
         <img
           className="trip-photo"
           alt={trip.title}
@@ -93,6 +95,9 @@ const Trip = ({
                 <p>
                   {trip.location}
                 </p>
+              </div>
+              <div className="creator">
+                <p>Créé par {`${trip.creator.firstname} ${trip.creator.lastname}`} </p>
               </div>
             </div>
 
@@ -212,14 +217,14 @@ const Trip = ({
         <section className="activities">
           <h2>Mes activités {''}
 
-            <span>({tripData.activities.length})</span>
+            <span>({trip.activities.length})</span>
           </h2>
           <div className="trip-activities">
-            {tripData.activities.slice(0, 5).map((activity) => (
+            {trip.activities.slice(0, 5).map((activity) => (
               <ActivityCard {...activity} key={activity.id} />
             ))}
-            {(tripData.activities.length > 5)
-          && (<PlusCard id={tripData.id} />)}
+            {(trip.activities.length > 5)
+          && (<PlusCard id={trip.id} />)}
           </div>
         </section>
 
