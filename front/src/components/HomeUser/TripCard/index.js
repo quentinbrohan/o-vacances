@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Calendar, MapPin } from 'react-feather';
+import moment from 'moment';
+import 'moment/locale/fr';
 
 import './tripCard.scss';
 
@@ -27,8 +29,8 @@ const TripCard = ({
           <div className="date">
             <Calendar />
             <p>
-              Du {startDate} <br />
-              au { endDate}
+              Du {moment(startDate).format('ll')} <br />
+              au {moment(endDate).format('ll')}
             </p>
           </div>
           <div className="location">

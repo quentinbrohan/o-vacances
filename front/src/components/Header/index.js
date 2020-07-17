@@ -4,6 +4,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { slide as Menu } from 'react-burger-menu';
 import { Menu as MenuIcon, X as CloseIcon } from 'react-feather';
 import Button from 'src/components/elements/Button';
+import { ReactComponent as Logo } from 'src/assets/svg/logo.svg';
 
 import './header.scss';
 
@@ -35,7 +36,9 @@ const Header = ({
     <header>
       <div className="header-container">
 
-        <a href="/">LOGO</a>
+        <Link to="/" className="logo">
+          <Logo alt="Logo" />
+        </Link>
         <nav className="navigation">
           <div className="mobile">
             <Menu

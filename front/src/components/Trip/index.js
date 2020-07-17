@@ -69,7 +69,7 @@ const Trip = ({
         <img
           className="trip-photo"
           alt={trip.title}
-          src={trip.picture}
+          src={trip.image}
         />
         <section className="trip-info">
           <div className="left">
