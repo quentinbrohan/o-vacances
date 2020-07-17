@@ -9,15 +9,19 @@ import { Edit2, Check } from 'react-feather';
 import ProfileField from './ProfileField/ProfileField';
 
 import './profile.scss';
-import { editUser } from '../../actions/user';
 
 // component to contact form
 const Profile = ({
   isDisabled,
   deleteDisabledInput,
   fetchUser,
-  info,
+  firstname,
+  lastname,
+  email,
+  password,
+  avatar,
   changeField,
+  handleEditUser,
 }) => {
   useEffect(() => {
     fetchUser();
@@ -26,7 +30,6 @@ const Profile = ({
   const handleSubmit = (event) => {
     event.preventDefault();
   };
-  const avatar = (info.avatar ? info.avatar : AvatarDefault);
 
   return (
 
@@ -34,38 +37,38 @@ const Profile = ({
       <h1>Mon profil</h1>
       <div className="profile-head">
         <div className="profile-head-img">
-          <img className="profile-head-img-picture" src={avatar} alt={info.firstname} />
+          <img className="profile-head-img-picture" src={avatar} alt={firstname} />
           <Button color="primary">Modifier la photo</Button>
         </div>
         <div className="profile-head-information">
           <form onSubmit={handleSubmit}>
             <ProfileField
-              inputId={1}
-              value={info.firstname}
+              name="firstname"
+              value={firstname}
               userTitle="Prénom"
               type="text"
               isDisabled={isDisabled}
               onChange={changeField}
             />
             <ProfileField
-              inputId={2}
-              value={info.lastname}
+              name="lastname"
+              value={lastname}
               userTitle="Nom"
               type="text"
               isDisabled={isDisabled}
               onChange={changeField}
             />
             <ProfileField
-              inputId={3}
-              value={info.email}
+              name="email"
+              value={email}
               userTitle="Email"
               type="text"
               isDisabled={isDisabled}
               onChange={changeField}
             />
             <ProfileField
-              inputId={4}
-              value={info.password}
+              name="password"
+              value={password}
               userTitle="Mot de passe"
               type="password"
               isDisabled={isDisabled}
@@ -80,13 +83,16 @@ const Profile = ({
             />
             )}
             {!isDisabled && (
+
             <Check
               className="icon check"
+              type="submit"
               onClick={() => {
                 deleteDisabledInput(true);
+                handleEditUser();
               }}
-              type="submit"
             />
+
             )}
           </form>
         </div>
@@ -119,9 +125,18 @@ Profile.propTypes = {
   deleteDisabledInput: PropTypes.func.isRequired,
   isDisabled: PropTypes.bool.isRequired,
   fetchUser: PropTypes.func.isRequired,
-  info: PropTypes.object.isRequired,
   changeField: PropTypes.func.isRequired,
+  firstname: PropTypes.string.isRequired,
+  lastname: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
+  avatar: PropTypes.string,
+  handleEditUser: PropTypes.func.isRequired,
 
+};
+
+Profile.defaultProps = {
+  avatar: AvatarDefault,
 };
 
 export default Profile;

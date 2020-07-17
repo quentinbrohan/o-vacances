@@ -8,6 +8,8 @@ const initialState = {
   // ici l'état initial
   email: '',
   password: '',
+  firstname: '',
+  lastname: '',
   info: {},
   isLogged: true,
   role: [],
@@ -33,8 +35,12 @@ const user = (state = initialState, action = {}) => {
     case UPDATE_USER_PROFIL:
       return {
         ...state,
-        info: action.data,
+        info: action.data.info,
         role: [action.data.roles],
+        email: action.data.email,
+        password: action.data.password,
+        firstname: action.data.firstname,
+        lastname: action.data.lastname,
       };
 
     default: return state;

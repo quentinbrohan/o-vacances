@@ -93,7 +93,7 @@ const userMiddleware = (store) => (next) => (action) => {
         lastname,
         firstname,
       }, {
-        withCredentials: true,
+        withCredentials: false,
         // config,
       })
         .then((response) => {

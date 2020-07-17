@@ -6,7 +6,7 @@ import './profilefield.scss';
 
 // component to change profil user
 const ProfileField = ({
-  inputId,
+  name,
   value,
   userTitle,
   type,
@@ -14,25 +14,26 @@ const ProfileField = ({
   onChange,
 }) => {
   const handleChange = (evt) => {
-    onChange(evt.target.value, inputId);
+    onChange(evt.target.value, name);
   };
 
   return (
 
     <div className="profile-field">
-      <label className="profile-field-label" htmlFor={inputId}>{userTitle}</label>
+      <label className="profile-field-label" htmlFor={name}>{userTitle}</label>
       {isDisabled && (
       <input
         disabled
         type={type}
         defaultValue={value}
+        onChange={handleChange}
       />
 
       )}
       {!isDisabled && (
       <input
         type={type}
-        defaultValue={value}
+        value={value}
         onChange={handleChange}
       />
       )}
@@ -45,9 +46,9 @@ ProfileField.propTypes = {
   userTitle: PropTypes.string.isRequired,
   value: PropTypes.string,
   type: PropTypes.string.isRequired,
-  inputId: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
   isDisabled: PropTypes.bool.isRequired,
-  onChange: PropTypes.func.isrequired,
+  onChange: PropTypes.func.isRequired,
 
 };
 
