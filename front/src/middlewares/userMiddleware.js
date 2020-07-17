@@ -69,14 +69,6 @@ const userMiddleware = (store) => (next) => (action) => {
             window.localStorage.setItem('authToken', token);
             // axios Global settings to forward header + token
             axios.defaults.headers.Authorization = `Bearer + ${token}`;
-
-            // get userId
-            const jwtData = jwtDecode(token);
-            const currentUser = jwtData.username;
-            // 1. decode ID from JWT
-            console.log(currentUser);
-            // 2. For user info (not required) fetch data from ID ${currentUser}
-            // return axios.get('http://localhost:8000/api/v0/user/5/profil');
           }
         })
         .catch((error) => {
