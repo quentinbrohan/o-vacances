@@ -10,7 +10,7 @@ import {
 } from 'src/actions/trip';
 
 const mapStateToProps = (state) => ({
-  infos: state.user.infos,
+  trip: state.trip.trip,
   suggestionContent: state.trip.suggestionContent,
 });
 

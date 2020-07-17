@@ -12,6 +12,9 @@ const mapStateToProps = (state) => ({
   email: state.user.email,
   password: state.user.password,
   info: state.user.info,
+  lastname: state.user.lastname,
+  firstname: state.user.firstname,
+  avatar: state.user.avatar,
 
 });
 

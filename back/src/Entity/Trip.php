@@ -18,6 +18,9 @@ class Trip
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups("apiV0_dispoByTrip")
+     * @Groups("apiV0_dispoByUser")
+     * @Groups("apiV0-dispo")
      * @Groups("apiV0_trip")
      * @Groups("apiV0_tripByUser")
      * @Groups("apiV0_list")
@@ -27,19 +30,23 @@ class Trip
 
     /**
      * @ORM\Column(type="string", length=64)
+     * @Groups("apiV0_dispoByTrip")
+     * @Groups("apiV0_dispoByUser")
+     * @Groups("apiV0-dispo")
      * @Assert\NotBlank
      * @Assert\Length(max=64)
      * @Groups("apiV0_trip")
      * @Groups("apiV0_tripByUser")
      * @Groups("apiV0_list")
      * @Groups("apiV0_Suggestion")
-     * 
+     * @Groups("apiV0_user")
      */
     private $title;
 
     
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups("apiV0_list")
      * @Groups("apiV0_trip")
      * @Groups("apiV0_tripByUser")
      *
@@ -74,7 +81,7 @@ class Trip
      * @Groups("apiV0_trip")
      * @Groups("apiV0_tripByUser")
      */
-    private $picture;
+    private $image;
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="trip")
@@ -92,6 +99,7 @@ class Trip
     /**
      * @ORM\OneToMany(targetEntity=Disponibility::class, mappedBy="trip")
      * @Groups("apiV0_trip")
+     * @Groups("apiV0_dispoByTrip")
      */
     private $disponibility;
 
@@ -100,15 +108,21 @@ class Trip
      * @Groups("apiV0_trip")
      */
     private $suggestion;
-
+    
     /**
-     * @ORM\Column(type="string", length=128)
-     * @Assert\NotBlank
-     * @Assert\Length(max=128)
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="trips")
+     * @ORM\JoinColumn(nullable=false)
      * @Groups("apiV0_trip")
-     * @Groups("apiV0_tripByUser")
+     * 
      */
     private $creator;
+
+    /**
+     * @ORM\Column(type="string", length=64, nullable=true)
+     */
+    private $password;
+
+    
 
     public function __construct()
     {
@@ -199,14 +213,14 @@ class Trip
         return $this;
     }
 
-    public function getPicture(): ?string
+    public function getImage(): ?string
     {
-        return $this->picture;
+        return $this->image;
     }
 
-    public function setPicture(?string $picture): self
+    public function setImage(?string $image): self
     {
-        $this->picture = $picture;
+        $this->image = $image;
 
         return $this;
     }
@@ -332,15 +346,28 @@ class Trip
         return $this;
     }
 
-    public function getCreator(): ?string
+    public function getCreator(): ?User
     {
         return $this->creator;
     }
 
-    public function setCreator(string $creator): self
+    public function setCreator(?User $creator): self
     {
         $this->creator = $creator;
 
         return $this;
     }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(?string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
 }

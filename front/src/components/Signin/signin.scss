@@ -25,12 +25,13 @@
       padding: 1rem;
     }
     .signin-form-button {
+      margin-top: $gutter;
       display: block;
       width: 100%;
       @media (min-width: $tablet) {
         width: initial;
       }
-      margin: 1rem auto 0;
+      margin: 2rem auto;
     }
   
     form {
@@ -41,7 +42,6 @@
     .helper {
       width: 100%;
       text-align: center;
-      margin: $gutter 0;
       p {
         margin: $gutter 0;
       }

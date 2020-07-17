@@ -20,10 +20,13 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups("apiV0-dispo")
+     * @Groups("apiV0_dispoByUser")
      * @Groups("apiV0_list")
      * @Groups("apiV0_trip")
      * @Groups("apiV0_tripByUser")
      * @Groups("apiV0_Suggestion")
+     * @Groups("apiV0_user")
      */
     private $id;
 
@@ -31,7 +34,11 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=180, unique=true)
      * @Groups("apiV0_list")
      * @Groups("apiV0_trip")
+     * @Groups("apiV0_dispoByTrip")
+     * @Groups("apiV0_dispoByUser")
+     * @Groups("apiV0-dispo")
      * @Groups("apiV0_tripByUser")
+     * @Groups("apiV0_user")
      */
     private $email;
 
@@ -39,37 +46,51 @@ class User implements UserInterface
      * @ORM\Column(type="json")
      * @Groups("apiV0_list")
      * @Groups("apiV0_trip")
-     * 
+     * @Groups("apiV0_user")
      */
     private $roles = [];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
-     * 
+     * @Groups("apiV0_list")
+     * @Groups("apiV0_user")
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=128)
      * @Groups("apiV0_trip")
-     * @Groups("apiV0_tripByUser")
+     * @Groups("apiV0_dispoByTrip")
+     * @Groups("apiV0_dispoByUser")
+     * @Groups("apiV0-dispo")
      * 
+     * @Groups("apiV0_tripByUser")
+     * @Groups("apiV0_list")
+     * @Groups("apiV0_user")
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="string", length=128)
      * @Groups("apiV0_trip")
+     * @Groups("apiV0_dispoByTrip")
+     * @Groups("apiV0_dispoByUser")
+     * @Groups("apiV0-dispo")
      * @Groups("apiV0_tripByUser")
      * @Groups("apiV0_Suggestion")
+     * @Groups("apiV0_list")
+     * @Groups("apiV0_user")
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=128, nullable=true)
      * @Groups("apiV0_trip")
+     * @Groups("apiV0_dispoByTrip")
+     * @Groups("apiV0-dispo")
      * @Groups("apiV0_tripByUser")
+     * @Groups("apiV0_user")
      */
     private $avatar;
 
@@ -78,22 +99,31 @@ class User implements UserInterface
      * 
      */
     private $suggestions;
+
     /**
      * @ORM\ManyToMany(targetEntity=Disponibility::class, inversedBy="users")
+     * @Groups("apiV0_dispoByUser")
      * 
      */
     private $disponibility;
+
     /**
      * @ORM\ManyToMany(targetEntity=Trip::class, inversedBy="users")
      * @Groups("apiV0_tripByUser")
-     * 
+     * @Groups("apiV0_user")
      */
     private $trip;
+
     /**
      * @ORM\OneToMany(targetEntity=Activity::class, mappedBy="creator")
      * 
      */
     private $activity;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Trip::class, mappedBy="creator")
+     */
+    private $trips;
     
     public function __construct()
     {
@@ -101,13 +131,14 @@ class User implements UserInterface
         $this->trip = new ArrayCollection();
         $this->activity = new ArrayCollection();
         $this->disponibility = new ArrayCollection();
+        $this->trips = new ArrayCollection();
     }
 
-    public function __toString()
+   public function __toString()
     {
         return $this->getEmail();
     }
-    
+   
     public function getId(): ?int
     {
         return $this->id;
@@ -319,5 +350,13 @@ class User implements UserInterface
             }
         }
         return $this;
+    }
+
+    /**
+     * @return Collection|Trip[]
+     */
+    public function getTrips(): Collection
+    {
+        return $this->trips;
     }
 }

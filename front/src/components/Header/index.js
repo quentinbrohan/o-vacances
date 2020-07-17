@@ -4,11 +4,13 @@ import { Link, NavLink } from 'react-router-dom';
 import { slide as Menu } from 'react-burger-menu';
 import { Menu as MenuIcon, X as CloseIcon } from 'react-feather';
 import Button from 'src/components/elements/Button';
+import { ReactComponent as Logo } from 'src/assets/svg/logo.svg';
 
 import './header.scss';
 
 const Header = ({
-  isLogged,
+  isAuthenticated,
+  handleLogout,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   // Handle BurgerMenu close onClick
@@ -20,11 +22,23 @@ const Header = ({
     setIsOpen(!isOpen);
   };
 
+  const manageLogout = () => {
+    console.log('levrette');
+    handleLogout();
+  };
+
+  const manageLogoutMobile = () => {
+    setIsOpen(false);
+    handleLogout();
+  };
+
   return (
     <header>
       <div className="header-container">
 
-        <a href="/">LOGO</a>
+        <Link to="/" className="logo">
+          <Logo alt="Logo" />
+        </Link>
         <nav className="navigation">
           <div className="mobile">
             <Menu
@@ -35,7 +49,7 @@ const Header = ({
               customBurgerIcon={<MenuIcon />}
               customCrossIcon={<CloseIcon />}
             >
-              {isLogged ? (
+              {isAuthenticated ? (
                 <>
                   <NavLink to="/mes-voyages" onClick={() => handleMenuState()} activeClassName="nav--active">Mes voyages</NavLink>
                   <NavLink to="/creer-un-voyage" onClick={() => handleMenuState()} activeClassName="nav--active">Créer un voyage</NavLink>
@@ -49,9 +63,14 @@ const Header = ({
                 )}
 
               <div className="connection-mobile">
-                {isLogged ? (
-                  <Button color="secondary" size="sm" haveClassName="button-header">
-                    <Link to="/logout" onClick={() => handleMenuState()}>Déconnexion</Link>
+                {isAuthenticated ? (
+                  <Button
+                    color="secondary"
+                    size="sm"
+                    haveClassName="button-header"
+                    onClick={() => manageLogoutMobile()}
+                  >
+                    Déconnexion
                   </Button>
                 )
                   : (
@@ -68,7 +87,7 @@ const Header = ({
             </Menu>
           </div>
           <div className="menu">
-            {isLogged ? (
+            {isAuthenticated ? (
               <ul>
                 <li><NavLink to="/mes-voyages" activeClassName="nav--active">Mes voyages</NavLink></li>
                 <li><NavLink to="/creer-un-voyage" activeClassName="nav--active">Créer un voyage</NavLink></li>
@@ -82,9 +101,14 @@ const Header = ({
                 </ul>
               )}
             <div className="connection">
-              {isLogged ? (
-                <Button color="secondary" size="sm" haveClassName="button-header">
-                  <Link to="/logout">Déconnexion</Link>
+              {isAuthenticated ? (
+                <Button
+                  color="secondary"
+                  size="sm"
+                  haveClassName="button-header"
+                  onClick={() => manageLogout()}
+                >
+                  Déconnexion
                 </Button>
               )
                 : (
@@ -106,7 +130,8 @@ const Header = ({
 };
 
 Header.propTypes = {
-  isLogged: PropTypes.bool.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
+  handleLogout: PropTypes.func.isRequired,
 };
 
 export default Header;

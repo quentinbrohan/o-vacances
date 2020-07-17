@@ -17,23 +17,27 @@ class Category
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups("apiV0_categories")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=64)
      * @Groups("apiV0_trip")
+     * @Groups("apiV0_categories")
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=128)
      * @Groups("apiV0_trip")
+     * @Groups("apiV0_categories")
      */
-    private $picture;
+    private $image;
 
     /**
      * @ORM\OneToMany(targetEntity=Activity::class, mappedBy="category")
+     * @Groups("apiV0_categories")
      */
     private $activities;
 
@@ -59,14 +63,14 @@ class Category
         return $this;
     }
 
-    public function getPicture(): ?string
+    public function getImage(): ?string
     {
-        return $this->picture;
+        return $this->image;
     }
 
-    public function setPicture(string $picture): self
+    public function setImage(string $image): self
     {
-        $this->picture = $picture;
+        $this->image = $image;
 
         return $this;
     }

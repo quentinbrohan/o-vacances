@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Button from 'src/components/elements/Button';
 
 import Field from './Field';
@@ -12,23 +12,41 @@ const Login = ({
   password,
   changeField,
   handleLogin,
-  isLogged,
-
+  isAuthenticated,
 }) => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     handleLogin();
   };
 
+  // Redirect to Home ('/') after 5s when connected
+  const history = useHistory();
+  useEffect(() => {
+    if (isAuthenticated) {
+      const redirect = setTimeout(() => {
+        history.push('/');
+      }, 5000);
+      return () => clearTimeout(redirect);
+    }
+  });
+
   return (
 
     <main className="login">
       <div className="connection-container">
         <h1>Bon retour parmi nous.</h1>
-        {isLogged && (
-        <div>Vous êtes connecté</div>)}
+        {isAuthenticated && (
+          <div className="is-authenticated">
+            <div>Vous êtes connecté</div>
+            <p>Redirection automatiqument vers Accueil...</p>
+            <p>
+              Si la redirection ne s'effectue pas après 5s, {''}
+              <Link to="/" className="redirect">cliquer ici.</Link>
+            </p>
+          </div>
+        )}
 
-        {!isLogged && (
+        {!isAuthenticated && (
         <div className="login-form">
           <form
             onSubmit={handleSubmit}
@@ -75,11 +93,11 @@ Login.propTypes = {
   password: PropTypes.string.isRequired,
   changeField: PropTypes.func.isRequired,
   handleLogin: PropTypes.func.isRequired,
-  isLogged: PropTypes.bool,
+  isAuthenticated: PropTypes.bool,
 };
 
 Login.defaultProps = {
-  isLogged: false,
+  isAuthenticated: false,
 };
 
 export default Login;

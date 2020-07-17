@@ -5,10 +5,10 @@ import PropTypes from 'prop-types';
 const PrivateRoute = ({
   component,
   exact,
-  isLogged,
+  isAuthenticated,
   path,
 }) => (
-  isLogged
+  isAuthenticated
     ? (
       <Route
         path={path}
@@ -22,7 +22,7 @@ const PrivateRoute = ({
 PrivateRoute.propTypes = {
   component: PropTypes.PropTypes.oneOfType([PropTypes.object, PropTypes.func]).isRequired,
   exact: PropTypes.bool,
-  isLogged: PropTypes.bool.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
   path: PropTypes.string.isRequired,
 };
 
