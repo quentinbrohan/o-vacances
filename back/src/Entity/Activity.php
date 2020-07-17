@@ -19,6 +19,7 @@ class Activity
      * @ORM\Column(type="integer")
      * @Groups("apiV0_list")
      * @Groups("apiV0_activity")
+     * @Groups("apiV0_categories")
      * @Groups("apiV0_trip")
      */
     private $id;
@@ -29,6 +30,7 @@ class Activity
      * @Assert\Length(max=64)
      * @Groups("apiV0_list")
      * @Groups("apiV0_activity")
+     * @Groups("apiV0_categories")
      * @Groups("apiV0_trip")
      */
     private $title;
