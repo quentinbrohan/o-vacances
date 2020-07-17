@@ -17,7 +17,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(updateSuggestionField(newValue, name));
   },
   handleSuggestion: () => {
-    console.log('container handleSugg');
     dispatch(addSuggestion());
   },
 });

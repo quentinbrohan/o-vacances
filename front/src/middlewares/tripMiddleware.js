@@ -67,15 +67,24 @@ const tripMiddleware = (store) => (next) => (action) => {
     }
 
     case ADD_SUGGESTION: {
-      // Endpoint add new trip to user
-      axios.post('http://localhost:8000/api/v0/users/5/trips', {
+      console.log(action);
+      const { suggestionTitle, suggestionDescription } = store.getState().trip;
+      const user = currentUser();
+      const { id } = store.getState().trip.trip;
+
+      // Endpoint add new suggestion to trip
+      axios.post(`http://localhost:8000/api/v0/trips/${user}/suggestions/new`, {
         // props,
+        title: suggestionTitle,
+        description: suggestionDescription,
+        user,
+        id,
       })
         .then((response) => {
           console.log(response);
 
-          // TODO: newTrip = clear tripForm inputs
-          store.dispatch(newTrip(response.data));
+          // TODO: newTrip = clear tripForm inputs DONE
+          // Add suggestion to state or directly refresh Trip component afterward (?)
         })
         .catch((error) => {
           console.warn(error);

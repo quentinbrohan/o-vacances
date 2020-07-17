@@ -17,10 +17,10 @@ import { useParams } from 'react-router-dom';
 import Loading from 'src/components/Loading';
 
 import tripData from 'src/data/tripData';
+import SuggestionForm from 'src/containers/Trip/SuggestionForm';
 import ActivityCard from './ActivityCard';
 import PlusCard from './PlusCard';
 import Suggestion from './Suggestion';
-import SuggestionForm from 'src/containers/Trip/SuggestionForm';
 import './trip.scss';
 
 const Trip = ({
@@ -70,7 +70,7 @@ const Trip = ({
 
   const handleSuggestion = () => {
     console.log();
-    
+
     console.log('newSuggestion');
     addSuggestion();
   };
