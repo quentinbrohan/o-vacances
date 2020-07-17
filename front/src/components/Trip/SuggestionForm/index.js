@@ -3,33 +3,35 @@ import React from 'react';
 import Button from 'src/components/elements/Button';
 import { Send } from 'react-feather';
 import PropTypes from 'prop-types';
+import Field from './Field';
 
 import './suggestionForm.scss';
 
 const SuggestionForm = ({
   handleSuggestion,
-  onChange,
-  suggestionContent,
+  suggestionDescription,
+  suggestionTitle,
+  changeField,
 }) => {
   const manageSubmit = (evt) => {
     evt.preventDefault();
     handleSuggestion();
   };
 
-  const handleChange = (evt) => {
-    onChange(evt.target.value, suggestionContent);
-  };
-
   return (
     <form className="suggestion-form" onSubmit={manageSubmit}>
-      <label className="field-label">Ajouter une suggestion</label>
-      <input
-        type="text"
-        place="Votre suggestion"
-        className="field-input"
-        onChange={handleChange}
-        value={suggestionContent}
-        name="suggestion"
+      <div className="suggestion-form-title">Ajouter une suggestion</div>
+      <Field
+        name="suggestionTitle"
+        placeholder="Titre"
+        onChange={changeField}
+        value={suggestionTitle}
+      />
+      <Field
+        name="suggestionDescription"
+        placeholder="Description"
+        onChange={changeField}
+        value={suggestionDescription}
       />
       <Button color="secondary" size="sm" type="submit">
         <Send />
@@ -40,13 +42,15 @@ const SuggestionForm = ({
 };
 
 SuggestionForm.propTypes = {
+  suggestionDescription: PropTypes.string,
+  suggestionTitle: PropTypes.string,
+  changeField: PropTypes.func.isRequired,
   handleSuggestion: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
-  suggestionContent: PropTypes.string,
 };
 
 SuggestionForm.defaultProps = {
-  suggestionContent: '',
+  suggestionDescription: '',
+  suggestionTitle: '',
 };
 
 export default SuggestionForm;

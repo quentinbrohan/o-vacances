@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
+import 'moment/locale/fr';
 
 import './suggestion.scss';
 
@@ -19,11 +21,14 @@ const Suggestion = ({
         className="suggestion-avatar"
       />
       <div className="suggestion-header-info">
+        <p className="suggestion-title">
+          Un titre pas trop long
+        </p>
         <p className="suggestion-author">
           {firstName}
-        </p>
-        <p className="suggestion-date">
-          {date}
+          <span className="suggestion-date">
+            {moment(date).format('lll')}
+          </span>
         </p>
 
       </div>

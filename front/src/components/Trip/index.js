@@ -20,16 +20,16 @@ import tripData from 'src/data/tripData';
 import ActivityCard from './ActivityCard';
 import PlusCard from './PlusCard';
 import Suggestion from './Suggestion';
-import SuggestionForm from './SuggestionForm';
+import SuggestionForm from 'src/containers/Trip/SuggestionForm';
 import './trip.scss';
 
 const Trip = ({
   changeSuggestion,
-  handleSuggestion,
   suggestionContent,
   fetchTrip,
   trip,
   isLoading,
+  addSuggestion,
 }) => {
   const currentTrip = useParams().id;
   const tripId = Number(currentTrip);
@@ -66,6 +66,13 @@ const Trip = ({
       startDate: disp.startDate,
       endDate: disp.endDate,
     });
+  };
+
+  const handleSuggestion = () => {
+    console.log();
+    
+    console.log('newSuggestion');
+    addSuggestion();
   };
 
   return (
@@ -111,13 +118,13 @@ const Trip = ({
           <div className="right">
             <div className="trip-info-aside">
               <div className="participants">
-                <p className="text">{`${tripData.participants.length} participants`}</p>
+                <p className="text">{`${trip.users.length} participants`}</p>
                 <div className="avatars">
-                  {tripData.participants.map((participant) => (
+                  {trip.users.map((user) => (
                     <img
-                      key={participant.firstName}
-                      src={participant.avatar}
-                      alt={participant.firstName}
+                      key={user.firstname}
+                      src={user.avatar}
+                      alt={user.firstname}
                       className="avatar"
                     />
                   ))}
@@ -231,15 +238,16 @@ const Trip = ({
         <section className="suggestions">
           <h2>Suggestions</h2>
           <div className="trip-suggestions">
-            {/* Suggestion component (h2 + card) */}
-            {tripData.suggestions.map((suggestion) => (
-              <Suggestion {...suggestion} key={suggestion.id} />
-            ))}
+            {(tripData.suggestions.length > 1) && (
+              tripData.suggestions.map((sugg) => (
+                <Suggestion {...sugg} key={sugg.id} />
+              ))
+            )}
           </div>
           <SuggestionForm
             onChange={changeSuggestion}
             suggestionContent={suggestionContent}
-            handleSuggestion={handleSuggestion}
+            manageSuggestion={handleSuggestion}
           />
         </section>
       </>
@@ -251,10 +259,14 @@ const Trip = ({
 Trip.propTypes = {
   changeSuggestion: PropTypes.func.isRequired,
   handleSuggestion: PropTypes.func.isRequired,
+  manageSuggestion: PropTypes.func.isRequired,
   suggestionContent: PropTypes.string.isRequired,
   fetchTrip: PropTypes.func.isRequired,
-  trip: PropTypes.array.isRequired,
+  trip: PropTypes.PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.object]).isRequired,
   isLoading: PropTypes.bool.isRequired,
+  addSuggestion: PropTypes.func.isRequired,
 };
 
 export default Trip;

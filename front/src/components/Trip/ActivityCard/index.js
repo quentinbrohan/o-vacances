@@ -42,7 +42,6 @@ const ActivityCard = ({
 ActivityCard.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
   startDate: PropTypes.string.isRequired,
   endDate: PropTypes.string.isRequired,
   category: PropTypes.arrayOf(

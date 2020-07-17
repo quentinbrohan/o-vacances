@@ -9,7 +9,8 @@ const initialState = {
   // ici l'état initial
   trips: [],
   trip: [],
-  suggestionContent: '',
+  suggestionDescription: '',
+  suggestionTitle: '',
   isLoading: true,
 };
 
@@ -18,7 +19,7 @@ const trip = (state = initialState, action = {}) => {
     case UPDATE_SUGGESTION_FIELD:
       return {
         ...state,
-        suggestionContent: action.newValue,
+        [action.name]: action.newValue,
       };
 
     case ADD_SUGGESTION:

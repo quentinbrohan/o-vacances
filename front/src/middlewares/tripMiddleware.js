@@ -7,6 +7,7 @@ import {
   saveTrip,
   ADD_TRIP,
   newTrip,
+  ADD_SUGGESTION,
 } from 'src/actions/trip';
 
 import currentUser from 'src/utils/getCurrentUser';
@@ -49,6 +50,24 @@ const tripMiddleware = (store) => (next) => (action) => {
 
     case ADD_TRIP: {
     // Endpoint add new trip to user
+      axios.post(`http://localhost:8000/api/v0/trips/${tripId}/suggestions/new`, {
+        // props,
+      })
+        .then((response) => {
+          console.log(response);
+
+          // store.dispatch(newTrip(response.data));
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
+
+      next(action);
+      break;
+    }
+
+    case ADD_SUGGESTION: {
+      // Endpoint add new trip to user
       axios.post('http://localhost:8000/api/v0/users/5/trips', {
         // props,
       })

@@ -7,9 +7,10 @@ export const SAVE_TRIP = 'SAVE_TRIP';
 export const ADD_TRIP = 'ADD_TRIP';
 export const NEW_TRIP = 'NEW_TRIP';
 
-export const updateSuggestionField = (newValue) => ({
+export const updateSuggestionField = (newValue, name) => ({
   type: UPDATE_SUGGESTION_FIELD,
   newValue,
+  name,
 });
 
 export const addSuggestion = () => ({
