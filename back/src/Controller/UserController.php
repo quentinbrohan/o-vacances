@@ -115,7 +115,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("api/v0/users/{id}", name="api_user_show", methods={"GET"})
+     * @Route("api/v0/user/{id}/profil", name="api_user_profil", methods="GET")
      */
     public function show(User $user, $id, UserRepository $userRepository, ObjectNormalizer $normalizer): Response
     {
@@ -124,13 +124,13 @@ class UserController extends AbstractController
         // On instancie un serializer en lui précisant un normalizer adapté aux objets PHP
         $serializer = new Serializer([$normalizer]);
         // Parce qu'on a précisé le normalizer, on peut normaliser selon un groupe
-        $normalizedUsers = $serializer->normalize($user, null, ['groups' => 'apiV0_list']);
+        $normalizedUsers = $serializer->normalize($user, null, ['groups' => 'apiV0_user']);
 
         return $this->json($normalizedUsers);
     }
 
     /**
-     * @Route("api/v0/users/{id}/delete", name="api_user_delete", methods={"DELETE"})
+     * @Route("api/v0/user/{id}/delete", name="api_user_delete", methods="DELETE")
      */
     public function delete( User $user, UserRepository $userRepository, ObjectNormalizer $normalizer, $id): Response
     {

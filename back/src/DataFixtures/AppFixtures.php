@@ -54,9 +54,10 @@ class AppFixtures extends Fixture
             $trip = new Trip();
             $trip->setTitle($tripTitle[$i]);
             $trip->setDescription($descriptions[0]);
+            $trip->setPassword($tripTitle[$i]);
             $trip->setLocation($locations[$i]);
             $trip->addUser($users[mt_rand(0, 4)], $users[mt_rand(0, 4)]);
-            $trip->setCreator($userName[$i]);
+            $trip->setCreator($users[mt_rand(0, 4)]);
             $trips[]=$trip;
     
             $manager->persist($trip);
@@ -67,7 +68,7 @@ class AppFixtures extends Fixture
         for ($i = 0; $i < 5; $i++) {
             $category = new Category();
             $category->setName($categoryTitle[$i]);
-            $category->setPicture('category.jpeg');
+            $category->setImage('category.jpeg');
             $categories[]=$category;
 
             $manager->persist($category);

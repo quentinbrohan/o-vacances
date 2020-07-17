@@ -7,7 +7,11 @@ parameters:
     images_directory: '%kernel.project_dir%/public/images'
 
 services:
-    # default configuration for services in *this* file
+    acme_api.event.jwt_created_listener:
+        class: App\Event\Listener\JWTCreatedListener
+        arguments: [ '@request_stack' ]
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_created, method: onJWTCreated }
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
