@@ -13,6 +13,7 @@ const initialState = {
   password: 'quentin',
   info: {},
   isAuthenticated: false,
+  isLoading: true,
 };
 
 const user = (state = initialState, action = {}) => {

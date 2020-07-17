@@ -10,6 +10,7 @@ const initialState = {
   trips: [],
   trip: {},
   suggestionContent: '',
+  isLoading: true,
 };
 
 const trip = (state = initialState, action = {}) => {
