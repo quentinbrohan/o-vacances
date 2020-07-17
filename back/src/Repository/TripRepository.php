@@ -61,6 +61,27 @@ class TripRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findAllActivitiesByTrips($id){
+        $builder = $this->createQueryBuilder('trip');
+        // je souhaite sécuriser le parametre $id
+        $builder->where("trip.id = :tripId");
+        // je precise au builder quelle valeur "injecter" dans le parametre :tripId
+        // Cette methode sécurise le contenu de la variable $id (echapment de car spéciaux ...)
+        $builder->setParameter("tripId", $id);
+        // Je demande a doctrine de faire la jointure avec la relation ->disponibility
+        $builder->leftJoin('trip.activity', 'activity');    
+        // je demande a doctrine d'alimenter les objets de type Disponibility dans mon objet Trip
+        $builder->addSelect('activity');
+        // Je demande a doctrine de faire la jointure avec la relation ->trip
+        $builder->leftJoin('activity.trip', 'trip');    
+        // je demande a doctrine d'alimenter les objets de type trip dans mon objet User
+        $builder->addSelect('trip');
+        // on recupère la requete construite
+        $query = $builder->getQuery();
+        // je demande a doctrine d'éxecuter le requete et de me renvoyer les resultats
+        return $query->getOneOrNullResult();
+    }
+
     // /**
     // * @return Trip[] Returns an array of Trip objects
     // */

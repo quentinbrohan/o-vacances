@@ -72,7 +72,7 @@ class TripController extends AbstractController
     }
 
     /**
-     * @Route("/api/v0/trips/{id}", name="api_v0_trips_show", methods="GET")
+     * @Route("/api/v0/users/{idUser}/trips/{id}", name="api_v0_trips_show", methods="GET")
      */
     public function show(TripRepository $tripRepository, SerializerInterface $serializer, Trip $trip)
     {
