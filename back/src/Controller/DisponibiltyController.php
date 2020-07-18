@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Disponibility;
+use App\Form\DisponibilityType;
 use App\Entity\Trip;
 use App\Entity\User;
 use App\Repository\DisponibilityRepository;
@@ -140,6 +141,7 @@ class DisponibiltyController extends AbstractController
     }
 
     /**
+     * @Route("api/v0/user/{id}/disponibilities", name="channel_delete", methods="DELETE")
      * @Route("api/v0/users/{idUser}/disponibilities/{id}", name="channel_delete", methods={"DELETE"})
      */
     public function delete(Request $request, EntityManagerInterface $em, Disponibility $disponibility, UserRepository $userRepository, $idUser)

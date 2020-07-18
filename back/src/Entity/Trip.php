@@ -46,6 +46,7 @@ class Trip
     
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups("apiV0_list")
      * @Groups("apiV0_trip")
      * @Groups("apiV0_tripByUser")
      *
@@ -120,6 +121,7 @@ class Trip
      * @ORM\Column(type="string", length=64, nullable=true)
      */
     private $password;
+
 
     
 
