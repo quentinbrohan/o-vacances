@@ -74,8 +74,10 @@ class TripController extends AbstractController
     /**
      * @Route("/api/v0/users/{idUser}/trips/{id}", name="api_v0_trips_show", methods="GET")
      */
-    public function show(TripRepository $tripRepository, SerializerInterface $serializer, Trip $trip)
+    public function show(TripRepository $tripRepository, SerializerInterface $serializer, Trip $trip, $id, $idUser)
     {
+
+        $trip = $tripRepository->findWithAllData($id);
         // On demande à Doctrine le voyage
         $trip = $tripRepository->find($trip);
 
@@ -121,6 +123,11 @@ class TripController extends AbstractController
                 ], 400);
             }
         
+        } else {
+            return $this->json([
+                'status' => 400,
+                'message'=>"Cette activité n'existe pas pour ce voyage"
+            ], 400);
         }
 
     
