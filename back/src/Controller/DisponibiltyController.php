@@ -93,8 +93,9 @@ class DisponibiltyController extends AbstractController
     /**
      * @Route("api/v0/users/{idUser}/disponibilities/{id}", name="api_v0_dispobinilities_user_edit", methods="PATCH")
      */
-    public function edit(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, ValidatorInterface $validator, $id, $idUser, Disponibility $disponibility, TripRepository $tripRepository, UserRepository $userRepository)
+    public function edit(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, ValidatorInterface $validator, $id, $idUser, DisponibilityRepository $disponibilityRepository, TripRepository $tripRepository, UserRepository $userRepository)
     {
+        $disponibility = $disponibilityRepository->find($id);
         if (!empty($disponibility)) {
             // On extrait de la requête le json reçu
             $jsonText = $request->getContent();
