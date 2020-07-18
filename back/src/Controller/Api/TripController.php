@@ -72,6 +72,11 @@ class TripController extends AbstractController
         }
     }
 
+    // todo : route permettant de verifier l'acces d'un utilisateur à un voyage avec son inscription auto (a l'aide du password du voyage) -> redirection sur la route pour voir les details du voyage.
+
+    
+
+
     /**
      * @Route("/api/v0/users/{idUser}/trips/{id}", name="api_v0_trips_show", methods="GET")
      */
@@ -90,47 +95,57 @@ class TripController extends AbstractController
     }
 
     /**
-     * @Route("/api/v0/trips/{id}", name="api_v0_trips_edit", methods="PATCH")
+     * @Route("/api/v0/users/{idUser}/trips/{id}", name="api_v0_trips_edit", methods="PATCH")
      */
-    public function edit(TripRepository $tripRepository, SerializerInterface $serializer, Request $request, $id, EntityManagerInterface $em, ValidatorInterface $validator)
+    public function edit(TripRepository $tripRepository, SerializerInterface $serializer, Request $request, $id, $idUser, EntityManagerInterface $em, ValidatorInterface $validator, UserRepository $userRepository)
     {
         // On demande à Doctrine le voyage
         $trip = $tripRepository->find($id);
+        
+        // je récupère l'id du créateur et celui de la personne qui fait l'action
+        $user = $userRepository->find($idUser);
+        $userId = $user->getId();
+        $creatorId = $trip->getCreator()->getId();
+ 
+        // seul le créateur du voyage à le droit de modifier ces informations
+        if ($userId === $creatorId) {
+            if (!empty($trip)) {
 
-        if (!empty($trip)){
+                // On extrait de la requête le json reçu
+                $jsonText = $request->getContent();
 
-            // On extrait de la requête le json reçu
-            $jsonText = $request->getContent();
-
-            try {
-                // on crée une nouvelle entité Trip avec le serializer
-                $newTrip = $serializer->deserialize($jsonText, Trip::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $trip]);
-             
-                // validation des données de $trips en fonction des Asserts des entités
-                $errors = $validator->validate($newTrip);
-
-                // s'il y a des erreurs
-                if(count($errors) > 0){
-                    return $this->json($errors, 400);
-                }
+                try {
+                    // on crée une nouvelle entité Trip avec le serializer
+                    $newTrip = $serializer->deserialize($jsonText, Trip::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $trip]);
                 
-                $em->flush();
-                return $this->json($newTrip, 201, [], ['groups' => 'apiV0_trip']);
+                    // validation des données de $trips en fonction des Asserts des entités
+                    $errors = $validator->validate($newTrip);
 
-            } catch(NotEncodableValueException $e) {
+                    // s'il y a des erreurs
+                    if (count($errors) > 0) {
+                        return $this->json($errors, 400);
+                    }
+                    
+                    $em->flush();
+                    return $this->json($newTrip, 201, [], ['groups' => 'apiV0_trip']);
+                } catch (NotEncodableValueException $e) {
+                    return $this->json([
+                        'status' => 400,
+                        'message'=>$e->getMessage()
+                    ], 400);
+                }
+            } else {
                 return $this->json([
                     'status' => 400,
-                    'message'=>$e->getMessage()
+                    'message'=>"Ce voyage n'existe pas"
                 ], 400);
             }
-        
         } else {
             return $this->json([
                 'status' => 400,
-                'message'=>"Ce voyage n'existe pas"
+                'message'=>"Vous n'avez pas l'autorisation de faire cette opération"
             ], 400);
         }
-
     
     }
 
