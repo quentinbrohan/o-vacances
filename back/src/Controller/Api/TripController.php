@@ -40,8 +40,9 @@ class TripController extends AbstractController
     /**
      * @Route("/api/v0/users/{id}/trips", name="api_v0_trips_new", methods="POST")
      */
-    public function new(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, ValidatorInterface $validator, User $user)
+    public function new(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, ValidatorInterface $validator, UserRepository $userRepository, $id)
     {
+        $user = $userRepository->find($id);
         // On extrait de la requête le json reçu
         $jsonText = $request->getContent();
 
@@ -126,7 +127,7 @@ class TripController extends AbstractController
         } else {
             return $this->json([
                 'status' => 400,
-                'message'=>"Cette activité n'existe pas pour ce voyage"
+                'message'=>"Ce voyage n'existe pas"
             ], 400);
         }
 
