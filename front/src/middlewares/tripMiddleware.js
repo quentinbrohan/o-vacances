@@ -16,8 +16,9 @@ import currentUser from 'src/utils/getCurrentUser';
 const tripMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case FETCH_TRIPS: {
+      const user = currentUser();
       // Endpoint fetch Trips list from user
-      axios.get('http://localhost:8000/api/v0/users/2/trips')
+      axios.get(`http://localhost:8000/api/v0/users/${user}/trips`)
         .then((response) => {
           console.log(response);
 
@@ -33,14 +34,14 @@ const tripMiddleware = (store) => (next) => (action) => {
 
     case FETCH_TRIP: {
       const { tripId } = action;
+      const user = currentUser();
 
       // Endpoint fetch Trips list from user
-      axios.get(`http://localhost:8000/api/v0/users/2/trips/${tripId}`)
+      axios.get(`http://localhost:8000/api/v0/users/${user}/trips/${tripId}`)
         .then((response) => {
           console.log(response);
 
           // // Check if creator
-          const user = currentUser();
           const isCreator = checkIfCreator(response.data.creator, user);
 
           store.dispatch(saveTrip(response.data, isCreator));
@@ -54,8 +55,10 @@ const tripMiddleware = (store) => (next) => (action) => {
     }
 
     case ADD_TRIP: {
-    // Endpoint add new trip to user
-      axios.post(`http://localhost:8000/api/v0/trips/${tripId}/suggestions/new`, {
+      // TODO:
+      const user = currentUser();
+      // Endpoint add new trip to user
+      axios.post(`http://localhost:8000/api/v0/users/${user}/trips`, {
         // props,
       })
         .then((response) => {
@@ -77,7 +80,7 @@ const tripMiddleware = (store) => (next) => (action) => {
       const { id } = store.getState().trip.trip;
 
       // Endpoint add new suggestion to trip
-      axios.post(`http://localhost:8000/api/v0/trips/${user}/suggestions/new`, {
+      axios.post(`http://localhost:8000/api/v0/trips/${id}/suggestions/new`, {
         // props,
         title: suggestionTitle,
         description: suggestionDescription,

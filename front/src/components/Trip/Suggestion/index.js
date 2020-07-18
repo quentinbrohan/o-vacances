@@ -9,7 +9,8 @@ const Suggestion = ({
   firstName,
   avatar,
   date,
-  content,
+  description,
+  title,
 }) => (
   <div className="suggestion">
     <header
@@ -22,7 +23,7 @@ const Suggestion = ({
       />
       <div className="suggestion-header-info">
         <p className="suggestion-title">
-          Un titre pas trop long
+          {title}
         </p>
         <p className="suggestion-author">
           {firstName}
@@ -34,8 +35,8 @@ const Suggestion = ({
       </div>
     </header>
     <div className="suggestion-body">
-      <p className="suggestion-content">
-        {content}
+      <p className="suggestion-description">
+        {description}
       </p>
     </div>
   </div>
@@ -45,7 +46,8 @@ Suggestion.propTypes = {
   avatar: PropTypes.string.isRequired,
   firstName: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 export default Suggestion;
