@@ -8,3 +8,11 @@
 //   reader.readAsDataURL(url[0]);
 //   )
 // };
+
+export const checkIfCreator = (creator, currentUser) => {
+  // Check in trip.creator if ID (creator) === currentUser ID
+  if (creator.id === currentUser) {
+    return true;
+  }
+  return false;
+};

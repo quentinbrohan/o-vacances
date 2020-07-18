@@ -10,6 +10,8 @@ import {
 const mapStateToProps = (state) => ({
   trip: state.trip.trip,
   isLoading: state.trip.isLoading,
+  isCreator: state.trip.isCreator,
+  isOwnUser: state.trip.isOwnUser,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -13,7 +13,7 @@ import 'react-dates/lib/css/_datepicker.css';
 import './react_dates_overrides.scss';
 import moment from 'moment';
 import 'moment/locale/fr';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Loading from 'src/components/Loading';
 
 import tripData from 'src/data/tripData';
@@ -30,16 +30,14 @@ const Trip = ({
   trip,
   isLoading,
   addSuggestion,
+  isCreator,
 }) => {
   const currentTrip = useParams().id;
   const tripId = Number(currentTrip);
-
   useEffect(() => {
     fetchTrip(tripId);
   }, []);
-  console.log(trip);
 
-  const [isCreator, setIsCreator] = useState(false);
   const [isOwnUser, setisOwnUser] = useState(false);
   const [focus, setFocus] = useState(null);
   // Trip's dates
@@ -69,9 +67,6 @@ const Trip = ({
   };
 
   const handleSuggestion = () => {
-    console.log();
-
-    console.log('newSuggestion');
     addSuggestion();
   };
 
@@ -81,7 +76,6 @@ const Trip = ({
       {isLoading && <Loading />}
       {(!isLoading && trip.length !== 0) && (
       <>
-        {console.log('loaded')}
         <img
           className="trip-photo"
           alt={trip.title}
@@ -184,6 +178,7 @@ const Trip = ({
                   onFocusChange={(focus) => setFocus(focus)}
                 />
                 {/* If Calendar === user show button => axios post new dates */}
+                {isOwnUser && (
                 <Button
                   color="secondary"
                   size="smg"
@@ -192,6 +187,7 @@ const Trip = ({
                 >
                   Modifier mes disponibilités
                 </Button>
+                )}
               </div>
 
               <div className="trip-access">
@@ -216,6 +212,16 @@ const Trip = ({
                 </div>
               </div>
               {/* OnClick copy Link to Clipboard ? */}
+              {/* If isCreator => Link to TripEdit !! Need currentTripID */}
+              {isCreator && (
+              <Button
+                color="secondary"
+                size="smg"
+                type="submit"
+              >
+                <Link to="/modifier-un-voyage">Modifier mon voyage</Link>
+              </Button>
+              )}
             </div>
 
           </div>
@@ -238,8 +244,8 @@ const Trip = ({
         <section className="suggestions">
           <h2>Suggestions</h2>
           <div className="trip-suggestions">
-            {(tripData.suggestions.length > 1) && (
-              tripData.suggestions.map((sugg) => (
+            {(trip.suggestion.length > 1) && (
+              trip.suggestion.map((sugg) => (
                 <Suggestion {...sugg} key={sugg.id} />
               ))
             )}
@@ -267,6 +273,7 @@ Trip.propTypes = {
     PropTypes.object]).isRequired,
   isLoading: PropTypes.bool.isRequired,
   addSuggestion: PropTypes.func.isRequired,
+  isCreator: PropTypes.bool.isRequired,
 };
 
 export default Trip;

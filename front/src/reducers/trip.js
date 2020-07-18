@@ -12,6 +12,8 @@ const initialState = {
   suggestionDescription: '',
   suggestionTitle: '',
   isLoading: true,
+  isCreator: false,
+  isOwnUser: false,
 };
 
 const trip = (state = initialState, action = {}) => {
@@ -40,6 +42,7 @@ const trip = (state = initialState, action = {}) => {
         ...state,
         trip: action.trip,
         isLoading: false,
+        isCreator: action.isCreator,
       };
 
     default: return state;

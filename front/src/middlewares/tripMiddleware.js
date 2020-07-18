@@ -10,6 +10,7 @@ import {
   ADD_SUGGESTION,
 } from 'src/actions/trip';
 
+import { checkIfCreator } from 'src/utils';
 import currentUser from 'src/utils/getCurrentUser';
 
 const tripMiddleware = (store) => (next) => (action) => {
@@ -38,7 +39,11 @@ const tripMiddleware = (store) => (next) => (action) => {
         .then((response) => {
           console.log(response);
 
-          store.dispatch(saveTrip(response.data));
+          // // Check if creator
+          const user = currentUser();
+          const isCreator = checkIfCreator(response.data.creator, user);
+
+          store.dispatch(saveTrip(response.data, isCreator));
         })
         .catch((error) => {
           console.warn(error);
@@ -67,7 +72,6 @@ const tripMiddleware = (store) => (next) => (action) => {
     }
 
     case ADD_SUGGESTION: {
-      console.log(action);
       const { suggestionTitle, suggestionDescription } = store.getState().trip;
       const user = currentUser();
       const { id } = store.getState().trip.trip;
