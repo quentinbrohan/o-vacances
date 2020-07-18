@@ -116,7 +116,12 @@ class Trip
      */
     private $creator;
 
-    
+    /**
+     * @ORM\Column(type="string", length=64, nullable=true)
+     */
+    private $password;
+
+
 
     public function __construct()
     {
@@ -348,6 +353,18 @@ class Trip
     public function setCreator(?User $creator): self
     {
         $this->creator = $creator;
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(?string $password): self
+    {
+        $this->password = $password;
 
         return $this;
     }

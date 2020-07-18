@@ -36,8 +36,8 @@ class AppFixtures extends Fixture
             $user->setFirstname($userName[$i]);
             $user->setLastname($userName[$i]);
             $user->setPassword($this->passwordEncoder->encodePassword($user, $pass[$i]));
-
-
+            $user->setRoles(['ROLE_USER']);
+            $user->setAvatar('avatar.png');
 
             $users [] = $user;
             
@@ -49,14 +49,21 @@ class AppFixtures extends Fixture
         $descriptions = ['Le voyage à dos de dromadaires prendra 4 heures la matinée et 2 heures le soir.
         Le matin, après le petit déjeuner, lorsque la caravane est prête, le départ vers le cœur du désert aura lieu. Après 3  heures de marche, avec quelques pauses de 15 ou 20 minutes pour prendre des photos, la caravane s\'arrête, les cuisiniers se chargent de préparer le déjeuner (couscous, soupe de blé, ...).'];
         $locations = ['Londres', 'Ile de Ré', 'Croatie', 'Espagne' ];
+        $startTrip = ['10-08-2020', '25-07-2020', '01-09-2020', '01-08-2015'];
+        $endTrip = ['30-08-2020', '09-08-2020', '03-09-2020', '10-08-2015'];
         
         for ($i = 0; $i < 4; $i++) {
             $trip = new Trip();
             $trip->setTitle($tripTitle[$i]);
             $trip->setDescription($descriptions[0]);
             $trip->setLocation($locations[$i]);
-            $trip->addUser($users[mt_rand(0, 4)], $users[mt_rand(0, 4)]);
             $trip->setCreator($users[mt_rand(0, 4)]);
+            $trip->addUser($users[mt_rand(0, 4)]);
+            $trip->addUser($users[mt_rand(0, 4)]);
+            $trip->setStartDate(new \DateTime($startTrip[$i]));
+            $trip->setEndDate(new \DateTime($endTrip[$i]));
+            $trip->setImage('imageTrip.jpeg');
+            $trip->setPassword($tripTitle[$i]);
             $trips[]=$trip;
     
             $manager->persist($trip);
@@ -67,13 +74,15 @@ class AppFixtures extends Fixture
         for ($i = 0; $i < 5; $i++) {
             $category = new Category();
             $category->setName($categoryTitle[$i]);
-            $category->setPicture('category.jpeg');
+            $category->setImage('category.jpeg');
             $categories[]=$category;
 
             $manager->persist($category);
         }
 
         $activities = ['canoé', 'chateau', 'nightclub', 'bistrot de France', 'foot', 'plage', 'rando de 7h' ];
+        $startActivity = ['10-08-2020', '25-07-2020', '01-09-2020', '14-07-2015', '20-07-2015', '17-07-2015', '14-10-2015'];
+        $endActivity = ['10-08-2020', '25-08-2020', '01-09-2020', '14-07-2015', '20-07-2015', '17-07-2015', '15-10-2015'];
         for ($i = 0; $i < 7; $i++) {
             $activity = new Activity();
             $activity->setTitle($activities[$i]);
@@ -81,6 +90,9 @@ class AppFixtures extends Fixture
             $activity->setCreator($users[mt_rand(0, 4)]);
             $activity->setCategory($categories[mt_rand(0, 4)]);
             $activity->setTrip($trips[mt_rand(0, 3)]);
+            $activity->setStartDate(new \DateTime($startActivity[$i]));
+            $activity->setEndDate(new \DateTime($endActivity[$i]));
+
 
             $manager->persist($activity);
         }
