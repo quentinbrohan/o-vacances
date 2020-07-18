@@ -56,6 +56,7 @@ class AppFixtures extends Fixture
             $trip = new Trip();
             $trip->setTitle($tripTitle[$i]);
             $trip->setDescription($descriptions[0]);
+            $trip->setPassword($tripTitle[$i]);
             $trip->setLocation($locations[$i]);
             $trip->setCreator($users[mt_rand(0, 4)]);
             $trip->addUser($users[mt_rand(0, 4)]);
