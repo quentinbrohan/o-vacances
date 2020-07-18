@@ -46,6 +46,7 @@ class Trip
     
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups("apiV0_list")
      * @Groups("apiV0_trip")
      * @Groups("apiV0_tripByUser")
      *
@@ -115,6 +116,12 @@ class Trip
      * 
      */
     private $creator;
+
+    /**
+     * @ORM\Column(type="string", length=64, nullable=true)
+     */
+    private $password;
+
 
     
 
@@ -348,6 +355,18 @@ class Trip
     public function setCreator(?User $creator): self
     {
         $this->creator = $creator;
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(?string $password): self
+    {
+        $this->password = $password;
 
         return $this;
     }

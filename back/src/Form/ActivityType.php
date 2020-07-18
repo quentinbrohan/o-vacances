@@ -17,22 +17,11 @@ class ActivityType extends AbstractType
         $builder
             ->add('title')
             ->add('description')
-            ->add('startDate')
-            ->add('endDate')
-            ->add('creator',
-            EntityType::class, [
-                "class" => Activity::class,
-                "required" => false
-            ])
-            ->add('category',
-            EntityType::class, [
-                "class" => Category::class
-            ])
-            ->add('trip',
-            EntityType::class, [
-                "class" => Trip::class
-            ])
-           
+            ->add('start_date')
+            ->add('end_date')
+            ->add('creator')
+            ->add('category')
+            ->add('trip')
         ;
     }
 
