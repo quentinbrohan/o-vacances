@@ -115,7 +115,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("api/v0/user/{id}/profil", name="api_user_profil", methods="GET")
+     * @Route("api/v0/users/{id}/profil", name="api_user_profil", methods="GET")
      */
     public function show(User $user, $id, UserRepository $userRepository, ObjectNormalizer $normalizer): Response
     {

@@ -17,23 +17,27 @@ class Category
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups("apiV0_categories")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=64)
      * @Groups("apiV0_trip")
+     * @Groups("apiV0_categories")
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=128)
      * @Groups("apiV0_trip")
+     * @Groups("apiV0_categories")
      */
     private $image;
 
     /**
      * @ORM\OneToMany(targetEntity=Activity::class, mappedBy="category")
+     * @Groups("apiV0_categories")
      */
     private $activities;
 
