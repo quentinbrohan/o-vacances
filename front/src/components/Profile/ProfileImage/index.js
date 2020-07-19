@@ -7,7 +7,7 @@ import { ReactComponent as AvatarDefault } from 'src/assets/svg/user.svg';
 
 import './profileImage.scss';
 
-const ProfileImage = ({avatar, name, firstname, onChangeImage, onChange, handleEditUser }) => {
+const ProfileImage = ({ avatar, name, firstname, onChangeImage, onChange, handleEditUser }) => {
   Modal.setAppElement('div');
   const [modalIsOpen, setIsOpen] = useState(false);
   const openModal = () => {
@@ -88,6 +88,8 @@ ProfileImage.propTypes = {
   firstname: PropTypes.string.isRequired,
   onChangeImage: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
+  avatar: PropTypes.func.isRequired,
+  handleEditUser: PropTypes.func.isRequired,
 };
 
 ProfileImage.defaultProps = {
