@@ -4,7 +4,6 @@ import jwtDecode from 'jwt-decode';
 import {
   SIGN_IN,
   LOG_IN,
-  saveUser,
   FETCH_USER,
   updateUserProfil,
   EDIT_USER,
@@ -17,6 +16,7 @@ import {
 // const config = {
 // headers: { Authorization: `Bearer ${token}` },
 // };
+import currentUser from 'src/utils/getCurrentUser';
 
 const userMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
@@ -84,7 +84,7 @@ const userMiddleware = (store) => (next) => (action) => {
     }
     case FETCH_USER: {
       // Endpoint fetch User Profil
-      axios.get('http://localhost:8000/api/v0/users/3/profil')
+      axios.get(`http://localhost:8000/api/v0/users/${currentUser()}/profil`)
         .then((response) => {
           console.log(response);
 
@@ -106,7 +106,7 @@ const userMiddleware = (store) => (next) => (action) => {
       } = store.getState().user;
 
       // withCredentials : autorisation d'accéder au cookie
-      axios.patch('http://localhost:8000/api/v0/users/3/edit', {
+      axios.patch(`http://localhost:8000/api/v0/users/${currentUser()}/edit`, {
         email,
         password,
         lastname,

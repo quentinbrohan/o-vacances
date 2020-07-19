@@ -14,8 +14,8 @@ const initialState = {
   password: '',
   avatar: '',
   info: {},
-  isAuthenticated: true,
-  isLoading: true,
+  isAuthenticated: false,
+  isLoading: false,
 };
 
 const user = (state = initialState, action = {}) => {
