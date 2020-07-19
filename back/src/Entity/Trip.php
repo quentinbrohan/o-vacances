@@ -119,6 +119,7 @@ class Trip
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
+     * @Groups("apiV0_trip")
      */
     private $password;
 
