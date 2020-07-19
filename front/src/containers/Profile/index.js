@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { deleteDisabledInput } from 'src/actions/settings';
+import { deleteDisabledInput, addImagePreview } from 'src/actions/settings';
 import { fetchUser, editUser, updateUserField } from 'src/actions/user';
 
 // === on importe le composant de présentation
@@ -15,6 +15,7 @@ const mapStateToProps = (state) => ({
   lastname: state.user.lastname,
   firstname: state.user.firstname,
   avatar: state.user.avatar,
+  file: state.settings.file,
 
 });
 
@@ -35,6 +36,10 @@ const mapDispatchToProps = (dispatch) => ({
 
   changeField: (newValue, name) => {
     dispatch(updateUserField(newValue, name));
+  },
+
+  addImagePreview: (url) => {
+    dispatch(addImagePreview(url));
   },
 });
 

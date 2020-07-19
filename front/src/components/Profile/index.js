@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Button from 'src/components/elements/Button';
-
 import { ReactComponent as AvatarDefault } from 'src/assets/svg/user.svg';
 
 import { Edit2, Check } from 'react-feather';
 
+import ProfileImage from './ProfileImage';
 import ProfileField from './ProfileField/ProfileField';
 
 import './profile.scss';
@@ -22,6 +22,7 @@ const Profile = ({
   avatar,
   changeField,
   handleEditUser,
+  addImagePreview,
 }) => {
   useEffect(() => {
     fetchUser();
@@ -36,10 +37,11 @@ const Profile = ({
     <main className="profile">
       <h1>Mon profil</h1>
       <div className="profile-head">
-        <div className="profile-head-img">
-          { avatar === null ? (<AvatarDefault className="profile-head-img-picture" />) : (<img className="profile-head-img-picture" src={avatar} alt={firstname} />) }
-          <Button color="primary">Modifier la photo</Button>
-        </div>
+        <ProfileImage
+          avatar={avatar}
+          firstname={firstname}
+          onChangeImage={addImagePreview}
+        />
         <div className="profile-head-information">
           <form onSubmit={handleSubmit}>
             <ProfileField
