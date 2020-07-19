@@ -78,20 +78,65 @@ class TripController extends AbstractController
 
 
     /**
-     * @Route("/api/v0/users/{idUser}/trips/{id}", name="api_v0_trips_show", methods="GET")
+     * @Route("/api/v0/users/{idUser}/trips/{id}", name="api_v0_trips_show", methods={"GET", "POST"})
      */
-    public function show(TripRepository $tripRepository, SerializerInterface $serializer, Trip $trip, $id, $idUser)
+    public function show(Request $request, TripRepository $tripRepository, SerializerInterface $serializer, EntityManagerInterface $em, $id, $idUser, UserRepository $userRepository)
     {
-
+        // On récupère le voyage
         $trip = $tripRepository->findWithAllData($id);
-        // On demande à Doctrine le voyage
-        $trip = $tripRepository->find($trip);
-
-        $json = $serializer->serialize($trip, 'json', ['groups' => 'apiV0_trip']);
         
-        $response = new JsonResponse($json, 200, [], true);
+        // je récupère l'id de la personne qui fait l'action sous format int (le $idUser est sous format string)
+        $user = $userRepository->find($idUser);
+        $userId = $user->getId();
+        $participant = 0;
+        
+        $usersBy = $tripRepository->findAllUsersByTrip($id);
+        $tripUsers = $trip->getUsers();
+        // si l'un des participant est la personne qui consulte la page $participant = 1
+        foreach($tripUsers as $userParticipant){
+            $i = $userParticipant->getId();      
+            if($i===$userId) {
+                $participant =+1;
+            } 
+        }
+
+        // si l'utilisateur fait parti des participant au voyage
+        if($participant >= 1){
+            $trip = $tripRepository->findWithAllData($id);
+            // On demande à Doctrine le voyage
+            
+            $json = $serializer->serialize($trip, 'json', ['groups' => 'apiV0_trip']);
+            
+            $response = new JsonResponse($json, 200, [], true);
 
         return $response;
+        
+        } else {
+            // sinon alors verifier qu'il envoie le bon mot de passe. 
+            // alors je récupère le password envoyé lors de la requete et je le compare à celui de la BDD
+            $jsonText = $request->getContent();
+            $jsonArray = json_decode($jsonText, true);
+            $passwordSend = $jsonArray["password"];
+            $PasswordTrip = $trip->getPassword();
+
+            if($passwordSend === $PasswordTrip){
+                
+                $trip->addUser($user);
+                $em->persist($trip);
+                $em->flush();
+
+                $json = $serializer->serialize($trip, 'json', ['groups' => 'apiV0_trip']);
+                $response = new JsonResponse($json, 200, [], true);
+                return $response;
+                
+            } else {
+                return $this->json([
+                    'status' => 400,
+                    'message'=>"Vous n'avez pas l'autorisation d'acceder au voyage. Contactez le créateur du voyage"
+                ], 400);
+            }
+        }
+
     }
 
     /**
