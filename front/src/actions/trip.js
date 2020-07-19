@@ -7,9 +7,10 @@ export const SAVE_TRIP = 'SAVE_TRIP';
 export const ADD_TRIP = 'ADD_TRIP';
 export const NEW_TRIP = 'NEW_TRIP';
 
-export const updateSuggestionField = (newValue) => ({
+export const updateSuggestionField = (newValue, name) => ({
   type: UPDATE_SUGGESTION_FIELD,
   newValue,
+  name,
 });
 
 export const addSuggestion = () => ({
@@ -25,13 +26,15 @@ export const saveTrips = (trips) => ({
   trips,
 });
 
-export const fetchTrip = () => ({
+export const fetchTrip = (tripId) => ({
   type: FETCH_TRIP,
+  tripId,
 });
 
-export const saveTrip = (trip) => ({
+export const saveTrip = (trip, isCreator) => ({
   type: SAVE_TRIP,
   trip,
+  isCreator,
 });
 
 export const addTrip = (trip) => ({

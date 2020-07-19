@@ -18,13 +18,19 @@
 
           .suggestion-header-info {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column;
             width: 100%;
-            .suggestion-author {
+            .suggestion-title {
               font-size: 1.2rem;
               font-weight: 600;
               color: $blackColor;
+              width: 100%;
+            }
+            .suggestion-author {
+              font-weight: 600;
+              color: $blackColor;
+              display: flex;
+              justify-content: space-between;
             }
             .suggestion-date {
               color: $greyColor;
@@ -42,7 +48,7 @@
         .suggestion-body {
           padding: 0.5rem;
         }
-        .suggestion-content {
+        .suggestion-description {
           margin-left: 3rem;
         }
       }

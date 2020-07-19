@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
+import 'moment/locale/fr';
 
 import './suggestion.scss';
 
@@ -7,7 +9,8 @@ const Suggestion = ({
   firstName,
   avatar,
   date,
-  content,
+  description,
+  title,
 }) => (
   <div className="suggestion">
     <header
@@ -19,18 +22,21 @@ const Suggestion = ({
         className="suggestion-avatar"
       />
       <div className="suggestion-header-info">
+        <p className="suggestion-title">
+          {title}
+        </p>
         <p className="suggestion-author">
           {firstName}
-        </p>
-        <p className="suggestion-date">
-          {date}
+          <span className="suggestion-date">
+            {moment(date).format('lll')}
+          </span>
         </p>
 
       </div>
     </header>
     <div className="suggestion-body">
-      <p className="suggestion-content">
-        {content}
+      <p className="suggestion-description">
+        {description}
       </p>
     </div>
   </div>
@@ -40,7 +46,8 @@ Suggestion.propTypes = {
   avatar: PropTypes.string.isRequired,
   firstName: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 export default Suggestion;

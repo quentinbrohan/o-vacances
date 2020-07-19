@@ -8,9 +8,12 @@ import {
 const initialState = {
   // ici l'état initial
   trips: [],
-  trip: {},
-  suggestionContent: '',
+  trip: [],
+  suggestionDescription: '',
+  suggestionTitle: '',
   isLoading: true,
+  isCreator: false,
+  isOwnUser: false,
 };
 
 const trip = (state = initialState, action = {}) => {
@@ -18,7 +21,7 @@ const trip = (state = initialState, action = {}) => {
     case UPDATE_SUGGESTION_FIELD:
       return {
         ...state,
-        suggestionContent: action.newValue,
+        [action.name]: action.newValue,
       };
 
     case ADD_SUGGESTION:
@@ -31,12 +34,15 @@ const trip = (state = initialState, action = {}) => {
       return {
         ...state,
         trips: action.trips,
+        isLoading: false,
       };
 
     case SAVE_TRIP:
       return {
         ...state,
         trip: action.trip,
+        isLoading: false,
+        isCreator: action.isCreator,
       };
 
     default: return state;

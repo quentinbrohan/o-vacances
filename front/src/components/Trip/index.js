@@ -3,7 +3,6 @@
 import React, {
   useState,
   useEffect,
-  Suspense,
 } from 'react';
 import PropTypes from 'prop-types';
 import { Calendar, MapPin } from 'react-feather';
@@ -14,27 +13,31 @@ import 'react-dates/lib/css/_datepicker.css';
 import './react_dates_overrides.scss';
 import moment from 'moment';
 import 'moment/locale/fr';
+import { Link, useParams } from 'react-router-dom';
+import Loading from 'src/components/Loading';
 
 import tripData from 'src/data/tripData';
+import SuggestionForm from 'src/containers/Trip/SuggestionForm';
 import ActivityCard from './ActivityCard';
 import PlusCard from './PlusCard';
 import Suggestion from './Suggestion';
-import SuggestionForm from './SuggestionForm';
 import './trip.scss';
 
 const Trip = ({
   changeSuggestion,
-  handleSuggestion,
   suggestionContent,
   fetchTrip,
   trip,
+  isLoading,
+  addSuggestion,
+  isCreator,
 }) => {
+  const currentTrip = useParams().id;
+  const tripId = Number(currentTrip);
   useEffect(() => {
-    fetchTrip();
-    console.log(trip);
+    fetchTrip(tripId);
   }, []);
 
-  const [isCreator, setIsCreator] = useState(false);
   const [isOwnUser, setisOwnUser] = useState(false);
   const [focus, setFocus] = useState(null);
   // Trip's dates
@@ -63,9 +66,16 @@ const Trip = ({
     });
   };
 
+  const handleSuggestion = () => {
+    addSuggestion();
+  };
+
   return (
     <main className="trip-details">
-      <Suspense fallback={<div>Chargement</div>}>
+
+      {isLoading && <Loading />}
+      {(!isLoading && trip.length !== 0) && (
+      <>
         <img
           className="trip-photo"
           alt={trip.title}
@@ -87,6 +97,9 @@ const Trip = ({
                   {trip.location}
                 </p>
               </div>
+              <div className="creator">
+                <p>Créé par {`${trip.creator.firstname} ${trip.creator.lastname}`} </p>
+              </div>
             </div>
 
             <div className="trip-info-description">
@@ -99,13 +112,13 @@ const Trip = ({
           <div className="right">
             <div className="trip-info-aside">
               <div className="participants">
-                <p className="text">{`${tripData.participants.length} participants`}</p>
+                <p className="text">{`${trip.users.length} participants`}</p>
                 <div className="avatars">
-                  {tripData.participants.map((participant) => (
+                  {trip.users.map((user) => (
                     <img
-                      key={participant.firstName}
-                      src={participant.avatar}
-                      alt={participant.firstName}
+                      key={user.firstname}
+                      src={user.avatar}
+                      alt={user.firstname}
                       className="avatar"
                     />
                   ))}
@@ -165,6 +178,7 @@ const Trip = ({
                   onFocusChange={(focus) => setFocus(focus)}
                 />
                 {/* If Calendar === user show button => axios post new dates */}
+                {isOwnUser && (
                 <Button
                   color="secondary"
                   size="smg"
@@ -173,6 +187,7 @@ const Trip = ({
                 >
                   Modifier mes disponibilités
                 </Button>
+                )}
               </div>
 
               <div className="trip-access">
@@ -197,6 +212,16 @@ const Trip = ({
                 </div>
               </div>
               {/* OnClick copy Link to Clipboard ? */}
+              {/* If isCreator => Link to TripEdit !! Need currentTripID */}
+              {isCreator && (
+              <Button
+                color="secondary"
+                size="smg"
+                type="submit"
+              >
+                <Link to="/modifier-un-voyage">Modifier mon voyage</Link>
+              </Button>
+              )}
             </div>
 
           </div>
@@ -205,32 +230,34 @@ const Trip = ({
         <section className="activities">
           <h2>Mes activités {''}
 
-            <span>({tripData.activities.length})</span>
+            <span>({trip.activities.length})</span>
           </h2>
           <div className="trip-activities">
-            {tripData.activities.slice(0, 5).map((activity) => (
+            {trip.activities.slice(0, 5).map((activity) => (
               <ActivityCard {...activity} key={activity.id} />
             ))}
-            {(tripData.activities.length > 5)
-          && (<PlusCard id={tripData.id} />)}
+            {(trip.activities.length > 5)
+          && (<PlusCard id={trip.id} />)}
           </div>
         </section>
 
         <section className="suggestions">
           <h2>Suggestions</h2>
           <div className="trip-suggestions">
-            {/* Suggestion component (h2 + card) */}
-            {tripData.suggestions.map((suggestion) => (
-              <Suggestion {...suggestion} key={suggestion.id} />
-            ))}
+            {(trip.suggestion.length > 1) && (
+              trip.suggestion.map((sugg) => (
+                <Suggestion {...sugg} key={sugg.id} />
+              ))
+            )}
           </div>
           <SuggestionForm
             onChange={changeSuggestion}
             suggestionContent={suggestionContent}
-            handleSuggestion={handleSuggestion}
+            manageSuggestion={handleSuggestion}
           />
         </section>
-      </Suspense>
+      </>
+      )}
     </main>
   );
 };
@@ -238,9 +265,15 @@ const Trip = ({
 Trip.propTypes = {
   changeSuggestion: PropTypes.func.isRequired,
   handleSuggestion: PropTypes.func.isRequired,
+  manageSuggestion: PropTypes.func.isRequired,
   suggestionContent: PropTypes.string.isRequired,
   fetchTrip: PropTypes.func.isRequired,
-  trip: PropTypes.array.isRequired,
+  trip: PropTypes.PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.object]).isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  addSuggestion: PropTypes.func.isRequired,
+  isCreator: PropTypes.bool.isRequired,
 };
 
 export default Trip;

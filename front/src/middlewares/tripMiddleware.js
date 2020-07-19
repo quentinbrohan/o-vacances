@@ -7,15 +7,18 @@ import {
   saveTrip,
   ADD_TRIP,
   newTrip,
+  ADD_SUGGESTION,
 } from 'src/actions/trip';
 
+import { checkIfCreator } from 'src/utils';
 import currentUser from 'src/utils/getCurrentUser';
 
 const tripMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case FETCH_TRIPS: {
+      const user = currentUser();
       // Endpoint fetch Trips list from user
-      axios.get(`http://localhost:8000/api/v0/users/${currentUser()}/trips`)
+      axios.get(`http://localhost:8000/api/v0/users/${user}/trips`)
         .then((response) => {
           console.log(response);
 
@@ -30,12 +33,18 @@ const tripMiddleware = (store) => (next) => (action) => {
     }
 
     case FETCH_TRIP: {
+      const { tripId } = action;
+      const user = currentUser();
+
       // Endpoint fetch Trips list from user
-      axios.get('http://localhost:8000/api/v0/trips/1')
+      axios.get(`http://localhost:8000/api/v0/users/${user}/trips/${tripId}`)
         .then((response) => {
           console.log(response);
 
-          store.dispatch(saveTrip(response.data));
+          // // Check if creator
+          const isCreator = checkIfCreator(response.data.creator, user);
+
+          store.dispatch(saveTrip(response.data, isCreator));
         })
         .catch((error) => {
           console.warn(error);
@@ -46,15 +55,43 @@ const tripMiddleware = (store) => (next) => (action) => {
     }
 
     case ADD_TRIP: {
-    // Endpoint add new trip to user
-      axios.post('http://localhost:8000/api/v0/users/5/trips', {
+      // TODO:
+      const user = currentUser();
+      // Endpoint add new trip to user
+      axios.post(`http://localhost:8000/api/v0/users/${user}/trips`, {
         // props,
       })
         .then((response) => {
           console.log(response);
 
-          // TODO: newTrip = clear tripForm inputs
-          store.dispatch(newTrip(response.data));
+          // store.dispatch(newTrip(response.data));
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
+
+      next(action);
+      break;
+    }
+
+    case ADD_SUGGESTION: {
+      const { suggestionTitle, suggestionDescription } = store.getState().trip;
+      const user = currentUser();
+      const { id } = store.getState().trip.trip;
+
+      // Endpoint add new suggestion to trip
+      axios.post(`http://localhost:8000/api/v0/trips/${id}/suggestions/new`, {
+        // props,
+        title: suggestionTitle,
+        description: suggestionDescription,
+        user,
+        id,
+      })
+        .then((response) => {
+          console.log(response);
+
+          // TODO: newTrip = clear tripForm inputs DONE
+          // Add suggestion to state or directly refresh Trip component afterward (?)
         })
         .catch((error) => {
           console.warn(error);

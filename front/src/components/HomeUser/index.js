@@ -1,8 +1,9 @@
-import React, { useEffect, Suspense } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import userTrips from 'src/data/homeUserTripsData';
 import userOldTrips from 'src/data/homeUserOldTripsData';
+import Loading from 'src/components/Loading';
 import TripCard from './TripCard';
 
 import './homeUser.scss';
@@ -10,6 +11,7 @@ import './homeUser.scss';
 const HomeUser = ({
   fetchTrips,
   trips,
+  isLoading,
 }) => {
   useEffect(() => {
     fetchTrips();
@@ -19,8 +21,10 @@ const HomeUser = ({
 
   return (
     <main className="home-user">
-      <h1>Mes Voyages</h1>
-      <Suspense fallback={<div>Chargement</div>}>
+      {isLoading && <Loading />}
+      {!isLoading && (
+      <>
+        <h1>Mes Voyages</h1>
         <div className="my-trips">
           {trips.map((trip) => (
             <TripCard {...trip} key={trip.id} />
@@ -33,13 +37,15 @@ const HomeUser = ({
             <TripCard {...trip} key={trip.id} />
           ))}
         </div>
-      </Suspense>
+      </>
+      )}
     </main>
   );
 };
 
 HomeUser.propTypes = {
   fetchTrips: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
   trips: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,

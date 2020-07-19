@@ -122,6 +122,7 @@ class Trip
      */
     private $password;
 
+
     
 
     public function __construct()
