@@ -102,6 +102,7 @@ const userMiddleware = (store) => (next) => (action) => {
         password,
         lastname,
         firstname,
+        avatar,
       } = store.getState().user;
 
       // withCredentials : autorisation d'accéder au cookie
@@ -110,6 +111,7 @@ const userMiddleware = (store) => (next) => (action) => {
         password,
         lastname,
         firstname,
+        avatar,
       }, {
         withCredentials: true,
         // config,

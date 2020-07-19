@@ -38,9 +38,12 @@ const Profile = ({
       <h1>Mon profil</h1>
       <div className="profile-head">
         <ProfileImage
+          name="avatar"
           avatar={avatar}
           firstname={firstname}
           onChangeImage={addImagePreview}
+          onChange={changeField}
+          handleEditUser={handleEditUser}
         />
         <div className="profile-head-information">
           <form onSubmit={handleSubmit}>
@@ -134,6 +137,7 @@ Profile.propTypes = {
   password: PropTypes.string.isRequired,
   handleEditUser: PropTypes.func.isRequired,
   avatar: PropTypes.string,
+  addImagePreview: PropTypes.func.isRequired,
 
 };
 
