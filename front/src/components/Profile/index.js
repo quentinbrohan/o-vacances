@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Button from 'src/components/elements/Button';
 
-import AvatarDefault from 'src/assets/svg/user.svg';
+import { ReactComponent as AvatarDefault } from 'src/assets/svg/user.svg';
 
 import { Edit2, Check } from 'react-feather';
 
@@ -31,16 +31,13 @@ const Profile = ({
     event.preventDefault();
   };
 
-  const Avatar = (avatar === null ? AvatarDefault : avatar);
-console.log(avatar);
-console.log(Avatar);
   return (
 
     <main className="profile">
       <h1>Mon profil</h1>
       <div className="profile-head">
         <div className="profile-head-img">
-          <img className="profile-head-img-picture" src={Avatar} alt={firstname} />
+          { avatar === null ? (<AvatarDefault className="profile-head-img-picture" />) : (<img className="profile-head-img-picture" src={avatar} alt={firstname} />) }
           <Button color="primary">Modifier la photo</Button>
         </div>
         <div className="profile-head-information">
@@ -139,7 +136,7 @@ Profile.propTypes = {
 };
 
 Profile.defaultProps = {
-  avatar: 'src/assets/svg/user.svg',
+  avatar: AvatarDefault,
 };
 
 export default Profile;
