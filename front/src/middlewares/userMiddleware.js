@@ -4,6 +4,9 @@ import jwtDecode from 'jwt-decode';
 import {
   SIGN_IN,
   LOG_IN,
+  FETCH_USER,
+  updateUserProfil,
+  EDIT_USER,
   CHECK_AUTHENTICATION,
   LOG_OUT,
   logInUser,
@@ -13,6 +16,7 @@ import {
 // const config = {
 // headers: { Authorization: `Bearer ${token}` },
 // };
+import currentUser from 'src/utils/getCurrentUser';
 
 const userMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
@@ -77,7 +81,50 @@ const userMiddleware = (store) => (next) => (action) => {
       next(action);
       break;
     }
+    case FETCH_USER: {
+      // Endpoint fetch User Profil
+      axios.get(`http://localhost:8000/api/v0/users/${currentUser()}/profil`)
+        .then((response) => {
+          console.log(response);
 
+          store.dispatch(updateUserProfil(response.data));
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
+
+      next(action);
+      break;
+    }
+    case EDIT_USER: {
+      const {
+        email,
+        password,
+        lastname,
+        firstname,
+        avatar,
+      } = store.getState().user;
+
+      // withCredentials : autorisation d'accéder au cookie
+      axios.patch(`http://localhost:8000/api/v0/users/${currentUser()}/edit`, {
+        email,
+        password,
+        lastname,
+        firstname,
+        avatar,
+      }, {
+        withCredentials: true,
+        // config,
+      })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
+      next(action);
+      break;
+    }
     case CHECK_AUTHENTICATION: {
       const token = window.localStorage.getItem('authToken');
       // If token still valid
