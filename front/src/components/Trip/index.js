@@ -95,16 +95,17 @@ const Trip = ({
   };
 
   // Merge trip.disponibility + trip.users for <select> options
-  // if (trip.length !== 0) {
-  //   const { disponibility, users } = trip;
-  //   console.log(users);
+  if (trip.length !== 0) {
+    const { disponibility, users } = trip;
+    console.log(disponibility);
+    // console.log(users);
 
-  //   const usersDisponibilities = disponibility.map((disp) => ({
-  //     ...disp,
-  //     ...users.find(({ id }) => id === disp.id),
-  //   }));
-  //   return usersDisponibilities;
-  // }
+    const participantsDisponibilities = disponibility.map((disp) => ({
+      ...disp,
+      ...users.find(({ id }) => id === disp.id),
+    }));
+    // console.log(participantsDisponibilities);
+  }
 
   return (
     <main className="trip-details">
