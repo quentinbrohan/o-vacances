@@ -12,6 +12,7 @@ import {
   FETCH_SUGGESTIONS,
   saveSuggestions,
   fetchTrip,
+  MODIFY_USER_DISPONIBILITIES,
 } from 'src/actions/trip';
 
 import { checkIfCreator } from 'src/utils';
@@ -45,10 +46,12 @@ const tripMiddleware = (store) => (next) => (action) => {
         .then((response) => {
           console.log(response);
 
-          // // Check if creator
+          // Check if creator
           const isCreator = checkIfCreator(response.data.creator, user);
+          // Get logged user disponibilities
+          const userDisponibilities = response.data.disponibility.filter((x) => x.id === user);
 
-          store.dispatch(saveTrip(response.data, isCreator));
+          store.dispatch(saveTrip(response.data, isCreator, userDisponibilities[0]));
         })
         .catch((error) => {
           console.warn(error);
@@ -94,9 +97,9 @@ const tripMiddleware = (store) => (next) => (action) => {
       })
         .then(() => {
           store.dispatch(clearSuggestionField());
-          // Add suggestion to state or directly refresh Trip component afterward (?)
         })
         .then(() => {
+          // For refresh
           store.dispatch(fetchTrip(id));
         })
         .catch((error) => {
@@ -117,6 +120,34 @@ const tripMiddleware = (store) => (next) => (action) => {
         .then((response) => {
           console.log(response);
           store.dispatch(saveSuggestions(response.data));
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
+
+      next(action);
+      break;
+    }
+
+    case MODIFY_USER_DISPONIBILITIES: {
+      const user = currentUser();
+      const { id } = store.getState().trip.trip;
+      const { startDate, endDate } = action;
+
+      // Endpoint add new suggestion to trip
+      axios.patch(`http://localhost:8000/api/v0/users/${id}/disponibilities/${id}`, {
+        // props,
+        user,
+        trip: id,
+        startDate,
+        endDate,
+      })
+        .then(() => {
+          console.log('Modification des dispo de l\'utilisateur effectuée');
+        })
+        .then(() => {
+          // For refresh
+          store.dispatch(fetchTrip(id));
         })
         .catch((error) => {
           console.warn(error);

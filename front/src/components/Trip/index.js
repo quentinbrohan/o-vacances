@@ -33,6 +33,9 @@ const Trip = ({
   isCreator,
   tripPassword,
   isOwnUser,
+  userDisponibilities,
+  changeUserDisponibilities,
+  modifyUserDisponibilities,
 }) => {
   const currentTrip = useParams().id;
   const tripId = Number(currentTrip);
@@ -40,43 +43,36 @@ const Trip = ({
     fetchTrip(tripId);
   }, []);
 
-  // const [isOwnUser, setisOwnUser] = useState(false);
   const [focus, setFocus] = useState(null);
-  // Trip's dates
-  const [datesTrip, setDatesTrip] = useState({
-    startDate: trip.startDate,
-    endDate: trip.endDate,
-  });
 
-  // Participant's dates (default = user)
-  const [datesParticipant, setDatesParticipant] = useState({
-    startDate: '01-01-2025',
-    endDate: '27-12-2025',
-  });
+  // Logged user disponibilities
 
-  const { startDate, endDate } = datesParticipant;
-
-  
-  
   // moment date format
   const DATE_FORMAT_MOMENT = 'YYYY-MM-DD';
-  console.log(moment(startDate, 'DD-MM-YYYY', true));
-  console.log(moment(trip.startDate).format(DATE_FORMAT_MOMENT));
 
-  const manageDisponibilities = (currentDisponibilities) => {
-    // JSON to object
-    const disp = (JSON.parse(currentDisponibilities.value));
-    setDatesParticipant({
-      startDate: disp.startDate,
-      endDate: disp.endDate,
-    });
+  const changeDisponibilities = () => {
+    changeUserDisponibilities();
+  };
+
+  const reviseDisponibilities = () => {
+    modifyUserDisponibilities();
   };
 
   const handleSuggestion = () => {
     addSuggestion();
   };
 
-  // const userDisp = new Set(trip.disponibility)
+  // Merge trip.disponibility + trip.users for <select> options
+  // if (trip.length !== 0) {
+  //   const { disponibility, users } = trip;
+  //   console.log(users);
+
+  //   const usersDisponibilities = disponibility.map((disp) => ({
+  //     ...disp,
+  //     ...users.find(({ id }) => id === disp.id),
+  //   }));
+  //   return usersDisponibilities;
+  // }
 
   return (
     <main className="trip-details">
@@ -96,7 +92,7 @@ const Trip = ({
               <div className="date">
                 <Calendar />
                 <p>
-                  Du {moment(trip.startDate).format('ll')} au {moment(trip.endDate).format('ll')}.
+                  Du {moment(trip.startDate).format('ll')} au {moment(trip.endDate).format('ll')}
                 </p>
               </div>
               <div className="location">
@@ -139,44 +135,45 @@ const Trip = ({
                 <select
                   name="disponibilities"
                   id="disponibilities"
-                  onChange={() => manageDisponibilities(disponibilities)}
+                  // onChange={() => manageDisponibilities(disponibilities)}
                 >
-                  <option disabled defaultValue>Participants</option>
-                  {tripData.participants.map((participant) => (
+                  <option disabled>Participants</option>
+                  {trip.disponibility.map((participant) => (
                     <option
                     // Pass Object as JSON for value
-                      value={JSON.stringify(participant.disponibilities)}
-                      key={participant.firstName}
+                      // value={JSON.stringify(participant.disponibilities)}
+                      key={participant.id}
+                      disabled={!isOwnUser}
+                      defaultValue={!!isOwnUser}
                     >
-                      {participant.firstName}
+                      {participant.id} - {moment(participant.startDate).format('L')} 🠒 {moment(participant.endDate).format('L')}
                     </option>
                   ))}
                 </select>
                 {/* if logged user => able to edit own disponibilities */}
                 <DateRangePicker
-                // minDate={moment(datesTrip.startDate)}
-                // maxDate={moment(datesTrip.endDate)}
+                  minDate={moment(trip.startDate, 'YYYY-MM-DD')}
+                  maxDate={moment(trip.endDate, 'YYYY-MM-DD')}
                 // TODO: DATE format YYYY-MM-DD in database !
                   startDate={moment(trip.startDate, 'YYYY-MM-DD')}
                   endDate={moment(trip.endDate, 'YYYY-MM-DD')}
                   startDateId="start"
                   endDateId="end"
 
-                // disabled={!isCreator}
                   startDatePlaceholderText="Début disponibilité"
                   endDatePlaceholderText="Fin disponibilité"
-                // disabled={!isOwnUser}
                 // TODO: disable dates outside start/end Trip.
-                // isOutsideRange={(date) => date.isBefore(datesTrip.startDate, 'day') || date.isAfter(datesTrip.endDate, 'day')}
-                // isOutsideRange={(date) => !date.isBetween(datesTrip.startDate, datesTrip.endDate, 'day', true)}
+                // isOutsideRange={(date) => date.isBefore(dates.startDate, 'day') || date.isAfter(dates.endDate, 'day')}
+                // isOutsideRange={(date) => !date.isBetween(dates.startDate, dates.endDate, 'day', true)}
                 // withPortal
+                  disabled={!isOwnUser}
                   anchorDirection="right"
                   firstDayOfWeek={1}
                   hideKeyboardShortcutsPanel
                   regular
                   onDatesChange={({ startDate, endDate }) => {
                     if (startDate && endDate) {
-                      setDatesParticipant({
+                      changeDisponibilities({
                         startDate: startDate.format(DATE_FORMAT_MOMENT),
                         endDate: endDate.format(DATE_FORMAT_MOMENT),
                       });
@@ -185,13 +182,13 @@ const Trip = ({
                   focusedInput={focus}
                   onFocusChange={(focus) => setFocus(focus)}
                 />
-                {/* If Calendar === user show button => axios post new dates */}
+                {/* If Calendar === user ++ select === user: show button => axios post new dates */}
                 {isOwnUser && (
                 <Button
                   color="secondary"
                   size="smg"
                   type="submit"
-                  onClick={() => manageDisponibilities()}
+                  onClick={() => reviseDisponibilities()}
                 >
                   Modifier mes disponibilités
                 </Button>
@@ -277,7 +274,7 @@ const Trip = ({
             <span>({trip.suggestion.length})</span>
           </h2>
           <div className="trip-suggestions">
-            {(trip.suggestion.length > 1) && (
+            {(trip.suggestion.length >= 1) && (
               trip.suggestion.map((sugg) => (
                 <Suggestion {...sugg} key={sugg.id} />
               ))
@@ -309,6 +306,14 @@ Trip.propTypes = {
   isCreator: PropTypes.bool.isRequired,
   tripPassword: PropTypes.string.isRequired,
   isOwnUser: PropTypes.bool.isRequired,
+  userDisponibilities: PropTypes.objectOf(
+    PropTypes.shape({
+      startDate: PropTypes.string.isRequired,
+      endDate: PropTypes.string.isRequired,
+    }).isRequired,
+  ).isRequired,
+  changeUserDisponibilities: PropTypes.func.isRequired,
+  modifyUserDisponibilities: PropTypes.func.isRequired,
 };
 
 export default Trip;
