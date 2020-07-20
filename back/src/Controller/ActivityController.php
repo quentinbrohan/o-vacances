@@ -95,7 +95,7 @@ class ActivityController extends AbstractController
     /**
      * @Route("/api/v0/trips/{idTrip}/activities/{id}/edit", name="api_v0_activities_edit", methods="PATCH")
      */
-    public function edit(ActivityRepository $activityRepository, SerializerInterface $serializer, Request $request, $id, EntityManagerInterface $em, ValidatorInterface $validator, User $user,UserRepository $userRepository, CategoryRepository $categoryRepository, Trip $trip, TripRepository $tripRepository)
+    public function edit(ActivityRepository $activityRepository, SerializerInterface $serializer, Request $request, $id, EntityManagerInterface $em, ValidatorInterface $validator,UserRepository $userRepository, CategoryRepository $categoryRepository, TripRepository $tripRepository)
     {
 
         $jsonText = $request->getContent();
@@ -155,7 +155,7 @@ class ActivityController extends AbstractController
     /**
      * @Route("api/v0/users/{idUser}/trips/{idTrip}/activities/{id}/delete", name="api_v0_activities_delete", methods="DELETE")
      */
-    public function delete(Request $request, EntityManagerInterface $em, Activity $activity, UserRepository $userRepository, TripRepository $tripRepository, $idTrip, $idUser)
+    public function delete(EntityManagerInterface $em, Activity $activity, UserRepository $userRepository, TripRepository $tripRepository, $idUser, $idTrip)
     {
         // récupération du voyage, utilisateur et créateur.
         $trip = $tripRepository->find($idTrip);
