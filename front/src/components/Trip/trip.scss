@@ -162,6 +162,9 @@
 
   section.activities {
     margin-top: $gutter * 2;
+    h2 span {
+      font-size: 1.5rem;
+    }
     .trip-activities {
       display: flex;
       flex-wrap: wrap;
@@ -170,6 +173,9 @@
 
   section.suggestions {
     margin-top: $gutter * 2;
+    h2 span {
+      font-size: 1.5rem;
+    }
     .trip-suggestions {
       display: flex;
       flex-direction: column;

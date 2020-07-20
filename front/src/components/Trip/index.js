@@ -5,7 +5,7 @@ import React, {
   useEffect,
 } from 'react';
 import PropTypes from 'prop-types';
-import { Calendar, MapPin } from 'react-feather';
+import { Calendar, MapPin, HelpCircle } from 'react-feather';
 import Button from 'src/components/elements/Button';
 // React Dates
 import { DateRangePicker } from 'react-dates';
@@ -31,12 +31,13 @@ const Trip = ({
   isLoading,
   addSuggestion,
   isCreator,
+  tripPassword,
 }) => {
   const currentTrip = useParams().id;
   const tripId = Number(currentTrip);
   useEffect(() => {
     fetchTrip(tripId);
-  }, []);
+  }, [trip]);
 
   const [isOwnUser, setisOwnUser] = useState(false);
   const [focus, setFocus] = useState(null);
@@ -67,7 +68,8 @@ const Trip = ({
   };
 
   const handleSuggestion = () => {
-    addSuggestion();
+    addSuggestion()
+      .then(() => fetchTrip(tripId));
   };
 
   return (
@@ -197,19 +199,34 @@ const Trip = ({
                     type="text"
                     name="trip-password"
                     id="trip-password"
-                    value="Excalibur"
+                    value={tripPassword}
                     disabled
                   />
                 </div>
                 <div className="trip-link">
                   <p>Lien du voyage:</p>
                   <a
-                    href="#"
+                    href="http://o-vacances.fr/voyage/{trip.id}"
                     className="link"
                   >
                     http://o-vacances.fr/voyage/{trip.id}
                   </a>
                 </div>
+              </div>
+              <div className="trip-help">
+                <details>
+                  <summary>
+                    <HelpCircle />
+                  </summary>
+                  {/* Modal instead of <details> ? */}
+                  Le mot de passe donne accès au voyage, il est nécessaire lors de la première
+                  connexion pour s'authentifier au voyage uniquement. Il est modifiable
+                  par le créateur du voyage uniquement.
+                  <hr />
+                  Le bouton "Modifier mes disponibilités" apparaît uniquement pour l'utilisateur
+                  connecté quand celui-ci est selectionné dans la liste. Il suffit de changer ses
+                  disponibilités dans le calendrier et cliquer sur "Modifier mes disponibilités" !
+                </details>
               </div>
               {/* OnClick copy Link to Clipboard ? */}
               {/* If isCreator => Link to TripEdit !! Need currentTripID */}
@@ -242,7 +259,9 @@ const Trip = ({
         </section>
 
         <section className="suggestions">
-          <h2>Suggestions</h2>
+          <h2>Suggestions {''}
+            <span>({trip.suggestion.length})</span>
+          </h2>
           <div className="trip-suggestions">
             {(trip.suggestion.length > 1) && (
               trip.suggestion.map((sugg) => (
@@ -274,6 +293,7 @@ Trip.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   addSuggestion: PropTypes.func.isRequired,
   isCreator: PropTypes.bool.isRequired,
+  tripPassword: PropTypes.string.isRequired,
 };
 
 export default Trip;

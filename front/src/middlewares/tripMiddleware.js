@@ -8,6 +8,7 @@ import {
   ADD_TRIP,
   newTrip,
   ADD_SUGGESTION,
+  clearSuggestionField,
 } from 'src/actions/trip';
 
 import { checkIfCreator } from 'src/utils';
@@ -78,6 +79,7 @@ const tripMiddleware = (store) => (next) => (action) => {
       const { suggestionTitle, suggestionDescription } = store.getState().trip;
       const user = currentUser();
       const { id } = store.getState().trip.trip;
+      console.log(id);
 
       // Endpoint add new suggestion to trip
       axios.post(`http://localhost:8000/api/v0/trips/${id}/suggestions/new`, {
@@ -85,12 +87,13 @@ const tripMiddleware = (store) => (next) => (action) => {
         title: suggestionTitle,
         description: suggestionDescription,
         user,
-        id,
+        trip: id,
       })
         .then((response) => {
           console.log(response);
 
           // TODO: newTrip = clear tripForm inputs DONE
+          store.dispatch(clearSuggestionField());
           // Add suggestion to state or directly refresh Trip component afterward (?)
         })
         .catch((error) => {
