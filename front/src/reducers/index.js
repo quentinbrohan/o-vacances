@@ -8,6 +8,7 @@ const rootReducer = combineReducers({
   user: userReducer,
   settings: settingsReducer,
   trip: tripReducer,
+
 });
 
 export default rootReducer;

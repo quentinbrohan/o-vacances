@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Button from 'src/components/elements/Button';
 import Modal from 'react-modal';
 
@@ -8,7 +9,7 @@ import FieldSelect from './FieldSelect';
 
 import './activityForm.scss';
 
-const ActivityForm = () => {
+const ActivityForm = ({ changeField, activity }) => {
   Modal.setAppElement('div');
   let subtitle;
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -39,38 +40,46 @@ const ActivityForm = () => {
 
         <form className="activity-form-element" onSubmit="">
           <Field
-            name="Activity"
+            name="title"
             placeholder="Activité"
-
+            onChange={changeField}
+            value={activity.title}
           />
           <FieldSelect
-            name="Category"
+            name="category"
             placeholder="Catégorie"
+            onChange={changeField}
+            value={activity.category.title}
           />
           <Field
             name="start-date"
             placeholder="Date de début"
             type="date"
+            onChange={changeField}
+            value={activity.startDate}
           />
 
           <Field
             name="end-date"
             placeholder="Date de fin"
             type="date"
+            onChange={changeField}
+            value={activity.startDate}
           />
           <Field
-            name="lieux"
+            name="location"
             type="adress"
             placeholder="Lieu"
-            // onChange={changeField}
-            // value={password}
+            onChange={changeField}
+            value={activity.location}
           />
           <Field
             name="description"
             type="textarea"
             placeholder="On fait quoi?"
-            // onChange={changeField}
-            // value={password}
+            onChange={changeField}
+            value={activity.description}
+
           />
         </form>
         <Button className="activity-form-button" onClick={closeModal}>j'ajoute</Button>
@@ -78,6 +87,10 @@ const ActivityForm = () => {
     </div>
 
   );
+};
+
+ActivityForm.propTypes = {
+  changeField: PropTypes.func.isRequired,
 };
 
 export default ActivityForm;

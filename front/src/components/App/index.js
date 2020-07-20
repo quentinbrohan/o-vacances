@@ -21,7 +21,7 @@ import Profile from 'src/containers/Profile';
 import Trip from 'src/containers/Trip';
 import ErrorPage from 'src/components/ErrorPage';
 import HomeUser from 'src/containers/HomeUser';
-import Activities from 'src/components/Activities';
+import Activities from 'src/containers/Activities';
 import TripForm from 'src/containers/TripForm';
 import TripEdit from 'src/containers/TripEdit';
 import ActivityForm from 'src/components/ActivityForm';

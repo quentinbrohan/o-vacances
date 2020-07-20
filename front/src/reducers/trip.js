@@ -3,6 +3,7 @@ import {
   ADD_SUGGESTION,
   SAVE_TRIPS,
   SAVE_TRIP,
+  UPDATE_ACTIVITY_FIELD,
 } from 'src/actions/trip';
 
 const initialState = {
@@ -43,6 +44,12 @@ const trip = (state = initialState, action = {}) => {
         trip: action.trip,
         isLoading: false,
         isCreator: action.isCreator,
+      };
+
+    case UPDATE_ACTIVITY_FIELD:
+      return {
+        ...state,
+        trip: [action.name].newValue,
       };
 
     default: return state;
