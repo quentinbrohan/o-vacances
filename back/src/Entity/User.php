@@ -321,6 +321,9 @@ class User implements UserInterface
     {
         if ($this->trip->contains($trip)) {
             $this->trip->removeElement($trip);
+            if ($trip->getUsers() === $this) {
+                $trip->addUsers(null);
+            }
         }
         return $this;
     }
