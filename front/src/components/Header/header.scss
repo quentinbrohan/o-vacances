@@ -24,9 +24,9 @@
 
   .logo {
     width: 10rem;
-    transform-origin: center;
     @include transitionFast;
     :hover {
+      transform-origin: center;
       transform: scale(0.92);
       opacity: 0.7;
     @include transitionFast;

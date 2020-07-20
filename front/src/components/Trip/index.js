@@ -195,10 +195,15 @@ const Trip = ({
                   startDatePlaceholderText="Début disponibilité"
                   endDatePlaceholderText="Fin disponibilité"
                 // TODO: disable dates outside start/end Trip.
-                isOutsideRange={(userDisponibilities) => userDisponibilities.isBefore(userDisponibilities.startDate, 'day') || userDisponibilities.isAfter(userDisponibilities.endDate, 'day')}
-                isOutsideRange={(userDisponibilities) => !userDisponibilities.isBetween(userDisponibilities.startDate, userDisponibilities.endDate, 'day', true)}
+                // isOutsideRange={(userDisponibilities) => (
+                  // userDisponibilities.isBefore(userDisponibilities.startDate, 'day')
+                  // || userDisponibilities.isAfter(userDisponibilities.endDate, 'day')
+                  // )}
+                // isOutsideRange={(userDisponibilities) => (
+                  // !userDisponibilities.isBetween(
+                    // userDisponibilities.startDate, userDisponibilities.endDate, 'day', true))}
                 // withPortal
-                  // disabled={!isOwnUser}
+                  disabled={!isOwnUser}
                   anchorDirection="right"
                   firstDayOfWeek={1}
                   hideKeyboardShortcutsPanel
@@ -265,15 +270,20 @@ const Trip = ({
                   <h2>Besoin d'aide ?</h2>
                   <div>
                     Le mot de passe donne accès au voyage, il est nécessaire lors de la première
-                    connexion pour s'authentifier au voyage uniquement. Il est modifiable
-                    par le créateur du voyage uniquement.
+                    connexion pour s'authentifier au voyage uniquement, et n'est modifiable que
+                    par le créateur du voyage.
                     <hr />
-                    {/* Le bouton "Modifier mes disponibilités" apparaît uniquement pour l'utilisateur
-                    connecté quand celui-ci est selectionné dans la liste. */}
+                    {/*
+                    Le bouton "Modifier mes disponibilités" apparaît uniquement pour l'utilisateur
+                    connecté quand celui-ci est selectionné dans la liste.
+                    */}
                     Pour changer ses disponibilités en un clic, il suffit de changer ses
-                    disponibilités dans le calendrier, ce dernier se ferme une fois avoir choisi 2 dates. Cliquer maintenant sur "Modifier mes disponibilités".
+                    disponibilités dans le calendrier, ce dernier se ferme une fois avoir choisi
+                    2 dates. Cliquer maintenant sur "Modifier mes disponibilités".
                     <hr />
-                    La suppression d'un voyage ne peut se faire que par un utilisateur ayant le rôle "créateur" (créateur du voyage). Autrement le voyage n'est pas supprimé mais vous n'y aurez plus accès.
+                    La suppression d'un voyage ne peut se faire que par un utilisateur ayant le rôle
+                    "créateur" (le créateur du voyage). Autrement, le voyage n'est pas
+                    supprimé mais vous n'y aurez plus accès.
                     <hr />
                     Tout le monde peut proposer une activité ainsi qu'une suggestion.
                     <hr />

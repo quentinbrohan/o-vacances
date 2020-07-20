@@ -70,6 +70,10 @@ const App = ({
               component={Contact}
             />
             <Route
+              path="/loading"
+              component={Loading}
+            />
+            <Route
               path="/qui-sommes-nous"
               render={() => <Team persons={persons} />}
             />
