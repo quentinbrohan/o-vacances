@@ -49,6 +49,8 @@ class SuggestionController extends AbstractController
       
         $form->submit($jsonArray);
 
+        $newSuggestion->setCreatedAt(new \DateTime('now'));
+
         if ($form->isSubmitted() && $form->isValid()) {
             // on traite le formulaire
             // par exemple on l'envoi dans la BDD
@@ -66,9 +68,9 @@ class SuggestionController extends AbstractController
     }
 
     /**
-     * @Route("api/v0/trips/{id}/suggestions/update", name="api_v0_suggestions_update", methods="PATCH")
+     * @Route("api/v0/trips/{idTrip}/suggestions/{id}/update", name="api_v0_suggestions_update", methods="PATCH")
      */
-    public function update(Request $request, Suggestion $suggestion, SuggestionRepository $suggestionRepository, $id, ObjectNormalizer $normalizer) : Response
+    public function update(Request $request, Suggestion $suggestion, SuggestionRepository $suggestionRepository, $idTrip, $id, ObjectNormalizer $normalizer) : Response
     {
         $suggestion = $suggestionRepository->find($id);
 
@@ -96,7 +98,7 @@ class SuggestionController extends AbstractController
             // On instancie un serializer en lui précisant un normalizer adapté aux objets PHP
             $serializer = new Serializer([$normalizer]);
             // Parce qu'on a précisé le normalizer, on peut normaliser selon un groupe
-            $normalizedSuggestion = $serializer->normalize($suggestion, null, ['groups' => 'apiV0_list']);
+            $normalizedSuggestion = $serializer->normalize($suggestion, null, ['groups' => 'apiV0_Suggestion']);
             return $this->json($normalizedSuggestion, 201);
         }
         return $this->json((string) $form->getErrors(true, false), 400);

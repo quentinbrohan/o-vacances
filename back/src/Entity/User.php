@@ -53,8 +53,7 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
-     * @Groups("apiV0_list")
-     * @Groups("apiV0_user")
+     * 
      */
     private $password;
 
