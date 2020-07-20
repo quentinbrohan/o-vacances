@@ -51,7 +51,7 @@ class DisponibiltyController extends AbstractController
     }
 
     /**
-     * @Route("/api/v0/users/{id}/disponibilities", name="api_v0_animes_new", methods="POST")
+     * @Route("/api/v0/users/{id}/disponibilities", name="api_v0_disponibilities_new", methods="POST")
      */
     public function new(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, ValidatorInterface $validator, User $user, TripRepository $tripRepository)
     {
@@ -92,10 +92,11 @@ class DisponibiltyController extends AbstractController
     }
 
     /**
-     * @Route("api/v0/users/{idUser}/disponibilities/{id}", name="api_v0_dispobinilities_user_edit", methods="PATCH")
+     * @Route("api/v0/users/{idUser}/disponibilities/{id}", name="api_v0_disponibilities_user_edit", methods="PATCH")
      */
-    public function edit(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, ValidatorInterface $validator, $id, $idUser, Disponibility $disponibility, TripRepository $tripRepository, UserRepository $userRepository)
+    public function edit(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, ValidatorInterface $validator, $id, $idUser, DisponibilityRepository $disponibilityRepository, TripRepository $tripRepository, UserRepository $userRepository)
     {
+        $disponibility = $disponibilityRepository->find($id);
         if (!empty($disponibility)) {
             // On extrait de la requête le json reçu
             $jsonText = $request->getContent();
@@ -141,8 +142,7 @@ class DisponibiltyController extends AbstractController
     }
 
     /**
-     * @Route("api/v0/user/{id}/disponibilities", name="channel_delete", methods="DELETE")
-     * @Route("api/v0/users/{idUser}/disponibilities/{id}", name="channel_delete", methods={"DELETE"})
+     * @Route("api/v0/users/{idUser}/disponibilities/{id}", name="api_v0_disponibilities_user_delete", methods={"DELETE"})
      */
     public function delete(Request $request, EntityManagerInterface $em, Disponibility $disponibility, UserRepository $userRepository, $idUser)
     {
@@ -170,7 +170,7 @@ class DisponibiltyController extends AbstractController
     }
 
     /**
-     * @Route("api/v0/disponibilities/{id}", name="channel_delete", methods={"DELETE"})
+     * @Route("api/v0/disponibilities/{id}", name="api_v0_disponibilities_delete", methods={"DELETE"})
      */
     public function deleteDisponibility(Request $request, EntityManagerInterface $em, Disponibility $disponibility, UserRepository $userRepository)
     {

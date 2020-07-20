@@ -47,7 +47,7 @@ class ActivityController extends AbstractController
     }
 
     /**
-     * @Route("/api/v0/trips/{id}/activities/new", name="api_v0_activities_new", methods="POST")
+     * @Route("/api/v0/trips/{id}/activities", name="api_v0_activities_new", methods="POST")
      */
     public function new(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, ValidatorInterface $validator, User $user,UserRepository $userRepository, CategoryRepository $categoryRepository, Trip $trip, TripRepository $tripRepository)
     {
@@ -152,6 +152,7 @@ class ActivityController extends AbstractController
 
     }
 
+    // todo : pas encore terminé
     /**
      * @Route("api/v0/users/{idUser}/trips/{idTrip}/activities/{id}/delete", name="api_v0_activities_delete", methods="DELETE")
      */
