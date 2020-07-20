@@ -10,6 +10,8 @@ import {
   ADD_SUGGESTION,
   clearSuggestionField,
   FETCH_SUGGESTIONS,
+  saveSuggestions,
+  fetchTrip,
 } from 'src/actions/trip';
 
 import { checkIfCreator } from 'src/utils';
@@ -90,7 +92,7 @@ const tripMiddleware = (store) => (next) => (action) => {
         user,
         trip: id,
       })
-        .then((response) => {
+        .then(() => {
           store.dispatch(clearSuggestionField());
           // Add suggestion to state or directly refresh Trip component afterward (?)
         })
@@ -105,9 +107,8 @@ const tripMiddleware = (store) => (next) => (action) => {
       break;
     }
 
-
     case FETCH_SUGGESTIONS: {
-      const { id } = store.getState().trip.trip;      
+      const { id } = store.getState().trip.trip;
 
       // Endpoint fetch suggestions from trip
       axios.get(`http://localhost:8000/api/v0/trips/${id}/suggestions`, {

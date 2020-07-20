@@ -32,7 +32,7 @@ const Trip = ({
   addSuggestion,
   isCreator,
   tripPassword,
-  fetchSuggestions,
+  isOwnUser,
 }) => {
   const currentTrip = useParams().id;
   const tripId = Number(currentTrip);
@@ -40,8 +40,7 @@ const Trip = ({
     fetchTrip(tripId);
   }, []);
 
-  // Force refresh in case of new Suggestion
-  const [isOwnUser, setisOwnUser] = useState(false);
+  // const [isOwnUser, setisOwnUser] = useState(false);
   const [focus, setFocus] = useState(null);
   // Trip's dates
   const [datesTrip, setDatesTrip] = useState({
@@ -57,8 +56,12 @@ const Trip = ({
 
   const { startDate, endDate } = datesParticipant;
 
+  
+  
   // moment date format
-  const DATE_FORMAT_MOMENT = 'YY-MM-DD';
+  const DATE_FORMAT_MOMENT = 'YYYY-MM-DD';
+  console.log(moment(startDate, 'DD-MM-YYYY', true));
+  console.log(moment(trip.startDate).format(DATE_FORMAT_MOMENT));
 
   const manageDisponibilities = (currentDisponibilities) => {
     // JSON to object
@@ -73,7 +76,7 @@ const Trip = ({
     addSuggestion();
   };
 
-  // const userDisponibilities = new Set(trip.disponibility)
+  // const userDisp = new Set(trip.disponibility)
 
   return (
     <main className="trip-details">
@@ -154,8 +157,8 @@ const Trip = ({
                 // minDate={moment(datesTrip.startDate)}
                 // maxDate={moment(datesTrip.endDate)}
                 // TODO: DATE format YYYY-MM-DD in database !
-                  startDate={moment(startDate, 'DD-MM-YYYY', true)}
-                  endDate={moment(endDate, 'DD-MM-YYYY', true)}
+                  startDate={moment(trip.startDate, 'YYYY-MM-DD')}
+                  endDate={moment(trip.endDate, 'YYYY-MM-DD')}
                   startDateId="start"
                   endDateId="end"
 
@@ -305,7 +308,7 @@ Trip.propTypes = {
   addSuggestion: PropTypes.func.isRequired,
   isCreator: PropTypes.bool.isRequired,
   tripPassword: PropTypes.string.isRequired,
-  fetchSuggestions: PropTypes.func.isRequired,
+  isOwnUser: PropTypes.bool.isRequired,
 };
 
 export default Trip;
