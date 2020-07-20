@@ -144,16 +144,15 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("api/v0/user/{id}/delete", name="api_user_delete", methods="DELETE")
+     * @Route("api/v0/users/{id}/delete", name="api_user_delete", methods="DELETE")
      */
-    public function delete( User $user, UserRepository $userRepository, ObjectNormalizer $normalizer, $id): Response
+    public function delete(User $user, UserRepository $userRepository, ObjectNormalizer $normalizer): Response
     {
-        $user = $userRepository->find($id);
         
-        return $this->json(200);
-
         $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($user);
-            $entityManager->flush();
+        $entityManager->remove($user);
+        $entityManager->flush();
+            
+        return $this->json(200);
     }
 }

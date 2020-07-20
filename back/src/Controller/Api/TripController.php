@@ -321,6 +321,4 @@ class TripController extends AbstractController
         
     }
 
-
-    // todo Fonction suppression de voyage - a voir plus tard si necessaire
 }
