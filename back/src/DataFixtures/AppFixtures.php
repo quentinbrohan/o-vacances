@@ -121,6 +121,7 @@ class AppFixtures extends Fixture
             $suggestion->setDescription($descriptionsSuggestions[$i]);
             $suggestion->setUser($users[mt_rand(0, 4)]);
             $suggestion->setTrip($trips[mt_rand(0, 3)]);
+            $suggestion->setCreatedAt(new \Datetime('now'));
 
             $manager->persist($suggestion);
         }
