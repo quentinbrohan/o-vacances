@@ -85,7 +85,7 @@ const userMiddleware = (store) => (next) => (action) => {
         const jwtData = jwtDecode(token);
         if (jwtData.exp * 1000 > new Date().getTime()) {
           axios.defaults.headers.Authorization = `Bearer + ${token}`;
-          console.log('Token valide');
+          // console.log('Token valide');
           store.dispatch(logInUser());
 
           next(action);

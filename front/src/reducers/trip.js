@@ -43,8 +43,6 @@ const trip = (state = initialState, action = {}) => {
       };
 
     case SAVE_TRIP:
-      console.log(action);
-
       return {
         ...state,
         trip: action.trip,

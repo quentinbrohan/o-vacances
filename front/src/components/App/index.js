@@ -33,7 +33,6 @@ import persons from 'src/data/teamData';
 
 import './styles.scss';
 
-
 // == Composant
 const App = ({
   isAuthenticated,
@@ -42,7 +41,7 @@ const App = ({
   checkAuth();
 
   useEffect(() => {
-    // checkAuth();
+    checkAuth();
   }, [isAuthenticated]);
 
   return (
