@@ -1,0 +1,35 @@
+@import "src/styles/vars";
+
+.trip-edit {
+  h1 {
+    text-align: center;
+  }
+  .trip-edit {
+    width: 50%;
+  }
+  .trip-edit-element {
+    width: 100%;
+    @media (min-width: $tablet) {
+      max-width: 50%;
+      margin: 0 auto;
+    }
+  }
+  .trip-edit-button {
+    display: block;
+    width: 100%;
+    @media (min-width: $tablet) {
+      width: initial;
+    }
+    margin: 1rem auto 0;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    &:hover {
+      background-color: $primaryColorDarker;
+    }
+  }
+
+  form {
+    margin-top: $gutter;
+    margin: 0 auto;
+  }
+}

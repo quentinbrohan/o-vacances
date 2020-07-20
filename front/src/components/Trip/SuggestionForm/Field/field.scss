@@ -1,0 +1,55 @@
+@import 'src/styles/vars';
+
+.trip-details {
+  .suggestion-form {
+    width: 100%;
+    max-width: 768px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    &-title {
+      width: 100%;
+      display: block;
+      font-weight: bold;
+      font-size: 1.4rem;
+      margin: 2rem 0 1rem;
+    }
+
+    .field {
+      width: 100%;
+    }
+    label.field-label {
+      width: 100%;
+      display: block;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+    input.field-input {
+      width: 100%;
+      // max-width: calc(768px - 2.5rem);
+      margin-top: 0.25rem;
+      height: 2.5rem;
+      padding: 0.75rem;
+      font-size: 1rem;
+      border: solid 1px $greyColorDarker;
+      border-radius: 0.5rem;
+      flex-grow: 2;
+      margin-bottom: 0.5rem;
+      &:last-of-type {
+        margin-bottom: 1rem;
+      }
+      &:focus {
+        border-color: $greyColorDarker;
+      }
+      &::placeholder {
+        color: $blackColor;
+      }
+    }
+
+    button {
+      margin-left: 0.5rem;
+      color: $blackColor;
+    }
+  }
+}

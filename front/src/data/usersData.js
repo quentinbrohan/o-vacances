@@ -1,4 +1,4 @@
-import avatarUser from 'src/assets/images/svg/user.svg';
+import avatarUser from 'src/assets/svg/user.svg';
 import imgQuentin from 'src/assets/images/team/quentin-brohan.jpg';
 import imgAlex from 'src/assets/images/team/alexandre-quezel.jpg';
 

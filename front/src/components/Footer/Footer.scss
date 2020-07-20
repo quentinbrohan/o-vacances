@@ -14,11 +14,19 @@ footer {
   .footer-nav{
     color: white;
     font-size: 0.8rem;
-    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    @media (min-width: $lg-mobile) {
+      display: block;
+    }
+
     .footer-nav-item{
 
       display: inline-block;
       margin-right: 2rem;
+      line-height: 125%;
       
       a{ 
         font-size: 1rem;
@@ -29,5 +37,14 @@ footer {
 
        }
     } 
+
+    .copyright{
+      margin-top: 0.5rem;
+      float: right;
+      font-size: 1rem;
+      @media (min-width: $lg-mobile) {
+        margin-top: 0;
+      }
+    }
   }
 }

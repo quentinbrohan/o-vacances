@@ -14,18 +14,56 @@
     margin: 0 auto;
   }
   button {
-    outline: none;
-    border: none;
-    background-color: initial;
-    font-size: 1rem;
-    color: $blackColor;
     @media (min-width: $tablet) {
       margin-left: 1rem;
     }
   }
   .button-header {
-    background: $whiteColor!important;
     height: 100%;
+  }
+
+  .logo {
+    width: 10rem;
+    @include transitionFast;
+    :hover {
+      transform-origin: center;
+      transform: scale(0.92);
+      opacity: 0.7;
+    @include transitionFast;
+    }
+    svg * {
+      fill: $primaryColor;
+    }
+  }
+
+  .navigation .menu {
+    li a {
+      padding-bottom: 2.25rem;
+      border-bottom: 0.25rem solid transparent;
+      @include transitionFast;
+    }
+    nav a:hover, li a:hover {
+      color: lighten($blackColor, 20%);
+      padding-bottom: 2.25rem;
+      border-bottom: 0.25rem solid lighten($blackColor, 20%);
+    }
+    a.nav--active {
+      color: $primaryColorDarker;
+      padding-bottom: 2.25rem;
+      border-bottom: 0.25rem solid $primaryColorDarker;
+
+      &:hover {
+        color: lighten($primaryColorDarker, 20);
+        padding-bottom: 2.25rem;
+        border-bottom: 0.25rem solid lighten($primaryColorDarker, 20%);
+      }
+    }
+  }
+
+  .navigation .mobile {
+    a.nav--active {
+      color: $primaryColorDarker;
+    }
   }
 
   .mobile {
@@ -42,99 +80,101 @@
       top: 2rem;
     }
 
-      /* Color/shape of burger icon bars */
-  .bm-burger-bars {
-    background: $blackColor;
-  }
+    /* Color/shape of burger icon bars */
+    .bm-burger-bars {
+      background: $blackColor;
+    }
 
+    /* Position and sizing of clickable cross button */
+    .bm-cross-button {
+      position: absolute;
+      top: 2rem !important;
+      right: 2rem !important;
+      height: 2rem !important;
+      width: 2rem !important;
+    }
 
-  /* Position and sizing of clickable cross button */
-  .bm-cross-button {
-    position: absolute;
-    top: 2rem !important;
-    right: 2rem !important;
-    height: 2rem !important;
-    width: 2rem !important;
-  }
+    /* Color/shape of close button cross */
+    .bm-cross {
+      color: $blackColor;
+    }
 
-  /* Color/shape of close button cross */
-  .bm-cross {
-    color: $blackColor;
-  }
-
-  /*
+    /*
 Sidebar wrapper styles
 Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
 */
-  .bm-menu-wrap {
-    top: 0;
-    position: fixed;
-    height: 100%;
-    box-shadow: 0 0.25rem .5rem rgba(0, 0, 0, 0.3);
-
-  }
-  /* General sidebar styles */
-  .bm-menu {
-    background: #fff;
-    padding: 2.5rem 1rem 0;
-    font-size: 1.15em;
-  }
-
-  /* Wrapper for item list */
-  .bm-item-list {
-    color: $blackColor;
-    padding: 0.8em;
-    text-align: center;
-  }
-
-  /* Individual item */
-  .bm-item {
-    display: inline-block;
-    font-size: 1.4rem;
-    margin: 0;
-    margin-bottom: 1rem;
-  }
-}
-  }
-  .navigation {
-    display: flex;
-    align-items: center;
-
-    .menu {
-      display: none;
-      @media (min-width: $tablet) {
-        display: flex;
-        align-items: center;
-        button:first-child {
-          margin-left: 1rem;
-        }
-        ul {
-          display: flex;
-          li {
-            margin-left: $gutter;
-          }
-        }
-      }
+    .bm-menu-wrap {
+      top: 0;
+      position: fixed;
+      height: 100%;
+      box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.3);
     }
-  }
-  .connection {
-    @media (min-width: $tablet) {
-      display: flex;
+    /* General sidebar styles */
+    .bm-menu {
+      background: #fff;
+      padding: 2.5rem 1rem 0;
+      font-size: 1.15em;
     }
-    &-mobile {
-      display: flex !important;
-      flex-direction: column !important;
-      @media (min-width: $tablet) {
+
+    /* Wrapper for item list */
+    .bm-item-list {
+      color: $blackColor;
+      padding: 0.8em;
+      text-align: center;
+      > a {
         display: block;
-      }
-      margin-left: $gutter;
-      button {
-        outline: 0;
-        border: 1px solid black;
-        background-color: #fff;
-        padding: 0.5rem 1rem;
-        font-size: 1rem;
         margin-bottom: 1rem;
       }
     }
+
+    /* Individual item */
+    .bm-item {
+      display: inline-block;
+      font-size: 1.4rem;
+      margin: 0;
+      margin-bottom: 1rem;
+    }
   }
+}
+.navigation {
+  display: flex;
+  align-items: center;
+
+  .menu {
+    display: none;
+    @media (min-width: $tablet) {
+      display: flex;
+      align-items: center;
+      button:first-child {
+        margin-left: 1rem;
+      }
+      ul {
+        display: flex;
+        li {
+          margin-left: $gutter;
+        }
+      }
+    }
+  }
+}
+.connection {
+  @media (min-width: $tablet) {
+    display: flex;
+  }
+  &-mobile {
+    display: flex !important;
+    flex-direction: column !important;
+    @media (min-width: $tablet) {
+      display: block;
+    }
+    margin-left: $gutter;
+    button {
+      outline: 0;
+      border: 1px solid black;
+      background-color: #fff;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+  }
+}

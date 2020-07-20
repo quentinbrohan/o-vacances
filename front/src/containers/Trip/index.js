@@ -2,19 +2,34 @@ import { connect } from 'react-redux';
 
 import Trip from 'src/components/Trip';
 
-import { updateSuggestionField, addSuggestion } from 'src/actions/trip';
+import {
+  fetchTrip,
+  saveTrip,
+  updateUserDisponibilities,
+  modifyUserDisponibilities,
+} from 'src/actions/trip';
 
 const mapStateToProps = (state) => ({
-  infos: state.user.infos,
-  suggestionContent: state.trip.suggestionContent,
+  trip: state.trip.trip,
+  isLoading: state.trip.isLoading,
+  isCreator: state.trip.isCreator,
+  isOwnUser: state.trip.isOwnUser,
+  tripPassword: state.trip.tripPassword,
+  userDisponibilities: state.trip.userDisponibilities,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeSuggestion: (newValue, suggestionContent) => {
-    dispatch(updateSuggestionField(newValue, suggestionContent));
+  fetchTrip: (tripId) => {
+    dispatch(fetchTrip(tripId));
   },
-  handleSuggestion: () => {
-    dispatch(addSuggestion());
+  saveTrip: () => {
+    dispatch(saveTrip());
+  },
+  changeDisponibilities: (startDate, endDate) => {
+    dispatch(updateUserDisponibilities(startDate, endDate));
+  },
+  reviseDisponibilities: () => {
+    dispatch(modifyUserDisponibilities());
   },
 });
 

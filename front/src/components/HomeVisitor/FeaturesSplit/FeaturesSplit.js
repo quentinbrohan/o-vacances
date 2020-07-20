@@ -1,12 +1,18 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
 
+// Features IMG
+import imgCalendar from 'src/assets/images/home-features/calendar.jpg';
+import imgActAndSugg from 'src/assets/images/home-features/activites-and-suggestions.jpg';
+import imgCentralised from 'src/assets/images/home-features/centralised-infos.jpg';
+import imgPlaceholder from 'src/assets/images/home-features/placeholder.jpg';
+
 import './featuresSplit.scss';
 
 const FeaturesSplit = () => (
-  <div className="features-split" id="fonctionnalites">
+  <section className="features-split" id="fonctionnalites">
     <h2 className="title">Le complexe rendu simple</h2>
-    <p>Grâce à ses nombreuses fonctionnalités, O'Vacances vous aides dans vos démarches.</p>
+    <p>Grâce à ses nombreuses fonctionnalités, O'Vacances m'aide tout au long de mon voyage.</p>
     <div className="split">
 
       <div className="split-item">
@@ -15,31 +21,32 @@ const FeaturesSplit = () => (
           <p>Une fois mon voyage créé, j'invite mes amis et eux indiquent leurs disponibilités.</p>
         </div>
         <div className="split-item-image">
-          <img src="https://via.placeholder.com/500x400" alt="" />
+          <img src={imgCalendar} alt="Calendrier" />
         </div>
       </div>
 
       <div className="split-item-inverted">
         <div className="split-item-content">
-          <h3>Organisation simplifiée</h3>
+          <h3>Centralisation des informations</h3>
           <p>
-            Une fois mon voyage créé, j'invite mes amis et eux indiquent leurs disponibilités.
+            J'ai accès en un clic à toutes les informations de mon voyages
+            et ce que je compte faire.
           </p>
         </div>
         <div className="split-item-image">
-          <img src="https://via.placeholder.com/500x400" alt="" />
+          <img src={imgCentralised} alt="Centralisation des infos" />
         </div>
       </div>
 
       <div className="split-item">
         <div className="split-item-content">
           <h3>Suivi des activités</h3>
-          <p>Centralisation des activités prévus,
-            suggestions possibles afin de ne rien oublier lors de mes vacances.
+          <p>Je peux consulter activité (date, lieu, description) et même en ajouter,
+            ainsi que des suggestions possibles afin de ne rien oublier lors de mes vacances.
           </p>
         </div>
         <div className="split-item-image">
-          <img src="https://via.placeholder.com/500x400" alt="" />
+          <img src={imgActAndSugg} alt="Activités et suggestions" />
         </div>
       </div>
 
@@ -47,12 +54,12 @@ const FeaturesSplit = () => (
         <div className="split-item-content">
           <h3>"Qui amène quoi ?" (prochainement)</h3>
           <p>Fini les listes papiers qui se perdent,
-            chacun peut écrire ce qu'ils comptent emmener
+            chacun peut écrire ce qu'il compte emmener
             (jeux de sociétés, matériels, nourriture...).
           </p>
         </div>
         <div className="split-item-image">
-          <img src="https://via.placeholder.com/500x400" alt="" />
+          <img src={imgPlaceholder} alt="Prochainement: `Qui amène quoi ?`" />
         </div>
       </div>
 
@@ -60,16 +67,16 @@ const FeaturesSplit = () => (
         <div className="split-item-content">
           <h3>Gestion du budget (prochainement)</h3>
           <p>
-            Trouver et gérer votre montant de dépenses parmi votre groupe.
+            Car trouver et gérer son montant de dépenses parmi le groupe n'est pas toujours évident.
           </p>
         </div>
         <div className="split-item-image">
-          <img src="https://via.placeholder.com/500x400" alt="" />
+          <img src={imgPlaceholder} alt="Prochainement: Gestion du budget" />
         </div>
       </div>
 
     </div>
 
-  </div>
+  </section>
 );
 export default FeaturesSplit;

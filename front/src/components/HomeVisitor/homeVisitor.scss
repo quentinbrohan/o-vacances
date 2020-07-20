@@ -1,9 +1,14 @@
 @import 'src/styles/vars';
 
 .home-visitor {
-  .button-home-signin {
-    display: block;
-    margin: 0 auto;
+  .cta-container {
+    background-color: $primaryColor;
+    border-radius: 0.5rem;
+    padding: 4rem;
+    .button-home-signin {
+      display: block;
+      margin: 0 auto;
+    }
   }
 }
 

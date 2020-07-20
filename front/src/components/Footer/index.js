@@ -12,7 +12,12 @@ const Footer = () => (
         </li>
         <li className="footer-nav-item">
           <Link to="/qui-sommes-nous">Qui sommes nous ?</Link>
-
+        </li>
+        <li className="footer-nav-item">
+          <Link to="/mentions-legales">Mentions Légales</Link>
+        </li>
+        <li className="footer-nav-item copyright">
+          &copy; O'vacances
         </li>
       </ul>
     </div>
