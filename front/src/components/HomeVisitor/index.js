@@ -11,9 +11,11 @@ const HomeVisitor = () => (
     {/* Slideshow Images/Text */}
     <Slideshow />
     <FeaturesSplit />
-    <Button color="primary" haveClassName="button-home-signin">
-      <Link to="/signin">Je m'inscris</Link>
-    </Button>
+    <div className="cta-container">
+      <Button color="secondary" haveClassName="button-home-signin">
+        <Link to="/signin">Je m'inscris</Link>
+      </Button>
+    </div>
   </main>
 );
 export default HomeVisitor;

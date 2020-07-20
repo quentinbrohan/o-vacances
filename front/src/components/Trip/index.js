@@ -195,10 +195,10 @@ const Trip = ({
                   startDatePlaceholderText="Début disponibilité"
                   endDatePlaceholderText="Fin disponibilité"
                 // TODO: disable dates outside start/end Trip.
-                // isOutsideRange={(date) => date.isBefore(dates.startDate, 'day') || date.isAfter(dates.endDate, 'day')}
-                // isOutsideRange={(date) => !date.isBetween(dates.startDate, dates.endDate, 'day', true)}
+                isOutsideRange={(userDisponibilities) => userDisponibilities.isBefore(userDisponibilities.startDate, 'day') || userDisponibilities.isAfter(userDisponibilities.endDate, 'day')}
+                isOutsideRange={(userDisponibilities) => !userDisponibilities.isBetween(userDisponibilities.startDate, userDisponibilities.endDate, 'day', true)}
                 // withPortal
-                  disabled={!isOwnUser}
+                  // disabled={!isOwnUser}
                   anchorDirection="right"
                   firstDayOfWeek={1}
                   hideKeyboardShortcutsPanel
