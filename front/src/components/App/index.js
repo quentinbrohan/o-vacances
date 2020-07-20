@@ -38,6 +38,8 @@ const App = ({
   isAuthenticated,
   checkAuth,
 }) => {
+  checkAuth();
+
   useEffect(() => {
     checkAuth();
   }, [isAuthenticated]);

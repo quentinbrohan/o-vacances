@@ -5,6 +5,8 @@ import Trip from 'src/components/Trip';
 import {
   fetchTrip,
   saveTrip,
+  updateUserDisponibilities,
+  modifyUserDisponibilities,
 } from 'src/actions/trip';
 
 const mapStateToProps = (state) => ({
@@ -12,6 +14,8 @@ const mapStateToProps = (state) => ({
   isLoading: state.trip.isLoading,
   isCreator: state.trip.isCreator,
   isOwnUser: state.trip.isOwnUser,
+  tripPassword: state.trip.tripPassword,
+  userDisponibilities: state.trip.userDisponibilities,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -20,6 +24,12 @@ const mapDispatchToProps = (dispatch) => ({
   },
   saveTrip: () => {
     dispatch(saveTrip());
+  },
+  changeDisponibilities: (startDate, endDate) => {
+    dispatch(updateUserDisponibilities(startDate, endDate));
+  },
+  reviseDisponibilities: () => {
+    dispatch(modifyUserDisponibilities());
   },
 });
 

@@ -6,7 +6,6 @@ import ActivityForm from 'src/components/ActivityForm';
 
 import tripData from 'src/data/tripData';
 import ActivityCard from './ActivityCard';
-
 import './activities.scss';
 
 const Activities = () => {

@@ -3,6 +3,9 @@ import {
   ADD_SUGGESTION,
   SAVE_TRIPS,
   SAVE_TRIP,
+  CLEAR_SUGGESTION_FIELD,
+  SAVE_SUGGESTIONS,
+  UPDATE_USER_DISPONIBILITIES,
 } from 'src/actions/trip';
 
 const initialState = {
@@ -14,6 +17,8 @@ const initialState = {
   isLoading: true,
   isCreator: false,
   isOwnUser: false,
+  tripPassword: '',
+  userDisponibilities: {},
 };
 
 const trip = (state = initialState, action = {}) => {
@@ -43,6 +48,33 @@ const trip = (state = initialState, action = {}) => {
         trip: action.trip,
         isLoading: false,
         isCreator: action.isCreator,
+        tripPassword: action.trip.password,
+        userDisponibilities: action.userDisponibilities,
+      };
+
+    case CLEAR_SUGGESTION_FIELD:
+      return {
+        ...state,
+        suggestionTitle: '',
+        suggestionDescription: '',
+      };
+
+    case SAVE_SUGGESTIONS:
+      return {
+        ...state,
+        trip: {
+          ...state,
+          suggestion: action.suggestion,
+        },
+      };
+    case UPDATE_USER_DISPONIBILITIES:
+      console.log(action);
+      return {
+        ...state,
+        userDisponibilities: {
+          startDate: action.startDate,
+          endDate: action.endDate,
+        },
       };
 
     default: return state;
