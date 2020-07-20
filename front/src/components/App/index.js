@@ -33,13 +33,16 @@ import persons from 'src/data/teamData';
 
 import './styles.scss';
 
+
 // == Composant
 const App = ({
   isAuthenticated,
   checkAuth,
 }) => {
+  checkAuth();
+
   useEffect(() => {
-    checkAuth();
+    // checkAuth();
   }, [isAuthenticated]);
 
   return (
