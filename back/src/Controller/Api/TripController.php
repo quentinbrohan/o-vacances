@@ -72,18 +72,13 @@ class TripController extends AbstractController
         }
     }
 
-    // todo : route permettant de verifier l'acces d'un utilisateur à un voyage avec son inscription auto (a l'aide du password du voyage) -> redirection sur la route pour voir les details du voyage.
-
-    
-
-
     /**
-     * @Route("/api/v0/users/{idUser}/trips/{id}", name="api_v0_trips_show", methods={"GET", "POST"})
+     * @Route("/api/v0/users/{idUser}/trips/{id}", name="api_v0_trips_registration", methods={"POST"})
      */
-    public function show(Request $request, TripRepository $tripRepository, SerializerInterface $serializer, EntityManagerInterface $em, $id, $idUser, UserRepository $userRepository)
+    public function registration(Request $request, TripRepository $tripRepository, SerializerInterface $serializer, EntityManagerInterface $em, $id, $idUser, UserRepository $userRepository)
     {
         // On récupère le voyage
-        $trip = $tripRepository->findWithAllData($id);
+        $trip = $tripRepository->find($id);
         
         // je récupère l'id de la personne qui fait l'action sous format int (le $idUser est sous format string)
         $user = $userRepository->find($idUser);
@@ -136,6 +131,51 @@ class TripController extends AbstractController
                 ], 400);
             }
         }
+
+    }
+
+
+    /**
+     * @Route("/api/v0/users/{idUser}/trips/{id}", name="api_v0_trips_show", methods={"GET"})
+     */
+    public function show(Request $request, TripRepository $tripRepository, SerializerInterface $serializer, EntityManagerInterface $em, $id, $idUser, UserRepository $userRepository)
+    {
+        // On récupère le voyage
+        $trip = $tripRepository->findWithAllData($id);
+        
+        // je récupère l'id de la personne qui fait l'action sous format int (le $idUser est sous format string)
+        $user = $userRepository->find($idUser);
+        $userId = $user->getId();
+        $participant = 0;
+        
+        $usersBy = $tripRepository->findAllUsersByTrip($id);
+        $tripUsers = $trip->getUsers();
+        // si l'un des participant est la personne qui consulte la page $participant = 1
+        foreach($tripUsers as $userParticipant){
+            $i = $userParticipant->getId();      
+            if($i===$userId) {
+                $participant =+1;
+            } 
+        }
+
+        // si l'utilisateur fait parti des participant au voyage
+        if($participant >= 1){
+            $trip = $tripRepository->findWithAllData($id);
+            // On demande à Doctrine le voyage
+            
+            $json = $serializer->serialize($trip, 'json', ['groups' => 'apiV0_trip']);
+            
+            $response = new JsonResponse($json, 200, [], true);
+
+        return $response;
+        
+        } else {
+                return $this->json([
+                    'status' => 400,
+                    'message'=>"Vous n'avez pas l'autorisation d'acceder au voyage. Contactez le modérateur du voyage"
+                ], 400);
+        }
+        
 
     }
 
