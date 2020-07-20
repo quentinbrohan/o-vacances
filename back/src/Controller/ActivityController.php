@@ -93,7 +93,7 @@ class ActivityController extends AbstractController
     }
 
     /**
-     * @Route("/api/v0/trips/{idTrip}/activities/{id}/update", name="api_v0_activities_update", methods="PATCH")
+     * @Route("/api/v0/trips/{idTrip}/activities/{id}/edit", name="api_v0_activities_edit", methods="PATCH")
      */
     public function edit(ActivityRepository $activityRepository, SerializerInterface $serializer, Request $request, $id, EntityManagerInterface $em, ValidatorInterface $validator, User $user,UserRepository $userRepository, CategoryRepository $categoryRepository, Trip $trip, TripRepository $tripRepository)
     {
@@ -155,19 +155,17 @@ class ActivityController extends AbstractController
     /**
      * @Route("api/v0/users/{idUser}/trips/{idTrip}/activities/{id}/delete", name="api_v0_activities_delete", methods="DELETE")
      */
-    public function delete(Request $request, EntityManagerInterface $em, Activity $activity, ActivityRepository $activityRepository, TripRepository $tripRepository, $idTrip, $idUser)
+    public function delete(Request $request, EntityManagerInterface $em, Activity $activity, UserRepository $userRepository, TripRepository $tripRepository, $idTrip, $idUser)
     {
-        // recuperer le creator de l'activité
-        $idCreator = $activity->getCreator();
-
-/*         dump($idUser);
-        dd($idCreator); */
-        // comparer ce creator - à la personne qui fait la demande (mettre l'user de la personne qui consulte dans l'url?)
-        if ($idCreator === $idUser) {
-            // si c'est bon alors ->
-
-            $trip = $tripRepository->find($idTrip);
-
+        // récupération du voyage, utilisateur et créateur.
+        $trip = $tripRepository->find($idTrip);
+        $user = $userRepository->find($idUser);
+        $userId = $user->getId();
+        $creatorId = $activity->getCreator()->getId();
+        
+        // comparaison des id pour déterminer l'accès à la commande de suppression d'activité.
+        if ($userId === $creatorId) {
+            // si c'est bon alors :
             if (!empty($trip)) {
                 try {
                     $trip->removeActivity($activity);
@@ -184,13 +182,13 @@ class ActivityController extends AbstractController
             } else {
                 return $this->json([
                     'status' => 400,
-                    'message'=>"Cette activité n'existe pas pour ce voyage."
+                    'message'=>"Cette activité ou ce voyage n'existe pas."
                 ], 400);
             }
         } else {
             return $this->json([
                 'status' => 400,
-                'message'=>"Cette activité n'existe pas pour ce voyage"
+                'message'=>"Seul le créateur de l'activité peut la supprimer."
             ], 400);
         }
     }
