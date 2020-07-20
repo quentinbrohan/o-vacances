@@ -8,6 +8,11 @@ import {
   ADD_TRIP,
   newTrip,
   ADD_SUGGESTION,
+  clearSuggestionField,
+  FETCH_SUGGESTIONS,
+  saveSuggestions,
+  fetchTrip,
+  MODIFY_USER_DISPONIBILITIES,
 } from 'src/actions/trip';
 
 import { checkIfCreator } from 'src/utils';
@@ -41,10 +46,12 @@ const tripMiddleware = (store) => (next) => (action) => {
         .then((response) => {
           console.log(response);
 
-          // // Check if creator
+          // Check if creator
           const isCreator = checkIfCreator(response.data.creator, user);
+          // Get logged user disponibilities
+          const userDisponibilities = response.data.disponibility.filter((x) => x.id === user);
 
-          store.dispatch(saveTrip(response.data, isCreator));
+          store.dispatch(saveTrip(response.data, isCreator, userDisponibilities[0]));
         })
         .catch((error) => {
           console.warn(error);
@@ -78,6 +85,7 @@ const tripMiddleware = (store) => (next) => (action) => {
       const { suggestionTitle, suggestionDescription } = store.getState().trip;
       const user = currentUser();
       const { id } = store.getState().trip.trip;
+      console.log(id);
 
       // Endpoint add new suggestion to trip
       axios.post(`http://localhost:8000/api/v0/trips/${id}/suggestions/new`, {
@@ -85,13 +93,61 @@ const tripMiddleware = (store) => (next) => (action) => {
         title: suggestionTitle,
         description: suggestionDescription,
         user,
-        id,
+        trip: id,
+      })
+        .then(() => {
+          store.dispatch(clearSuggestionField());
+        })
+        .then(() => {
+          // For refresh
+          store.dispatch(fetchTrip(id));
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
+
+      next(action);
+      break;
+    }
+
+    case FETCH_SUGGESTIONS: {
+      const { id } = store.getState().trip.trip;
+
+      // Endpoint fetch suggestions from trip
+      axios.get(`http://localhost:8000/api/v0/trips/${id}/suggestions`, {
+        // props,
       })
         .then((response) => {
           console.log(response);
+          store.dispatch(saveSuggestions(response.data));
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
 
-          // TODO: newTrip = clear tripForm inputs DONE
-          // Add suggestion to state or directly refresh Trip component afterward (?)
+      next(action);
+      break;
+    }
+
+    case MODIFY_USER_DISPONIBILITIES: {
+      const user = currentUser();
+      const { id } = store.getState().trip.trip;
+      const { startDate, endDate } = action;
+
+      // Endpoint add new suggestion to trip
+      axios.patch(`http://localhost:8000/api/v0/users/${id}/disponibilities/${id}`, {
+        // props,
+        user,
+        trip: id,
+        startDate,
+        endDate,
+      })
+        .then(() => {
+          console.log('Modification des dispo de l\'utilisateur effectuée');
+        })
+        .then(() => {
+          // For refresh
+          store.dispatch(fetchTrip(id));
         })
         .catch((error) => {
           console.warn(error);
