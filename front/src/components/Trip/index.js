@@ -5,7 +5,9 @@ import React, {
   useEffect,
 } from 'react';
 import PropTypes from 'prop-types';
-import { Calendar, MapPin, HelpCircle } from 'react-feather';
+import {
+  Calendar, MapPin, HelpCircle, XCircle,
+} from 'react-feather';
 import Button from 'src/components/elements/Button';
 // React Dates
 import { DateRangePicker } from 'react-dates';
@@ -15,6 +17,7 @@ import moment from 'moment';
 import 'moment/locale/fr';
 import { Link, useParams } from 'react-router-dom';
 import Loading from 'src/components/Loading';
+import Modal from 'react-modal';
 
 import tripData from 'src/data/tripData';
 import SuggestionForm from 'src/containers/Trip/SuggestionForm';
@@ -22,6 +25,22 @@ import ActivityCard from './ActivityCard';
 import PlusCard from './PlusCard';
 import Suggestion from './Suggestion';
 import './trip.scss';
+
+// Modal style
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    maxWidth: '560px',
+  },
+};
+
+// Bind modal to App element
+Modal.setAppElement('#root');
 
 const Trip = ({
   changeSuggestion,
@@ -44,6 +63,19 @@ const Trip = ({
   }, []);
 
   const [focus, setFocus] = useState(null);
+
+  // Modal
+  const [modalIsOpen, setIsOpen] = useState(false);
+  function openModal() {
+    setIsOpen(true);
+  }
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
 
   // Logged user disponibilities
 
@@ -217,19 +249,37 @@ const Trip = ({
                 </div>
               </div>
               <div className="trip-help">
-                <details>
-                  <summary>
-                    <HelpCircle />
-                  </summary>
-                  {/* Modal instead of <details> ? */}
-                  Le mot de passe donne accès au voyage, il est nécessaire lors de la première
-                  connexion pour s'authentifier au voyage uniquement. Il est modifiable
-                  par le créateur du voyage uniquement.
-                  <hr />
-                  Le bouton "Modifier mes disponibilités" apparaît uniquement pour l'utilisateur
-                  connecté quand celui-ci est selectionné dans la liste. Il suffit de changer ses
-                  disponibilités dans le calendrier et cliquer sur "Modifier mes disponibilités" !
-                </details>
+                <Button color="secondary" size="sm" onClick={openModal}>
+                  <HelpCircle />
+                </Button>
+                <Modal
+                  isOpen={modalIsOpen}
+                  onAfterOpen={afterOpenModal}
+                  onRequestClose={closeModal}
+                  style={customStyles}
+                  contentLabel="Aide voyage"
+                >
+                  <Button color="secondary" size="sm" onClick={closeModal}>
+                    <XCircle />
+                  </Button>
+                  <h2>Besoin d'aide ?</h2>
+                  <div>
+                    Le mot de passe donne accès au voyage, il est nécessaire lors de la première
+                    connexion pour s'authentifier au voyage uniquement. Il est modifiable
+                    par le créateur du voyage uniquement.
+                    <hr />
+                    {/* Le bouton "Modifier mes disponibilités" apparaît uniquement pour l'utilisateur
+                    connecté quand celui-ci est selectionné dans la liste. */}
+                    Pour changer ses disponibilités en un clic, il suffit de changer ses
+                    disponibilités dans le calendrier, ce dernier se ferme une fois avoir choisi 2 dates. Cliquer maintenant sur "Modifier mes disponibilités".
+                    <hr />
+                    La suppression d'un voyage ne peut se faire que par un utilisateur ayant le rôle "créateur" (créateur du voyage). Autrement le voyage n'est pas supprimé mais vous n'y aurez plus accès.
+                    <hr />
+                    Tout le monde peut proposer une activité ainsi qu'une suggestion.
+                    <hr />
+                    Des idées pour améliorer O'vacances ? Fais-nous en part grâce à notre <Link to="/contact">page contact</Link> !
+                  </div>
+                </Modal>
               </div>
               {/* OnClick copy Link to Clipboard ? */}
               {/* If isCreator => Link to TripEdit !! Need currentTripID */}
