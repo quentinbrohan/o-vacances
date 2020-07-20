@@ -32,13 +32,15 @@ const Trip = ({
   addSuggestion,
   isCreator,
   tripPassword,
+  fetchSuggestions,
 }) => {
   const currentTrip = useParams().id;
   const tripId = Number(currentTrip);
   useEffect(() => {
     fetchTrip(tripId);
-  }, [trip]);
+  }, []);
 
+  // Force refresh in case of new Suggestion
   const [isOwnUser, setisOwnUser] = useState(false);
   const [focus, setFocus] = useState(null);
   // Trip's dates
@@ -68,9 +70,10 @@ const Trip = ({
   };
 
   const handleSuggestion = () => {
-    addSuggestion()
-      .then(() => fetchTrip(tripId));
+    addSuggestion();
   };
+
+  // const userDisponibilities = new Set(trip.disponibility)
 
   return (
     <main className="trip-details">
@@ -129,7 +132,7 @@ const Trip = ({
 
               <div className="disponibilities">
                 {/* Liste ? Intégration calendrier avec selector */}
-                <label htmlFor="disponibilities">Calendrier des disponibilités</label>
+                <p htmlFor="disponibilities">Calendrier des disponibilités</p>
                 <select
                   name="disponibilities"
                   id="disponibilities"
@@ -231,13 +234,21 @@ const Trip = ({
               {/* OnClick copy Link to Clipboard ? */}
               {/* If isCreator => Link to TripEdit !! Need currentTripID */}
               {isCreator && (
-              <Button
-                color="secondary"
-                size="smg"
-                type="submit"
-              >
-                <Link to="/modifier-un-voyage">Modifier mon voyage</Link>
-              </Button>
+                <>
+                  <Button
+                    color="secondary"
+                    size="smg"
+                    type="submit"
+                  >
+                    <Link to="/modifier-un-voyage">Modifier mon voyage</Link>
+                  </Button>
+                  <Button
+                    color="secondary"
+                    size="smg"
+                    type="submit"
+                  >Supprimer mon voyage
+                  </Button>
+                </>
               )}
             </div>
 
@@ -294,6 +305,7 @@ Trip.propTypes = {
   addSuggestion: PropTypes.func.isRequired,
   isCreator: PropTypes.bool.isRequired,
   tripPassword: PropTypes.string.isRequired,
+  fetchSuggestions: PropTypes.func.isRequired,
 };
 
 export default Trip;

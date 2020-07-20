@@ -4,6 +4,7 @@ import {
   SAVE_TRIPS,
   SAVE_TRIP,
   CLEAR_SUGGESTION_FIELD,
+  SAVE_SUGGESTIONS,
 } from 'src/actions/trip';
 
 const initialState = {
@@ -53,6 +54,16 @@ const trip = (state = initialState, action = {}) => {
         ...state,
         suggestionTitle: '',
         suggestionDescription: '',
+      };
+
+    case SAVE_SUGGESTIONS:
+      console.log(action);
+      return {
+        ...state,
+        trip: {
+          ...state,
+          suggestion: action.suggestion,
+        },
       };
 
     default: return state;

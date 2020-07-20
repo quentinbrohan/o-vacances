@@ -7,6 +7,8 @@ export const SAVE_TRIP = 'SAVE_TRIP';
 export const ADD_TRIP = 'ADD_TRIP';
 export const NEW_TRIP = 'NEW_TRIP';
 export const CLEAR_SUGGESTION_FIELD = 'CLEAR_SUGGESTION_FIELD';
+export const FETCH_SUGGESTIONS = 'FETCH_SUGGESTIONS';
+export const SAVE_SUGGESTIONS = 'SAVE_SUGGESTIONS';
 
 export const updateSuggestionField = (newValue, name) => ({
   type: UPDATE_SUGGESTION_FIELD,
@@ -49,4 +51,13 @@ export const newTrip = () => ({
 
 export const clearSuggestionField = () => ({
   type: CLEAR_SUGGESTION_FIELD,
+});
+
+export const fetchSuggestions = () => ({
+  type: FETCH_SUGGESTIONS,
+});
+
+export const saveSuggestions = (suggestions) => ({
+  type: SAVE_SUGGESTIONS,
+  suggestions,
 });

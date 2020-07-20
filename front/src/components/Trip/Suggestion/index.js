@@ -16,11 +16,11 @@ const Suggestion = ({
     <header
       className="suggestion-header"
     >
-      {/* <img
-        src={avatar}
+      <img
+        src={user.avatar}
         alt="Avatar"
         className="suggestion-avatar"
-      /> */}
+      />
       <div className="suggestion-header-info">
         <p className="suggestion-title">
           {title}
@@ -46,6 +46,7 @@ Suggestion.propTypes = {
   // avatar: PropTypes.string.isRequired,
   user: PropTypes.objectOf(
     PropTypes.shape({
+      avatar: PropTypes.string.isRequired,
       firstname: PropTypes.string.isRequired,
     }).isRequired,
   ).isRequired,
