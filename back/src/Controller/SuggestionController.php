@@ -26,7 +26,7 @@ class SuggestionController extends AbstractController
         // On instancie un serializer en lui précisant un normalizer adapté aux objets PHP
         $serializer = new Serializer([$normalizer]);
         // Parce qu'on a précisé le normalizer, on peut normaliser selon un groupe
-        $normalizedSuggestions = $serializer->normalize($suggestions, null, ['groups' => 'apiV0_list']);
+        $normalizedSuggestions = $serializer->normalize($suggestions, null, ['groups' => 'apiV0_Suggestion']);
 
         // dd($normalizedAnimes);
 
