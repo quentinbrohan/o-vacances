@@ -11,7 +11,7 @@ const initialState = {
   firstname: '',
   lastname: '',
   email: '',
-  password: '',
+  password: ' ',
   avatar: '',
   info: {},
   isAuthenticated: false,
