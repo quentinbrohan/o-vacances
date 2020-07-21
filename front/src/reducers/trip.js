@@ -3,6 +3,7 @@ import {
   ADD_SUGGESTION,
   SAVE_TRIPS,
   SAVE_TRIP,
+  UPDATE_ACTIVITY_FIELD,
   CLEAR_SUGGESTION_FIELD,
   SAVE_SUGGESTIONS,
   UPDATE_USER_DISPONIBILITIES,
@@ -18,6 +19,11 @@ const initialState = {
   isLoading: true,
   isCreator: false,
   isOwnUser: false,
+  activityTilte: '',
+  activityDescription: '',
+  activityStartDate: '',
+  activityEndDate: '',
+  activityCategory: '',
   tripPassword: '',
   userDisponibilities: {},
   title: '',
@@ -84,6 +90,12 @@ const trip = (state = initialState, action = {}) => {
       };
 
     case UPDATE_TRIP_FORM_FIELD:
+      return {
+        ...state,
+        [action.name]: action.newValue,
+      };
+
+    case UPDATE_ACTIVITY_FIELD:
       return {
         ...state,
         [action.name]: action.newValue,
