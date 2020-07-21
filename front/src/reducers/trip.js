@@ -31,6 +31,7 @@ const initialState = {
   startDate: '',
   endDate: '',
   password: '',
+  location: '',
 };
 
 const trip = (state = initialState, action = {}) => {

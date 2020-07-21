@@ -131,7 +131,9 @@ const userMiddleware = (store) => (next) => (action) => {
       // If token still valid
       if (token) {
         const jwtData = jwtDecode(token);
+        // Check if JWT exp date > actual Date
         if (jwtData.exp * 1000 > new Date().getTime()) {
+          // Add to Axios global config:
           axios.defaults.withCredentials = true;
           axios.defaults.headers.Authorization = `Bearer ${token}`;
           // console.log('Token valide');

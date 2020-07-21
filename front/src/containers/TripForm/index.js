@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import TripForm from 'src/components/TripForm';
 
-import { newTrip, updateTripFormField } from 'src/actions/trip';
+import { addTrip, updateTripFormField } from 'src/actions/trip';
 
 import { addImagePreview } from 'src/actions/settings';
 
@@ -13,6 +13,7 @@ const mapStateToProps = (state) => ({
   startDate: state.trip.startDate,
   endDate: state.trip.endDate,
   password: state.trip.password,
+  location: state.trip.location,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -22,8 +23,8 @@ const mapDispatchToProps = (dispatch) => ({
   changeField: (newValue, name) => {
     dispatch(updateTripFormField(newValue, name));
   },
-  handleTripForm: () => {
-    // dispatch(newTrip(image?))
+  handleTripForm: (formData) => {
+    dispatch(addTrip(formData));
   },
 });
 

@@ -6,7 +6,6 @@ import {
   FETCH_TRIP,
   saveTrip,
   ADD_TRIP,
-  newTrip,
   ADD_SUGGESTION,
   ADD_ACTIVITY,
   clearSuggestionField,
@@ -63,16 +62,34 @@ const tripMiddleware = (store) => (next) => (action) => {
     }
 
     case ADD_TRIP: {
-      // TODO:
+      const {
+        title,
+        description,
+        startDate,
+        endDate,
+        password,
+      } = store.getState().trip;
       const user = currentUser();
-      // Endpoint add new trip to user
+      // FormData = plain image
+      const { formData } = action;
+      console.log(formData);
+
+      const config = { headers: { 'Content-Type': 'multipart/form-data' } };
+
+      // Request must be ASYNC !
+      // Endpoint add new suggestion to trip
       axios.post(`http://localhost:8000/api/v0/users/${user}/trips`, {
-        // props,
-      })
+        formData,
+        title,
+        description,
+        startDate,
+        endDate,
+        password,
+        // creator: user,
+      }, config)
         .then((response) => {
           console.log(response);
-
-          // store.dispatch(newTrip(response.data));
+          console.log('Nouveau voyage créé');
         })
         .catch((error) => {
           console.warn(error);
