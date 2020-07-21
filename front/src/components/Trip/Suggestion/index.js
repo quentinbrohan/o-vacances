@@ -6,8 +6,8 @@ import 'moment/locale/fr';
 import './suggestion.scss';
 
 const Suggestion = ({
-  firstName,
-  avatar,
+  user,
+  // avatar,
   date,
   description,
   title,
@@ -17,7 +17,7 @@ const Suggestion = ({
       className="suggestion-header"
     >
       <img
-        src={avatar}
+        src={user.avatar}
         alt="Avatar"
         className="suggestion-avatar"
       />
@@ -26,7 +26,7 @@ const Suggestion = ({
           {title}
         </p>
         <p className="suggestion-author">
-          {firstName}
+          {user.firstname}
           <span className="suggestion-date">
             {moment(date).format('lll')}
           </span>
@@ -43,8 +43,14 @@ const Suggestion = ({
 );
 
 Suggestion.propTypes = {
-  avatar: PropTypes.string.isRequired,
-  firstName: PropTypes.string.isRequired,
+  // avatar: PropTypes.string.isRequired,
+  user: PropTypes.objectOf(
+    PropTypes.shape({
+      avatar: PropTypes.string.isRequired,
+      firstname: PropTypes.string.isRequired,
+    }).isRequired,
+  ).isRequired,
+  firstname: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,

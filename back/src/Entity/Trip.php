@@ -91,20 +91,20 @@ class Trip
     private $users;
 
     /**
-     * @ORM\OneToMany(targetEntity=Activity::class, mappedBy="trip")
+     * @ORM\OneToMany(targetEntity=Activity::class, mappedBy="trip", cascade={"remove"})
      * @Groups("apiV0_trip")
      */
     private $activities;
 
     /**
-     * @ORM\OneToMany(targetEntity=Disponibility::class, mappedBy="trip")
+     * @ORM\OneToMany(targetEntity=Disponibility::class, mappedBy="trip", cascade={"remove"})
      * @Groups("apiV0_trip")
      * @Groups("apiV0_dispoByTrip")
      */
     private $disponibility;
 
     /**
-     * @ORM\OneToMany(targetEntity=Suggestion::class, mappedBy="trip")
+     * @ORM\OneToMany(targetEntity=Suggestion::class, mappedBy="trip", cascade={"remove"})
      * @Groups("apiV0_trip")
      */
     private $suggestion;
@@ -119,6 +119,7 @@ class Trip
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
+     * @Groups("apiV0_trip")
      */
     private $password;
 
@@ -234,7 +235,7 @@ class Trip
         return $this->users;
     }
 
-    public function addUser(User $user): self
+    public function addUsers(User $user): self
     {
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
@@ -244,11 +245,14 @@ class Trip
         return $this;
     }
 
-    public function removeUser(User $user): self
+    public function removeUsers(User $user): self
     {
         if ($this->users->contains($user)) {
             $this->users->removeElement($user);
-            $user->removeTrip($this);
+            // set the owning side to null (unless already changed)
+            if ($user->getTrip() === $this) {
+                $user->addTrip(null);
+            }
         }
 
         return $this;

@@ -1,6 +1,12 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
 
+// Features IMG
+import imgCalendar from 'src/assets/images/home-features/calendar.jpg';
+import imgActAndSugg from 'src/assets/images/home-features/activites-and-suggestions.jpg';
+import imgCentralised from 'src/assets/images/home-features/centralised-infos.jpg';
+import imgPlaceholder from 'src/assets/images/home-features/placeholder.jpg';
+
 import './featuresSplit.scss';
 
 const FeaturesSplit = () => (
@@ -15,7 +21,7 @@ const FeaturesSplit = () => (
           <p>Une fois mon voyage créé, j'invite mes amis et eux indiquent leurs disponibilités.</p>
         </div>
         <div className="split-item-image">
-          <img src="https://via.placeholder.com/500x400" alt="" />
+          <img src={imgCalendar} alt="Calendrier" />
         </div>
       </div>
 
@@ -28,7 +34,7 @@ const FeaturesSplit = () => (
           </p>
         </div>
         <div className="split-item-image">
-          <img src="https://via.placeholder.com/500x400" alt="" />
+          <img src={imgCentralised} alt="Centralisation des infos" />
         </div>
       </div>
 
@@ -40,7 +46,7 @@ const FeaturesSplit = () => (
           </p>
         </div>
         <div className="split-item-image">
-          <img src="https://via.placeholder.com/500x400" alt="" />
+          <img src={imgActAndSugg} alt="Activités et suggestions" />
         </div>
       </div>
 
@@ -53,7 +59,7 @@ const FeaturesSplit = () => (
           </p>
         </div>
         <div className="split-item-image">
-          <img src="https://via.placeholder.com/500x400" alt="" />
+          <img src={imgPlaceholder} alt="Prochainement: `Qui amène quoi ?`" />
         </div>
       </div>
 
@@ -65,7 +71,7 @@ const FeaturesSplit = () => (
           </p>
         </div>
         <div className="split-item-image">
-          <img src="https://via.placeholder.com/500x400" alt="" />
+          <img src={imgPlaceholder} alt="Prochainement: Gestion du budget" />
         </div>
       </div>
 

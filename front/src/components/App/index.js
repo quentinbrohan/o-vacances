@@ -1,5 +1,9 @@
 // == Import npm
-import React, { useEffect, Suspense } from 'react';
+import React, {
+  useEffect,
+  Suspense,
+  lazy,
+} from 'react';
 import {
   Switch,
   Route,
@@ -13,9 +17,7 @@ import Header from 'src/containers/Header';
 import PrivateRoute from 'src/utils/PrivateRoute';
 // Pages
 import Contact from 'src/components/Contact';
-import HomeVisitor from 'src/components/HomeVisitor';
 import Signin from 'src/containers/Signin';
-import Team from 'src/components/Team';
 import Login from 'src/containers/Login';
 import Profile from 'src/containers/Profile';
 import Trip from 'src/containers/Trip';
@@ -27,17 +29,28 @@ import TripEdit from 'src/containers/TripEdit';
 import ActivityForm from 'src/containers/ActivityForm';
 import LegacyMentions from 'src/components/LegacyMentions';
 import Loading from 'src/components/Loading';
+import TripEdit from 'src/components/TripEdit';
 
 // Data
 import persons from 'src/data/teamData';
 
 import './styles.scss';
 
+// Lazy Loading
+const HomeUser = lazy(() => import('src/containers/HomeUser'));
+const Activities = lazy(() => import('src/components/Activities'));
+const TripForm = lazy(() => import('src/containers/TripForm'));
+const ActivityForm = lazy(() => import('src/components/ActivityForm'));
+const Team = lazy(() => import('src/components/Team'));
+const HomeVisitor = lazy(() => import('src/components/HomeVisitor'));
+
 // == Composant
 const App = ({
   isAuthenticated,
   checkAuth,
 }) => {
+  checkAuth();
+
   useEffect(() => {
     checkAuth();
   }, [isAuthenticated]);
@@ -66,6 +79,10 @@ const App = ({
             <Route
               path="/contact"
               component={Contact}
+            />
+            <Route
+              path="/loading"
+              component={Loading}
             />
             <Route
               path="/qui-sommes-nous"

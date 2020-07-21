@@ -9,6 +9,12 @@ export const NEW_TRIP = 'NEW_TRIP';
 export const UPDATE_ACTIVITY_FIELD = 'UPDATE_ACTIVITY_FIELD';
 export const ADD_ACTIVITY = 'ADD_ACTIVITY';
 export const DELETE_ACTIVITY = 'DELETE_ACTIVITY';
+export const CLEAR_SUGGESTION_FIELD = 'CLEAR_SUGGESTION_FIELD';
+export const FETCH_SUGGESTIONS = 'FETCH_SUGGESTIONS';
+export const SAVE_SUGGESTIONS = 'SAVE_SUGGESTIONS';
+export const UPDATE_USER_DISPONIBILITIES = 'UPDATE_USER_DISPONIBILITIES';
+export const MODIFY_USER_DISPONIBILITIES = 'MODIFY_USER_DISPONIBILITIES';
+
 
 export const updateSuggestionField = (newValue, name) => ({
   type: UPDATE_SUGGESTION_FIELD,
@@ -34,10 +40,11 @@ export const fetchTrip = (tripId) => ({
   tripId,
 });
 
-export const saveTrip = (trip, isCreator) => ({
+export const saveTrip = (trip, isCreator, userDisponibilities) => ({
   type: SAVE_TRIP,
   trip,
   isCreator,
+  userDisponibilities,
 });
 
 export const addTrip = (trip) => ({
@@ -48,6 +55,7 @@ export const addTrip = (trip) => ({
 export const newTrip = () => ({
   type: NEW_TRIP,
 });
+
 
 export const updateActivityField = (newValue, name) => ({
   type: UPDATE_ACTIVITY_FIELD,
@@ -61,4 +69,25 @@ export const addActivity = () => ({
 
 export const deleteActivity = () => ({
   type: DELETE_ACTIVITY,
+});
+
+export const clearSuggestionField = () => ({
+  type: CLEAR_SUGGESTION_FIELD,
+});
+
+export const fetchSuggestions = () => ({
+  type: FETCH_SUGGESTIONS,
+});
+
+export const saveSuggestions = (suggestions) => ({
+  type: SAVE_SUGGESTIONS,
+  suggestions,
+});
+
+export const updateUserDisponibilities = () => ({
+  type: UPDATE_USER_DISPONIBILITIES,
+});
+
+export const modifyUserDisponibilities = () => ({
+  type: MODIFY_USER_DISPONIBILITIES,
 });

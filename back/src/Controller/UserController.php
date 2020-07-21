@@ -79,9 +79,10 @@ class UserController extends AbstractController
     /**
      * @Route("api/v0/users/{id}/edit", name="api_user_edit", methods={"PATCH"})
      */
-    public function edit(Request $request, User $user, UserRepository $userRepository, $id, ObjectNormalizer $normalizer): Response
+    public function edit(UserPasswordEncoderInterface $passwordEncoder, Request $request, User $user, UserRepository $userRepository, $id, ObjectNormalizer $normalizer): Response
     {
         $user = $userRepository->find($id);
+        $oldPassword = $user->getPassword();
 
         $form = $this->createForm(UserType::class, $user);
 
@@ -89,12 +90,25 @@ class UserController extends AbstractController
         $jsonText = $request->getContent();
         // On transforme ce json en array
         $jsonArray = json_decode($jsonText, true);
+        
+        // on récupére la valeur du champ password
+        $newPassword = $jsonArray['password'];
+        // s'il est vide, alors on lui remet l'ancien password
+        if(empty($newPassword)){
+            $jsonArray['password'] = $oldPassword;           
+        } else {
+        // sinon, on lui hash le nouveau password et on met le password hashé dans le champs "password" pour l'enregistrer.
+            $encodedPassword = $passwordEncoder->encodePassword($user, $newPassword);
+            $jsonArray['password'] = $encodedPassword;
+        }
 
-        // $jsonArray est un tableau contenant tous les champs du formulaire
-        // Ces champs doivent être structurés comme dans le formulaire,
-        // il faudra donc l'expliquer aux dev du front
         // On envoie ce tableau à la méthode submit()
         $form->submit($jsonArray);
+
+        if(empty($user->getPassword())){
+            $user->setPassword($oldPassword);
+        }
+
 
         // On vérifie si le formulaire est valide, toutes les données reçues sont bonnes
         if ($form->isValid()) {
@@ -130,16 +144,15 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("api/v0/user/{id}/delete", name="api_user_delete", methods="DELETE")
+     * @Route("api/v0/users/{id}/delete", name="api_user_delete", methods="DELETE")
      */
-    public function delete( User $user, UserRepository $userRepository, ObjectNormalizer $normalizer, $id): Response
+    public function delete(User $user, UserRepository $userRepository, ObjectNormalizer $normalizer): Response
     {
-        $user = $userRepository->find($id);
         
-        return $this->json(200);
-
         $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($user);
-            $entityManager->flush();
+        $entityManager->remove($user);
+        $entityManager->flush();
+            
+        return $this->json(200);
     }
 }
