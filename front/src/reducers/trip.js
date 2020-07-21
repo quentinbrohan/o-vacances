@@ -6,6 +6,7 @@ import {
   CLEAR_SUGGESTION_FIELD,
   SAVE_SUGGESTIONS,
   UPDATE_USER_DISPONIBILITIES,
+  UPDATE_TRIP_FORM_FIELD,
 } from 'src/actions/trip';
 
 const initialState = {
@@ -19,6 +20,13 @@ const initialState = {
   isOwnUser: false,
   tripPassword: '',
   userDisponibilities: {},
+  newTrip: {
+    title: '',
+    description: '',
+    startDate: '',
+    endDate: '',
+    password: '',
+  },
 };
 
 const trip = (state = initialState, action = {}) => {
@@ -75,6 +83,12 @@ const trip = (state = initialState, action = {}) => {
           startDate: action.startDate,
           endDate: action.endDate,
         },
+      };
+
+    case UPDATE_TRIP_FORM_FIELD:
+      return {
+        ...state,
+        [action.name]: action.newValue,
       };
 
     default: return state;

@@ -11,6 +11,7 @@ export const FETCH_SUGGESTIONS = 'FETCH_SUGGESTIONS';
 export const SAVE_SUGGESTIONS = 'SAVE_SUGGESTIONS';
 export const UPDATE_USER_DISPONIBILITIES = 'UPDATE_USER_DISPONIBILITIES';
 export const MODIFY_USER_DISPONIBILITIES = 'MODIFY_USER_DISPONIBILITIES';
+export const UPDATE_TRIP_FORM_FIELD = 'UPDATE_TRIP_FORM_FIELD';
 
 export const updateSuggestionField = (newValue, name) => ({
   type: UPDATE_SUGGESTION_FIELD,
@@ -71,4 +72,10 @@ export const updateUserDisponibilities = () => ({
 
 export const modifyUserDisponibilities = () => ({
   type: MODIFY_USER_DISPONIBILITIES,
+});
+
+export const updateTripFormField = (newValue, name) => ({
+  type: UPDATE_TRIP_FORM_FIELD,
+  newValue,
+  name,
 });
