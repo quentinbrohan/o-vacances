@@ -24,7 +24,7 @@ import HomeUser from 'src/containers/HomeUser';
 import Activities from 'src/containers/Activities';
 import TripForm from 'src/containers/TripForm';
 import TripEdit from 'src/containers/TripEdit';
-import ActivityForm from 'src/components/ActivityForm';
+import ActivityForm from 'src/containers/ActivityForm';
 import LegacyMentions from 'src/components/LegacyMentions';
 import Loading from 'src/components/Loading';
 

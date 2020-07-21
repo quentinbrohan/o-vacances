@@ -15,6 +15,11 @@ const initialState = {
   isLoading: true,
   isCreator: false,
   isOwnUser: false,
+  activityTilte: '',
+  activityDescription: '',
+  activityStartDate: '',
+  activityEndDate: '',
+  activityCategory: '',
 };
 
 const trip = (state = initialState, action = {}) => {
@@ -49,7 +54,7 @@ const trip = (state = initialState, action = {}) => {
     case UPDATE_ACTIVITY_FIELD:
       return {
         ...state,
-        trip: [action.name].newValue,
+        [action.name]: action.newValue,
       };
 
     default: return state;

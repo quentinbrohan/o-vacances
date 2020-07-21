@@ -8,6 +8,7 @@ import {
   ADD_TRIP,
   newTrip,
   ADD_SUGGESTION,
+  ADD_ACTIVITY,
 } from 'src/actions/trip';
 
 import { checkIfCreator } from 'src/utils';
@@ -91,6 +92,42 @@ const tripMiddleware = (store) => (next) => (action) => {
           console.log(response);
 
           // TODO: newTrip = clear tripForm inputs DONE
+          // Add suggestion to state or directly refresh Trip component afterward (?)
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
+
+      next(action);
+      break;
+    }
+
+    case ADD_ACTIVITY: {
+      const {
+        activityTitle,
+        activityDescription,
+        activityStartDate,
+        activityEndDate,
+        activityCategory,
+      } = store.getState().trip;
+      const { id } = store.getState().trip.trip;
+      const user = currentUser();
+
+      // Endpoint add new suggestion to trip
+      axios.post(`http://localhost:8000/api/v0/trips/${id}/activities`, {
+        // props,
+        title: activityTitle,
+        description: activityDescription,
+        startDate: activityStartDate,
+        endDate: activityEndDate,
+        category: activityCategory,
+        trip: id,
+        creator: user,
+      })
+        .then((response) => {
+          console.log(response);
+
+          // TODO: newTrip = cleForm inputs DONE
           // Add suggestion to state or directly refresh Trip component afterward (?)
         })
         .catch((error) => {

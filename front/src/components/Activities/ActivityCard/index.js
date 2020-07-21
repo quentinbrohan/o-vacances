@@ -13,11 +13,10 @@ import './activityCard.scss';
 
 const ActivityCard = ({
   id,
-  name,
+  title,
   image,
   startDate,
   endDate,
-  location,
   description,
   handleDelete,
 }) => {
@@ -40,6 +39,8 @@ const ActivityCard = ({
     console.log(`Suppression de l'activité ${id}`);
   };
 
+  console.log(id);
+
   return (
     <article className="activity-card" id={`activite-${id}`}>
       <header
@@ -48,7 +49,7 @@ const ActivityCard = ({
       />
       <div className="activity-card-body">
         <div className="body-content">
-          <h4>{name}</h4>
+          <h4>{title}</h4>
           <div className="date">
             <Calendar />
             <p>
@@ -58,7 +59,7 @@ const ActivityCard = ({
           <div className="location">
             <MapPin />
             <p>
-              {location}
+              Situation
             </p>
           </div>
           <p className="description">{description}</p>
@@ -94,11 +95,10 @@ const ActivityCard = ({
 
 ActivityCard.propTypes = {
   id: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   startDate: PropTypes.string.isRequired,
   endDate: PropTypes.string.isRequired,
-  location: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
 };
 

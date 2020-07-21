@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'src/components/elements/Button';
 import { Link } from 'react-router-dom';
@@ -12,6 +12,7 @@ const Activities = ({ activities }) => {
   const handleDelete = (selected) => {
     console.log(`Suppression des activités ${selected}`);
   };
+  console.log(activities);
 
   return (
     <main className="trip-activities">
@@ -47,8 +48,7 @@ const Activities = ({ activities }) => {
 };
 
 Activities.propTypes = {
-  fetchActivities: PropTypes.func.isRequired,
-  activities: PropTypes.arrayOf.isRequired,
+  activities: PropTypes.array.isRequired,
 };
 
 export default Activities;

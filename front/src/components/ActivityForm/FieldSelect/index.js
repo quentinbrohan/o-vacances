@@ -27,10 +27,11 @@ const FieldSelect = ({
         className="field-label"
       >{placeholder}
         <select value={value} onChange={handleChange}>
-          <option value="Sport">Sport</option>
-          <option value="Musée">Musée</option>
-          <option value="Restaurant">Restaurant</option>
-          <option value="Plage-Piscine">Plage-Piscine</option>
+          <option value="1">restaurant</option>
+          <option value="2">sortie nocturne</option>
+          <option value="3">sport</option>
+          <option value="4">visite culturelle</option>
+          <option value="5">point d'eau</option>
         </select>
       </label>
     </div>
@@ -38,16 +39,12 @@ const FieldSelect = ({
 };
 
 FieldSelect.propTypes = {
-  value: PropTypes.string,
+  value: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
 };
 
-// Valeurs par défaut pour les props
-FieldSelect.defaultProps = {
-  value: '',
-  type: 'text',
-};
+// Valeurs par défaut pour les pro
 // == Export
 export default FieldSelect;
