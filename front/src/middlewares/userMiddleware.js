@@ -71,7 +71,8 @@ const userMiddleware = (store) => (next) => (action) => {
             // Store token in localStorage
             window.localStorage.setItem('authToken', token);
             // axios Global settings to forward header + token
-            axios.defaults.headers.Authorization = `Bearer + ${token}`;
+            axios.defaults.withCredentials = true;
+            axios.defaults.headers.Authorization = `Bearer ${token}`;
           }
         })
         .catch((error) => {
@@ -131,7 +132,8 @@ const userMiddleware = (store) => (next) => (action) => {
       if (token) {
         const jwtData = jwtDecode(token);
         if (jwtData.exp * 1000 > new Date().getTime()) {
-          axios.defaults.headers.Authorization = `Bearer + ${token}`;
+          axios.defaults.withCredentials = true;
+          axios.defaults.headers.Authorization = `Bearer ${token}`;
           // console.log('Token valide');
           store.dispatch(logInUser());
 
