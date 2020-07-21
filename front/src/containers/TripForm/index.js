@@ -8,13 +8,11 @@ import { addImagePreview } from 'src/actions/settings';
 
 const mapStateToProps = (state) => ({
   file: state.settings.file,
-  newTrip: {
-    title: state.trip.newTrip.title,
-    description: state.trip.newTrip.description,
-    startDate: state.trip.newTrip.startDate,
-    endDate: state.trip.newTrip.endDate,
-    password: state.trip.newTrip.password,
-  },
+  title: state.trip.title,
+  description: state.trip.description,
+  startDate: state.trip.startDate,
+  endDate: state.trip.endDate,
+  password: state.trip.password,
 });
 
 const mapDispatchToProps = (dispatch) => ({

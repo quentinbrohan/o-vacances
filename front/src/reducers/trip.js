@@ -20,13 +20,11 @@ const initialState = {
   isOwnUser: false,
   tripPassword: '',
   userDisponibilities: {},
-  newTrip: {
-    title: '',
-    description: '',
-    startDate: '',
-    endDate: '',
-    password: '',
-  },
+  title: '',
+  description: '',
+  startDate: '',
+  endDate: '',
+  password: '',
 };
 
 const trip = (state = initialState, action = {}) => {
