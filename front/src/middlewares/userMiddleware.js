@@ -104,7 +104,7 @@ const userMiddleware = (store) => (next) => (action) => {
         firstname,
         avatar,
       } = store.getState().user;
-
+      console.log(password);
       // withCredentials : autorisation d'accéder au cookie
       axios.patch(`http://localhost:8000/api/v0/users/${currentUser()}/edit`, {
         email,

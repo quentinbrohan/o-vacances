@@ -22,14 +22,9 @@ import Login from 'src/containers/Login';
 import Profile from 'src/containers/Profile';
 import Trip from 'src/containers/Trip';
 import ErrorPage from 'src/components/ErrorPage';
-import HomeUser from 'src/containers/HomeUser';
-import Activities from 'src/containers/Activities';
-import TripForm from 'src/containers/TripForm';
 import TripEdit from 'src/containers/TripEdit';
-import ActivityForm from 'src/containers/ActivityForm';
 import LegacyMentions from 'src/components/LegacyMentions';
 import Loading from 'src/components/Loading';
-import TripEdit from 'src/components/TripEdit';
 
 // Data
 import persons from 'src/data/teamData';
@@ -38,7 +33,7 @@ import './styles.scss';
 
 // Lazy Loading
 const HomeUser = lazy(() => import('src/containers/HomeUser'));
-const Activities = lazy(() => import('src/components/Activities'));
+const Activities = lazy(() => import('src/containers/Activities'));
 const TripForm = lazy(() => import('src/containers/TripForm'));
 const ActivityForm = lazy(() => import('src/components/ActivityForm'));
 const Team = lazy(() => import('src/components/Team'));
