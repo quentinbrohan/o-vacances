@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import {
   Calendar,
   MapPin,
@@ -39,8 +40,6 @@ const ActivityCard = ({
     console.log(`Suppression de l'activité ${id}`);
   };
 
-  console.log(id);
-
   return (
     <article className="activity-card" id={`activite-${id}`}>
       <header
@@ -53,15 +52,15 @@ const ActivityCard = ({
           <div className="date">
             <Calendar />
             <p>
-              Du {startDate} au {endDate}
+              Du {moment(startDate).format('ll')} au {moment(endDate).format('ll')}
             </p>
           </div>
-          <div className="location">
-            <MapPin />
+          {/* <div className="location">
+           <MapPin />
             <p>
               Situation
             </p>
-          </div>
+            </div> */}
           <p className="description">{description}</p>
         </div>
         <div className="activity-cta">

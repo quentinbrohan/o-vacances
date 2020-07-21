@@ -29,7 +29,7 @@ const FieldSelect = ({
         <select value={value} onChange={handleChange}>
           <option value="1">restaurant</option>
           <option value="2">sortie nocturne</option>
-          <option value="3">sport</option>
+          <option value="3">sport</option>""
           <option value="4">visite culturelle</option>
           <option value="5">point d'eau</option>
         </select>

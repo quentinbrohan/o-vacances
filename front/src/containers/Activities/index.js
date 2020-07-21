@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { deleteActivity } from 'src/actions/trip';
 
 import Activities from 'src/components/Activities';
 
@@ -7,6 +8,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  handleDelete: () => {
+    dispatch(deleteActivity());
+  },
 
 });
 

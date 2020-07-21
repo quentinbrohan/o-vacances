@@ -12,7 +12,6 @@ const Activities = ({ activities }) => {
   const handleDelete = (selected) => {
     console.log(`Suppression des activités ${selected}`);
   };
-  console.log(activities);
 
   return (
     <main className="trip-activities">

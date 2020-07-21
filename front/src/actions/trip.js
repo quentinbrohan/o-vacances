@@ -8,6 +8,7 @@ export const ADD_TRIP = 'ADD_TRIP';
 export const NEW_TRIP = 'NEW_TRIP';
 export const UPDATE_ACTIVITY_FIELD = 'UPDATE_ACTIVITY_FIELD';
 export const ADD_ACTIVITY = 'ADD_ACTIVITY';
+export const DELETE_ACTIVITY = 'DELETE_ACTIVITY';
 
 export const updateSuggestionField = (newValue, name) => ({
   type: UPDATE_SUGGESTION_FIELD,
@@ -56,4 +57,8 @@ export const updateActivityField = (newValue, name) => ({
 
 export const addActivity = () => ({
   type: ADD_ACTIVITY,
+});
+
+export const deleteActivity = () => ({
+  type: DELETE_ACTIVITY,
 });
