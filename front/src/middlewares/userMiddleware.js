@@ -114,8 +114,6 @@ const userMiddleware = (store) => (next) => (action) => {
         firstname,
         avatar,
       }, {
-        withCredentials: true,
-        // config,
       })
         .then((response) => {
           console.log(response);
