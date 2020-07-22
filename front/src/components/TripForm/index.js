@@ -8,7 +8,7 @@ import Image from './Image';
 import './tripForm.scss';
 
 const TripForm = ({
-  image,
+  addImagePreview,
   changeField,
   title,
   description,
@@ -34,7 +34,7 @@ const TripForm = ({
       <form className="trip-edit-element" onSubmit={handleSubmit}>
         <Image
           className="trip-edit-image"
-          onChangeImage={image}
+          onChangeImage={addImagePreview}
         />
         <Field
           name="title"

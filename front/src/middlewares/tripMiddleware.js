@@ -14,6 +14,9 @@ import {
   fetchTrip,
   MODIFY_USER_DISPONIBILITIES,
   DELETE_TRIP,
+  removeTrip,
+  MODIFY_TRIP,
+  saveTripEdit,
 } from 'src/actions/trip';
 
 import {
@@ -22,8 +25,6 @@ import {
 } from 'src/actions/error';
 
 import {
-  dismiss as toastDismiss,
-  update as toastUpdate,
   error as toastError,
   message as toastMessage,
   warning as toastWarning,
@@ -57,7 +58,7 @@ const tripMiddleware = (store) => (next) => (action) => {
       const { tripId } = action;
       const user = currentUser();
 
-      // Endpoint fetch Trips list from user
+      // Endpoint fetch Trips from user
       axios.get(`http://localhost:8000/api/v0/users/${user}/trips/${tripId}`)
         .then((response) => {
           console.log(response);
@@ -238,10 +239,47 @@ const tripMiddleware = (store) => (next) => (action) => {
         trip: id,
       })
         .then(() => {
+          store.dispatch(removeTrip());
           store.dispatch(toastSuccess('Voyage supprimé'));
         })
         .then(() => {
           // Redirect to HomeUser
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
+
+      next(action);
+      break;
+    }
+
+    case MODIFY_TRIP: {
+      const { tripId } = action;
+      const user = currentUser();
+      const {
+        id,
+        title,
+        description,
+        location,
+        startDate,
+        endDate,
+        password,
+      } = store.getState().trip.trip;
+
+      // Endpoint fetch Trip from user
+      axios.patch(`http://localhost:8000/api/v0/users/${user}/trips/${id}`, {
+        title,
+        description,
+        location,
+        startDate,
+        endDate,
+        password,
+      })
+        .then((response) => {
+          console.log(response);
+
+          store.dispatch(saveTripEdit(response.data));
+          store.dispatch(toastSuccess('Modifications effectuées'));
         })
         .catch((error) => {
           console.warn(error);

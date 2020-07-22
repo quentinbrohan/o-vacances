@@ -229,7 +229,7 @@ const Trip = ({
                 {isOwnUser && (
                 <Button
                   color="secondary"
-                  size="smg"
+                  size="sm"
                   type="submit"
                   onClick={() => reviseDisponibilities()}
                 >
@@ -312,7 +312,7 @@ const Trip = ({
                     color="secondary"
                     size="sm"
                     type="submit"
-                    onClick={handleDelete}
+                    onClick={() => handleDelete()}
                   >Supprimer mon voyage
                   </Button>
                 </>

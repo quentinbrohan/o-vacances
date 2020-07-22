@@ -14,8 +14,6 @@ import {
 } from 'src/actions/user';
 
 import {
-  dismiss as toastDismiss,
-  update as toastUpdate,
   error as toastError,
   message as toastMessage,
   warning as toastWarning,

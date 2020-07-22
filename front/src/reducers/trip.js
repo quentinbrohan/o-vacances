@@ -8,7 +8,9 @@ import {
   SAVE_SUGGESTIONS,
   UPDATE_USER_DISPONIBILITIES,
   UPDATE_TRIP_FORM_FIELD,
-  DELETE_TRIP,
+  REMOVE_TRIP,
+  SAVE_TRIP_EDIT,
+  UPDATE_TRIP_EDIT_FIELD,
 } from 'src/actions/trip';
 
 const initialState = {
@@ -103,10 +105,34 @@ const trip = (state = initialState, action = {}) => {
         [action.name]: action.newValue,
       };
 
-    case DELETE_TRIP:
+    case REMOVE_TRIP:
       return {
         ...state,
-        trip: [],
+        trip: undefined,
+      };
+
+    case UPDATE_TRIP_EDIT_FIELD:
+      return {
+        ...state,
+        trip: {
+          ...state.trip,
+          [action.name]: action.newValue,
+        },
+      };
+
+    case SAVE_TRIP_EDIT:
+      return {
+        ...state,
+        isLoading: false,
+        isCreator: action.isCreator,
+        tripPassword: action.trip.password,
+        title: action.trip.title,
+        description: action.trip.description,
+        startDate: action.trip.startDate,
+        endDate: action.trip.endDate,
+        password: action.trip.password,
+        location: action.trip.location,
+        image: action.trip.image,
       };
 
     default: return state;

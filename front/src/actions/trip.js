@@ -17,6 +17,10 @@ export const MODIFY_USER_DISPONIBILITIES = 'MODIFY_USER_DISPONIBILITIES';
 export const UPDATE_TRIP_FORM_FIELD = 'UPDATE_TRIP_FORM_FIELD';
 export const UPLOAD_IMAGE = 'UPLOAD_IMAGE';
 export const DELETE_TRIP = 'DELETE_TRIP';
+export const REMOVE_TRIP = 'REMOVE_TRIP';
+export const UPDATE_TRIP_EDIT_FIELD = 'UPDATE_TRIP_EDIT_FIELD';
+export const SAVE_TRIP_EDIT = 'SAVE_TRIP_EDIT';
+export const MODIFY_TRIP = 'MODIFY_TRIP';
 
 export const updateSuggestionField = (newValue, name) => ({
   type: UPDATE_SUGGESTION_FIELD,
@@ -101,4 +105,24 @@ export const updateTripFormField = (newValue, name) => ({
 
 export const deleteTrip = () => ({
   type: DELETE_TRIP,
+});
+
+export const removeTrip = () => ({
+  type: REMOVE_TRIP,
+});
+
+export const updateTripEditField = (newValue, name) => ({
+  type: UPDATE_TRIP_EDIT_FIELD,
+  newValue,
+  name,
+});
+
+export const saveTripEdit = (trip, isCreator) => ({
+  type: SAVE_TRIP_EDIT,
+  trip,
+  isCreator,
+});
+
+export const modifyTrip = () => ({
+  type: MODIFY_TRIP,
 });
