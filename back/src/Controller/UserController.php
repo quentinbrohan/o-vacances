@@ -93,9 +93,10 @@ class UserController extends AbstractController
         
         // on récupére la valeur du champ password
         $newPassword = $jsonArray['password'];
+dd($newPassword);
         // s'il est vide, alors on lui remet l'ancien password
         if(empty($newPassword)){
-            $jsonArray['password'] = $oldPassword;           
+            $jsonArray['password'] = $oldPassword;          
         } else {
         // sinon, on lui hash le nouveau password et on met le password hashé dans le champs "password" pour l'enregistrer.
             $encodedPassword = $passwordEncoder->encodePassword($user, $newPassword);
