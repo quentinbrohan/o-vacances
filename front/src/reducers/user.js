@@ -41,7 +41,7 @@ const user = (state = initialState, action = {}) => {
         info: action.data.info,
         role: [action.data.roles],
         email: action.data.email,
-        password: action.data.password,
+        // password: action.data.password, ne pas charger password!!!
         firstname: action.data.firstname,
         lastname: action.data.lastname,
         avatar: action.data.avatar,
