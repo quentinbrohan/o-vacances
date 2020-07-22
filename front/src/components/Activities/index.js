@@ -27,7 +27,7 @@ const Activities = ({ activities }) => {
           <Button
             color="primary"
             size="sm"
-            onClick={() => handleDelete()}
+            onClick={handleDelete}
           >
             Supprimer des activités
           </Button>

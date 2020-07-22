@@ -22,16 +22,16 @@
 
   input{
     width: 280px;
-    border:solid 1px $greyColorLighter;
     font-size: 1rem;
+    border: none;
     border-radius: 1rem;
     padding: 0.5rem;
-    background-color: $primaryColorLighter;
+    background-color: $whiteColor;
    
     
     &:disabled{
       background-color: white;
-      border: none;
+  
     }
 
     @media (max-width: $laptop) {
