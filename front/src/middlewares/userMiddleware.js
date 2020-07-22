@@ -13,9 +13,16 @@ import {
   logOutUser,
 } from 'src/actions/user';
 
-// const config = {
-// headers: { Authorization: `Bearer ${token}` },
-// };
+import {
+  dismiss as toastDismiss,
+  update as toastUpdate,
+  error as toastError,
+  message as toastMessage,
+  warning as toastWarning,
+  success as toastSuccess,
+  info as toastInfo,
+} from 'react-toastify-redux';
+
 import currentUser from 'src/utils/getCurrentUser';
 
 const userMiddleware = (store) => (next) => (action) => {
@@ -39,13 +46,12 @@ const userMiddleware = (store) => (next) => (action) => {
           console.log(response);
           if (response.status === 201) {
             console.log('Inscription réussie');
-          }
-          else {
-            console.log('Erreur lors de l\'inscription');
+            store.dispatch(toastSuccess('Inscription réussie'));
           }
         })
         .catch((error) => {
           console.warn(error);
+          store.dispatch(toastError('Erreur lors de l\'inscription'));
         });
 
       next(action);
@@ -119,6 +125,7 @@ const userMiddleware = (store) => (next) => (action) => {
       })
         .then((response) => {
           console.log(response);
+          store.dispatch(toastSuccess('Modifications effectuées'));
         })
         .catch((error) => {
           console.warn(error);
@@ -138,7 +145,6 @@ const userMiddleware = (store) => (next) => (action) => {
           axios.defaults.headers.Authorization = `Bearer ${token}`;
           // console.log('Token valide');
           store.dispatch(logInUser());
-
           next(action);
           break;
         }

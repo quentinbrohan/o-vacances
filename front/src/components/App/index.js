@@ -9,6 +9,8 @@ import {
   Route,
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { ToastContainer } from 'react-toastify-redux';
+import 'react-toastify/dist/ReactToastify.css';
 
 // == Import
 // Layout
@@ -54,6 +56,7 @@ const App = ({
     <div className="app">
       <Header />
       <div className="container">
+        <ToastContainer />
         <Suspense fallback={<Loading />}>
           <Switch>
             {isAuthenticated

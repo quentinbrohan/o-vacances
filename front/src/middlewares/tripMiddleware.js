@@ -15,6 +15,21 @@ import {
   MODIFY_USER_DISPONIBILITIES,
 } from 'src/actions/trip';
 
+import {
+  successMessage,
+  errorMessage,
+} from 'src/actions/error';
+
+import {
+  dismiss as toastDismiss,
+  update as toastUpdate,
+  error as toastError,
+  message as toastMessage,
+  warning as toastWarning,
+  success as toastSuccess,
+  info as toastInfo,
+} from 'react-toastify-redux';
+
 import { checkIfCreator } from 'src/utils';
 import currentUser from 'src/utils/getCurrentUser';
 
@@ -89,7 +104,7 @@ const tripMiddleware = (store) => (next) => (action) => {
       }, config)
         .then((response) => {
           console.log(response);
-          console.log('Nouveau voyage créé');
+          store.dispatch(toastSuccess('Nouveau voyage créé'));
         })
         .catch((error) => {
           console.warn(error);
@@ -161,7 +176,7 @@ const tripMiddleware = (store) => (next) => (action) => {
         endDate,
       })
         .then(() => {
-          console.log('Modification des dispo de l\'utilisateur effectuée');
+          store.dispatch(toastSuccess('Mise à jour des disponibilités'));
         })
         .then(() => {
           // For refresh
