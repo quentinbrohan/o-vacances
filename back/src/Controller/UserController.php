@@ -93,7 +93,7 @@ class UserController extends AbstractController
         
         // on récupére la valeur du champ password
         $newPassword = $jsonArray['password'];
-dd($newPassword);
+//dd($newPassword);
         // s'il est vide, alors on lui remet l'ancien password
         if(empty($newPassword)){
             $jsonArray['password'] = $oldPassword;          
