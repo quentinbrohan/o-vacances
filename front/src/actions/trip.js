@@ -14,6 +14,7 @@ export const FETCH_SUGGESTIONS = 'FETCH_SUGGESTIONS';
 export const SAVE_SUGGESTIONS = 'SAVE_SUGGESTIONS';
 export const UPDATE_USER_DISPONIBILITIES = 'UPDATE_USER_DISPONIBILITIES';
 export const MODIFY_USER_DISPONIBILITIES = 'MODIFY_USER_DISPONIBILITIES';
+export const NEW_USER_DISPONIBILITIES = 'NEW_USER_DISPONIBILITIES';
 export const UPDATE_TRIP_FORM_FIELD = 'UPDATE_TRIP_FORM_FIELD';
 export const UPLOAD_IMAGE = 'UPLOAD_IMAGE';
 export const DELETE_TRIP = 'DELETE_TRIP';
@@ -89,12 +90,22 @@ export const saveSuggestions = (suggestions) => ({
   suggestions,
 });
 
-export const updateUserDisponibilities = () => ({
+export const updateUserDisponibilities = (startDate, endDate) => ({
   type: UPDATE_USER_DISPONIBILITIES,
+  startDate,
+  endDate,
 });
 
-export const modifyUserDisponibilities = () => ({
+export const modifyUserDisponibilities = (startDate, endDate) => ({
   type: MODIFY_USER_DISPONIBILITIES,
+  startDate,
+  endDate,
+});
+
+export const newUserDisponibilities = (startDate, endDate) => ({
+  type: NEW_USER_DISPONIBILITIES,
+  startDate,
+  endDate,
 });
 
 export const updateTripFormField = (newValue, name) => ({

@@ -5,8 +5,9 @@ import Trip from 'src/components/Trip';
 import {
   fetchTrip,
   saveTrip,
-  updateUserDisponibilities,
+  // updateUserDisponibilities,
   modifyUserDisponibilities,
+  newUserDisponibilities,
   deleteTrip,
 } from 'src/actions/trip';
 
@@ -26,14 +27,16 @@ const mapDispatchToProps = (dispatch) => ({
   saveTrip: () => {
     dispatch(saveTrip());
   },
-  changeDisponibilities: (startDate, endDate) => {
-    dispatch(updateUserDisponibilities(startDate, endDate));
+  // changeUserDisponibilities: (startDate, endDate) => {
+  //   dispatch(updateUserDisponibilities(startDate, endDate));
+  // },
+  reviseUserDisponibilities: (startDate, endDate) => {
+    dispatch(modifyUserDisponibilities(startDate, endDate));
   },
-  reviseDisponibilities: () => {
-    dispatch(modifyUserDisponibilities());
+  addUserDisponibilities: (startDate, endDate) => {
+    dispatch(newUserDisponibilities(startDate, endDate));
   },
   handleDelete: () => {
-    console.log('container');
     dispatch(deleteTrip());
   },
 });

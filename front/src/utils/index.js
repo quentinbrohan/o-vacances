@@ -17,4 +17,4 @@ export const checkIfCreator = (creator, currentUser) => {
   return false;
 };
 
-export const momentFormatDate = 'YYYY-MM-DD';
+export const MOMENT_FORMAT_DATE = 'YYYY-MM-DD';

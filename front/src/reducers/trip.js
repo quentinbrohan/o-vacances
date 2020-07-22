@@ -28,7 +28,7 @@ const initialState = {
   activityEndDate: '',
   activityCategory: '',
   tripPassword: '',
-  userDisponibilities: {},
+  userDisponibilities: [],
   title: '',
   description: '',
   startDate: '',
@@ -59,6 +59,8 @@ const trip = (state = initialState, action = {}) => {
       };
 
     case SAVE_TRIP:
+      console.log(action);
+
       return {
         ...state,
         trip: action.trip,
@@ -88,8 +90,8 @@ const trip = (state = initialState, action = {}) => {
       return {
         ...state,
         userDisponibilities: {
-          startDate: action.startDate,
-          endDate: action.endDate,
+          ...state.userDisponibilities,
+          [action.name]: action.newValue,
         },
       };
 

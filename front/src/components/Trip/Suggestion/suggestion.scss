@@ -48,6 +48,13 @@
 
         .suggestion-body {
           padding: 0.5rem;
+          // display: flex;
+          // justify-content: space-between;
+          // align-items: stretch;
+
+          .suggestion-button--edit {
+            display: block;
+          }
         }
         .suggestion-description {
           margin-left: 3rem;

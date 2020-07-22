@@ -13,6 +13,7 @@ import {
   saveSuggestions,
   fetchTrip,
   MODIFY_USER_DISPONIBILITIES,
+  NEW_USER_DISPONIBILITIES,
   DELETE_TRIP,
   removeTrip,
   MODIFY_TRIP,
@@ -27,9 +28,7 @@ import {
 import {
   error as toastError,
   message as toastMessage,
-  warning as toastWarning,
   success as toastSuccess,
-  info as toastInfo,
 } from 'react-toastify-redux';
 
 import { checkIfCreator } from 'src/utils';
@@ -66,9 +65,14 @@ const tripMiddleware = (store) => (next) => (action) => {
           // Check if creator
           const isCreator = checkIfCreator(response.data.creator, user);
           // Get logged user disponibilities
-          const userDisponibilities = response.data.disponibility.filter((x) => x.id === user);
+          // const userDisponibilities = response.data.disponibility.filter((x) => x.id === user);
 
-          store.dispatch(saveTrip(response.data, isCreator, userDisponibilities[0]));
+          // TODO: Delete  Temp userDisp === firstOne
+          // console.log(response.data.disponibility[0]);
+
+          const userDisponibilities = response.data.disponibility[0];
+
+          store.dispatch(saveTrip(response.data, isCreator, userDisponibilities));
         })
         .catch((error) => {
           console.warn(error);
@@ -120,7 +124,6 @@ const tripMiddleware = (store) => (next) => (action) => {
       const { suggestionTitle, suggestionDescription } = store.getState().trip;
       const user = currentUser();
       const { id } = store.getState().trip.trip;
-      console.log(id);
 
       // Endpoint add new suggestion to trip
       axios.post(`http://localhost:8000/api/v0/trips/${id}/suggestions/new`, {
@@ -191,6 +194,36 @@ const tripMiddleware = (store) => (next) => (action) => {
       next(action);
       break;
     }
+
+    case NEW_USER_DISPONIBILITIES: {
+      const user = currentUser();
+      const { id } = store.getState().trip.trip;
+      const { startDate, endDate } = action;
+
+      // Endpoint add new suggestion to trip
+      axios.post(`http://localhost:8000/api/v0/users/${id}/disponibilities/`, {
+        // props,
+        user,
+        trip: id,
+        startDate,
+        endDate,
+      })
+        .then(() => {
+          store.dispatch(toastSuccess('Mise à jour des disponibilités'));
+        })
+        .then(() => {
+          // For refresh
+          store.dispatch(fetchTrip(id));
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
+
+      next(action);
+      break;
+    }
+
+
 
     case ADD_ACTIVITY: {
       const {
