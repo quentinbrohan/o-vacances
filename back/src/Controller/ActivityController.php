@@ -32,62 +32,80 @@ class ActivityController extends AbstractController
     /**
      * @Route("/api/v0/trips/{id}/activities", name="api_v0_activities_list", methods="GET")
      */
-    public function list(ActivityRepository $activityRepository, ObjectNormalizer $normalizer)
+    public function list(ActivityRepository $activityRepository, ObjectNormalizer $normalizer, $id, TripRepository $tripRepository)
     {
-        $activities = $activityRepository->findAll();
+        $trip = $tripRepository->find($id);
+        if(!empty($trip)){
 
-        // On instancie un serializer en lui précisant un normalizer adapté aux objets PHP
-        $serializer = new Serializer([$normalizer]);
-        // Parce qu'on a précisé le normalizer, on peut normaliser selon un groupe
-        $normalizedActivities = $serializer->normalize($activities, null, ['groups' => 'apiV0_activity']);
+            $activities = $activityRepository->findAllActivitiesByTrip($id);
+    
+            // On instancie un serializer en lui précisant un normalizer adapté aux objets PHP
+            $serializer = new Serializer([$normalizer]);
+            // Parce qu'on a précisé le normalizer, on peut normaliser selon un groupe
+            $normalizedActivities = $serializer->normalize($activities, null, ['groups' => 'apiV0_activity']);
+    
+            return $this->json($normalizedActivities);
 
-
-
-        return $this->json($normalizedActivities);
+        } else {
+            return $this->json([
+                'status' => 400,
+                'message'=>"Ce voyage n'existe pas"
+            ], 400);
+        }
     }
 
     /**
      * @Route("/api/v0/trips/{id}/activities", name="api_v0_activities_new", methods="POST")
      */
-    public function new(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, ValidatorInterface $validator, User $user,UserRepository $userRepository, CategoryRepository $categoryRepository, Trip $trip, TripRepository $tripRepository)
+    public function new(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, ValidatorInterface $validator,UserRepository $userRepository, CategoryRepository $categoryRepository, $id, TripRepository $tripRepository)
     {
-        // On extrait de la requête le json reçu
-        $jsonText = $request->getContent();
-        $jsonArray = json_decode($jsonText, true);
+        $trip = $tripRepository->find($id);
 
-        $idUser = $jsonArray['creator'];
-        $user = $userRepository->find($idUser);
+        if (!empty($trip)) {
 
-        $idTrip = $jsonArray['trip'];
-        $trip = $tripRepository->find($idTrip);
-        
-        $idCategory = $jsonArray['category'];
-        $category = $categoryRepository->find($idCategory);
+            // On extrait de la requête le json reçu
+            $jsonText = $request->getContent();
+            $jsonArray = json_decode($jsonText, true);
 
-        try {
-            // on crée une nouvelle entité Activity avec le serializer
-            $activity = $serializer->deserialize($jsonText, Activity::class, 'json');
+            $idUser = $jsonArray['creator'];
+            $user = $userRepository->find($idUser);
 
-            // validation des données de $activity en fonction des Asserts des entités
-            $errors = $validator->validate($activity);
+            $idTrip = $jsonArray['trip'];
+            $trip = $tripRepository->find($idTrip);
+            
+            $idCategory = $jsonArray['category'];
+            $category = $categoryRepository->find($idCategory);
 
-            // s'il y a des erreurs
-            if (count($errors) > 0) {
-                return $this->json($errors, 400);
+            try {
+                // on crée une nouvelle entité Activity avec le serializer
+                $activity = $serializer->deserialize($jsonText, Activity::class, 'json');
+
+                // validation des données de $activity en fonction des Asserts des entités
+                $errors = $validator->validate($activity);
+
+                // s'il y a des erreurs
+                if (count($errors) > 0) {
+                    return $this->json($errors, 400);
+                }
+
+                $activity->setCreator($user);
+                $activity->setCategory($category);
+                $activity->setTrip($trip);
+
+                $em->persist($activity);
+                $em->flush();
+
+                return $this->json($activity, 201, [], ['groups' => 'apiV0_activity']);
+            } catch (NotEncodableValueException $e) {
+                return $this->json([
+                    'status' => 400,
+                    'message' => $e->getMessage()
+                ], 400);
             }
-
-            $activity->setCreator($user);
-            $activity->setCategory($category);
-            $activity->setTrip($trip);
-
-            $em->persist($activity);
-            $em->flush();
-
-            return $this->json($activity, 201, [], ['groups' => 'apiV0_activity']);
-        } catch (NotEncodableValueException $e) {
+        } else {
             return $this->json([
                 'status' => 400,
-                'message' => $e->getMessage()
+                'message'=>"Ce voyage n'existe pas"
             ], 400);
         }
     }
@@ -113,7 +131,7 @@ class ActivityController extends AbstractController
         $category = $categoryRepository->find($idCategory);
         
 
-        if (!empty($activity)) {
+        if ((!empty($activity)) && (!empty($trip))) {
             
             // On extrait de la requête le json reçu
             $jsonText = $request->getContent();
@@ -152,22 +170,23 @@ class ActivityController extends AbstractController
 
     }
 
-    // todo : pas encore terminé
     /**
      * @Route("api/v0/users/{idUser}/trips/{idTrip}/activities/{id}/delete", name="api_v0_activities_delete", methods="DELETE")
      */
-    public function delete(EntityManagerInterface $em, Activity $activity, UserRepository $userRepository, TripRepository $tripRepository, $idUser, $idTrip)
+    public function delete(EntityManagerInterface $em, ActivityRepository $activityRepository, UserRepository $userRepository, TripRepository $tripRepository, $idUser, $idTrip, $id)
     {
         // récupération du voyage, utilisateur et créateur.
+        $activity = $activityRepository->find($id);
         $trip = $tripRepository->find($idTrip);
         $user = $userRepository->find($idUser);
         $userId = $user->getId();
-        $creatorId = $activity->getCreator()->getId();
         
+   
         // comparaison des id pour déterminer l'accès à la commande de suppression d'activité.
-        if ($userId === $creatorId) {
+        if ((!empty($trip)) && (!empty($activity))) {
             // si c'est bon alors :
-            if (!empty($trip)) {
+            $creatorId = $activity->getCreator()->getId();
+            if ($userId === $creatorId) {
                 try {
                     $trip->removeActivity($activity);
                     $em->remove($activity);
@@ -182,14 +201,14 @@ class ActivityController extends AbstractController
                 }
             } else {
                 return $this->json([
-                    'status' => 400,
-                    'message'=>"Cette activité ou ce voyage n'existe pas."
-                ], 400);
+                    'status' => 403,
+                    'message'=>"Seul le créateur de l'activité peut la supprimer."
+                ], 403);
             }
         } else {
             return $this->json([
                 'status' => 400,
-                'message'=>"Seul le créateur de l'activité peut la supprimer."
+                'message'=>"Cette activité ou ce voyage n'existe pas."
             ], 400);
         }
     }
