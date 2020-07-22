@@ -28,8 +28,6 @@ class ActivityRepository extends ServiceEntityRepository
         $builder = $this->createQueryBuilder('activity');
         // je souhaite sécuriser le parametre $id
         $builder->where("activity.trip = :tripId");
-        // je precise au builder quelle valeur "injecter" dans le parametre :animeId
-        // Cette methode sécurise le contenu de la variable $id (echapment de car spéciaux ...)
         $builder->setParameter("tripId", $id);
 
         // on recupère la requete construite

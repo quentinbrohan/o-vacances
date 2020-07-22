@@ -19,6 +19,21 @@ class SuggestionRepository extends ServiceEntityRepository
         parent::__construct($registry, Suggestion::class);
     }
 
+    public function findAllSuggestionsByTrip($id)
+    {
+        $builder = $this->createQueryBuilder('suggestion');
+        // je souhaite sécuriser le parametre $id
+        $builder->where("suggestion.trip = :tripId");
+        $builder->setParameter("tripId", $id);
+
+        // on recupère la requete construite
+        $query = $builder->getQuery();
+
+        // je demande a doctrine d'éxecuter le requete et de me renvoyer les resultats
+        return $query->getResult();
+        ;
+    }
+
     // /**
     //  * @return Suggestion[] Returns an array of Suggestion objects
     //  */
