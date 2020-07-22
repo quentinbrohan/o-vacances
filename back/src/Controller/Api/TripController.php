@@ -57,8 +57,10 @@ class TripController extends AbstractController
             if(count($errors) > 0){
                 return $this->json($errors, 400);
             }
-            
+          
+            $trip->addUsers($user);
             $trip->setCreator($user);
+            
 
             $em->persist($trip);
             $em->flush();
@@ -321,6 +323,4 @@ class TripController extends AbstractController
         
     }
 
-
-    // todo Fonction suppression de voyage - a voir plus tard si necessaire
 }

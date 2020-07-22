@@ -1,58 +1,83 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import Button from 'src/components/elements/Button';
+import { ReactComponent as AvatarDefault } from 'src/assets/svg/user.svg';
 
 import { Edit2, Check } from 'react-feather';
 
-// fausses données
-import users from 'src/data/usersData';
-
+import ProfileImage from './ProfileImage';
 import ProfileField from './ProfileField/ProfileField';
 
 import './profile.scss';
 
 // component to contact form
-const Profile = ({ isDisabled, deleteDisabledInput }) => {
-// simulation de récupération de l'utilisateur avec son id
-  const user = users.find((one) => one.id === '3');
-  console.log(isDisabled);
+const Profile = ({
+  isDisabled,
+  deleteDisabledInput,
+  fetchUser,
+  firstname,
+  lastname,
+  email,
+  password,
+  avatar,
+  changeField,
+  handleEditUser,
+  addImagePreview,
+}) => {
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  };
 
   return (
-    <div className="profile">
+
+    <main className="profile">
       <h1>Mon profil</h1>
       <div className="profile-head">
-        <div className="profile-head-img">
-          <img className="profile-head-img-picture" src={user.avatar} alt={user.firstname} />
-          <button type="button">Modifier la photo</button>
-        </div>
+        <ProfileImage
+          name="avatar"
+          avatar={avatar}
+          firstname={firstname}
+          onChangeImage={addImagePreview}
+          onChange={changeField}
+          handleEditUser={handleEditUser}
+        />
         <div className="profile-head-information">
-          <form>
+          <form onSubmit={handleSubmit}>
             <ProfileField
-              inputId={1}
-              value={user.firstname}
+              name="firstname"
+              value={firstname}
               userTitle="Prénom"
               type="text"
               isDisabled={isDisabled}
+              onChange={changeField}
             />
             <ProfileField
-              inputId={2}
-              value={user.lastname}
+              name="lastname"
+              value={lastname}
               userTitle="Nom"
               type="text"
               isDisabled={isDisabled}
+              onChange={changeField}
             />
             <ProfileField
-              inputId={3}
-              value={user.email}
+              name="email"
+              value={email}
               userTitle="Email"
               type="text"
               isDisabled={isDisabled}
+              onChange={changeField}
             />
             <ProfileField
-              inputId={4}
-              value={user.password}
+              name="password"
+              value={password}
               userTitle="Mot de passe"
               type="password"
               isDisabled={isDisabled}
+              onChange={changeField}
             />
             {isDisabled && (
             <Edit2
@@ -63,12 +88,16 @@ const Profile = ({ isDisabled, deleteDisabledInput }) => {
             />
             )}
             {!isDisabled && (
+
             <Check
               className="icon check"
+              type="submit"
               onClick={() => {
                 deleteDisabledInput(true);
+                handleEditUser();
               }}
             />
+
             )}
           </form>
         </div>
@@ -82,21 +111,39 @@ const Profile = ({ isDisabled, deleteDisabledInput }) => {
             <br />
             Agenda, lieux, activités, suggestions,...
           </p>
-          <button className="profil-trip-button" type="button">GO !</button>
+          <Button
+            color="primary"
+            haveClassName="profil-trip-button"
+          >
+            GO !
+          </Button>
         </div>
         <div className="profile-trip-archive">
           <h2>Mes anciens voyages</h2>
         </div>
       </div>
-    </div>
+    </main>
   );
 };
-
 Profile.propTypes = {
 
   deleteDisabledInput: PropTypes.func.isRequired,
   isDisabled: PropTypes.bool.isRequired,
+  fetchUser: PropTypes.func.isRequired,
+  changeField: PropTypes.func.isRequired,
+  firstname: PropTypes.string.isRequired,
+  lastname: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  password: PropTypes.string,
+  handleEditUser: PropTypes.func.isRequired,
+  avatar: PropTypes.string,
+  addImagePreview: PropTypes.func.isRequired,
 
+};
+
+Profile.defaultProps = {
+  avatar: AvatarDefault,
+  password: null,
 };
 
 export default Profile;

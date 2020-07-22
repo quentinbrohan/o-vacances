@@ -36,7 +36,7 @@ const Slideshow = () => {
   return (
     <>
       {/* Slideshow Images/Text */}
-      <div className="slideshow">
+      <section className="slideshow">
         <div className="slideshow-images">
           {slideshowData.map(({ image }, i) => (
             <div
@@ -75,13 +75,13 @@ const Slideshow = () => {
             Tomber amoureux du voyage à nouveau.
           </p>
         </div>
-      </div>
+      </section>
 
       <Button color="secondary" size="sm" haveClassName="show-features">
         <a
           href="#fonctionnalites"
         >
-          Voir les fonctionnalités <ArrowDownCircle />
+          <ArrowDownCircle />
         </a>
 
       </Button>

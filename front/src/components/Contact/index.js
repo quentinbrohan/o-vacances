@@ -1,12 +1,12 @@
 import React from 'react';
-
 import { Link } from 'react-router-dom';
+import Button from 'src/components/elements/Button';
 
 import './contact.scss';
 
 // component to contact form
 const Contact = () => (
-  <div className="contact">
+  <main className="contact">
     <h1>Contactez-nous</h1>
     <div className="contact-text">
       <h3>Vous souhaitez nous faire part d'une remarque? Vous avez besoin d'un renseignement? </h3>
@@ -28,10 +28,12 @@ const Contact = () => (
         <div>
           <textarea id="msg" name="visitor-message" placeholder="Commentaire" />
         </div>
-        <button type="submit">Envoyer le message</button>
+        <Button color="primary" type="submit">
+          Envoyer le message
+        </Button>
       </form>
     </div>
-  </div>
+  </main>
 );
 
 export default Contact;

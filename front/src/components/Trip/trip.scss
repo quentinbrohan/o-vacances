@@ -47,6 +47,11 @@
             color: $primaryColor;
           }
         }
+        .creator {
+          p {
+            font-size: 1.2rem;
+          }
+        }
       }
 
       .trip-info-description {
@@ -86,7 +91,8 @@
               width: 2.5rem;
               height: 2.5rem;
               border-radius: 50%;
-              border: 2px solid white;
+              border: 4px solid white;
+              background: white;
             }
             img.avatar:not(:first-child) {
               position: relative;
@@ -96,7 +102,8 @@
               width: 2.5rem;
               height: 2.5rem;
               border-radius: 50%;
-              border: 2px solid white;
+              border: 4px solid white;
+              background: white;
             }
           }
         }
@@ -105,7 +112,7 @@
           margin-bottom: 1rem;
           font-weight: bold;
 
-          label {
+          p {
             font-size: 1.2em;
             display: block;
             margin-bottom: 0.5rem;
@@ -135,12 +142,12 @@
           flex-direction: column;
           .trip-password {
             margin-bottom: 1rem;
-
             font-size: 1.2rem;
             font-weight: bold;
             input {
               padding: 0.5rem;
               font-weight: bold;
+              cursor: text;
             }
           }
           .trip-link {
@@ -157,6 +164,9 @@
 
   section.activities {
     margin-top: $gutter * 2;
+    h2 span {
+      font-size: 1.5rem;
+    }
     .trip-activities {
       display: flex;
       flex-wrap: wrap;
@@ -165,9 +175,22 @@
 
   section.suggestions {
     margin-top: $gutter * 2;
+    h2 span {
+      font-size: 1.5rem;
+    }
     .trip-suggestions {
       display: flex;
       flex-direction: column;
     }
+  }
+}
+
+.ReactModalPortal {
+  line-height: 125%;
+  hr {
+    margin: 1rem;
+  }
+  a {
+    color: $primaryColor;
   }
 }

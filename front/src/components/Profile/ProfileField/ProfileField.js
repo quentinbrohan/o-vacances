@@ -6,41 +6,54 @@ import './profilefield.scss';
 
 // component to change profil user
 const ProfileField = ({
-  inputId,
+  name,
   value,
   userTitle,
   type,
   isDisabled,
-}) => (
+  onChange,
+}) => {
+  const handleChange = (evt) => {
+    onChange(evt.target.value, name);
+  };
 
-  <div className="profile-field">
-    <label className="profile-field-label" htmlFor={inputId}>{userTitle}</label>
-    {isDisabled && (
-    <input
-      disabled
-      type={type}
-      defaultValue={value}
-    />
+  return (
 
-    )}
-    {!isDisabled && (
-    <input
-      type={type}
-      defaultValue={value}
-      onChange=""
-    />
-    )}
-  </div>
-);
+    <div className="profile-field">
+      <label className="profile-field-label" htmlFor={name}>{userTitle}</label>
+      {isDisabled && (
+      <input
+        disabled
+        type={type}
+        defaultValue={value}
+        onChange={handleChange}
+      />
+
+      )}
+      {!isDisabled && (
+      <input
+        type={type}
+        value={value}
+        onChange={handleChange}
+      />
+      )}
+    </div>
+  );
+};
 
 ProfileField.propTypes = {
 
   userTitle: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.string,
   type: PropTypes.string.isRequired,
-  inputId: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
   isDisabled: PropTypes.bool.isRequired,
+  onChange: PropTypes.func.isRequired,
 
+};
+
+ProfileField.defaultProps = {
+  value: null,
 };
 
 export default ProfileField;

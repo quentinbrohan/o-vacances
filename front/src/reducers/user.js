@@ -1,6 +1,9 @@
 import {
   UPDATE_USER_FIELD,
   SAVE_USER,
+  UPDATE_USER_PROFIL,
+  LOG_IN_USER,
+  LOG_OUT_USER,
 } from 'src/actions/user';
 
 const initialState = {
@@ -9,8 +12,10 @@ const initialState = {
   lastname: '',
   email: '',
   password: '',
+  avatar: '',
   info: {},
-  isLogged: false,
+  isAuthenticated: false,
+  isLoading: false,
 };
 
 const user = (state = initialState, action = {}) => {
@@ -25,9 +30,32 @@ const user = (state = initialState, action = {}) => {
       return {
         ...state,
         info: action.data,
-        isLogged: action.isLogged,
+        isAuthenticated: true,
         email: '',
         password: '',
+      };
+
+    case UPDATE_USER_PROFIL:
+      return {
+        ...state,
+        info: action.data.info,
+        role: [action.data.roles],
+        email: action.data.email,
+        firstname: action.data.firstname,
+        lastname: action.data.lastname,
+        avatar: action.data.avatar,
+      };
+
+    case LOG_IN_USER:
+      return {
+        ...state,
+        isAuthenticated: true,
+      };
+
+    case LOG_OUT_USER:
+      return {
+        ...state,
+        isAuthenticated: false,
       };
 
     default: return state;
