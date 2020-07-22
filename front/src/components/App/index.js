@@ -127,7 +127,7 @@ const App = ({
               isAuthenticated={isAuthenticated}
             />
             <PrivateRoute
-              path="/modifier-un-voyage"
+              path="/modifier-un-voyage/:id"
               component={TripEdit}
               isAuthenticated={isAuthenticated}
             />

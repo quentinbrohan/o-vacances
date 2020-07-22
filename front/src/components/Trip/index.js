@@ -303,16 +303,16 @@ const Trip = ({
                 <>
                   <Button
                     color="secondary"
-                    size="smg"
+                    size="sm"
                     type="submit"
                   >
-                    <Link to="/modifier-un-voyage">Modifier mon voyage</Link>
+                    <Link to={`/modifier-un-voyage/${tripId}`}>Modifier mon voyage</Link>
                   </Button>
                   <Button
                     color="secondary"
-                    size="smg"
+                    size="sm"
                     type="submit"
-                    onClick={() => handleDelete(tripId)}
+                    onClick={handleDelete}
                   >Supprimer mon voyage
                   </Button>
                 </>

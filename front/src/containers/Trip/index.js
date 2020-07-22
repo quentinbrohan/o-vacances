@@ -33,6 +33,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(modifyUserDisponibilities());
   },
   handleDelete: () => {
+    console.log('container');
     dispatch(deleteTrip());
   },
 });

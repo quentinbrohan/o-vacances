@@ -106,7 +106,7 @@ const trip = (state = initialState, action = {}) => {
     case DELETE_TRIP:
       return {
         ...state,
-        trip: undefined,
+        trip: [],
       };
 
     default: return state;

@@ -251,7 +251,6 @@ const tripMiddleware = (store) => (next) => (action) => {
       break;
     }
 
-
     default:
       // on passe l'action au suivant (middleware suivant ou reducer)
       next(action);
