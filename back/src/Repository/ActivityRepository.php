@@ -27,21 +27,16 @@ class ActivityRepository extends ServiceEntityRepository
     {
         $builder = $this->createQueryBuilder('activity');
         // je souhaite sécuriser le parametre $id
-        $builder->where("activity.trip_id = :tripId");
+        $builder->where("activity.trip = :tripId");
         // je precise au builder quelle valeur "injecter" dans le parametre :animeId
         // Cette methode sécurise le contenu de la variable $id (echapment de car spéciaux ...)
         $builder->setParameter("tripId", $id);
-
-        // Je demande a doctrine de faire la jointure avec la relation ->categories
-    //    $builder->leftJoin('user.trip', 'trip');
-        // je demande a doctrien d'alimenter les objets de type Category dans mon objet Anime
-    //    $builder->addSelect('trip');
 
         // on recupère la requete construite
         $query = $builder->getQuery();
 
         // je demande a doctrine d'éxecuter le requete et de me renvoyer les resultats
-        return $query->getOneOrNullResult();
+        return $query->getResult();
         ;
     }
     /*

@@ -49,8 +49,8 @@ class UserController extends AbstractController
         $jsonArray = json_decode($jsonText, true);
 
         $form->submit($jsonArray);
-
         
+  
 
         if ($form->isValid()) {
             // On a besoin d'hasher le mot de passe avant de le stocker en base de données
@@ -61,8 +61,6 @@ class UserController extends AbstractController
             // Puis on replace le mot de passe hashé dans $user
             $user->setPassword($encodedPassword);
             
-            $user->setRoles(["ROLE_USER"]);
-
 
             // On reprend le fil ordinaire des choses, en persistant et flush $user
             $entityManager = $this->getDoctrine()->getManager();
