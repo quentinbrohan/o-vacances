@@ -49,7 +49,7 @@ class UserController extends AbstractController
         $jsonArray = json_decode($jsonText, true);
 
         $form->submit($jsonArray);
-dd($form);
+
         
 
         if ($form->isValid()) {
