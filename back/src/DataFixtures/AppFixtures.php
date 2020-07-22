@@ -37,7 +37,7 @@ class AppFixtures extends Fixture
             $user->setLastname($userName[$i]);
             $user->setPassword($this->passwordEncoder->encodePassword($user, $pass[$i]));
             $user->setRoles(['ROLE_USER']);
-            $user->setAvatar('avatar.png');
+            $user->setAvatar('images/avatar.png');
 
             $users [] = $user;
             

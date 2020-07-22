@@ -8,6 +8,7 @@ import {
   SAVE_SUGGESTIONS,
   UPDATE_USER_DISPONIBILITIES,
   UPDATE_TRIP_FORM_FIELD,
+  DELETE_TRIP,
 } from 'src/actions/trip';
 
 const initialState = {
@@ -100,6 +101,12 @@ const trip = (state = initialState, action = {}) => {
       return {
         ...state,
         [action.name]: action.newValue,
+      };
+
+    case DELETE_TRIP:
+      return {
+        ...state,
+        trip: undefined,
       };
 
     default: return state;

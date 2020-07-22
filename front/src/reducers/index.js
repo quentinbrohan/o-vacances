@@ -12,7 +12,6 @@ const rootReducer = combineReducers({
   trip: tripReducer,
   error: errorReducer,
   toasts,
-
 });
 
 export default rootReducer;

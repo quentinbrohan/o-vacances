@@ -60,6 +60,9 @@ class UserController extends AbstractController
             $encodedPassword = $passwordEncoder->encodePassword($user, $password);
             // Puis on replace le mot de passe hashé dans $user
             $user->setPassword($encodedPassword);
+            
+            $user->setRoles(["ROLE_USER"]);
+
 
             // On reprend le fil ordinaire des choses, en persistant et flush $user
             $entityManager = $this->getDoctrine()->getManager();
@@ -93,9 +96,10 @@ class UserController extends AbstractController
         
         // on récupére la valeur du champ password
         $newPassword = $jsonArray['password'];
+
         // s'il est vide, alors on lui remet l'ancien password
         if(empty($newPassword)){
-            $jsonArray['password'] = $oldPassword;           
+            $jsonArray['password'] = $oldPassword;          
         } else {
         // sinon, on lui hash le nouveau password et on met le password hashé dans le champs "password" pour l'enregistrer.
             $encodedPassword = $passwordEncoder->encodePassword($user, $newPassword);
@@ -105,13 +109,9 @@ class UserController extends AbstractController
         // On envoie ce tableau à la méthode submit()
         $form->submit($jsonArray);
 
-        if(empty($user->getPassword())){
-            $user->setPassword($oldPassword);
-        }
-
-
         // On vérifie si le formulaire est valide, toutes les données reçues sont bonnes
         if ($form->isValid()) {
+            $user->setRoles(["ROLE_USER"]);
             // Si c'est valide, on persiste et on flushe
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);

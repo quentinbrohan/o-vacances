@@ -16,6 +16,7 @@ export const UPDATE_USER_DISPONIBILITIES = 'UPDATE_USER_DISPONIBILITIES';
 export const MODIFY_USER_DISPONIBILITIES = 'MODIFY_USER_DISPONIBILITIES';
 export const UPDATE_TRIP_FORM_FIELD = 'UPDATE_TRIP_FORM_FIELD';
 export const UPLOAD_IMAGE = 'UPLOAD_IMAGE';
+export const DELETE_TRIP = 'DELETE_TRIP';
 
 export const updateSuggestionField = (newValue, name) => ({
   type: UPDATE_SUGGESTION_FIELD,
@@ -96,4 +97,8 @@ export const updateTripFormField = (newValue, name) => ({
   type: UPDATE_TRIP_FORM_FIELD,
   newValue,
   name,
+});
+
+export const deleteTrip = () => ({
+  type: DELETE_TRIP,
 });

@@ -55,6 +55,7 @@ const Trip = ({
   userDisponibilities,
   changeUserDisponibilities,
   modifyUserDisponibilities,
+  deleteTrip,
 }) => {
   const currentTrip = useParams().id;
   const tripId = Number(currentTrip);
@@ -94,6 +95,10 @@ const Trip = ({
     addSuggestion();
   };
 
+  const handleDelete = () => {
+    deleteTrip();
+  };
+
   // Merge trip.disponibility + trip.users for <select> options
   if (trip.length !== 0) {
     const { disponibility, users } = trip;
@@ -104,7 +109,7 @@ const Trip = ({
       ...disp,
       ...users.find(({ id }) => id === disp.id),
     }));
-    // console.log(participantsDisponibilities);
+    console.log(participantsDisponibilities);
   }
 
   return (
@@ -307,6 +312,7 @@ const Trip = ({
                     color="secondary"
                     size="smg"
                     type="submit"
+                    onClick={() => handleDelete(tripId)}
                   >Supprimer mon voyage
                   </Button>
                 </>
@@ -375,6 +381,7 @@ Trip.propTypes = {
   ).isRequired,
   changeUserDisponibilities: PropTypes.func.isRequired,
   modifyUserDisponibilities: PropTypes.func.isRequired,
+  deleteTrip: PropTypes.func.isRequired,
 };
 
 export default Trip;

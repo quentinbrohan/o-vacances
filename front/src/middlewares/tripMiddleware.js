@@ -13,6 +13,7 @@ import {
   saveSuggestions,
   fetchTrip,
   MODIFY_USER_DISPONIBILITIES,
+  DELETE_TRIP,
 } from 'src/actions/trip';
 
 import {
@@ -225,6 +226,31 @@ const tripMiddleware = (store) => (next) => (action) => {
       next(action);
       break;
     }
+
+    case DELETE_TRIP: {
+      const user = currentUser();
+      const { id } = store.getState().trip.trip;
+
+      // Endpoint add new suggestion to trip
+      axios.delete(`http://localhost:8000/api/v0/users/${user}/trips/${id}`, {
+        // props,
+        user,
+        trip: id,
+      })
+        .then(() => {
+          store.dispatch(toastSuccess('Voyage supprimé'));
+        })
+        .then(() => {
+          // Redirect to HomeUser
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
+
+      next(action);
+      break;
+    }
+
 
     default:
       // on passe l'action au suivant (middleware suivant ou reducer)

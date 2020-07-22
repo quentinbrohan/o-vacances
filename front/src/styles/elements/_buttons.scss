@@ -123,8 +123,9 @@ button,
   display: inline-flex;
   font-size: 1rem;
   font-weight: 600;
-  padding: (($button-form--height - 1 - ($button-form--border-width * 2)) / 2)
-    ($button--padding-h - $button-form--border-width);
+  // padding: (($button-form--height - 1 - ($button-form--border-width * 2)) / 2)
+  //   ($button--padding-h - $button-form--border-width);
+  margin: 0.25rem 0;
   height: $button-form--height;
   text-decoration: none !important;
   text-transform: $button--transform;
@@ -147,6 +148,9 @@ button,
     display: flex;
     justify-content: center;
     align-items: center;
+  height: $button-form--height;
+    padding: (($button-form--height - 1 - ($button-form--border-width * 2)) / 2)
+    ($button--padding-h - $button-form--border-width);
     svg {
       margin: 0 0.5rem;
     }

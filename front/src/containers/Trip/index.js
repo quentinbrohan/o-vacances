@@ -7,6 +7,7 @@ import {
   saveTrip,
   updateUserDisponibilities,
   modifyUserDisponibilities,
+  deleteTrip,
 } from 'src/actions/trip';
 
 const mapStateToProps = (state) => ({
@@ -30,6 +31,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   reviseDisponibilities: () => {
     dispatch(modifyUserDisponibilities());
+  },
+  handleDelete: () => {
+    dispatch(deleteTrip());
   },
 });
 
