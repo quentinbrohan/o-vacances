@@ -97,7 +97,7 @@ class TripController extends AbstractController
             } 
         }
 
-        // si l'utilisateur fait parti des participant au voyage
+        // si l'utilisateur fait parti des participants au voyage
         if($participant >= 1){
             $trip = $tripRepository->findWithAllData($id);
             // On demande à Doctrine le voyage
@@ -118,7 +118,7 @@ class TripController extends AbstractController
 
             if($passwordSend === $PasswordTrip){
                 
-                $trip->addUser($user);
+                $trip->addUsers($user);
                 $em->persist($trip);
                 $em->flush();
 
@@ -128,9 +128,9 @@ class TripController extends AbstractController
                 
             } else {
                 return $this->json([
-                    'status' => 400,
-                    'message'=>"Vous n'avez pas l'autorisation d'acceder au voyage. Contactez le créateur du voyage"
-                ], 400);
+                    'status' => 401,
+                    'message'=>"Vous n'avez pas l'autorisation d'acceder au voyage. Contactez le modérateur du voyage"
+                ], 401);
             }
         }
 
@@ -173,9 +173,9 @@ class TripController extends AbstractController
         
         } else {
                 return $this->json([
-                    'status' => 400,
+                    'status' => 401,
                     'message'=>"Vous n'avez pas l'autorisation d'acceder au voyage. Contactez le modérateur du voyage"
-                ], 400);
+                ], 401);
         }
         
 
@@ -194,9 +194,9 @@ class TripController extends AbstractController
         $userId = $user->getId();
         $creatorId = $trip->getCreator()->getId();
  
-        // seul le créateur du voyage à le droit de modifier ces informations
-        if ($userId === $creatorId) {
-            if (!empty($trip)) {
+        if (!empty($trip)) {
+            // seul le créateur du voyage à le droit de modifier ces informations
+            if ($userId === $creatorId) {
 
                 // On extrait de la requête le json reçu
                 $jsonText = $request->getContent();
@@ -223,14 +223,14 @@ class TripController extends AbstractController
                 }
             } else {
                 return $this->json([
-                    'status' => 400,
-                    'message'=>"Ce voyage n'existe pas"
-                ], 400);
+                    'status' => 403,
+                    'message'=>"Vous n'avez pas le droit d'effectuer cette action"
+                ], 403);
             }
         } else {
             return $this->json([
                 'status' => 400,
-                'message'=>"Vous n'avez pas l'autorisation de faire cette opération"
+                'message'=>"Ce voyage n'existe pas"
             ], 400);
         }
     
@@ -245,24 +245,30 @@ class TripController extends AbstractController
         $jsonText = $request->getContent();
 
         $jsonArray = json_decode($jsonText, true);
-        
-        try {
-            
-            foreach($jsonArray['email'] as $email){
-            $user = $userRepository->findByEmail($email);
-            $trip->addUser($user);
-            }
 
-            $em->persist($trip);
-            $em->flush();
-            return $this->json($trip, 201, [], ['groups' => 'apiV0_trip']);
+        if (!empty($trip)) {
+            try {
+                foreach ($jsonArray['email'] as $email) {
+                    $user = $userRepository->findByEmail($email);
+                    $trip->addUsers($user);
+                }
 
-        } catch(NotEncodableValueException $e) {
-            return $this->json([
+                $em->persist($trip);
+                $em->flush();
+                return $this->json($trip, 201, [], ['groups' => 'apiV0_trip']);
+            } catch (NotEncodableValueException $e) {
+                return $this->json([
                 'status' => 400,
                 'message'=>$e->getMessage()
             ], 400);
-         }
+            }
+        } else {
+            return $this->json([
+                'status' => 400,
+                'message'=>"Ce voyage n'existe pas"
+            ], 400);
+
+        }
     }
 
     /**
@@ -272,54 +278,59 @@ class TripController extends AbstractController
     {
         //$trip = $tripRepository->find($id);
         $user = $userRepository->findAllTripsByUser($idUser);
-     
-        $creator = $trip->getCreator();
-        $creatorId = $creator->getId();
-        $participant = 0;
+        if (!empty($trip)) {
+            $creator = $trip->getCreator();
+            $creatorId = $creator->getId();
+            $participant = 0;
 
-        $tripsUser = $trip->getUsers();
+            $tripsUser = $trip->getUsers();
 
-        // si l'un des participant est la personne qui consulte la page $participant = 1
-        foreach($tripsUser as $userTrip){
-            $i = $userTrip->getId();      
-            if($i==$idUser) {
-                $participant =+1;
-            } 
-        }
-      
-        // si le voyage existe, si le user est un participant et si ce n'est pas le créateur 
-        if ((!empty($trip)) && ($participant > 0) && ($creatorId != $idUser)){ 
-            try {
-                $user->removeTrip($trip);
-                $em->persist($user);
-                $em->flush();
-                return $this->json($trip, 201, [], ['groups' => 'apiV0-trip']);
-
-            } catch (NotEncodableValueException $e) {
-                return $this->json([
-                    'status' => 400,
-                    'message'=>$e->getMessage()
-                ], 400);
+            // si l'un des participants est la personne qui consulte la page $participant = 1
+            foreach ($tripsUser as $userTrip) {
+                $i = $userTrip->getId();
+                if ($i==$idUser) {
+                    $participant =+1;
+                }
             }
-        } else if((!empty($trip)) && (count($tripsUser) <= 1) && ($creatorId == $idUser)){
-            try {
-                $user->removeTrip($trip);
-                $em->remove($trip);
-                $em->flush();
-                return $this->json($trip, 201, [], ['groups' => 'apiV0-trip']);
-
-            } catch (NotEncodableValueException $e) {
+        
+            // si le voyage existe, si le user est un participant et si ce n'est pas le créateur
+            if ((!empty($trip)) && ($participant > 0) && ($creatorId != $idUser)) {
+                try {
+                    $user->removeTrip($trip);
+                    $em->persist($user);
+                    $em->flush();
+                    return $this->json($trip, 201, [], ['groups' => 'apiV0-trip']);
+                } catch (NotEncodableValueException $e) {
+                    return $this->json([
+                        'status' => 400,
+                        'message'=>$e->getMessage()
+                    ], 400);
+                }
+            } elseif ((!empty($trip)) && (count($tripsUser) <= 1) && ($creatorId == $idUser)) {
+                try {
+                    $user->removeTrip($trip);
+                    $em->remove($trip);
+                    $em->flush();
+                    return $this->json($trip, 201, [], ['groups' => 'apiV0-trip']);
+                } catch (NotEncodableValueException $e) {
+                    return $this->json([
+                        'status' => 400,
+                        'message'=>$e->getMessage()
+                    ], 400);
+                }
+            } else {
                 return $this->json([
-                    'status' => 400,
-                    'message'=>$e->getMessage()
-                ], 400);
+                    'status' => 403,
+                    'message'=>"Vous n'avez pas le droit de faire cette action."
+                ], 403);
             }
         } else {
             return $this->json([
                 'status' => 400,
-                'message'=>"Vous n'avez pas le droit de faire cette action."
+                'message'=>"ce voyage n'existe pas."
             ], 400);
-        }
+
+        }    
         
     }
 
