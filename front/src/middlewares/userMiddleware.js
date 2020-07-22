@@ -99,18 +99,19 @@ const userMiddleware = (store) => (next) => (action) => {
     case EDIT_USER: {
       const {
         email,
-        password,
         lastname,
         firstname,
         avatar,
+        password,
       } = store.getState().user;
+      console.log(password, email, lastname, firstname, avatar);
       // withCredentials : autorisation d'accéder au cookie
       axios.patch(`http://localhost:8000/api/v0/users/${currentUser()}/edit`, {
         email,
-        password,
         lastname,
         firstname,
         avatar,
+        password,
       }, {
         withCredentials: true,
         // config,

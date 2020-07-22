@@ -134,7 +134,7 @@ Profile.propTypes = {
   firstname: PropTypes.string.isRequired,
   lastname: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired,
+  password: PropTypes.string,
   handleEditUser: PropTypes.func.isRequired,
   avatar: PropTypes.string,
   addImagePreview: PropTypes.func.isRequired,
@@ -143,6 +143,7 @@ Profile.propTypes = {
 
 Profile.defaultProps = {
   avatar: AvatarDefault,
+  password: null,
 };
 
 export default Profile;
