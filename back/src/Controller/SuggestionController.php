@@ -67,6 +67,7 @@ class SuggestionController extends AbstractController
             if ($form->isSubmitted() && $form->isValid()) {
                 // on traite le formulaire
                 // par exemple on l'envoi dans la BDD
+                $newSuggestion->setTrip($trip);
                 $entitymanager = $this->getDoctrine()->getManager();
                 $entitymanager->persist($newSuggestion);
                 $entitymanager->flush();
