@@ -9,6 +9,7 @@ import {
   newTrip,
   ADD_SUGGESTION,
   ADD_ACTIVITY,
+  EDIT_ACTIVITY,
   clearSuggestionField,
   FETCH_SUGGESTIONS,
   saveSuggestions,
@@ -171,6 +172,43 @@ const tripMiddleware = (store) => (next) => (action) => {
 
       // Endpoint add new suggestion to trip
       axios.post(`http://localhost:8000/api/v0/trips/${id}/activities`, {
+        // props,
+        title: activityTitle,
+        description: activityDescription,
+        startDate: activityStartDate,
+        endDate: activityEndDate,
+        category: activityCategory,
+        trip: id,
+        creator: user,
+      })
+        .then((response) => {
+          console.log(response);
+
+          // TODO: newTrip = cleForm inputs DONE
+          // Add suggestion to state or directly refresh Trip component afterward (?)
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
+
+      next(action);
+      break;
+    }
+
+    case EDIT_ACTIVITY: {
+      const {
+        activityTitle,
+        activityDescription,
+        activityStartDate,
+        activityEndDate,
+        activityCategory,
+        activityId,
+      } = store.getState().trip;
+      const { id } = store.getState().trip.trip;
+      const user = currentUser();
+
+      // Endpoint add new suggestion to trip
+      axios.patch(`/api/v0/trips/${id}/activities/${activityId}/edit`, {
         // props,
         title: activityTitle,
         description: activityDescription,

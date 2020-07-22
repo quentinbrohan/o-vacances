@@ -44,7 +44,7 @@ const ProfileField = ({
 ProfileField.propTypes = {
 
   userTitle: PropTypes.string.isRequired,
-  value: PropTypes.string,
+  value: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   isDisabled: PropTypes.bool.isRequired,
@@ -53,7 +53,7 @@ ProfileField.propTypes = {
 };
 
 ProfileField.defaultProps = {
-  value: null,
+  value: '',
 };
 
 export default ProfileField;

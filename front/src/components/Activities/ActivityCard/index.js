@@ -9,6 +9,7 @@ import {
   CheckCircle as Unselect,
 } from 'react-feather';
 import Button from 'src/components/elements/Button';
+import ActivityEdit from 'src/containers/ActivityEdit';
 
 import './activityCard.scss';
 
@@ -84,6 +85,14 @@ const ActivityCard = ({
             <Thrash
               className="delete"
               onClick={() => manageDeleteSingle(id)}
+            />
+          </Button>
+          <Button>
+            <ActivityEdit
+              className="edit"
+              color="secondary"
+              size="sm"
+              activityId={id}
             />
           </Button>
         </div>

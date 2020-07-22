@@ -147,7 +147,7 @@ Profile.propTypes = {
 
 Profile.defaultProps = {
   avatar: AvatarDefault,
-  password: null,
+  password: '',
 };
 
 export default Profile;
