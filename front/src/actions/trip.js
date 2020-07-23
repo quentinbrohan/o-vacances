@@ -22,6 +22,8 @@ export const REMOVE_TRIP = 'REMOVE_TRIP';
 export const UPDATE_TRIP_EDIT_FIELD = 'UPDATE_TRIP_EDIT_FIELD';
 export const SAVE_TRIP_EDIT = 'SAVE_TRIP_EDIT';
 export const MODIFY_TRIP = 'MODIFY_TRIP';
+export const FETCH_DISPONIBILITIES = 'FETCH_DISPONIBILITIES';
+export const SAVE_DISPONIBILITIES = 'SAVE_DISPONIBILITIES';
 
 export const updateSuggestionField = (newValue, name) => ({
   type: UPDATE_SUGGESTION_FIELD,
@@ -136,4 +138,13 @@ export const saveTripEdit = (trip, isCreator) => ({
 
 export const modifyTrip = () => ({
   type: MODIFY_TRIP,
+});
+
+export const fetchDisponibilities = () => ({
+  type: FETCH_DISPONIBILITIES,
+});
+
+export const saveDisponibilities = (disponibilities) => ({
+  type: SAVE_DISPONIBILITIES,
+  disponibilities,
 });

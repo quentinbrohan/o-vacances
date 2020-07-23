@@ -18,6 +18,8 @@ import {
   removeTrip,
   MODIFY_TRIP,
   saveTripEdit,
+  FETCH_DISPONIBILITIES,
+  saveDisponibilities,
 } from 'src/actions/trip';
 
 import {
@@ -266,11 +268,7 @@ const tripMiddleware = (store) => (next) => (action) => {
       const { id } = store.getState().trip.trip;
 
       // Endpoint add new suggestion to trip
-      axios.delete(`http://localhost:8000/api/v0/users/${user}/trips/${id}`, {
-        // props,
-        user,
-        trip: id,
-      })
+      axios.delete(`http://localhost:8000/api/v0/users/${user}/trips/${id}`)
         .then(() => {
           store.dispatch(removeTrip());
           store.dispatch(toastSuccess('Voyage supprimé'));
@@ -313,6 +311,26 @@ const tripMiddleware = (store) => (next) => (action) => {
 
           store.dispatch(saveTripEdit(response.data));
           store.dispatch(toastSuccess('Modifications effectuées'));
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
+
+      next(action);
+      break;
+    }
+
+    case FETCH_DISPONIBILITIES: {
+      const { id } = store.getState().trip.trip;
+
+      // Endpoint fetch disponibilities from trip
+      axios.get(`http://localhost:8000/api/v0/trips/${id}/disponibilities`, {
+        // props,
+      })
+        .then((response) => {
+          console.log(response);
+          console.log(response.data.disponibility);
+          store.dispatch(saveDisponibilities(response.data.disponibility));
         })
         .catch((error) => {
           console.warn(error);

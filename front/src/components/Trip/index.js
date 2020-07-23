@@ -59,11 +59,13 @@ const Trip = ({
   reviseUserDisponibilities,
   // addUserDisponibilities,
   handleDelete,
+  fetchDisponibilities,
 }) => {
   const currentTrip = useParams().id;
   const tripId = Number(currentTrip);
   useEffect(() => {
     fetchTrip(tripId);
+    fetchDisponibilities(tripId);
   }, []);
 
   // const [newDisponibilities, setNewDisponibilities] = useState(true);

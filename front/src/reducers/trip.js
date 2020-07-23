@@ -11,6 +11,7 @@ import {
   REMOVE_TRIP,
   SAVE_TRIP_EDIT,
   UPDATE_TRIP_EDIT_FIELD,
+  SAVE_DISPONIBILITIES,
 } from 'src/actions/trip';
 
 const initialState = {
@@ -81,10 +82,11 @@ const trip = (state = initialState, action = {}) => {
       return {
         ...state,
         trip: {
-          ...state,
+          ...state.trip,
           suggestion: action.suggestion,
         },
       };
+
     case UPDATE_USER_DISPONIBILITIES:
       console.log(action);
       return {
@@ -135,6 +137,17 @@ const trip = (state = initialState, action = {}) => {
         password: action.trip.password,
         location: action.trip.location,
         image: action.trip.image,
+      };
+
+    case SAVE_DISPONIBILITIES:
+      console.log(action);
+
+      return {
+        ...state,
+        trip: {
+          ...state.trip,
+          disponibility: action.disponibilities,
+        },
       };
 
     default: return state;
