@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import {
   Calendar,
   MapPin,
@@ -13,11 +14,10 @@ import './activityCard.scss';
 
 const ActivityCard = ({
   id,
-  name,
+  title,
   image,
   startDate,
   endDate,
-  location,
   description,
   handleDelete,
 }) => {
@@ -48,19 +48,19 @@ const ActivityCard = ({
       />
       <div className="activity-card-body">
         <div className="body-content">
-          <h4>{name}</h4>
+          <h4>{title}</h4>
           <div className="date">
             <Calendar />
             <p>
-              Du {startDate} au {endDate}
+              Du {moment(startDate).format('ll')} au {moment(endDate).format('ll')}
             </p>
           </div>
-          <div className="location">
-            <MapPin />
+          {/* <div className="location">
+           <MapPin />
             <p>
-              {location}
+              Situation
             </p>
-          </div>
+            </div> */}
           <p className="description">{description}</p>
         </div>
         <div className="activity-cta">
@@ -94,11 +94,10 @@ const ActivityCard = ({
 
 ActivityCard.propTypes = {
   id: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   startDate: PropTypes.string.isRequired,
   endDate: PropTypes.string.isRequired,
-  location: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
 };
 
