@@ -204,9 +204,8 @@ const tripMiddleware = (store) => (next) => (action) => {
       const { startDate, endDate } = action;
 
       // Endpoint add new suggestion to trip
-      axios.post(`http://localhost:8000/api/v0/users/${id}/disponibilities/`, {
+      axios.post(`http://localhost:8000/api/v0/users/${user}/disponibilities`, {
         // props,
-        user,
         trip: id,
         startDate,
         endDate,

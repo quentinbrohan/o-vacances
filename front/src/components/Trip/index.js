@@ -57,7 +57,7 @@ const Trip = ({
   userDisponibilities,
   // changeUserDisponibilities,
   reviseUserDisponibilities,
-  // addUserDisponibilities,
+  addUserDisponibilities,
   handleDelete,
 }) => {
   const currentTrip = useParams().id;
@@ -66,16 +66,10 @@ const Trip = ({
     fetchTrip(tripId);
   }, []);
 
-  // const [newDisponibilities, setNewDisponibilities] = useState(true);
-
-  // Check if User already ave disponibilites
-  // if (userDisponibilities.startDate !== '' && userDisponibilities.endDate !== '') {
-  // Pass state to false
-  // setNewDisponibilities(false);
-  // if (userDisponibilities.length >= 1) {
+  const [haveDisponibilities, setHaveDisponibilities] = useState(false);
   const [disponibilities, setDisponibilities] = useState({
-    startDate: userDisponibilities ? moment(userDisponibilities.startDate).format(MOMENT_FORMAT_DATE) : '0000-00-00',
-    endDate: userDisponibilities ? moment(userDisponibilities.endDate).format(MOMENT_FORMAT_DATE) : '00-00-00',
+    startDate: userDisponibilities ? moment(userDisponibilities.startDate).format(MOMENT_FORMAT_DATE) : '2020-08-27',
+    endDate: userDisponibilities ? moment(userDisponibilities.endDate).format(MOMENT_FORMAT_DATE) : null,
   });
 
   // }
@@ -122,12 +116,12 @@ const Trip = ({
     );
   };
 
-  // const createDisponibilities = () => {
-  //   addUserDisponibilities(
-  //     moment(startDate).format(MOMENT_FORMAT_DATE),
-  //     moment(endDate).format(MOMENT_FORMAT_DATE),
-  //   );
-  // };
+  const createDisponibilities = () => {
+    addUserDisponibilities(
+      moment(startDate).format(MOMENT_FORMAT_DATE),
+      moment(endDate).format(MOMENT_FORMAT_DATE),
+    );
+  };
 
   const handleSuggestion = () => {
     addSuggestion();
@@ -265,6 +259,7 @@ const Trip = ({
                 />
                 {/* If Calendar === user ++ select === user: show button => axios post new dates */}
                 {/* {isOwnUser && ( */}
+                {haveDisponibilities && (
                 <Button
                   color="secondary"
                   size="sm"
@@ -273,14 +268,17 @@ const Trip = ({
                 >
                   Modifier mes disponibilités
                 </Button>
-                {/* <Button
+                )}
+                {!haveDisponibilities && (
+                <Button
                   color="secondary"
                   size="sm"
                   type="submit"
                   onClick={createDisponibilities}
                 >
                   Ajouter mes disponibilités
-                </Button> */}
+                </Button>
+                )}
               </div>
 
               <div className="trip-access">
@@ -420,14 +418,21 @@ Trip.propTypes = {
   isOwnUser: PropTypes.bool.isRequired,
   userDisponibilities: PropTypes.objectOf(
     PropTypes.shape({
-      startDate: PropTypes.string.isRequired,
-      endDate: PropTypes.string.isRequired,
-    }).isRequired,
-  ).isRequired,
+      startDate: PropTypes.string,
+      endDate: PropTypes.string,
+    }),
+  ),
   changeUserDisponibilities: PropTypes.func.isRequired,
   reviseUserDisponibilities: PropTypes.func.isRequired,
   addUserDisponibilities: PropTypes.func.isRequired,
   handleDelete: PropTypes.func.isRequired,
+};
+
+Trip.defaultProps = {
+  userDisponibilities: {
+    startDate: null,
+    endDate: null,
+  },
 };
 
 export default Trip;
