@@ -222,14 +222,14 @@ const Trip = ({
                       disabled={!isOwnUser}
                       defaultValue={!!isOwnUser}
                     >
-                      {participant.id} - {moment(participant.startDate).format('L')} 🠒 {moment(participant.endDate).format('L')}
+                      {participant.users[0].firstname}: {moment(participant.startDate).format('L')} 🠒 {moment(participant.endDate).format('L')}
                     </option>
                   ))}
                 </select>
                 {/* if logged user => able to edit own disponibilities */}
                 <DateRangePicker
-                  // minDate={moment(trip.startDate, MOMENT_FORMAT_DATE)}
-                  // maxDate={moment(trip.endDate, MOMENT_FORMAT_DATE)}
+                  minDate={moment(trip.startDate, MOMENT_FORMAT_DATE)}
+                  maxDate={moment(trip.endDate, MOMENT_FORMAT_DATE)}
                   startDate={moment(startDate, MOMENT_FORMAT_DATE)}
                   endDate={moment(endDate, MOMENT_FORMAT_DATE)}
                   startDateId="start"

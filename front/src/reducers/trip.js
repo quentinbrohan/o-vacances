@@ -60,12 +60,9 @@ const trip = (state = initialState, action = {}) => {
       };
 
     case SAVE_TRIP:
-      console.log(action);
-
       return {
         ...state,
         trip: action.trip,
-        isLoading: false,
         isCreator: action.isCreator,
         tripPassword: action.trip.password,
         userDisponibilities: action.userDisponibilities,
@@ -88,7 +85,6 @@ const trip = (state = initialState, action = {}) => {
       };
 
     case UPDATE_USER_DISPONIBILITIES:
-      console.log(action);
       return {
         ...state,
         userDisponibilities: {
@@ -140,10 +136,9 @@ const trip = (state = initialState, action = {}) => {
       };
 
     case SAVE_DISPONIBILITIES:
-      console.log(action);
-
       return {
         ...state,
+        isLoading: false,
         trip: {
           ...state.trip,
           disponibility: action.disponibilities,
