@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import userTrips from 'src/data/homeUserTripsData';
-import userOldTrips from 'src/data/homeUserOldTripsData';
 import Loading from 'src/components/Loading';
 import moment from 'moment';
 import TripCard from './TripCard';

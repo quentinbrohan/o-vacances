@@ -9,7 +9,6 @@ import {
   ADD_SUGGESTION,
   ADD_ACTIVITY,
   EDIT_ACTIVITY,
-  clearSuggestionField,
   FETCH_SUGGESTIONS,
   saveSuggestions,
   fetchTrip,
@@ -25,6 +24,7 @@ import {
   fetchSuggestions,
   DELETE_ACTIVITY,
   removeActivity,
+  saveUserDisponibilities,
 } from 'src/actions/trip';
 
 import {
@@ -96,16 +96,47 @@ const tripMiddleware = (store) => (next) => (action) => {
       const {
         title,
         description,
+        location,
         startDate,
         endDate,
         password,
       } = store.getState().trip;
       const user = currentUser();
       // FormData = plain image
-      const { formData } = action;
-      console.log(formData);
 
-      const config = { headers: { 'Content-Type': 'multipart/form-data' } };
+      const imageInput = document.querySelector('#tripForm-image');
+      const file = imageInput.files[0];
+      console.log(file);
+
+      const form = {
+        title,
+        description,
+        location,
+        startDate,
+        endDate,
+        password,
+      };
+      // console.log(form);
+
+      const json = JSON.stringify(form);
+
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('document', json);
+
+      // // Appear as empty
+      // console.log(formData);
+      // // but isn't !
+      // console.log(formData.get('file'));
+      // console.log(formData.get('document'));
+
+      const config = {
+        data: formData,
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'multipart/form-data',
+        },
+      };
 
       // Request must be ASYNC !
       // Endpoint add new suggestion to trip
@@ -117,7 +148,8 @@ const tripMiddleware = (store) => (next) => (action) => {
         endDate,
         password,
         // creator: user,
-      }, config)
+      },
+      config)
         .then((response) => {
           console.log(response);
           store.dispatch(toastSuccess('Nouveau voyage créé'));
@@ -187,10 +219,11 @@ const tripMiddleware = (store) => (next) => (action) => {
         startDate,
         endDate,
       })
-        .then(() => {
+        .then((response) => {
+          console.log(response);
+
+          store.dispatch(saveUserDisponibilities(response.data));
           store.dispatch(toastSuccess('Disponibilités mise à jour'));
-        })
-        .then(() => {
           // For refresh
           store.dispatch(fetchDisponibilities(tripId));
         })
@@ -208,17 +241,15 @@ const tripMiddleware = (store) => (next) => (action) => {
       const { startDate, endDate } = action;
 
       // Endpoint add new suggestion to trip
-      axios.post(`http://localhost:8000/api/v0/users/${id}/disponibilities/`, {
+      axios.post(`http://localhost:8000/api/v0/users/${user}/disponibilities`, {
         // props,
-        user,
         trip: id,
         startDate,
         endDate,
       })
-        .then(() => {
+        .then((response) => {
+          store.dispatch(saveUserDisponibilities(response.data));
           store.dispatch(toastSuccess('Mise à jour des disponibilités'));
-        })
-        .then(() => {
           // For refresh
           store.dispatch(fetchDisponibilities(id));
         })
@@ -276,6 +307,7 @@ const tripMiddleware = (store) => (next) => (action) => {
       } = store.getState().trip;
       const { id } = store.getState().trip.trip;
       const user = currentUser();
+
       // Endpoint add new suggestion to trip
       axios.patch(`http://localhost:8000/api/v0/trips/${id}/activities/${activityId}/edit`, {
         // props,

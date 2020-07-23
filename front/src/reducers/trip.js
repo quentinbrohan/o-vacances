@@ -14,7 +14,7 @@ import {
   CHECK_ACTIVITY,
   LOADING,
   REMOVE_ACTIVITY,
-
+  SAVE_USER_DISPONIBILITIES,
 } from 'src/actions/trip';
 
 const initialState = {
@@ -61,6 +61,8 @@ const trip = (state = initialState, action = {}) => {
       return {
         ...state,
         trips: action.trips,
+        trip: [],
+        userDisponibilities: [],
         isLoading: false,
       };
 
@@ -158,6 +160,13 @@ const trip = (state = initialState, action = {}) => {
     case REMOVE_ACTIVITY:
       return {
         ...state,
+      };
+
+    case SAVE_USER_DISPONIBILITIES:
+      return {
+        ...state,
+        isLoading: false,
+        userDisponibilities: action.userDisponibilities,
       };
 
     default: return state;
