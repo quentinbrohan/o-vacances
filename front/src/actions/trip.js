@@ -27,6 +27,9 @@ export const FETCH_DISPONIBILITIES = 'FETCH_DISPONIBILITIES';
 export const SAVE_DISPONIBILITIES = 'SAVE_DISPONIBILITIES';
 export const CHECK_ACTIVITY = 'CHECK_ACTIVITY';
 
+export const LOADING = 'LOADING';
+
+
 export const updateSuggestionField = (newValue, name) => ({
   type: UPDATE_SUGGESTION_FIELD,
   newValue,
@@ -79,10 +82,6 @@ export const addActivity = () => ({
 
 export const deleteActivity = () => ({
   type: DELETE_ACTIVITY,
-});
-
-export const clearSuggestionField = () => ({
-  type: CLEAR_SUGGESTION_FIELD,
 });
 
 export const fetchSuggestions = () => ({
@@ -157,4 +156,10 @@ export const saveDisponibilities = (disponibilities) => ({
 export const checkActivity = (id) => ({
   type: CHECK_ACTIVITY,
   id,
+});
+
+export const loading = (isLoading) => ({
+  type: LOADING,
+  isLoading,
+
 });

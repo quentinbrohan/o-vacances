@@ -4,7 +4,6 @@ import {
   SAVE_TRIPS,
   SAVE_TRIP,
   UPDATE_ACTIVITY_FIELD,
-  CLEAR_SUGGESTION_FIELD,
   SAVE_SUGGESTIONS,
   UPDATE_USER_DISPONIBILITIES,
   UPDATE_TRIP_FORM_FIELD,
@@ -13,6 +12,8 @@ import {
   UPDATE_TRIP_EDIT_FIELD,
   SAVE_DISPONIBILITIES,
   CHECK_ACTIVITY,
+  LOADING,
+
 } from 'src/actions/trip';
 
 const initialState = {
@@ -51,7 +52,8 @@ const trip = (state = initialState, action = {}) => {
     case ADD_SUGGESTION:
       return {
         ...state,
-        suggestionContent: '',
+        suggestionTitle: '',
+        suggestionDescription: '',
       };
 
     case SAVE_TRIPS:
@@ -62,22 +64,12 @@ const trip = (state = initialState, action = {}) => {
       };
 
     case SAVE_TRIP:
-      console.log(action);
-
       return {
         ...state,
         trip: action.trip,
-        isLoading: false,
         isCreator: action.isCreator,
         tripPassword: action.trip.password,
         userDisponibilities: action.userDisponibilities,
-      };
-
-    case CLEAR_SUGGESTION_FIELD:
-      return {
-        ...state,
-        suggestionTitle: '',
-        suggestionDescription: '',
       };
 
     case SAVE_SUGGESTIONS:
@@ -85,12 +77,11 @@ const trip = (state = initialState, action = {}) => {
         ...state,
         trip: {
           ...state.trip,
-          suggestion: action.suggestion,
+          suggestion: action.suggestions,
         },
       };
 
     case UPDATE_USER_DISPONIBILITIES:
-      console.log(action);
       return {
         ...state,
         userDisponibilities: {
@@ -142,10 +133,9 @@ const trip = (state = initialState, action = {}) => {
       };
 
     case SAVE_DISPONIBILITIES:
-      console.log(action);
-
       return {
         ...state,
+        isLoading: false,
         trip: {
           ...state.trip,
           disponibility: action.disponibilities,
@@ -156,6 +146,12 @@ const trip = (state = initialState, action = {}) => {
       return {
         ...state,
         activityId: action.id,
+       }; 
+      
+    case LOADING:
+      return {
+        ...state,
+        isLoading: action.isLoading,
       };
 
     default: return state;

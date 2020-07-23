@@ -21,6 +21,8 @@ import {
   saveTripEdit,
   FETCH_DISPONIBILITIES,
   saveDisponibilities,
+  fetchDisponibilities,
+  fetchSuggestions,
 } from 'src/actions/trip';
 
 import {
@@ -76,6 +78,9 @@ const tripMiddleware = (store) => (next) => (action) => {
           const userDisponibilities = response.data.disponibility[0];
 
           store.dispatch(saveTrip(response.data, isCreator, userDisponibilities));
+        })
+        .then(() => {
+          store.dispatch(fetchDisponibilities(tripId));
         })
         .catch((error) => {
           console.warn(error);
@@ -137,11 +142,8 @@ const tripMiddleware = (store) => (next) => (action) => {
         trip: id,
       })
         .then(() => {
-          store.dispatch(clearSuggestionField());
-        })
-        .then(() => {
-          // For refresh
-          store.dispatch(fetchTrip(id));
+          store.dispatch(toastSuccess('Suggestion ajoutée !'));
+          store.dispatch(fetchSuggestions(id));
         })
         .catch((error) => {
           console.warn(error);
@@ -184,11 +186,11 @@ const tripMiddleware = (store) => (next) => (action) => {
         endDate,
       })
         .then(() => {
-          store.dispatch(toastSuccess('Mise à jour des disponibilités'));
+          store.dispatch(toastSuccess('Disponibilités mise à jour'));
         })
         .then(() => {
           // For refresh
-          store.dispatch(fetchTrip(id));
+          store.dispatch(fetchDisponibilities(tripId));
         })
         .catch((error) => {
           console.warn(error);
@@ -216,7 +218,7 @@ const tripMiddleware = (store) => (next) => (action) => {
         })
         .then(() => {
           // For refresh
-          store.dispatch(fetchTrip(id));
+          store.dispatch(fetchDisponibilities(id));
         })
         .catch((error) => {
           console.warn(error);
@@ -321,7 +323,6 @@ const tripMiddleware = (store) => (next) => (action) => {
     }
 
     case MODIFY_TRIP: {
-      const { tripId } = action;
       const user = currentUser();
       const {
         id,
