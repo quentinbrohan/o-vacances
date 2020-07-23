@@ -169,14 +169,14 @@ const tripMiddleware = (store) => (next) => (action) => {
 
     case MODIFY_USER_DISPONIBILITIES: {
       const user = currentUser();
-      const { id } = store.getState().trip.trip;
+      const { id: tripId } = store.getState().trip.trip;
+      const { id: disponibilityId } = store.getState().trip.userDisponibilities;
       const { startDate, endDate } = action;
 
       // Endpoint add new suggestion to trip
-      axios.patch(`http://localhost:8000/api/v0/users/${id}/disponibilities/${id}`, {
+      axios.patch(`http://localhost:8000/api/v0/users/${user}/disponibilities/${disponibilityId}`, {
         // props,
-        user,
-        trip: id,
+        trip: tripId,
         startDate,
         endDate,
       })
