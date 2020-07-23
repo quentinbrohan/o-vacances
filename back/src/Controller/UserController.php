@@ -13,7 +13,6 @@ use App\Form\UserType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-
 class UserController extends AbstractController
 {
      /**
@@ -83,13 +82,16 @@ class UserController extends AbstractController
     public function edit(UserPasswordEncoderInterface $passwordEncoder, Request $request, User $user, UserRepository $userRepository, $id, ObjectNormalizer $normalizer): Response
     {
         $user = $userRepository->find($id);
+     
         $oldPassword = $user->getPassword();
-
+        
         if (!empty($user)) {
             $form = $this->createForm(UserType::class, $user);
 
             // On extrait de la requête le json reçu
             $jsonText = $request->getContent();
+    dd($jsonText);
+    //dd($request->files->get('avatar'));  
             // On transforme ce json en array
             $jsonArray = json_decode($jsonText, true);
         
@@ -105,9 +107,31 @@ class UserController extends AbstractController
                 $jsonArray['password'] = $encodedPassword;
             }
 
-            // On envoie ce tableau à la méthode submit()
             $form->submit($jsonArray);
 
+             // On récupère les images transmises
+             $avatars = $form->get('avatar')->getData();
+             
+             // On boucle sur les images
+             foreach($avatars as $avatar){
+                 // On génère un nouveau nom de fichier
+                 $fichier = md5(uniqid()).'.'.$avatar->guessExtension();
+                 
+                 
+                 // On copie le fichier dans le dossier uploads
+                 $avatar->move(
+                     $this->getParameter('images_directory'),
+                     $fichier
+                 );
+                 
+                 // On crée l'image dans la base de données
+                 $user->setAvatar($fichier);
+             }   
+            // On envoie ce tableau à la méthode submit()
+            $jsonArray['avatar'] = $fichier;
+
+                
+                   
             // On vérifie si le formulaire est valide, toutes les données reçues sont bonnes
             if ($form->isValid()) {
                 $user->setRoles(["ROLE_USER"]);

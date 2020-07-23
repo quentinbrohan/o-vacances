@@ -8,30 +8,35 @@ use App\Entity\Suggestion;
 use App\Entity\Trip;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\IsTrue;
-use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+
 
 class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email')
-            ->add('roles', null, ['empty_data' => []])
-            ->add('password')
-            ->add('lastname',)
-            ->add('firstname',)
-            ->add('avatar',)
+            //->add('email')
+            //->add('roles', null, ['empty_data' => []])
+            //->add('password')
+           // ->add('lastname',)
+            //->add('firstname',)
+            ->add('avatar', FileType::class,[
+                'label' => false,
+                'multiple' => true,
+                'mapped' => false,
+                'required' => false,
+              
+            ])
+                
+
+
             ->add('suggestions',
                 EntityType::class, [
                     "class" => Suggestion::class,
