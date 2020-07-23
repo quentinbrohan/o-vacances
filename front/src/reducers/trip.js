@@ -146,8 +146,8 @@ const trip = (state = initialState, action = {}) => {
       return {
         ...state,
         activityId: action.id,
-       }; 
-      
+      };
+
     case LOADING:
       return {
         ...state,

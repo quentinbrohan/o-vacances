@@ -277,7 +277,7 @@ const tripMiddleware = (store) => (next) => (action) => {
       const user = currentUser();
      console.log(activityTitle, activityDescription, activityStartDate, activityEndDate, user, activityCategory, activityId);
       // Endpoint add new suggestion to trip
-      axios.patch(`/api/v0/trips/${id}/activities/${activityId}/edit`, {
+      axios.patch(`http://localhost:8000/api/v0/trips/${id}/activities/${activityId}/edit`, {
         // props,
         title: activityTitle,
         description: activityDescription,

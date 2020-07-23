@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import {
   Calendar,
-  MapPin,
+  // MapPin,
   Trash2 as Thrash,
   Circle as Select,
   CheckCircle as Unselect,

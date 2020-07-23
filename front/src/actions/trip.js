@@ -26,9 +26,7 @@ export const MODIFY_TRIP = 'MODIFY_TRIP';
 export const FETCH_DISPONIBILITIES = 'FETCH_DISPONIBILITIES';
 export const SAVE_DISPONIBILITIES = 'SAVE_DISPONIBILITIES';
 export const CHECK_ACTIVITY = 'CHECK_ACTIVITY';
-
 export const LOADING = 'LOADING';
-
 
 export const updateSuggestionField = (newValue, name) => ({
   type: UPDATE_SUGGESTION_FIELD,
