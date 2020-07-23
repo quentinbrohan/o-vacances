@@ -19,7 +19,6 @@ const TripForm = ({
   handleTripForm,
   location,
 }) => {
-
   const handleSubmit = (evt) => {
     evt.preventDefault();
 

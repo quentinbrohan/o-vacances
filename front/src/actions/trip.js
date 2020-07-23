@@ -9,6 +9,8 @@ export const NEW_TRIP = 'NEW_TRIP';
 export const UPDATE_ACTIVITY_FIELD = 'UPDATE_ACTIVITY_FIELD';
 export const ADD_ACTIVITY = 'ADD_ACTIVITY';
 export const DELETE_ACTIVITY = 'DELETE_ACTIVITY';
+export const EDIT_ACTIVITY = 'EDIT_ACTIVITY';
+export const CLEAR_SUGGESTION_FIELD = 'CLEAR_SUGGESTION_FIELD';
 export const FETCH_SUGGESTIONS = 'FETCH_SUGGESTIONS';
 export const SAVE_SUGGESTIONS = 'SAVE_SUGGESTIONS';
 export const UPDATE_USER_DISPONIBILITIES = 'UPDATE_USER_DISPONIBILITIES';
@@ -23,9 +25,9 @@ export const SAVE_TRIP_EDIT = 'SAVE_TRIP_EDIT';
 export const MODIFY_TRIP = 'MODIFY_TRIP';
 export const FETCH_DISPONIBILITIES = 'FETCH_DISPONIBILITIES';
 export const SAVE_DISPONIBILITIES = 'SAVE_DISPONIBILITIES';
+export const CHECK_ACTIVITY = 'CHECK_ACTIVITY';
 export const LOADING = 'LOADING';
 export const SAVE_USER_DISPONIBILITIES = 'SAVE_USER_DISPONIBILITIES';
-
 
 export const updateSuggestionField = (newValue, name) => ({
   type: UPDATE_SUGGESTION_FIELD,
@@ -114,6 +116,9 @@ export const updateTripFormField = (newValue, name) => ({
   name,
 });
 
+export const editActivity = () => ({
+  type: EDIT_ACTIVITY,
+});
 export const deleteTrip = () => ({
   type: DELETE_TRIP,
 });
@@ -147,9 +152,15 @@ export const saveDisponibilities = (disponibilities) => ({
   disponibilities,
 });
 
+export const checkActivity = (id) => ({
+  type: CHECK_ACTIVITY,
+  id,
+});
+
 export const loading = (isLoading) => ({
   type: LOADING,
   isLoading,
+
 });
 
 export const saveUserDisponibilities = (userDisponibilities) => ({

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'src/components/elements/Button';
-import { Link } from 'react-router-dom';
 
 import ActivityForm from 'src/containers/ActivityForm';
 
@@ -27,7 +26,7 @@ const Activities = ({ activities }) => {
           <Button
             color="primary"
             size="sm"
-            onClick={() => handleDelete()}
+            onClick={handleDelete}
           >
             Supprimer des activités
           </Button>

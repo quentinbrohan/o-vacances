@@ -3,16 +3,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './fieldSelect.scss';
+import './field.scss';
 
 // == Import : local
 
 // == Composant
-const FieldSelect = ({
+const Field = ({
   value,
+  type,
   name,
   placeholder,
   onChange,
+  labelTitle,
 }) => {
   const handleChange = (evt) => {
     onChange(evt.target.value, name);
@@ -25,27 +27,37 @@ const FieldSelect = ({
       <label
         htmlFor={inputId}
         className="field-label"
-      >{placeholder}
-        <select value={value} onChange={handleChange}>
-          <option defaultValue="" selected disabled> Choisir une catégorie</option>
-          <option value="1">restaurant</option>
-          <option value="2">sortie nocturne</option>
-          <option value="3">sport</option>""
-          <option value="4">visite culturelle</option>
-          <option value="5">point d'eau</option>
-        </select>
+      >
+        {labelTitle}
       </label>
+      <input
+        // React - state
+        value={value.name}
+        onChange={handleChange}
+        // infos de base
+        id={inputId}
+        type={type}
+        className="field-input"
+        placeholder={placeholder}
+        name={name}
+        list={inputId}
+      />
     </div>
   );
 };
 
-FieldSelect.propTypes = {
-  value: PropTypes.string.isRequired,
+Field.propTypes = {
+  value: PropTypes.string,
+  type: PropTypes.string,
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
 };
 
-// Valeurs par défaut pour les pro
+// Valeurs par défaut pour les props
+Field.defaultProps = {
+  value: '',
+  type: 'text',
+};
 // == Export
-export default FieldSelect;
+export default Field;
