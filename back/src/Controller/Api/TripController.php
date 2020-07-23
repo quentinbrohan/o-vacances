@@ -272,7 +272,7 @@ class TripController extends AbstractController
     }
 
     /**
-     * @Route("api/v0/users/{idUser}/trip/{id}", name="api_v0_trips_users_delete", methods={"DELETE"})
+     * @Route("api/v0/users/{idUser}/trips/{id}", name="api_v0_trips_users_delete", methods={"DELETE"})
      */
     public function delete(Request $request, EntityManagerInterface $em, UserRepository $userRepository, TripRepository $tripRepository, $idUser, Trip $trip)
     {
@@ -299,7 +299,7 @@ class TripController extends AbstractController
                     $user->removeTrip($trip);
                     $em->persist($user);
                     $em->flush();
-                    return $this->json($trip, 201, [], ['groups' => 'apiV0-trip']);
+                    return $this->json($trip, 200, [], ['groups' => 'apiV0-trip']);
                 } catch (NotEncodableValueException $e) {
                     return $this->json([
                         'status' => 400,
@@ -311,7 +311,7 @@ class TripController extends AbstractController
                     $user->removeTrip($trip);
                     $em->remove($trip);
                     $em->flush();
-                    return $this->json($trip, 201, [], ['groups' => 'apiV0-trip']);
+                    return $this->json($trip, 200, [], ['groups' => 'apiV0-trip']);
                 } catch (NotEncodableValueException $e) {
                     return $this->json([
                         'status' => 400,
