@@ -21,6 +21,7 @@ import {
   saveDisponibilities,
   fetchDisponibilities,
   fetchSuggestions,
+  saveUserDisponibilities,
 } from 'src/actions/trip';
 
 import {
@@ -183,10 +184,11 @@ const tripMiddleware = (store) => (next) => (action) => {
         startDate,
         endDate,
       })
-        .then(() => {
+        .then((response) => {
+          console.log(response);
+          
+          store.dispatch(saveUserDisponibilities(response.data));
           store.dispatch(toastSuccess('Disponibilités mise à jour'));
-        })
-        .then(() => {
           // For refresh
           store.dispatch(fetchDisponibilities(tripId));
         })
@@ -210,10 +212,9 @@ const tripMiddleware = (store) => (next) => (action) => {
         startDate,
         endDate,
       })
-        .then(() => {
+        .then((response) => {
+          store.dispatch(saveUserDisponibilities(response.data));
           store.dispatch(toastSuccess('Mise à jour des disponibilités'));
-        })
-        .then(() => {
           // For refresh
           store.dispatch(fetchDisponibilities(id));
         })

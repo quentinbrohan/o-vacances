@@ -24,6 +24,8 @@ export const MODIFY_TRIP = 'MODIFY_TRIP';
 export const FETCH_DISPONIBILITIES = 'FETCH_DISPONIBILITIES';
 export const SAVE_DISPONIBILITIES = 'SAVE_DISPONIBILITIES';
 export const LOADING = 'LOADING';
+export const SAVE_USER_DISPONIBILITIES = 'SAVE_USER_DISPONIBILITIES';
+
 
 export const updateSuggestionField = (newValue, name) => ({
   type: UPDATE_SUGGESTION_FIELD,
@@ -148,4 +150,9 @@ export const saveDisponibilities = (disponibilities) => ({
 export const loading = (isLoading) => ({
   type: LOADING,
   isLoading,
+});
+
+export const saveUserDisponibilities = (userDisponibilities) => ({
+  type: SAVE_USER_DISPONIBILITIES,
+  userDisponibilities,
 });

@@ -62,27 +62,24 @@ const Trip = ({
 }) => {
   const currentTrip = useParams().id;
   const tripId = Number(currentTrip);
+  const [focus, setFocus] = useState(null);
+  const [haveDisponibilities, setHaveDisponibilities] = useState(
+    !!(!isLoading && userDisponibilities
+    ),
+  );
+  const [disponibilities, setDisponibilities] = useState({
+    startDate: userDisponibilities
+      ? moment(userDisponibilities.startDate).format(MOMENT_FORMAT_DATE) : null,
+    endDate: userDisponibilities
+      ? moment(userDisponibilities.endDate).format(MOMENT_FORMAT_DATE) : null,
+  });
+  const { startDate, endDate } = disponibilities;
+  // if (!isLoading && userDisponibilities.length !== 0) {
+  //   setHaveDisponibilities(true);
+  // }
   useEffect(() => {
     fetchTrip(tripId);
   }, []);
-
-  const [haveDisponibilities, setHaveDisponibilities] = useState(false);
-  const [disponibilities, setDisponibilities] = useState({
-    startDate: userDisponibilities ? moment(userDisponibilities.startDate).format(MOMENT_FORMAT_DATE) : '2020-08-27',
-    endDate: userDisponibilities ? moment(userDisponibilities.endDate).format(MOMENT_FORMAT_DATE) : null,
-  });
-
-  // }
-  // }
-  // else {
-  //   // Stay true
-  //   const [disponibilities, setDisponibilities] = useState({
-  //     startDate: 2020-07-27,
-  //     endDate: 2020-07-29,
-  //   });
-  // }
-
-  const [focus, setFocus] = useState(null);
 
   // Modal
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -98,7 +95,6 @@ const Trip = ({
   }
 
   // Logged user disponibilities
-  const { startDate, endDate } = disponibilities;
 
   // Controlled components not working w/ react-dates
   // const changeDisponibilities = () => {
@@ -208,24 +204,26 @@ const Trip = ({
                   // onChange={() => manageDisponibilities(disponibilities)}
                 >
                   <option disabled>Participants</option>
-                  {trip.disponibility.map((participant) => (
-                    <option
+                  {trip.disponiblity && (
+                    trip.disponibility.map((participant) => (
+                      <option
                     // Pass Object as JSON for value
                       // value={JSON.stringify(participant.disponibilities)}
-                      key={participant.id}
-                      disabled={!isOwnUser}
-                      defaultValue={!!isOwnUser}
-                    >
-                      {participant.users[0].firstname}: {moment(participant.startDate).format('L')} 🠒 {moment(participant.endDate).format('L')}
-                    </option>
-                  ))}
+                        key={participant.id}
+                        disabled={!isOwnUser}
+                        defaultValue={!!isOwnUser}
+                      >
+                        {participant.users[0].firstname}: {moment(participant.startDate).format('L')} 🠒 {moment(participant.endDate).format('L')}
+                      </option>
+                    ))
+                  )}
                 </select>
                 {/* if logged user => able to edit own disponibilities */}
                 <DateRangePicker
                   minDate={moment(trip.startDate, MOMENT_FORMAT_DATE)}
                   maxDate={moment(trip.endDate, MOMENT_FORMAT_DATE)}
-                  startDate={moment(startDate, MOMENT_FORMAT_DATE)}
-                  endDate={moment(endDate, MOMENT_FORMAT_DATE)}
+                  startDate={moment(disponibilities.startDate, MOMENT_FORMAT_DATE, true)}
+                  endDate={moment(disponibilities.endDate, MOMENT_FORMAT_DATE, true)}
                   startDateId="start"
                   endDateId="end"
 
@@ -428,11 +426,11 @@ Trip.propTypes = {
   handleDelete: PropTypes.func.isRequired,
 };
 
-Trip.defaultProps = {
-  userDisponibilities: {
-    startDate: null,
-    endDate: null,
-  },
-};
+// Trip.defaultProps = {
+//   userDisponibilities: {
+//     startDate: null,
+//     endDate: null,
+//   },
+// };
 
 export default Trip;

@@ -12,6 +12,7 @@ import {
   UPDATE_TRIP_EDIT_FIELD,
   SAVE_DISPONIBILITIES,
   LOADING,
+  SAVE_USER_DISPONIBILITIES,
 } from 'src/actions/trip';
 
 const initialState = {
@@ -57,6 +58,8 @@ const trip = (state = initialState, action = {}) => {
       return {
         ...state,
         trips: action.trips,
+        trip: [],
+        userDisponibilities: [],
         isLoading: false,
       };
 
@@ -143,6 +146,15 @@ const trip = (state = initialState, action = {}) => {
       return {
         ...state,
         isLoading: action.isLoading,
+      };
+
+    case SAVE_USER_DISPONIBILITIES:
+      console.log(action);
+
+      return {
+        ...state,
+        isLoading: false,
+        userDisponibilities: action.userDisponibilities,
       };
 
     default: return state;
