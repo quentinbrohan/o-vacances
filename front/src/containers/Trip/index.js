@@ -9,6 +9,7 @@ import {
   modifyUserDisponibilities,
   newUserDisponibilities,
   deleteTrip,
+  checkTripAuth,
 } from 'src/actions/trip';
 
 const mapStateToProps = (state) => ({
@@ -23,6 +24,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   fetchTrip: (tripId) => {
     dispatch(fetchTrip(tripId));
+  },
+  checkTripAuth: (tripId) => {
+    dispatch(checkTripAuth(tripId));
   },
   saveTrip: () => {
     dispatch(saveTrip());

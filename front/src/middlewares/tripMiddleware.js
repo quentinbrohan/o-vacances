@@ -25,6 +25,7 @@ import {
   DELETE_ACTIVITY,
   removeActivity,
   saveUserDisponibilities,
+  CHECK_TRIP_AUTH,
 } from 'src/actions/trip';
 
 import {
@@ -68,6 +69,10 @@ const tripMiddleware = (store) => (next) => (action) => {
       axios.get(`http://localhost:8000/api/v0/users/${user}/trips/${tripId}`)
         .then((response) => {
           console.log(response);
+          if (response.status === 401) {
+            console.log(response.data.message);
+            
+          }
 
           // Check if creator
           const isCreator = checkIfCreator(response.data.creator, user);
@@ -85,7 +90,11 @@ const tripMiddleware = (store) => (next) => (action) => {
           store.dispatch(fetchDisponibilities(tripId));
         })
         .catch((error) => {
-          console.warn(error);
+          if (error.response) {
+            console.log(error.response);
+            
+          }
+          
         });
 
       next(action);
@@ -421,6 +430,30 @@ const tripMiddleware = (store) => (next) => (action) => {
         })
         .then(() => {
           // Redirect to HomeUser
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
+
+      next(action);
+      break;
+    }
+
+    case CHECK_TRIP_AUTH: {
+      const { tripId } = action;
+      const user = currentUser();
+      const { password } = store.getState().trip;
+
+      // Endpoint registration to trip with password
+      axios.post(`http://localhost:8000/api/v0/users/${user}/trips/${tripId}`, {
+        user,
+        password,
+      })
+        .then((response) => {
+          console.log(response);
+        })
+        .then(() => {
+          // // If OK
         })
         .catch((error) => {
           console.warn(error);

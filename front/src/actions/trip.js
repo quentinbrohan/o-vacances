@@ -29,6 +29,7 @@ export const CHECK_ACTIVITY = 'CHECK_ACTIVITY';
 export const LOADING = 'LOADING';
 export const REMOVE_ACTIVITY = 'REMOVE_ACTIVITY';
 export const SAVE_USER_DISPONIBILITIES = 'SAVE_USER_DISPONIBILITIES';
+export const CHECK_TRIP_AUTH = 'CHECK_TRIP_AUTH';
 
 export const updateSuggestionField = (newValue, name) => ({
   type: UPDATE_SUGGESTION_FIELD,
@@ -170,4 +171,9 @@ export const removeActivity = () => ({
 export const saveUserDisponibilities = (userDisponibilities) => ({
   type: SAVE_USER_DISPONIBILITIES,
   userDisponibilities,
+});
+
+export const checkTripAuth = (tripId) => ({
+  type: CHECK_TRIP_AUTH,
+  tripId,
 });
