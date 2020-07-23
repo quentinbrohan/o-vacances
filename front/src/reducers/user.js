@@ -11,7 +11,7 @@ const initialState = {
   firstname: '',
   lastname: '',
   email: '',
-  password: ' ',
+  password: '',
   avatar: '',
   info: {},
   isAuthenticated: false,
@@ -50,12 +50,15 @@ const user = (state = initialState, action = {}) => {
       return {
         ...state,
         isAuthenticated: true,
+        email: '',
+        password: '',
       };
 
     case LOG_OUT_USER:
       return {
         ...state,
         isAuthenticated: false,
+
       };
 
     default: return state;

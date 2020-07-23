@@ -1,0 +1,38 @@
+@import 'src/styles/vars';
+
+.activity-edit-element {
+  .field {
+    margin: 0.25rem;
+    position: relative;
+    margin-bottom: 1rem;
+    label {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: $blackColor;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+  
+    &-input {
+      width: 100%;
+      height: 2rem;
+      padding: 0.75rem;
+      font-size: 1rem;
+      border: 1px solid $greyColorDarker;
+      border-radius: 0.5rem;
+      &:focus {
+        border-color: $greyColorDarker;
+      }
+      &::placeholder {
+        color: $blackColor;
+      }
+      &-input:focus,
+      &-label {
+        color: $primaryColor;
+      }
+    }
+
+   
+  }
+
+}

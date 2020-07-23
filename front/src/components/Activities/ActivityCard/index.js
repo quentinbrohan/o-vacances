@@ -10,6 +10,8 @@ import {
 } from 'react-feather';
 import Button from 'src/components/elements/Button';
 
+import ActivityEdit from 'src/containers/ActivityEdit';
+
 import './activityCard.scss';
 
 const ActivityCard = ({
@@ -19,7 +21,7 @@ const ActivityCard = ({
   startDate,
   endDate,
   description,
-  handleDelete,
+  manageDelete,
 }) => {
   // Selected activities
   const [selected, setSelected] = useState([]);
@@ -32,11 +34,11 @@ const ActivityCard = ({
       setSelected(selected.filter((selectedIds) => (selectedIds !== activityId)));
     }
     else {
-      setSelected((selected) => [...selected, activityId]);
+      setSelected(() => [...selected, activityId]);
     }
   };
 
-  const manageDeleteSingle = (id) => {
+  const manageDeleteSingle = () => {
     console.log(`Suppression de l'activité ${id}`);
   };
 
@@ -86,6 +88,15 @@ const ActivityCard = ({
               onClick={() => manageDeleteSingle(id)}
             />
           </Button>
+          <Button>
+            <ActivityEdit
+              className="edit"
+              color="secondary"
+              size="sm"
+              Id={id}
+            />
+          </Button>
+
         </div>
       </div>
     </article>

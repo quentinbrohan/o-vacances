@@ -118,8 +118,6 @@ const userMiddleware = (store) => (next) => (action) => {
         avatar,
         password,
       }, {
-        withCredentials: true,
-        // config,
       })
         .then((response) => {
           console.log(response);

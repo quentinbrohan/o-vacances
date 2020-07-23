@@ -11,7 +11,9 @@ import {
   SAVE_TRIP_EDIT,
   UPDATE_TRIP_EDIT_FIELD,
   SAVE_DISPONIBILITIES,
+  CHECK_ACTIVITY,
   LOADING,
+
 } from 'src/actions/trip';
 
 const initialState = {
@@ -23,11 +25,12 @@ const initialState = {
   isLoading: true,
   isCreator: false,
   isOwnUser: false,
-  activityTilte: '',
+  activityTitle: '',
   activityDescription: '',
   activityStartDate: '',
   activityEndDate: '',
   activityCategory: '',
+  activityId: '',
   tripPassword: '',
   userDisponibilities: [],
   title: '',
@@ -139,6 +142,12 @@ const trip = (state = initialState, action = {}) => {
         },
       };
 
+    case CHECK_ACTIVITY:
+      return {
+        ...state,
+        activityId: action.id,
+       }; 
+      
     case LOADING:
       return {
         ...state,
