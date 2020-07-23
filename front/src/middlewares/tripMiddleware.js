@@ -23,6 +23,8 @@ import {
   saveDisponibilities,
   fetchDisponibilities,
   fetchSuggestions,
+  DELETE_ACTIVITY,
+  removeActivity,
 } from 'src/actions/trip';
 
 import {
@@ -238,7 +240,6 @@ const tripMiddleware = (store) => (next) => (action) => {
       } = store.getState().trip;
       const { id } = store.getState().trip.trip;
       const user = currentUser();
-
       // Endpoint add new suggestion to trip
       axios.post(`http://localhost:8000/api/v0/trips/${id}/activities`, {
         // props,
@@ -275,7 +276,6 @@ const tripMiddleware = (store) => (next) => (action) => {
       } = store.getState().trip;
       const { id } = store.getState().trip.trip;
       const user = currentUser();
-     console.log(activityTitle, activityDescription, activityStartDate, activityEndDate, user, activityCategory, activityId);
       // Endpoint add new suggestion to trip
       axios.patch(`http://localhost:8000/api/v0/trips/${id}/activities/${activityId}/edit`, {
         // props,
@@ -379,6 +379,24 @@ const tripMiddleware = (store) => (next) => (action) => {
       break;
     }
 
+    case DELETE_ACTIVITY: {
+      const { id } = store.getState().trip.trip;
+      const { activityId } = store.getState().trip;
+      // Endpoint add new suggestion to trip
+      axios.delete(`http://localhost:8000/api/v0/trips/${id}/activities/${activityId}`)
+        .then(() => {
+          store.dispatch(removeActivity());
+        })
+        .then(() => {
+          // Redirect to HomeUser
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
+
+      next(action);
+      break;
+    }
     default:
       // on passe l'action au suivant (middleware suivant ou reducer)
       next(action);

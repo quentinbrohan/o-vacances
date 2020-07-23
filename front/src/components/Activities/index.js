@@ -7,7 +7,7 @@ import ActivityForm from 'src/containers/ActivityForm';
 import ActivityCard from './ActivityCard';
 import './activities.scss';
 
-const Activities = ({ activities }) => {
+const Activities = ({ activities, deleteActivity, checkActivityId, }) => {
   const handleDelete = (selected) => {
     console.log(`Suppression des activités ${selected}`);
   };
@@ -38,6 +38,8 @@ const Activities = ({ activities }) => {
             {...activity}
             key={activity.id}
             manageDelete={handleDelete}
+            deleteActivity={deleteActivity}
+            checkActivityId={checkActivityId}
           />
         ))}
       </div>
@@ -47,6 +49,8 @@ const Activities = ({ activities }) => {
 
 Activities.propTypes = {
   activities: PropTypes.array.isRequired,
+  deleteActivity: PropTypes.func.isRequired,
+  checkActivityId: PropTypes.func.isRequired,
 };
 
 export default Activities;

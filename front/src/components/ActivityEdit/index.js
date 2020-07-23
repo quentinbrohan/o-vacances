@@ -139,11 +139,14 @@ ActivityEdit.propTypes = {
   activityCategory: PropTypes.string.isRequired,
   activityStartDate: PropTypes.string.isRequired,
   activityEndDate: PropTypes.string.isRequired,
-  activityDescription: PropTypes.string.isRequired,
+  activityDescription: PropTypes.string,
   handleEditActivity: PropTypes.func.isRequired,
   activities: PropTypes.array.isRequired,
   Id: PropTypes.number.isRequired,
   checkActivityId: PropTypes.func.isRequired,
 };
 
+ActivityEdit.defaultProps = {
+  activityDescription: '',
+};
 export default ActivityEdit;

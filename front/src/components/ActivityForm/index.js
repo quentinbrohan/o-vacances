@@ -107,9 +107,13 @@ ActivityForm.propTypes = {
   activityCategory: PropTypes.string.isRequired,
   activityStartDate: PropTypes.string.isRequired,
   activityEndDate: PropTypes.string.isRequired,
-  activityDescription: PropTypes.string.isRequired,
+  activityDescription: PropTypes.string,
   handleAddActivity: PropTypes.func.isRequired,
 
+};
+
+ActivityForm.defaultProps = {
+  activityDescription: '',
 };
 
 export default ActivityForm;

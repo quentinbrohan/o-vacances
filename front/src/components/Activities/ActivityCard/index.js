@@ -21,7 +21,8 @@ const ActivityCard = ({
   startDate,
   endDate,
   description,
-  manageDelete,
+  deleteActivity,
+  checkActivityId,
 }) => {
   // Selected activities
   const [selected, setSelected] = useState([]);
@@ -38,9 +39,13 @@ const ActivityCard = ({
     }
   };
 
-  const manageDeleteSingle = () => {
-    console.log(`Suppression de l'activité ${id}`);
-  };
+  // const manageDeleteSingle = () => {
+  //   console.log(`Suppression de l'activité ${id}`);
+  // };
+
+  const handleCheckActivity = () => (
+    checkActivityId(id)
+  );
 
   return (
     <article className="activity-card" id={`activite-${id}`}>
@@ -85,7 +90,10 @@ const ActivityCard = ({
           <Button color="secondary" size="sm">
             <Thrash
               className="delete"
-              onClick={() => manageDeleteSingle(id)}
+              onClick={() => {
+                handleCheckActivity();
+                deleteActivity();
+              }}
             />
           </Button>
           <Button>
@@ -110,6 +118,8 @@ ActivityCard.propTypes = {
   startDate: PropTypes.string.isRequired,
   endDate: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
+  deleteActivity: PropTypes.func.isRequired,
+  checkActivityId: PropTypes.func.isRequired,
 };
 
 export default ActivityCard;

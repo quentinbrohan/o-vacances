@@ -13,6 +13,7 @@ import {
   SAVE_DISPONIBILITIES,
   CHECK_ACTIVITY,
   LOADING,
+  REMOVE_ACTIVITY,
 
 } from 'src/actions/trip';
 
@@ -152,6 +153,11 @@ const trip = (state = initialState, action = {}) => {
       return {
         ...state,
         isLoading: action.isLoading,
+      };
+
+    case REMOVE_ACTIVITY:
+      return {
+        ...state,
       };
 
     default: return state;
