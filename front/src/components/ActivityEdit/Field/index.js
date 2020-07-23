@@ -14,6 +14,7 @@ const Field = ({
   name,
   placeholder,
   onChange,
+  labelTitle,
 }) => {
   const handleChange = (evt) => {
     onChange(evt.target.value, name);
@@ -27,7 +28,7 @@ const Field = ({
         htmlFor={inputId}
         className="field-label"
       >
-        {placeholder}
+        {labelTitle}
       </label>
       <input
         // React - state

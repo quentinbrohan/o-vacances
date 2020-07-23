@@ -27,6 +27,7 @@ const FieldSelect = ({
         className="field-label"
       >{placeholder}
         <select value={value} onChange={handleChange}>
+          <option defaultValue="" selected disabled> Choisir une catégorie</option>
           <option value="1">restaurant</option>
           <option value="2">sortie nocturne</option>
           <option value="3">sport</option>""

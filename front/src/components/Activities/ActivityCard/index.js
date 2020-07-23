@@ -9,6 +9,7 @@ import {
   CheckCircle as Unselect,
 } from 'react-feather';
 import Button from 'src/components/elements/Button';
+
 import ActivityEdit from 'src/containers/ActivityEdit';
 
 import './activityCard.scss';
@@ -92,9 +93,10 @@ const ActivityCard = ({
               className="edit"
               color="secondary"
               size="sm"
-              activityId={id}
+              Id={id}
             />
           </Button>
+
         </div>
       </div>
     </article>

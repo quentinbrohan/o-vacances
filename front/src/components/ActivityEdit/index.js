@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from 'src/components/elements/Button';
 import Modal from 'react-modal';
+import moment from 'moment';
 
 import { Edit2 } from 'react-feather';
 
@@ -12,7 +13,7 @@ import FieldSelect from './FieldSelect';
 import './activityEdit.scss';
 
 const ActivityEdit = ({
-  activityId,
+  Id,
   changeField,
   activityTitle,
   activityDescription,
@@ -21,6 +22,7 @@ const ActivityEdit = ({
   activityCategory,
   handleEditActivity,
   activities,
+  checkActivityId,
 }) => {
   Modal.setAppElement('div');
   let subtitle;
@@ -36,19 +38,27 @@ const ActivityEdit = ({
     event.preventDefault();
   };
 
-  console.log(activityId);
+  console.log(Id);
   console.log(activities);
 
-  const getActivityById = (activities, activityId) => {
-    activities.find((activity) => (activity.id === activityId));
-  };
+  const getActivityById = (activities, Id) => (
+    activities.find((activity) => (activity.id === Id))
+  );
+  const handleCheckActivity = () => (
+    checkActivityId(Id)
+  );
 
-  const activity = getActivityById(activities, activityId);
+  const activity = getActivityById(activities, Id);
 
   return (
-
     <div className="activity-edit">
-      <Edit2 className="edit" onClick={openModal} />
+      <Edit2
+        className="edit"
+        onClick={() => {
+          handleCheckActivity();
+          openModal();
+        }}
+      />
       <Modal
         className="activity-edit-modal"
         isOpen={modalIsOpen}
@@ -60,44 +70,57 @@ const ActivityEdit = ({
           },
         }}
       >
-        <span className="activity-edit-button-close" onClick={closeModal}>x</span>
+        <span
+          className="activity-edit-button-close"
+          onClick={closeModal}
+        >x
+        </span>
         <h2 ref={subtitle}>Modifier cette activité</h2>
 
-        <form className="activity-edit-element" onSubmit={handleSubmit}>
+        <form
+          className="activity-edit-element"
+          onSubmit={() => {
+            handleSubmit();
+          }}
+        >
           <Field
             name="activityTitle"
             placeholder={activity.title}
             onChange={changeField}
             value={activityTitle}
             type="text"
+            labelTitle="Activité"
           />
           <FieldSelect
             name="activityCategory"
-            placeholder="Catégorie"
             onChange={changeField}
             value={activityCategory}
+            labelTitle="Catégorie"
           />
           <Field
             name="activityStartDate"
-            placeholder="Date de début"
+            placeholder={activity.startDate}
             type="date"
             onChange={changeField}
             value={activityStartDate}
+            labelTitle="Date de début"
           />
 
           <Field
             name="activityEndDate"
-            placeholder="Date de fin"
+            placeholder={activity.endDate}
             type="date"
             onChange={changeField}
             value={activityEndDate}
+            labelTitle="Date de fin"
           />
           <Field
             name="activityDescription"
             type="textarea"
-            placeholder="On fait quoi?"
+            placeholder={activity.description}
             onChange={changeField}
             value={activityDescription}
+            labelTitle="Description"
           />
         </form>
         <Button
@@ -122,7 +145,7 @@ ActivityEdit.propTypes = {
   activityEndDate: PropTypes.string.isRequired,
   activityDescription: PropTypes.string.isRequired,
   handleEditActivity: PropTypes.func.isRequired,
-
+  activities: PropTypes.array.isRequired,
 };
 
 export default ActivityEdit;

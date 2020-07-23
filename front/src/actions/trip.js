@@ -25,6 +25,7 @@ export const SAVE_TRIP_EDIT = 'SAVE_TRIP_EDIT';
 export const MODIFY_TRIP = 'MODIFY_TRIP';
 export const FETCH_DISPONIBILITIES = 'FETCH_DISPONIBILITIES';
 export const SAVE_DISPONIBILITIES = 'SAVE_DISPONIBILITIES';
+export const CHECK_ACTIVITY = 'CHECK_ACTIVITY';
 
 export const updateSuggestionField = (newValue, name) => ({
   type: UPDATE_SUGGESTION_FIELD,
@@ -151,4 +152,9 @@ export const fetchDisponibilities = () => ({
 export const saveDisponibilities = (disponibilities) => ({
   type: SAVE_DISPONIBILITIES,
   disponibilities,
+});
+
+export const checkActivity = (id) => ({
+  type: CHECK_ACTIVITY,
+  id,
 });

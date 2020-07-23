@@ -226,8 +226,6 @@ const tripMiddleware = (store) => (next) => (action) => {
       break;
     }
 
-
-
     case ADD_ACTIVITY: {
       const {
         activityTitle,
@@ -275,7 +273,7 @@ const tripMiddleware = (store) => (next) => (action) => {
       } = store.getState().trip;
       const { id } = store.getState().trip.trip;
       const user = currentUser();
-
+     console.log(activityTitle, activityDescription, activityStartDate, activityEndDate, user, activityCategory, activityId);
       // Endpoint add new suggestion to trip
       axios.patch(`/api/v0/trips/${id}/activities/${activityId}/edit`, {
         // props,
