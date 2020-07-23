@@ -20,6 +20,7 @@ import {
   saveTripEdit,
   FETCH_DISPONIBILITIES,
   saveDisponibilities,
+  fetchDisponibilities,
 } from 'src/actions/trip';
 
 import {
@@ -75,6 +76,9 @@ const tripMiddleware = (store) => (next) => (action) => {
           const userDisponibilities = response.data.disponibility[0];
 
           store.dispatch(saveTrip(response.data, isCreator, userDisponibilities));
+        })
+        .then(() => {
+          store.dispatch(fetchDisponibilities(tripId));
         })
         .catch((error) => {
           console.warn(error);
@@ -187,6 +191,7 @@ const tripMiddleware = (store) => (next) => (action) => {
         })
         .then(() => {
           // For refresh
+          const { id } = store.getState().trip.trip;
           store.dispatch(fetchTrip(id));
         })
         .catch((error) => {
@@ -224,8 +229,6 @@ const tripMiddleware = (store) => (next) => (action) => {
       next(action);
       break;
     }
-
-
 
     case ADD_ACTIVITY: {
       const {
@@ -285,7 +288,6 @@ const tripMiddleware = (store) => (next) => (action) => {
     }
 
     case MODIFY_TRIP: {
-      const { tripId } = action;
       const user = currentUser();
       const {
         id,
