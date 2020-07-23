@@ -4,7 +4,6 @@ import {
   SAVE_TRIPS,
   SAVE_TRIP,
   UPDATE_ACTIVITY_FIELD,
-  CLEAR_SUGGESTION_FIELD,
   SAVE_SUGGESTIONS,
   UPDATE_USER_DISPONIBILITIES,
   UPDATE_TRIP_FORM_FIELD,
@@ -12,6 +11,7 @@ import {
   SAVE_TRIP_EDIT,
   UPDATE_TRIP_EDIT_FIELD,
   SAVE_DISPONIBILITIES,
+  LOADING,
 } from 'src/actions/trip';
 
 const initialState = {
@@ -49,7 +49,8 @@ const trip = (state = initialState, action = {}) => {
     case ADD_SUGGESTION:
       return {
         ...state,
-        suggestionContent: '',
+        suggestionTitle: '',
+        suggestionDescription: '',
       };
 
     case SAVE_TRIPS:
@@ -68,19 +69,14 @@ const trip = (state = initialState, action = {}) => {
         userDisponibilities: action.userDisponibilities,
       };
 
-    case CLEAR_SUGGESTION_FIELD:
-      return {
-        ...state,
-        suggestionTitle: '',
-        suggestionDescription: '',
-      };
-
     case SAVE_SUGGESTIONS:
+      console.log(action);
+      
       return {
         ...state,
         trip: {
           ...state.trip,
-          suggestion: action.suggestion,
+          suggestion: action.suggestions,
         },
       };
 
@@ -143,6 +139,12 @@ const trip = (state = initialState, action = {}) => {
           ...state.trip,
           disponibility: action.disponibilities,
         },
+      };
+
+    case LOADING:
+      return {
+        ...state,
+        isLoading: action.isLoading,
       };
 
     default: return state;

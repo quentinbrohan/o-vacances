@@ -9,7 +9,6 @@ export const NEW_TRIP = 'NEW_TRIP';
 export const UPDATE_ACTIVITY_FIELD = 'UPDATE_ACTIVITY_FIELD';
 export const ADD_ACTIVITY = 'ADD_ACTIVITY';
 export const DELETE_ACTIVITY = 'DELETE_ACTIVITY';
-export const CLEAR_SUGGESTION_FIELD = 'CLEAR_SUGGESTION_FIELD';
 export const FETCH_SUGGESTIONS = 'FETCH_SUGGESTIONS';
 export const SAVE_SUGGESTIONS = 'SAVE_SUGGESTIONS';
 export const UPDATE_USER_DISPONIBILITIES = 'UPDATE_USER_DISPONIBILITIES';
@@ -24,6 +23,7 @@ export const SAVE_TRIP_EDIT = 'SAVE_TRIP_EDIT';
 export const MODIFY_TRIP = 'MODIFY_TRIP';
 export const FETCH_DISPONIBILITIES = 'FETCH_DISPONIBILITIES';
 export const SAVE_DISPONIBILITIES = 'SAVE_DISPONIBILITIES';
+export const LOADING = 'LOADING';
 
 export const updateSuggestionField = (newValue, name) => ({
   type: UPDATE_SUGGESTION_FIELD,
@@ -77,10 +77,6 @@ export const addActivity = () => ({
 
 export const deleteActivity = () => ({
   type: DELETE_ACTIVITY,
-});
-
-export const clearSuggestionField = () => ({
-  type: CLEAR_SUGGESTION_FIELD,
 });
 
 export const fetchSuggestions = () => ({
@@ -147,4 +143,9 @@ export const fetchDisponibilities = () => ({
 export const saveDisponibilities = (disponibilities) => ({
   type: SAVE_DISPONIBILITIES,
   disponibilities,
+});
+
+export const loading = (isLoading) => ({
+  type: LOADING,
+  isLoading,
 });
