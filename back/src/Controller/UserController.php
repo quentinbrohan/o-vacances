@@ -49,8 +49,8 @@ class UserController extends AbstractController
         $jsonArray = json_decode($jsonText, true);
 
         $form->submit($jsonArray);
-
         
+  
 
         if ($form->isValid()) {
             // On a besoin d'hasher le mot de passe avant de le stocker en base de données
@@ -61,8 +61,6 @@ class UserController extends AbstractController
             // Puis on replace le mot de passe hashé dans $user
             $user->setPassword($encodedPassword);
             
-            $user->setRoles(["ROLE_USER"]);
-
 
             // On reprend le fil ordinaire des choses, en persistant et flush $user
             $entityManager = $this->getDoctrine()->getManager();
@@ -87,45 +85,53 @@ class UserController extends AbstractController
         $user = $userRepository->find($id);
         $oldPassword = $user->getPassword();
 
-        $form = $this->createForm(UserType::class, $user);
+        if (!empty($user)) {
+            $form = $this->createForm(UserType::class, $user);
 
-        // On extrait de la requête le json reçu
-        $jsonText = $request->getContent();
-        // On transforme ce json en array
-        $jsonArray = json_decode($jsonText, true);
+            // On extrait de la requête le json reçu
+            $jsonText = $request->getContent();
+            // On transforme ce json en array
+            $jsonArray = json_decode($jsonText, true);
         
-        // on récupére la valeur du champ password
-        $newPassword = $jsonArray['password'];
+            // on récupére la valeur du champ password
+            $newPassword = $jsonArray['password'];
 
-        // s'il est vide, alors on lui remet l'ancien password
-        if(empty($newPassword)){
-            $jsonArray['password'] = $oldPassword;          
-        } else {
-        // sinon, on lui hash le nouveau password et on met le password hashé dans le champs "password" pour l'enregistrer.
-            $encodedPassword = $passwordEncoder->encodePassword($user, $newPassword);
-            $jsonArray['password'] = $encodedPassword;
-        }
+            // s'il est vide, alors on lui remet l'ancien password
+            if (empty($newPassword)) {
+                $jsonArray['password'] = $oldPassword;
+            } else {
+                // sinon, on lui hash le nouveau password et on met le password hashé dans le champs "password" pour l'enregistrer.
+                $encodedPassword = $passwordEncoder->encodePassword($user, $newPassword);
+                $jsonArray['password'] = $encodedPassword;
+            }
 
-        // On envoie ce tableau à la méthode submit()
-        $form->submit($jsonArray);
+            // On envoie ce tableau à la méthode submit()
+            $form->submit($jsonArray);
 
-        // On vérifie si le formulaire est valide, toutes les données reçues sont bonnes
-        if ($form->isValid()) {
-            $user->setRoles(["ROLE_USER"]);
-            // Si c'est valide, on persiste et on flushe
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
+            // On vérifie si le formulaire est valide, toutes les données reçues sont bonnes
+            if ($form->isValid()) {
+                $user->setRoles(["ROLE_USER"]);
+                // Si c'est valide, on persiste et on flushe
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($user);
+                $em->flush();
 
-            // On retourne une 201 avec l'objet qu'on vient de créer
-            // On instancie un serializer en lui précisant un normalizer adapté aux objets PHP
-            $serializer = new Serializer([$normalizer]);
-            // Parce qu'on a précisé le normalizer, on peut normaliser selon un groupe
-            $normalizedUser = $serializer->normalize($user, null, ['groups' => 'apiV0_list']);
-            return $this->json($normalizedUser, 201);
-        }
+                // On retourne une 201 avec l'objet qu'on vient de créer
+                // On instancie un serializer en lui précisant un normalizer adapté aux objets PHP
+                $serializer = new Serializer([$normalizer]);
+                // Parce qu'on a précisé le normalizer, on peut normaliser selon un groupe
+                $normalizedUser = $serializer->normalize($user, null, ['groups' => 'apiV0_list']);
+                return $this->json($normalizedUser, 201);
+            }
      
-        return $this->json((string) $form->getErrors(true, false), 400);
+            return $this->json((string) $form->getErrors(true, false), 400);
+
+        } else {
+            return $this->json([
+                'status' => 400,
+                'message'=>"Vous ne pouvez pas effectuer cette action"
+            ], 400);
+        }
     }
 
     /**
@@ -135,12 +141,20 @@ class UserController extends AbstractController
     {
         $user = $userRepository->find($id);
 
-        // On instancie un serializer en lui précisant un normalizer adapté aux objets PHP
-        $serializer = new Serializer([$normalizer]);
-        // Parce qu'on a précisé le normalizer, on peut normaliser selon un groupe
-        $normalizedUsers = $serializer->normalize($user, null, ['groups' => 'apiV0_user']);
+        if (!empty($user)) {
+            // On instancie un serializer en lui précisant un normalizer adapté aux objets PHP
+            $serializer = new Serializer([$normalizer]);
+            // Parce qu'on a précisé le normalizer, on peut normaliser selon un groupe
+            $normalizedUsers = $serializer->normalize($user, null, ['groups' => 'apiV0_user']);
 
-        return $this->json($normalizedUsers);
+            return $this->json($normalizedUsers);
+
+        } else {
+            return $this->json([
+                'status' => 400,
+                'message'=>"Vous ne pouvez pas effectuer cette action"
+            ], 400);
+        }
     }
 
     /**
@@ -148,11 +162,17 @@ class UserController extends AbstractController
      */
     public function delete(User $user, UserRepository $userRepository, ObjectNormalizer $normalizer): Response
     {
-        
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->remove($user);
-        $entityManager->flush();
-            
-        return $this->json(200);
+        if (!empty ($user)){
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($user);
+            $entityManager->flush();
+                
+            return $this->json(200);
+        } else {
+            return $this->json([
+                'status' => 400,
+                'message'=>"Vous ne pouvez pas effectuer cette action"
+            ], 400);
+        }
     }
 }

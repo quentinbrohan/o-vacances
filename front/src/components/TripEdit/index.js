@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import 'moment/locale/fr';
 
-import { momentFormatDate } from 'src/utils';
+import { MOMENT_FORMAT_DATE } from 'src/utils';
 
 import Field from './Field';
 import Image from './Image';
@@ -72,14 +72,14 @@ const TripEdit = ({
           name="startDate"
           type="date"
           placeholder="Date de départ prévue"
-          value={moment(startDate).format(momentFormatDate)}
+          value={moment(startDate).format(MOMENT_FORMAT_DATE)}
           onChange={changeField}
         />
         <Field
           name="endDate"
           type="date"
           placeholder="Date de retour prévue"
-          value={moment(endDate).format(momentFormatDate)}
+          value={moment(endDate).format(MOMENT_FORMAT_DATE)}
           onChange={changeField}
         />
         <Field

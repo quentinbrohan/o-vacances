@@ -11,6 +11,7 @@ import {
   REMOVE_TRIP,
   SAVE_TRIP_EDIT,
   UPDATE_TRIP_EDIT_FIELD,
+  SAVE_DISPONIBILITIES,
 } from 'src/actions/trip';
 
 const initialState = {
@@ -28,7 +29,7 @@ const initialState = {
   activityEndDate: '',
   activityCategory: '',
   tripPassword: '',
-  userDisponibilities: {},
+  userDisponibilities: [],
   title: '',
   description: '',
   startDate: '',
@@ -59,6 +60,8 @@ const trip = (state = initialState, action = {}) => {
       };
 
     case SAVE_TRIP:
+      console.log(action);
+
       return {
         ...state,
         trip: action.trip,
@@ -79,17 +82,18 @@ const trip = (state = initialState, action = {}) => {
       return {
         ...state,
         trip: {
-          ...state,
+          ...state.trip,
           suggestion: action.suggestion,
         },
       };
+
     case UPDATE_USER_DISPONIBILITIES:
       console.log(action);
       return {
         ...state,
         userDisponibilities: {
-          startDate: action.startDate,
-          endDate: action.endDate,
+          ...state.userDisponibilities,
+          [action.name]: action.newValue,
         },
       };
 
@@ -133,6 +137,17 @@ const trip = (state = initialState, action = {}) => {
         password: action.trip.password,
         location: action.trip.location,
         image: action.trip.image,
+      };
+
+    case SAVE_DISPONIBILITIES:
+      console.log(action);
+
+      return {
+        ...state,
+        trip: {
+          ...state.trip,
+          disponibility: action.disponibilities,
+        },
       };
 
     default: return state;

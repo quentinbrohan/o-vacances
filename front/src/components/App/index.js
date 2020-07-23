@@ -104,11 +104,10 @@ const App = ({
               component={Profile}
               isAuthenticated={isAuthenticated}
             />
-            <PrivateRoute
+            <Route
               exact
               path="/voyage/:id"
               component={Trip}
-              isAuthenticated={isAuthenticated}
             />
             <PrivateRoute
               exact
