@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from 'src/components/elements/Button';
 import Modal from 'react-modal';
-import moment from 'moment';
 
 import { Edit2 } from 'react-feather';
 
@@ -38,10 +37,7 @@ const ActivityEdit = ({
     event.preventDefault();
   };
 
-  console.log(Id);
-  console.log(activities);
-
-  const getActivityById = (activities, Id) => (
+  const getActivityById = () => (
     activities.find((activity) => (activity.id === Id))
   );
   const handleCheckActivity = () => (
@@ -146,6 +142,8 @@ ActivityEdit.propTypes = {
   activityDescription: PropTypes.string.isRequired,
   handleEditActivity: PropTypes.func.isRequired,
   activities: PropTypes.array.isRequired,
+  Id: PropTypes.number.isRequired,
+  checkActivityId: PropTypes.func.isRequired,
 };
 
 export default ActivityEdit;

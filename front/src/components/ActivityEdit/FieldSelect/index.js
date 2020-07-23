@@ -43,6 +43,7 @@ FieldSelect.propTypes = {
   value: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  labelTitle: PropTypes.string.isRequired,
 };
 
 // Valeurs par défaut pour les pro
