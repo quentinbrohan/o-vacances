@@ -149,8 +149,6 @@ const trip = (state = initialState, action = {}) => {
       };
 
     case SAVE_USER_DISPONIBILITIES:
-      console.log(action);
-
       return {
         ...state,
         isLoading: false,
