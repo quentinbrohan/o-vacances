@@ -16,6 +16,7 @@
 
     h1 {
       text-align: center;
+      line-height: 125%;
     }
 
     .disclaimer {
@@ -44,6 +45,10 @@
       margin-top: $gutter;
       margin: 0 auto;
     }
+    
+    hr {
+      margin-top: 2rem;
+    }
   
     .helper {
       width: 100%;
@@ -55,7 +60,7 @@
         width: 80%;
       }
       a {
-        color: $primaryColor;
+        color: $primaryColorDarker;
       }
     }
   

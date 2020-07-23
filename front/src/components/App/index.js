@@ -28,13 +28,12 @@ import TripEdit from 'src/containers/TripEdit';
 import LegacyMentions from 'src/components/LegacyMentions';
 import Loading from 'src/components/Loading';
 // TEMPO: For direct integration in Trip component
-import TripAuth from 'src/components/Trip/TripAuth';
+import TripAuth from 'src/containers/TripAuth';
 
 // Data
 import persons from 'src/data/teamData';
 
 import './styles.scss';
-import { checkTripAuth } from '../../actions/trip';
 
 // Lazy Loading
 const HomeUser = lazy(() => import('src/containers/HomeUser'));

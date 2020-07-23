@@ -79,7 +79,7 @@ const Trip = ({
   //   setHaveDisponibilities(true);
   // }
   useEffect(() => {
-    checkTripAuth();
+    // checkTripAuth();
     fetchTrip(tripId);
   }, []);
 

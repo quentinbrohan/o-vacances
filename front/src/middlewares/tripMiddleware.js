@@ -71,7 +71,6 @@ const tripMiddleware = (store) => (next) => (action) => {
           console.log(response);
           if (response.status === 401) {
             console.log(response.data.message);
-            
           }
 
           // Check if creator
@@ -92,9 +91,7 @@ const tripMiddleware = (store) => (next) => (action) => {
         .catch((error) => {
           if (error.response) {
             console.log(error.response);
-            
           }
-          
         });
 
       next(action);
@@ -451,9 +448,10 @@ const tripMiddleware = (store) => (next) => (action) => {
       })
         .then((response) => {
           console.log(response);
-        })
-        .then(() => {
-          // // If OK
+          // IF Password OK || user already authenticated
+          // fetchTrip(tripId)
+          // ELSE IF password incorrect
+          // display error
         })
         .catch((error) => {
           console.warn(error);
