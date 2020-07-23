@@ -140,6 +140,7 @@ const tripMiddleware = (store) => (next) => (action) => {
         trip: id,
       })
         .then(() => {
+          store.dispatch(toastSuccess('Suggestion ajoutée !'));
           store.dispatch(fetchSuggestions(id));
         })
         .catch((error) => {

@@ -70,8 +70,6 @@ const trip = (state = initialState, action = {}) => {
       };
 
     case SAVE_SUGGESTIONS:
-      console.log(action);
-      
       return {
         ...state,
         trip: {
