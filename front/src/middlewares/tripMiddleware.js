@@ -6,7 +6,6 @@ import {
   FETCH_TRIP,
   saveTrip,
   ADD_TRIP,
-  newTrip,
   ADD_SUGGESTION,
   ADD_ACTIVITY,
   EDIT_ACTIVITY,
@@ -15,7 +14,24 @@ import {
   saveSuggestions,
   fetchTrip,
   MODIFY_USER_DISPONIBILITIES,
+  DELETE_TRIP,
+  removeTrip,
+  MODIFY_TRIP,
+  saveTripEdit,
 } from 'src/actions/trip';
+
+import {
+  successMessage,
+  errorMessage,
+} from 'src/actions/error';
+
+import {
+  error as toastError,
+  message as toastMessage,
+  warning as toastWarning,
+  success as toastSuccess,
+  info as toastInfo,
+} from 'react-toastify-redux';
 
 import { checkIfCreator } from 'src/utils';
 import currentUser from 'src/utils/getCurrentUser';
@@ -43,7 +59,7 @@ const tripMiddleware = (store) => (next) => (action) => {
       const { tripId } = action;
       const user = currentUser();
 
-      // Endpoint fetch Trips list from user
+      // Endpoint fetch Trips from user
       axios.get(`http://localhost:8000/api/v0/users/${user}/trips/${tripId}`)
         .then((response) => {
           console.log(response);
@@ -64,16 +80,34 @@ const tripMiddleware = (store) => (next) => (action) => {
     }
 
     case ADD_TRIP: {
-      // TODO:
+      const {
+        title,
+        description,
+        startDate,
+        endDate,
+        password,
+      } = store.getState().trip;
       const user = currentUser();
-      // Endpoint add new trip to user
+      // FormData = plain image
+      const { formData } = action;
+      console.log(formData);
+
+      const config = { headers: { 'Content-Type': 'multipart/form-data' } };
+
+      // Request must be ASYNC !
+      // Endpoint add new suggestion to trip
       axios.post(`http://localhost:8000/api/v0/users/${user}/trips`, {
-        // props,
-      })
+        formData,
+        title,
+        description,
+        startDate,
+        endDate,
+        password,
+        // creator: user,
+      }, config)
         .then((response) => {
           console.log(response);
-
-          // store.dispatch(newTrip(response.data));
+          store.dispatch(toastSuccess('Nouveau voyage créé'));
         })
         .catch((error) => {
           console.warn(error);
@@ -145,7 +179,7 @@ const tripMiddleware = (store) => (next) => (action) => {
         endDate,
       })
         .then(() => {
-          console.log('Modification des dispo de l\'utilisateur effectuée');
+          store.dispatch(toastSuccess('Mise à jour des disponibilités'));
         })
         .then(() => {
           // For refresh
@@ -221,8 +255,71 @@ const tripMiddleware = (store) => (next) => (action) => {
         .then((response) => {
           console.log(response);
 
+        // TODO: newTrip = cleForm inputs DONE
+        // Add suggestion to state or directly refresh Trip component afterward (?)
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
+
+      next(action);
+      break;
+    }
+
+    case DELETE_TRIP: {
+      const user = currentUser();
+      const { id } = store.getState().trip.trip;
+
+      // Endpoint add new suggestion to trip
+      axios.delete(`http://localhost:8000/api/v0/users/${user}/trips/${id}`, {
+        // props,
+        user,
+        trip: id,
+      })
+        .then(() => {
+          store.dispatch(removeTrip());
+          store.dispatch(toastSuccess('Voyage supprimé'));
+        })
+        .then(() => {
+          // Redirect to HomeUser
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
+
+      next(action);
+      break;
+    }
+
+    case MODIFY_TRIP: {
+      const { tripId } = action;
+      const user = currentUser();
+      const {
+        id,
+        title,
+        description,
+        location,
+        startDate,
+        endDate,
+        password,
+      } = store.getState().trip.trip;
+
+      // Endpoint fetch Trip from user
+      axios.patch(`http://localhost:8000/api/v0/users/${user}/trips/${id}`, {
+        title,
+        description,
+        location,
+        startDate,
+        endDate,
+        password,
+      })
+        .then((response) => {
+          console.log(response);
+
           // TODO: newTrip = cleForm inputs DONE
           // Add suggestion to state or directly refresh Trip component afterward (?)
+          store.dispatch(saveTripEdit(response.data));
+          store.dispatch(toastSuccess('Modifications effectuées'));
         })
         .catch((error) => {
           console.warn(error);

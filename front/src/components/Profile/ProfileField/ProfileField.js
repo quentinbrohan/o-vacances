@@ -53,7 +53,7 @@ ProfileField.propTypes = {
 };
 
 ProfileField.defaultProps = {
-  value: '',
+  value: null,
 };
 
 export default ProfileField;

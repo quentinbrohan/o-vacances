@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from 'src/components/elements/Button';
 
@@ -16,12 +16,16 @@ const TripForm = ({
   endDate,
   password,
   handleTripForm,
+  location,
 }) => {
+  const [file, setFile] = useState(null);
+
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    // IMAGE
-    // TODO: do something with state.file
-    handleTripForm();
+    // Image
+    const formData = new FormData();
+    formData.append('file', file);
+    handleTripForm(formData);
   };
 
   return (
@@ -45,10 +49,16 @@ const TripForm = ({
           type="text"
           onChange={changeField}
           value={description}
-
         />
         <Field
-          name="start-date"
+          name="location"
+          placeholder="Lieu du voyage"
+          type="text"
+          onChange={changeField}
+          value={location}
+        />
+        <Field
+          name="startDate"
           type="date"
           placeholder="Date de départ prévue"
           onChange={changeField}
@@ -56,7 +66,7 @@ const TripForm = ({
 
         />
         <Field
-          name="end-date"
+          name="endDate"
           type="date"
           placeholder="Date de retour prévue"
           onChange={changeField}
@@ -83,7 +93,7 @@ const TripForm = ({
 };
 
 TripForm.propTypes = {
-  addImagePreview: PropTypes.func.isRequired,
+  image: PropTypes.func.isRequired,
   changeField: PropTypes.func.isRequired,
   handleTripForm: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
@@ -91,6 +101,7 @@ TripForm.propTypes = {
   startDate: PropTypes.string.isRequired,
   endDate: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
+  location: PropTypes.string.isRequired,
 };
 
 export default TripForm;
