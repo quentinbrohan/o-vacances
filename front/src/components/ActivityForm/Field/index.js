@@ -31,7 +31,7 @@ const Field = ({
       </label>
       <input
         // React - state
-        value={value}
+        value={value.name}
         onChange={handleChange}
         // infos de base
         id={inputId}

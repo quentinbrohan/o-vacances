@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import Button from 'src/components/elements/Button';
 import { ReactComponent as AvatarDefault } from 'src/assets/svg/user.svg';
 
+import { Link } from 'react-router-dom';
+
 import { Edit2, Check } from 'react-feather';
 
 import ProfileImage from './ProfileImage';
@@ -111,12 +113,14 @@ const Profile = ({
             <br />
             Agenda, lieux, activités, suggestions,...
           </p>
-          <Button
-            color="primary"
-            haveClassName="profil-trip-button"
-          >
-            GO !
-          </Button>
+          <Link to="/creer-un-voyage">
+            <Button
+              color="primary"
+              haveClassName="profil-trip-button"
+            >
+              GO !
+            </Button>
+          </Link>
         </div>
         <div className="profile-trip-archive">
           <h2>Mes anciens voyages</h2>
@@ -143,7 +147,7 @@ Profile.propTypes = {
 
 Profile.defaultProps = {
   avatar: AvatarDefault,
-  password: null,
+  password: '',
 };
 
 export default Profile;

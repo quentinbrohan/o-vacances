@@ -88,7 +88,7 @@ ProfileImage.propTypes = {
   firstname: PropTypes.string.isRequired,
   onChangeImage: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
-  avatar: PropTypes.func.isRequired,
+  avatar: PropTypes.string.isRequired,
   handleEditUser: PropTypes.func.isRequired,
 };
 
