@@ -274,10 +274,12 @@ class TripController extends AbstractController
     /**
      * @Route("api/v0/users/{idUser}/trips/{id}", name="api_v0_trips_users_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, EntityManagerInterface $em, UserRepository $userRepository, TripRepository $tripRepository, $idUser, Trip $trip)
+    public function delete(Request $request, EntityManagerInterface $em, UserRepository $userRepository, TripRepository $tripRepository, $idUser, $id)
     {
         //$trip = $tripRepository->find($id);
         $user = $userRepository->findAllTripsByUser($idUser);
+        $trip = $tripRepository->find($id);
+        
         if (!empty($trip)) {
             $creator = $trip->getCreator();
             $creatorId = $creator->getId();
