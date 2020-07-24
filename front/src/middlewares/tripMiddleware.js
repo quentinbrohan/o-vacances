@@ -338,7 +338,7 @@ const tripMiddleware = (store) => (next) => (action) => {
       const { id } = store.getState().trip.trip;
 
       // Endpoint add new suggestion to trip
-      axios.delete(`http://localhost:8000/api/v0/users/${user}/trips/${id}`)
+      axios.delete(`http://localhost:8000/api/v0/users/${user}/trips/${id}/`)
         .then(() => {
           store.dispatch(removeTrip());
           store.dispatch(toastSuccess('Voyage supprimé'));
@@ -414,8 +414,9 @@ const tripMiddleware = (store) => (next) => (action) => {
     case DELETE_ACTIVITY: {
       const { id } = store.getState().trip.trip;
       const { activityId } = store.getState().trip;
+      const user = currentUser();
       // Endpoint add new suggestion to trip
-      axios.delete(`http://localhost:8000/api/v0/trips/${id}/activities/${activityId}`)
+      axios.delete(`http://localhost:8000/api/v0/users/${user}/trips/${id}/activities/${activityId}/delete`)
         .then(() => {
           store.dispatch(removeActivity());
         })
