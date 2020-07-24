@@ -110,15 +110,30 @@ const userMiddleware = (store) => (next) => (action) => {
         password,
       } = store.getState().user;
       console.log(password, email, lastname, firstname, avatar);
+
+      const imageInput = document.querySelector('#profile-field-input.profile-image');
+      const file = imageInput.files[0];
+      console.log(file);
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const config = {
+        data: formData,
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+
       // withCredentials : autorisation d'accéder au cookie
       axios.patch(`http://localhost:8000/api/v0/users/${currentUser()}/edit`, {
         email,
         lastname,
         firstname,
-        avatar,
+        // avatar,
         password,
-      }, {
-      })
+      },config)
         .then((response) => {
           console.log(response);
           store.dispatch(toastSuccess('Modifications effectuées'));
