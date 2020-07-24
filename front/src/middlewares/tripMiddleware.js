@@ -26,6 +26,7 @@ import {
   removeActivity,
   saveUserDisponibilities,
   CHECK_TRIP_AUTH,
+  loading,
 } from 'src/actions/trip';
 
 import {
@@ -65,6 +66,7 @@ const tripMiddleware = (store) => (next) => (action) => {
       const { tripId } = action;
       const user = currentUser();
 
+      store.dispatch(loading(true));
       // Endpoint fetch Trips from user
       axios.get(`http://localhost:8000/api/v0/users/${user}/trips/${tripId}`)
         .then((response) => {
@@ -342,12 +344,14 @@ const tripMiddleware = (store) => (next) => (action) => {
     case DELETE_TRIP: {
       const user = currentUser();
       const { id } = store.getState().trip.trip;
-
+      store.dispatch(loading(true));
       // Endpoint add new suggestion to trip
       axios.delete(`http://localhost:8000/api/v0/users/${user}/trips/${id}`)
         .then(() => {
           store.dispatch(removeTrip());
           store.dispatch(toastSuccess('Voyage supprimé'));
+          store.dispatch(loading(false));
+
         })
         .then(() => {
           // Redirect to HomeUser
@@ -443,7 +447,6 @@ const tripMiddleware = (store) => (next) => (action) => {
 
       // Endpoint registration to trip with password
       axios.post(`http://localhost:8000/api/v0/users/${user}/trips/${tripId}`, {
-        user,
         password,
       })
         .then((response) => {
