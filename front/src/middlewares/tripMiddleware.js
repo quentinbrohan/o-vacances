@@ -140,25 +140,16 @@ const tripMiddleware = (store) => (next) => (action) => {
       // console.log(formData.get('document'));
 
       const config = {
-        data: formData,
         headers: {
           Accept: 'application/json',
           'Content-Type': 'multipart/form-data',
         },
       };
 
-      // Request must be ASYNC !
       // Endpoint add new suggestion to trip
-      axios.post(`http://localhost:8000/api/v0/users/${user}/trips`, {
+      axios.post(`http://localhost:8000/api/v0/users/${user}/trips`,
         formData,
-        title,
-        description,
-        startDate,
-        endDate,
-        password,
-        // creator: user,
-      },
-      config)
+        config)
         .then((response) => {
           console.log(response);
           store.dispatch(toastSuccess('Nouveau voyage créé'));
@@ -352,7 +343,6 @@ const tripMiddleware = (store) => (next) => (action) => {
           store.dispatch(removeTrip());
           store.dispatch(toastSuccess('Voyage supprimé'));
           store.dispatch(loading(false));
-
         })
         .then(() => {
           // Redirect to HomeUser

@@ -109,7 +109,17 @@ const userMiddleware = (store) => (next) => (action) => {
         avatar,
         password,
       } = store.getState().user;
-      console.log(password, email, lastname, firstname, avatar);
+
+      // To JSON
+      const form = {
+        email,
+        lastname,
+        firstname,
+        avatar,
+        password,
+      };
+
+      const json = JSON.stringify(form);
 
       const imageInput = document.querySelector('#profile-field-input.profile-image');
       const file = imageInput.files[0];
@@ -117,9 +127,9 @@ const userMiddleware = (store) => (next) => (action) => {
 
       const formData = new FormData();
       formData.append('file', file);
+      formData.append('document', json);
 
       const config = {
-        data: formData,
         headers: {
           Accept: 'application/json',
           'Content-Type': 'multipart/form-data',
@@ -127,13 +137,9 @@ const userMiddleware = (store) => (next) => (action) => {
       };
 
       // withCredentials : autorisation d'accéder au cookie
-      axios.patch(`http://localhost:8000/api/v0/users/${currentUser()}/edit`, {
-        email,
-        lastname,
-        firstname,
-        // avatar,
-        password,
-      }, config)
+      axios.patch(`http://localhost:8000/api/v0/users/${currentUser()}/edit`,
+        formData,
+        config)
         .then((response) => {
           console.log(response);
           store.dispatch(toastSuccess('Modifications effectuées'));
