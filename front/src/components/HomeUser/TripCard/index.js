@@ -49,10 +49,14 @@ const TripCard = ({
 TripCard.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
+  image: PropTypes.string,
   startDate: PropTypes.string.isRequired,
   endDate: PropTypes.string.isRequired,
   location: PropTypes.string.isRequired,
+};
+
+TripCard.defaultProps = {
+  image: '',
 };
 
 export default TripCard;

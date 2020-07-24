@@ -47,7 +47,6 @@ Modal.setAppElement('#root');
 const Trip = ({
   changeSuggestion,
   suggestionContent,
-  fetchTrip,
   trip,
   isLoading,
   addSuggestion,
@@ -80,7 +79,7 @@ const Trip = ({
   // }
   useEffect(() => {
     // checkTripAuth();
-    fetchTrip(tripId);
+    checkTripAuth(tripId);
   }, []);
 
   // Modal
@@ -407,7 +406,7 @@ Trip.propTypes = {
   handleSuggestion: PropTypes.func.isRequired,
   manageSuggestion: PropTypes.func.isRequired,
   suggestionContent: PropTypes.string.isRequired,
-  fetchTrip: PropTypes.func.isRequired,
+  checkTripAuth: PropTypes.func.isRequired,
   trip: PropTypes.PropTypes.oneOfType([
     PropTypes.array,
     PropTypes.object]).isRequired,

@@ -124,7 +124,7 @@ const userMiddleware = (store) => (next) => (action) => {
           Accept: 'application/json',
           'Content-Type': 'multipart/form-data',
         },
-      }
+      };
 
       // withCredentials : autorisation d'accéder au cookie
       axios.patch(`http://localhost:8000/api/v0/users/${currentUser()}/edit`, {
@@ -133,7 +133,7 @@ const userMiddleware = (store) => (next) => (action) => {
         firstname,
         // avatar,
         password,
-      },config)
+      }, config)
         .then((response) => {
           console.log(response);
           store.dispatch(toastSuccess('Modifications effectuées'));

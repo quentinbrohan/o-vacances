@@ -446,6 +446,7 @@ const tripMiddleware = (store) => (next) => (action) => {
       const user = currentUser();
       const { password } = store.getState().trip;
 
+      store.dispatch(loading(true));
       // Endpoint registration to trip with password
       axios.post(`http://localhost:8000/api/v0/users/${user}/trips/${tripId}`, {
         password,
@@ -453,12 +454,16 @@ const tripMiddleware = (store) => (next) => (action) => {
         .then((response) => {
           console.log(response);
           // IF Password OK || user already authenticated
-          // fetchTrip(tripId)
-          // ELSE IF password incorrect
-          // display error
+          if (response.status === 200) {
+            store.dispatch(fetchTrip(tripId));
+          }
         })
         .catch((error) => {
           console.warn(error);
+          if (error.response.status === 401) {
+            console.log(error.response.data.message);
+            // display error
+          }
         });
 
       next(action);
