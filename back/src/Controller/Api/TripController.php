@@ -61,7 +61,7 @@ class TripController extends AbstractController
             }
 
             // On génère un nouveau nom de fichier
-            $fichier = md5(uniqid()).'.'.$image->guessExtension();
+            $fichier = '/uploads/'. md5(uniqid()).'.'.$image->guessExtension();
             
             // On copie le fichier dans le dossier uploads
             $image->move(
@@ -234,7 +234,7 @@ class TripController extends AbstractController
                         $trip->setImage($oldImage);
                     }else {
                         // On génère un nouveau nom de fichier
-                        $fichier = md5(uniqid()).'.'.$image->guessExtension();
+                        $fichier = '/uploads/'. md5(uniqid()).'.'.$image->guessExtension();
                         
                         // On copie le fichier dans le dossier uploads
                         $image->move(
