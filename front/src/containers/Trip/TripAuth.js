@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import TripAuth from 'src/components/TripAuth';
+import TripAuth from 'src/components/Trip/TripAuth';
 
 import { checkTripAuth, updateTripFormField } from 'src/actions/trip';
 

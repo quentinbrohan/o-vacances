@@ -58,7 +58,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
         // je demande a doctrine d'éxecuter le requete et de me renvoyer les resultats
         return $query->getOneOrNullResult();
-        ;
+        
     }
 
     public function findByEmail($email)

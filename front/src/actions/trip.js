@@ -30,6 +30,7 @@ export const LOADING = 'LOADING';
 export const REMOVE_ACTIVITY = 'REMOVE_ACTIVITY';
 export const SAVE_USER_DISPONIBILITIES = 'SAVE_USER_DISPONIBILITIES';
 export const CHECK_TRIP_AUTH = 'CHECK_TRIP_AUTH';
+export const SAVE_TRIP_AUTH = 'SAVE_TRIP_AUTH';
 
 export const updateSuggestionField = (newValue, name) => ({
   type: UPDATE_SUGGESTION_FIELD,
@@ -173,7 +174,13 @@ export const saveUserDisponibilities = (userDisponibilities) => ({
   userDisponibilities,
 });
 
-export const checkTripAuth = (tripId) => ({
+export const checkTripAuth = (tripId, haveTripAccess) => ({
   type: CHECK_TRIP_AUTH,
   tripId,
+  haveTripAccess,
+});
+
+export const saveTripAuth = (haveTripAccess) => ({
+  type: SAVE_TRIP_AUTH,
+  haveTripAccess,
 });

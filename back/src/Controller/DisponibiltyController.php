@@ -206,7 +206,7 @@ class DisponibiltyController extends AbstractController
             try {
                 $em->remove($disponibility);
                 $em->flush();
-                return $this->json($disponibility, 201, [], ['groups' => 'apiV0-dispo']);
+                return $this->json($disponibility, 200, [], ['groups' => 'apiV0-dispo']);
             } catch (NotEncodableValueException $e) {
                 return $this->json([
                     'status' => 400,

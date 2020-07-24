@@ -26,6 +26,8 @@ import {
   removeActivity,
   saveUserDisponibilities,
   CHECK_TRIP_AUTH,
+  loading,
+  saveTripAuth,
 } from 'src/actions/trip';
 
 import {
@@ -65,6 +67,7 @@ const tripMiddleware = (store) => (next) => (action) => {
       const { tripId } = action;
       const user = currentUser();
 
+      store.dispatch(loading(true));
       // Endpoint fetch Trips from user
       axios.get(`http://localhost:8000/api/v0/users/${user}/trips/${tripId}`)
         .then((response) => {
@@ -137,25 +140,16 @@ const tripMiddleware = (store) => (next) => (action) => {
       // console.log(formData.get('document'));
 
       const config = {
-        data: formData,
         headers: {
           Accept: 'application/json',
           'Content-Type': 'multipart/form-data',
         },
       };
 
-      // Request must be ASYNC !
       // Endpoint add new suggestion to trip
-      axios.post(`http://localhost:8000/api/v0/users/${user}/trips`, {
+      axios.post(`http://localhost:8000/api/v0/users/${user}/trips`,
         formData,
-        title,
-        description,
-        startDate,
-        endDate,
-        password,
-        // creator: user,
-      },
-      config)
+        config)
         .then((response) => {
           console.log(response);
           store.dispatch(toastSuccess('Nouveau voyage créé'));
@@ -342,12 +336,13 @@ const tripMiddleware = (store) => (next) => (action) => {
     case DELETE_TRIP: {
       const user = currentUser();
       const { id } = store.getState().trip.trip;
-
+      store.dispatch(loading(true));
       // Endpoint add new suggestion to trip
       axios.delete(`http://localhost:8000/api/v0/users/${user}/trips/${id}/`)
         .then(() => {
           store.dispatch(removeTrip());
           store.dispatch(toastSuccess('Voyage supprimé'));
+          store.dispatch(loading(false));
         })
         .then(() => {
           // Redirect to HomeUser
@@ -442,20 +437,27 @@ const tripMiddleware = (store) => (next) => (action) => {
       const user = currentUser();
       const { password } = store.getState().trip;
 
+      store.dispatch(loading(true));
       // Endpoint registration to trip with password
       axios.post(`http://localhost:8000/api/v0/users/${user}/trips/${tripId}`, {
-        user,
         password,
       })
         .then((response) => {
           console.log(response);
           // IF Password OK || user already authenticated
-          // fetchTrip(tripId)
-          // ELSE IF password incorrect
-          // display error
+          if (response.status === 200) {
+            store.dispatch(saveTripAuth(true));
+            store.dispatch(fetchTrip(tripId));
+          }
         })
         .catch((error) => {
           console.warn(error);
+          if (error.response.status === 401) {
+            console.log(error.response.data.message);
+            // display error
+            store.dispatch(saveTripAuth(false));
+            store.dispatch(loading(false));
+          }
         });
 
       next(action);

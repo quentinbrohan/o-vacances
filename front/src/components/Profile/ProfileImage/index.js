@@ -31,7 +31,7 @@ const ProfileImage = ({
   const { imagePreviewUrl } = image;
 
   const handleChange = (evt) => {
-    onChangeImage(evt.target.value);
+    onChangeImage(evt.target.files[0]);
     onChange(evt.target.value, name);
 
     const reader = new FileReader();
@@ -77,6 +77,7 @@ const ProfileImage = ({
           <input
             type="file"
             id="profile-field-input"
+            className="profile-image"
             onChange={handleChange}
           />
         </div>
