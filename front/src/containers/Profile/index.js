@@ -1,7 +1,12 @@
 import { connect } from 'react-redux';
 
 import { deleteDisabledInput, addImagePreview } from 'src/actions/settings';
-import { fetchUser, editUser, updateUserField } from 'src/actions/user';
+import {
+  fetchUser,
+  editUser,
+  updateUserField,
+  editUserImage,
+} from 'src/actions/user';
 
 // === on importe le composant de présentation
 import Profile from 'src/components/Profile';
