@@ -28,6 +28,7 @@ import {
   CHECK_TRIP_AUTH,
   loading,
   saveTripAuth,
+  saveTripActivities,
 } from 'src/actions/trip';
 
 import {
@@ -284,7 +285,7 @@ const tripMiddleware = (store) => (next) => (action) => {
       })
         .then((response) => {
           console.log(response);
-
+          store.dispatch(saveTripActivities(response.data));
           // TODO: newTrip = cleForm inputs DONE
           // Add suggestion to state or directly refresh Trip component afterward (?)
         })
