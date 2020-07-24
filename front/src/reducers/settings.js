@@ -3,7 +3,8 @@ import { DELETE_DISABLED_INPUT, ADD_IMAGE_PREVIEW } from 'src/actions/settings';
 const initialState = {
   // ici l'état initial
   isDisabled: true,
-  file: '',
+  file: {},
+  name: '',
   imagePreviewUrl: '',
 };
 

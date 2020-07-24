@@ -11,6 +11,7 @@ const TripForm = ({
   addImagePreview,
   changeField,
   title,
+  file,
   description,
   startDate,
   endDate,
@@ -18,14 +19,11 @@ const TripForm = ({
   handleTripForm,
   location,
 }) => {
-  const [file, setFile] = useState(null);
-
   const handleSubmit = (evt) => {
     evt.preventDefault();
+
     // Image
-    const formData = new FormData();
-    formData.append('file', file);
-    handleTripForm(formData);
+    handleTripForm();
   };
 
   return (
@@ -93,7 +91,6 @@ const TripForm = ({
 };
 
 TripForm.propTypes = {
-  image: PropTypes.func.isRequired,
   changeField: PropTypes.func.isRequired,
   handleTripForm: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
@@ -102,6 +99,7 @@ TripForm.propTypes = {
   endDate: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
   location: PropTypes.string.isRequired,
+  addImagePreview: PropTypes.func.isRequired,
 };
 
 export default TripForm;

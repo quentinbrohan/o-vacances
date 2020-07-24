@@ -11,8 +11,8 @@ import './fieldSelect.scss';
 const FieldSelect = ({
   value,
   name,
-  placeholder,
   onChange,
+  labelTitle,
 }) => {
   const handleChange = (evt) => {
     onChange(evt.target.value, name);
@@ -25,9 +25,9 @@ const FieldSelect = ({
       <label
         htmlFor={inputId}
         className="field-label"
-      >{placeholder}
+      >{labelTitle}
         <select value={value} onChange={handleChange}>
-          <option defaultValue="" selected disabled> Choisir une catégorie</option>
+          <option Value="Choisir une catégorie" disabled> Choisir une catégorie</option>
           <option value="1">restaurant</option>
           <option value="2">sortie nocturne</option>
           <option value="3">sport</option>""
@@ -42,8 +42,8 @@ const FieldSelect = ({
 FieldSelect.propTypes = {
   value: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  placeholder: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  labelTitle: PropTypes.string.isRequired,
 };
 
 // Valeurs par défaut pour les pro

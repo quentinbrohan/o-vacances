@@ -4,7 +4,6 @@ import {
   SAVE_TRIPS,
   SAVE_TRIP,
   UPDATE_ACTIVITY_FIELD,
-  CLEAR_SUGGESTION_FIELD,
   SAVE_SUGGESTIONS,
   UPDATE_USER_DISPONIBILITIES,
   UPDATE_TRIP_FORM_FIELD,
@@ -12,6 +11,10 @@ import {
   SAVE_TRIP_EDIT,
   UPDATE_TRIP_EDIT_FIELD,
   SAVE_DISPONIBILITIES,
+  CHECK_ACTIVITY,
+  LOADING,
+  REMOVE_ACTIVITY,
+  SAVE_USER_DISPONIBILITIES,
 } from 'src/actions/trip';
 
 const initialState = {
@@ -23,11 +26,12 @@ const initialState = {
   isLoading: true,
   isCreator: false,
   isOwnUser: false,
-  activityTilte: '',
+  activityTitle: '',
   activityDescription: '',
   activityStartDate: '',
   activityEndDate: '',
   activityCategory: '',
+  activityId: '',
   tripPassword: '',
   userDisponibilities: [],
   title: '',
@@ -49,33 +53,26 @@ const trip = (state = initialState, action = {}) => {
     case ADD_SUGGESTION:
       return {
         ...state,
-        suggestionContent: '',
+        suggestionTitle: '',
+        suggestionDescription: '',
       };
 
     case SAVE_TRIPS:
       return {
         ...state,
         trips: action.trips,
+        trip: [],
+        userDisponibilities: [],
         isLoading: false,
       };
 
     case SAVE_TRIP:
-      console.log(action);
-
       return {
         ...state,
         trip: action.trip,
-        isLoading: false,
         isCreator: action.isCreator,
         tripPassword: action.trip.password,
         userDisponibilities: action.userDisponibilities,
-      };
-
-    case CLEAR_SUGGESTION_FIELD:
-      return {
-        ...state,
-        suggestionTitle: '',
-        suggestionDescription: '',
       };
 
     case SAVE_SUGGESTIONS:
@@ -83,12 +80,11 @@ const trip = (state = initialState, action = {}) => {
         ...state,
         trip: {
           ...state.trip,
-          suggestion: action.suggestion,
+          suggestion: action.suggestions,
         },
       };
 
     case UPDATE_USER_DISPONIBILITIES:
-      console.log(action);
       return {
         ...state,
         userDisponibilities: {
@@ -140,14 +136,37 @@ const trip = (state = initialState, action = {}) => {
       };
 
     case SAVE_DISPONIBILITIES:
-      console.log(action);
-
       return {
         ...state,
+        isLoading: false,
         trip: {
           ...state.trip,
           disponibility: action.disponibilities,
         },
+      };
+
+    case CHECK_ACTIVITY:
+      return {
+        ...state,
+        activityId: action.id,
+      };
+
+    case LOADING:
+      return {
+        ...state,
+        isLoading: action.isLoading,
+      };
+
+    case REMOVE_ACTIVITY:
+      return {
+        ...state,
+      };
+
+    case SAVE_USER_DISPONIBILITIES:
+      return {
+        ...state,
+        isLoading: false,
+        userDisponibilities: action.userDisponibilities,
       };
 
     default: return state;

@@ -27,6 +27,8 @@ import ErrorPage from 'src/components/ErrorPage';
 import TripEdit from 'src/containers/TripEdit';
 import LegacyMentions from 'src/components/LegacyMentions';
 import Loading from 'src/components/Loading';
+// TEMPO: For direct integration in Trip component
+import TripAuth from 'src/containers/TripAuth';
 
 // Data
 import persons from 'src/data/teamData';
@@ -74,6 +76,10 @@ const App = ({
                   component={HomeVisitor}
                 />
               )}
+            <Route
+              path="/tripAuth"
+              component={TripAuth}
+            />
             <Route
               path="/contact"
               component={Contact}

@@ -3,20 +3,25 @@ import PropTypes from 'prop-types';
 import Button from 'src/components/elements/Button';
 import Modal from 'react-modal';
 
+import { Edit2 } from 'react-feather';
+
 import Field from './Field';
 
 import FieldSelect from './FieldSelect';
 
-import './activityForm.scss';
+import './activityEdit.scss';
 
-const ActivityForm = ({
+const ActivityEdit = ({
+  Id,
   changeField,
   activityTitle,
   activityDescription,
   activityStartDate,
   activityEndDate,
   activityCategory,
-  handleAddActivity,
+  handleEditActivity,
+  activities,
+  checkActivityId,
 }) => {
   Modal.setAppElement('div');
   let subtitle;
@@ -32,12 +37,26 @@ const ActivityForm = ({
     event.preventDefault();
   };
 
-  return (
+  const getActivityById = () => (
+    activities.find((activity) => (activity.id === Id))
+  );
+  const handleCheckActivity = () => (
+    checkActivityId(Id)
+  );
 
-    <div className="activity-form">
-      <Button onClick={openModal}>Ajouter une activité</Button>
+  const activity = getActivityById(activities, Id);
+
+  return (
+    <div className="activity-edit">
+      <Edit2
+        className="edit"
+        onClick={() => {
+          handleCheckActivity();
+          openModal();
+        }}
+      />
       <Modal
-        className="activity-form-modal"
+        className="activity-edit-modal"
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         contentLabel="Example Modal"
@@ -47,50 +66,63 @@ const ActivityForm = ({
           },
         }}
       >
-        <span className="activity-form-button-close" onClick={closeModal}>x</span>
-        <h2 ref={subtitle}>Nouvelle activité</h2>
+        <span
+          className="activity-edit-button-close"
+          onClick={closeModal}
+        >x
+        </span>
+        <h2 ref={subtitle}>Modifier cette activité</h2>
 
-        <form className="activity-form-element" onSubmit={handleSubmit}>
+        <form
+          className="activity-edit-element"
+          onSubmit={() => {
+            handleSubmit();
+          }}
+        >
           <Field
             name="activityTitle"
-            placeholder="Activité"
+            placeholder={activity.title}
             onChange={changeField}
             value={activityTitle}
             type="text"
+            labelTitle="Activité"
           />
           <FieldSelect
             name="activityCategory"
-            placeholder="Catégorie"
             onChange={changeField}
             value={activityCategory}
+            labelTitle="Catégorie"
           />
           <Field
             name="activityStartDate"
-            placeholder="Date de début"
+            placeholder={activity.startDate}
             type="date"
             onChange={changeField}
             value={activityStartDate}
+            labelTitle="Date de début"
           />
 
           <Field
             name="activityEndDate"
-            placeholder="Date de fin"
+            placeholder={activity.endDate}
             type="date"
             onChange={changeField}
             value={activityEndDate}
+            labelTitle="Date de fin"
           />
           <Field
             name="activityDescription"
             type="textarea"
-            placeholder="On fait quoi?"
+            placeholder={activity.description}
             onChange={changeField}
             value={activityDescription}
+            labelTitle="Description"
           />
         </form>
         <Button
-          className="activity-form-button"
+          className="activity-edit-button"
           onClick={() => {
-            handleAddActivity();
+            handleEditActivity();
             closeModal();
           }}
         >j'ajoute
@@ -101,19 +133,20 @@ const ActivityForm = ({
   );
 };
 
-ActivityForm.propTypes = {
+ActivityEdit.propTypes = {
   changeField: PropTypes.func.isRequired,
   activityTitle: PropTypes.string.isRequired,
   activityCategory: PropTypes.string.isRequired,
   activityStartDate: PropTypes.string.isRequired,
   activityEndDate: PropTypes.string.isRequired,
   activityDescription: PropTypes.string,
-  handleAddActivity: PropTypes.func.isRequired,
-
+  handleEditActivity: PropTypes.func.isRequired,
+  activities: PropTypes.array.isRequired,
+  Id: PropTypes.number.isRequired,
+  checkActivityId: PropTypes.func.isRequired,
 };
 
-ActivityForm.defaultProps = {
+ActivityEdit.defaultProps = {
   activityDescription: '',
 };
-
-export default ActivityForm;
+export default ActivityEdit;
