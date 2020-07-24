@@ -21,7 +21,6 @@ const mapStateToProps = (state) => ({
   firstname: state.user.firstname,
   avatar: state.user.avatar,
   file: state.settings.file,
-
 });
 
 // eslint-disable-next-line no-unused-vars
