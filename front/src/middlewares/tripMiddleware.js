@@ -368,15 +368,39 @@ const tripMiddleware = (store) => (next) => (action) => {
         password,
       } = store.getState().trip.trip;
 
-      // Endpoint fetch Trip from user
-      axios.patch(`http://localhost:8000/api/v0/users/${user}/trips/${id}`, {
+      const imageInput = document.querySelector('#tripEdit-image');
+      const file = imageInput.files[0];
+      console.log(file);
+
+      const form = {
+        id,
         title,
         description,
         location,
         startDate,
         endDate,
         password,
-      })
+      };
+      console.log(form);
+
+      const json = JSON.stringify(form);
+      console.log(json);
+
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('document', json);
+
+      const config = {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'multipart/form-data',
+        },
+      };
+
+      // Endpoint fetch Trip from user
+      axios.patch(`http://localhost:8000/api/v0/users/${user}/trips/${id}`,
+        formData,
+        config)
         .then((response) => {
           console.log(response);
 

@@ -174,7 +174,7 @@ class UserController extends AbstractController
                 $em->flush();
              }
           
-            return $this->json(201);
+            return $this->json($fichier, 201);
             
         } else {
             return $this->json([
