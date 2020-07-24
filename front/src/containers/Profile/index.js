@@ -1,7 +1,12 @@
 import { connect } from 'react-redux';
 
 import { deleteDisabledInput, addImagePreview } from 'src/actions/settings';
-import { fetchUser, editUser, updateUserField } from 'src/actions/user';
+import {
+  fetchUser,
+  editUser,
+  updateUserField,
+  editUserImage,
+} from 'src/actions/user';
 
 // === on importe le composant de présentation
 import Profile from 'src/components/Profile';
@@ -16,7 +21,6 @@ const mapStateToProps = (state) => ({
   firstname: state.user.firstname,
   avatar: state.user.avatar,
   file: state.settings.file,
-
 });
 
 // eslint-disable-next-line no-unused-vars
@@ -32,6 +36,10 @@ const mapDispatchToProps = (dispatch) => ({
 
   handleEditUser: () => {
     dispatch(editUser());
+  },
+
+  handleEditUserImage: () => {
+    dispatch(editUserImage());
   },
 
   changeField: (newValue, name) => {

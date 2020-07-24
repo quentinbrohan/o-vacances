@@ -25,6 +25,7 @@ const Profile = ({
   changeField,
   handleEditUser,
   addImagePreview,
+  handleEditUserImage,
 }) => {
   useEffect(() => {
     fetchUser();
@@ -45,7 +46,7 @@ const Profile = ({
           firstname={firstname}
           onChangeImage={addImagePreview}
           onChange={changeField}
-          handleEditUser={handleEditUser}
+          handleEditUserImage={handleEditUserImage}
         />
         <div className="profile-head-information">
           <form onSubmit={handleSubmit}>
@@ -142,6 +143,8 @@ Profile.propTypes = {
   handleEditUser: PropTypes.func.isRequired,
   avatar: PropTypes.string,
   addImagePreview: PropTypes.func.isRequired,
+  handleEditUserImage: PropTypes.func.isRequired,
+
 
 };
 
