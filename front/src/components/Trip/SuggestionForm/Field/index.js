@@ -1,4 +1,4 @@
-git /* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable jsx-a11y/label-has-associated-control */
 // == Import : npm
 import React from 'react';
 import PropTypes from 'prop-types';

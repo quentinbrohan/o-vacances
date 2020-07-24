@@ -41,6 +41,7 @@ const mapDispatchToProps = (dispatch) => ({
   addImagePreview: (url) => {
     dispatch(addImagePreview(url));
   },
+
 });
 
 // === création de l'assistant

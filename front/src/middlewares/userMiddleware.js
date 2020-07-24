@@ -122,6 +122,7 @@ const userMiddleware = (store) => (next) => (action) => {
         .then((response) => {
           console.log(response);
           store.dispatch(toastSuccess('Modifications effectuées'));
+          store.dispatch(updateUserProfil(response.data));
         })
         .catch((error) => {
           console.warn(error);
