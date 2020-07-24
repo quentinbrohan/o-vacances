@@ -43,16 +43,14 @@ class TripController extends AbstractController
     public function new(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, ValidatorInterface $validator, UserRepository $userRepository, $id)
     {
         $user = $userRepository->find($id);
+        $trip = new Trip;
         // On extrait de la requête le json reçu
-        $content = $request->getContent();
-
-        $form = $this->createForm(TripType::class, $user);
-        $jsonArray=json_decode($content, true);
-        $form->submit($jsonArray);
+        $jsontext = $request->get('document');
+        $image = $request->files->get('file');
 
         try {
             // on crée une nouvelle entité Trip avec le serializer
-            $trip = $serializer->deserialize($content, Trip::class, 'json');
+            $trip = $serializer->deserialize($jsontext, Trip::class, 'json');
             
             // validation des données de $trips en fonction des Asserts des entités
             $errors = $validator->validate($trip);
@@ -61,6 +59,16 @@ class TripController extends AbstractController
             if(count($errors) > 0){
                 return $this->json($errors, 400);
             }
+
+             // On génère un nouveau nom de fichier
+             $fichier = md5(uniqid()).'.'.$image->guessExtension();
+             
+             // On copie le fichier dans le dossier uploads
+             $image->move(
+                 $this->getParameter('images_directory'),
+                 $fichier
+             );
+             $trip->setImage($fichier);
           
             $trip->addUsers($user);
             $trip->setCreator($user);
