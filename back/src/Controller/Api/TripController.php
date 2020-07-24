@@ -45,7 +45,9 @@ class TripController extends AbstractController
         $user = $userRepository->find($id);
         $trip = new Trip;
         // On extrait de la requête le json reçu
-        $jsontext = $request->get('document');
+
+        $jsonText = $request->get('document');
+
         $image = $request->files->get('file');
 
         try {
@@ -60,15 +62,16 @@ class TripController extends AbstractController
                 return $this->json($errors, 400);
             }
 
-            // On génère un nouveau nom de fichier
-            $fichier = '/uploads/'. md5(uniqid()).'.'.$image->guessExtension();
-            
-            // On copie le fichier dans le dossier uploads
-            $image->move(
-                $this->getParameter('images_directory'),
-                $fichier
-            );
-            $trip->setImage($fichier);
+             // On génère un nouveau nom de fichier
+             $fichier = '/uploads/'. md5(uniqid()).'.'.$image->guessExtension();
+             
+             // On copie le fichier dans le dossier uploads
+             $image->move(
+                 $this->getParameter('images_directory'),
+                 $fichier
+             );
+             $trip->setImage($fichier);
+
           
             $trip->addUsers($user);
             $trip->setCreator($user);
@@ -85,7 +88,6 @@ class TripController extends AbstractController
             ], 400);
         }
     }
-
     /**
      * @Route("/api/v0/users/{idUser}/trips/{id}", name="api_v0_trips_registration", methods={"POST"})
      */
@@ -198,9 +200,10 @@ class TripController extends AbstractController
      */
     public function edit(TripRepository $tripRepository, SerializerInterface $serializer, Request $request, $id, $idUser, EntityManagerInterface $em, ValidatorInterface $validator, UserRepository $userRepository)
     {
-        // On demande à Doctrine le voyage
-        $trip = $tripRepository->find($id);
+       // On demande à Doctrine le voyage
+       $trip = $tripRepository->find($id);
         
+
         // je récupère l'id du créateur et celui de la personne qui fait l'action
         $user = $userRepository->find($idUser);
         $userId = $user->getId();
@@ -265,6 +268,7 @@ class TripController extends AbstractController
             ], 400);
         }
     
+
     }
 
     /**

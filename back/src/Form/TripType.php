@@ -20,42 +20,45 @@ class TripType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            // ->add('title')
-            // ->add('description')
-            // ->add('startDate',
-            //     DateTimeType::class)
-            // ->add('endDate')
-            // ->add('location')
-            ->add('image', 
+
+/*             ->add('title')
+            ->add('description')
+            ->add('startDate',
+                DateTimeType::class)
+            ->add('endDate')
+            ->add('location')
+ */            ->add('picture', 
                 FileType::class, [
-                    'mapped' => false
+                    'mapped' => false,
             ])
-        //     ->add('users',
-        //         EntityType::class, [
-        //             "class" => User::class,
-        //             "required" => false,
-        //             'multiple' => true
-        //         ])
-        //     ->add('activities',
-        //         EntityType::class, [
-        //             "class" => Activity::class,
-        //             "required" => false,
-        //             'multiple' => true
-        //         ])
-        //     ->add('disponibility',
-        //         EntityType::class, [
-        //             "class" => Disponibility::class,
-        //             "required" => false,
-        //             'multiple' => true
-        //         ])
-        //     ->add('suggestion',
-        //         EntityType::class, [
-        //             "class" => Suggestion::class,
-        //             "required" => false,
-        //             'multiple' => true
-        //         ])
-        //     ->add('creator')
-        ;
+
+/*             ->add('users',
+                EntityType::class, [
+                    "class" => User::class,
+                    "required" => false,
+                    'multiple' => true
+                ])
+            ->add('activities',
+                EntityType::class, [
+                    "class" => Activity::class,
+                    "required" => false,
+                    'multiple' => true
+                ])
+            ->add('disponibility',
+                EntityType::class, [
+                    "class" => Disponibility::class,
+                    "required" => false,
+                    'multiple' => true
+                ])
+            ->add('suggestion',
+                EntityType::class, [
+                    "class" => Suggestion::class,
+                    "required" => false,
+                    'multiple' => true
+                ])
+            ->add('creator')
+ */        ;
+
     }
 
     public function configureOptions(OptionsResolver $resolver)
