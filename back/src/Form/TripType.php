@@ -26,7 +26,7 @@ class TripType extends AbstractType
             //     DateTimeType::class)
             // ->add('endDate')
             // ->add('location')
-            ->add('picture', 
+            ->add('image', 
                 FileType::class, [
                     'mapped' => false
             ])
