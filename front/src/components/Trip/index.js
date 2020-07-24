@@ -59,6 +59,7 @@ const Trip = ({
   reviseUserDisponibilities,
   addUserDisponibilities,
   handleDelete,
+  checkTripAuth,
 }) => {
   const currentTrip = useParams().id;
   const tripId = Number(currentTrip);
@@ -78,6 +79,7 @@ const Trip = ({
   //   setHaveDisponibilities(true);
   // }
   useEffect(() => {
+    // checkTripAuth();
     fetchTrip(tripId);
   }, []);
 
