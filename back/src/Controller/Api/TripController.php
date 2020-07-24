@@ -48,7 +48,7 @@ class TripController extends AbstractController
 
         $form = $this->createForm(TripType::class, $user);
         $jsonArray=json_decode($content, true);
-        $form->submit($jsonArray)
+        $form->submit($jsonArray);
 
         try {
             // on crée une nouvelle entité Trip avec le serializer
