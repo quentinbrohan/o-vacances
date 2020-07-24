@@ -84,14 +84,15 @@ class UserController extends AbstractController
         $user = $userRepository->find($id);
      
         $oldPassword = $user->getPassword();
+    
+        
         
         if (!empty($user)) {
             $form = $this->createForm(UserType::class, $user);
 
             // On extrait de la requête le json reçu
-            $jsonText = $request->getContent();
-    dd($jsonText);
-    //dd($request->files->get('avatar'));  
+            $jsonText = $request->getContent;
+   
             // On transforme ce json en array
             $jsonArray = json_decode($jsonText, true);
         
@@ -108,30 +109,7 @@ class UserController extends AbstractController
             }
 
             $form->submit($jsonArray);
-
-             // On récupère les images transmises
-             $avatars = $form->get('avatar')->getData();
-             
-             // On boucle sur les images
-             foreach($avatars as $avatar){
-                 // On génère un nouveau nom de fichier
-                 $fichier = md5(uniqid()).'.'.$avatar->guessExtension();
-                 
-                 
-                 // On copie le fichier dans le dossier uploads
-                 $avatar->move(
-                     $this->getParameter('images_directory'),
-                     $fichier
-                 );
-                 
-                 // On crée l'image dans la base de données
-                 $user->setAvatar($fichier);
-             }   
-            // On envoie ce tableau à la méthode submit()
-            $jsonArray['avatar'] = $fichier;
-
-                
-                   
+          
             // On vérifie si le formulaire est valide, toutes les données reçues sont bonnes
             if ($form->isValid()) {
                 $user->setRoles(["ROLE_USER"]);
@@ -150,6 +128,53 @@ class UserController extends AbstractController
      
             return $this->json((string) $form->getErrors(true, false), 400);
 
+        } else {
+            return $this->json([
+                'status' => 400,
+                'message'=>"Vous ne pouvez pas effectuer cette action"
+            ], 400);
+        }
+    }
+
+     /**
+     * @Route("api/v0/users/{id}/upload", name="api_user_upload", methods={"PUT"})
+     */
+    public function uploadAvatar(UserPasswordEncoderInterface $passwordEncoder, Request $request, User $user, UserRepository $userRepository, $id, ObjectNormalizer $normalizer): Response
+    {
+        $user = $userRepository->find($id);
+     
+        
+        if (!empty($user)) {
+            $form = $this->createForm(UploadType::class, $user);
+
+            // recuper
+            $avatar = $request->files->get('file');
+            $form->submit($avatar);
+            
+            if ($form->isValid()) {
+                // On génère un nouveau nom de fichier
+                $fichier = '/uploads/'.md5(uniqid()).'.'.$avatar->guessExtension();
+            
+            
+                // On copie le fichier dans le dossier uploads
+                $avatar->move(
+                    $this->getParameter('images_directory'),
+                    $fichier
+                );
+            
+                // On crée l'image dans la base de données
+                $user->setAvatar($fichier);
+        
+                // On envoie ce tableau à la méthode submit()
+                  
+        
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($user);
+                $em->flush();
+             }
+          
+            return $this->json(201);
+            
         } else {
             return $this->json([
                 'status' => 400,

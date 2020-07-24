@@ -43,8 +43,10 @@ class TripController extends AbstractController
     public function new(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, ValidatorInterface $validator, UserRepository $userRepository, $id)
     {
         $user = $userRepository->find($id);
+        $trip = new Trip;
         // On extrait de la requête le json reçu
-        $jsonText = $request->getContent();
+        $jsonText = $request->get('document');
+        $image = $request->files->get('file');
 
         try {
             // on crée une nouvelle entité Trip avec le serializer
@@ -57,6 +59,16 @@ class TripController extends AbstractController
             if(count($errors) > 0){
                 return $this->json($errors, 400);
             }
+
+             // On génère un nouveau nom de fichier
+             $fichier = '/uploads/'. md5(uniqid()).'.'.$image->guessExtension();
+             
+             // On copie le fichier dans le dossier uploads
+             $image->move(
+                 $this->getParameter('images_directory'),
+                 $fichier
+             );
+             $trip->setImage($fichier);
           
             $trip->addUsers($user);
             $trip->setCreator($user);
@@ -73,7 +85,6 @@ class TripController extends AbstractController
             ], 400);
         }
     }
-
     /**
      * @Route("/api/v0/users/{idUser}/trips/{id}", name="api_v0_trips_registration", methods={"POST"})
      */
@@ -186,54 +197,54 @@ class TripController extends AbstractController
      */
     public function edit(TripRepository $tripRepository, SerializerInterface $serializer, Request $request, $id, $idUser, EntityManagerInterface $em, ValidatorInterface $validator, UserRepository $userRepository)
     {
-        // On demande à Doctrine le voyage
-        $trip = $tripRepository->find($id);
+       // On demande à Doctrine le voyage
+       $trip = $tripRepository->find($id);
         
-        // je récupère l'id du créateur et celui de la personne qui fait l'action
-        $user = $userRepository->find($idUser);
-        $userId = $user->getId();
-        $creatorId = $trip->getCreator()->getId();
- 
-        if (!empty($trip)) {
-            // seul le créateur du voyage à le droit de modifier ces informations
-            if ($userId === $creatorId) {
+       // je récupère l'id du créateur et celui de la personne qui fait l'action
+       $user = $userRepository->find($idUser);
+       $userId = $user->getId();
+       $creatorId = $trip->getCreator()->getId();
 
-                // On extrait de la requête le json reçu
-                $jsonText = $request->getContent();
+       if (!empty($trip)) {
+           // seul le créateur du voyage à le droit de modifier ces informations
+           if ($userId === $creatorId) {
 
-                try {
-                    // on crée une nouvelle entité Trip avec le serializer
-                    $newTrip = $serializer->deserialize($jsonText, Trip::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $trip]);
-                
-                    // validation des données de $trips en fonction des Asserts des entités
-                    $errors = $validator->validate($newTrip);
+               // On extrait de la requête le json reçu
+               $jsonText = $request->getContent();
 
-                    // s'il y a des erreurs
-                    if (count($errors) > 0) {
-                        return $this->json($errors, 400);
-                    }
-                    
-                    $em->flush();
-                    return $this->json($newTrip, 201, [], ['groups' => 'apiV0_trip']);
-                } catch (NotEncodableValueException $e) {
-                    return $this->json([
-                        'status' => 400,
-                        'message'=>$e->getMessage()
-                    ], 400);
-                }
-            } else {
-                return $this->json([
-                    'status' => 403,
-                    'message'=>"Vous n'avez pas le droit d'effectuer cette action"
-                ], 403);
-            }
-        } else {
-            return $this->json([
-                'status' => 400,
-                'message'=>"Ce voyage n'existe pas"
-            ], 400);
-        }
-    
+               try {
+                   // on crée une nouvelle entité Trip avec le serializer
+                   $newTrip = $serializer->deserialize($jsonText, Trip::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $trip]);
+               
+                   // validation des données de $trips en fonction des Asserts des entités
+                   $errors = $validator->validate($newTrip);
+
+                   // s'il y a des erreurs
+                   if (count($errors) > 0) {
+                       return $this->json($errors, 400);
+                   }
+                   
+                   $em->flush();
+                   return $this->json($newTrip, 201, [], ['groups' => 'apiV0_trip']);
+               } catch (NotEncodableValueException $e) {
+                   return $this->json([
+                       'status' => 400,
+                       'message'=>$e->getMessage()
+                   ], 400);
+               }
+           } else {
+               return $this->json([
+                   'status' => 403,
+                   'message'=>"Vous n'avez pas le droit d'effectuer cette action"
+               ], 403);
+           }
+       } else {
+           return $this->json([
+               'status' => 400,
+               'message'=>"Ce voyage n'existe pas"
+           ], 400);
+       }
+   
     }
 
     /**

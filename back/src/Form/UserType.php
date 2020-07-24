@@ -25,17 +25,8 @@ class UserType extends AbstractType
             //->add('email')
             //->add('roles', null, ['empty_data' => []])
             //->add('password')
-           // ->add('lastname',)
+            // ->add('lastname',)
             //->add('firstname',)
-            ->add('avatar', FileType::class,[
-                'label' => false,
-                'multiple' => true,
-                'mapped' => false,
-                'required' => false,
-              
-            ])
-                
-
 
             ->add('suggestions',
                 EntityType::class, [
