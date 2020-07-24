@@ -52,7 +52,7 @@ class TripController extends AbstractController
 
         try {
             // on crée une nouvelle entité Trip avec le serializer
-            $trip = $serializer->deserialize($jsontext, Trip::class, 'json');
+            $trip = $serializer->deserialize($jsonText, Trip::class, 'json');
             
             // validation des données de $trips en fonction des Asserts des entités
             $errors = $validator->validate($trip);
