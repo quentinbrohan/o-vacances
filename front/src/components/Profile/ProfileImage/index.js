@@ -12,8 +12,8 @@ const ProfileImage = ({
   name,
   firstname,
   onChangeImage,
-  onChange,
-  handleEditUser,
+  // onChange,
+  handleEditUserImage,
 }) => {
   Modal.setAppElement('div');
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -31,23 +31,29 @@ const ProfileImage = ({
   const { imagePreviewUrl } = image;
 
   const handleChange = (evt) => {
-    onChangeImage(evt.target.files[0]);
-    onChange(evt.target.value, name);
+    // Check if filesize < 3 Mo
+    const FileSize = evt.target.files[0].size / 1024 / 1024; // in MB
+    if (FileSize > 3) {
+      alert('L\'image doti faire moins de 3 Mo !');
+      document.querySelector('#profile-field-input.profile-image').value = null;
+    }
+    else {
+      onChangeImage(evt.target.files[0]);
 
-    const reader = new FileReader();
-    const file = evt.target.files[0];
+      const reader = new FileReader();
+      const file = evt.target.files[0];
 
-    reader.onloadend = () => {
-      setImage({
-        file,
-        imagePreviewUrl: reader.result,
-      });
-    };
+      reader.onloadend = () => {
+        setImage({
+          file,
+          imagePreviewUrl: reader.result,
+        });
+      };
 
-    reader.readAsDataURL(file);
+      reader.readAsDataURL(file);
+    }
   };
 
-  console.log(avatar);
   return (
     <div className="profile-head-img">
       { avatar === null ? (<AvatarDefault className="profile-head-img-picture" />) : (<img className="profile-head-img-picture" src={avatar} alt={firstname} />)}
@@ -79,12 +85,13 @@ const ProfileImage = ({
             id="profile-field-input"
             className="profile-image"
             onChange={handleChange}
+            accept="image/*"
           />
         </div>
         <Button
           className="profile-image-button"
           onClick={() => {
-            handleEditUser();
+            handleEditUserImage();
             closeModal();
           }}
         >MODIFIER LA PHOTO
@@ -95,10 +102,11 @@ const ProfileImage = ({
 };
 ProfileImage.propTypes = {
   name: PropTypes.string,
+  avatar: PropTypes.string.isRequired,
   firstname: PropTypes.string.isRequired,
   onChangeImage: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
-  handleEditUser: PropTypes.func.isRequired,
+  // onChange: PropTypes.func.isRequired,
+  handleEditUserImage: PropTypes.func.isRequired,
 };
 
 ProfileImage.defaultProps = {

@@ -48,6 +48,7 @@ const tripMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case FETCH_TRIPS: {
       const user = currentUser();
+      store.dispatch(loading(true));
       // Endpoint fetch Trips list from user
       axios.get(`http://localhost:8000/api/v0/users/${user}/trips`)
         .then((response) => {
