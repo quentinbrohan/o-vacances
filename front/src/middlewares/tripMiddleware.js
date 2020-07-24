@@ -27,6 +27,7 @@ import {
   saveUserDisponibilities,
   CHECK_TRIP_AUTH,
   loading,
+  saveTripAuth,
 } from 'src/actions/trip';
 
 import {
@@ -455,6 +456,7 @@ const tripMiddleware = (store) => (next) => (action) => {
           console.log(response);
           // IF Password OK || user already authenticated
           if (response.status === 200) {
+            store.dispatch(saveTripAuth(true));
             store.dispatch(fetchTrip(tripId));
           }
         })
@@ -463,6 +465,8 @@ const tripMiddleware = (store) => (next) => (action) => {
           if (error.response.status === 401) {
             console.log(error.response.data.message);
             // display error
+            store.dispatch(saveTripAuth(false));
+            store.dispatch(loading(false));
           }
         });
 

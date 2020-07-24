@@ -15,6 +15,7 @@ import {
   LOADING,
   REMOVE_ACTIVITY,
   SAVE_USER_DISPONIBILITIES,
+  SAVE_TRIP_AUTH,
 } from 'src/actions/trip';
 
 const initialState = {
@@ -40,6 +41,7 @@ const initialState = {
   endDate: '',
   password: '',
   location: '',
+  haveTripAccess: false,
 };
 
 const trip = (state = initialState, action = {}) => {
@@ -167,6 +169,12 @@ const trip = (state = initialState, action = {}) => {
         ...state,
         isLoading: false,
         userDisponibilities: action.userDisponibilities,
+      };
+
+    case SAVE_TRIP_AUTH:
+      return {
+        ...state,
+        haveTripAccess: action.haveTripAccess,
       };
 
     default: return state;

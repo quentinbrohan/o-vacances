@@ -22,6 +22,7 @@ import Modal from 'react-modal';
 import { MOMENT_FORMAT_DATE } from 'src/utils';
 
 // import tripData from 'src/data/tripData';
+import TripAuth from 'src/containers/Trip/TripAuth';
 import SuggestionForm from 'src/containers/Trip/SuggestionForm';
 import ActivityCard from './ActivityCard';
 import PlusCard from './PlusCard';
@@ -59,6 +60,7 @@ const Trip = ({
   addUserDisponibilities,
   handleDelete,
   checkTripAuth,
+  haveTripAccess,
 }) => {
   const currentTrip = useParams().id;
   const tripId = Number(currentTrip);
@@ -78,7 +80,6 @@ const Trip = ({
   //   setHaveDisponibilities(true);
   // }
   useEffect(() => {
-    // checkTripAuth();
     checkTripAuth(tripId);
   }, []);
 
@@ -143,7 +144,7 @@ const Trip = ({
 
   return (
     <main className="trip-details">
-
+      {(!isLoading && !haveTripAccess) && <TripAuth tripId={tripId} />}
       {isLoading && <Loading />}
       {(!isLoading && trip.length !== 0) && (
       <>
@@ -425,6 +426,7 @@ Trip.propTypes = {
   reviseUserDisponibilities: PropTypes.func.isRequired,
   addUserDisponibilities: PropTypes.func.isRequired,
   handleDelete: PropTypes.func.isRequired,
+  haveTripAccess: PropTypes.bool.isRequired,
 };
 
 // Trip.defaultProps = {

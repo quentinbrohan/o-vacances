@@ -28,7 +28,7 @@ import TripEdit from 'src/containers/TripEdit';
 import LegacyMentions from 'src/components/LegacyMentions';
 import Loading from 'src/components/Loading';
 // TEMPO: For direct integration in Trip component
-import TripAuth from 'src/containers/TripAuth';
+import TripAuth from 'src/containers/Trip/TripAuth';
 
 // Data
 import persons from 'src/data/teamData';
