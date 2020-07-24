@@ -20,6 +20,7 @@ class TripType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+
 /*             ->add('title')
             ->add('description')
             ->add('startDate',
@@ -30,6 +31,7 @@ class TripType extends AbstractType
                 FileType::class, [
                     'mapped' => false,
             ])
+
 /*             ->add('users',
                 EntityType::class, [
                     "class" => User::class,
@@ -56,6 +58,7 @@ class TripType extends AbstractType
                 ])
             ->add('creator')
  */        ;
+
     }
 
     public function configureOptions(OptionsResolver $resolver)

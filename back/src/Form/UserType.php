@@ -22,12 +22,12 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            //->add('email')
-            //->add('roles', null, ['empty_data' => []])
-            //->add('password')
-            // ->add('lastname',)
-            //->add('firstname',)
 
+            ->add('email')
+            ->add('roles', null, ['empty_data' => []])
+            ->add('password')
+            ->add('lastname',)
+            ->add('firstname',)
             ->add('suggestions',
                 EntityType::class, [
                     "class" => Suggestion::class,
