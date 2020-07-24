@@ -32,7 +32,6 @@ const ProfileImage = ({
 
   const handleChange = (evt) => {
     onChangeImage(evt.target.files[0]);
-    onChange(evt.target.value, name);
 
     const reader = new FileReader();
     const file = evt.target.files[0];
@@ -47,7 +46,6 @@ const ProfileImage = ({
     reader.readAsDataURL(file);
   };
 
-  console.log(avatar);
   return (
     <div className="profile-head-img">
       { avatar === null ? (<AvatarDefault className="profile-head-img-picture" />) : (<img className="profile-head-img-picture" src={avatar} alt={firstname} />)}

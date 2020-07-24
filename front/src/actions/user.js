@@ -9,6 +9,8 @@ export const CHECK_AUTHENTICATION = 'CHECK_AUTHENTICATION';
 export const LOG_OUT = 'LOG_OUT';
 export const LOG_OUT_USER = 'LOG_OUT_USER';
 export const LOG_IN_USER = 'LOG_IN_USER';
+export const EDIT_USER_IMAGE = 'EDIT_USER_IMAGE';
+export const UPDATE_USER_IMAGE = 'UPDATE_USER_IMAGE';
 
 export const updateUserField = (newValue, name) => ({
   type: UPDATE_USER_FIELD,
@@ -57,4 +59,12 @@ export const updateUserProfil = (data) => ({
 
 export const editUser = () => ({
   type: EDIT_USER,
+});
+
+export const editUserImage = () => ({
+  type: EDIT_USER_IMAGE,
+});
+
+export const updateUserImage = () => ({
+  type: UPDATE_USER_IMAGE,
 });

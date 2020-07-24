@@ -11,6 +11,8 @@ import {
   LOG_OUT,
   logInUser,
   logOutUser,
+  EDIT_USER_IMAGE,
+  updateUserImage,
 } from 'src/actions/user';
 
 import {
@@ -62,9 +64,6 @@ const userMiddleware = (store) => (next) => (action) => {
       axios.post('http://localhost:8000/api/login_check', {
         password,
         email,
-      }, {
-        withCredentials: true,
-        // config,
       })
         .then((response) => {
           console.log(response);
@@ -106,40 +105,16 @@ const userMiddleware = (store) => (next) => (action) => {
         email,
         lastname,
         firstname,
-        avatar,
         password,
       } = store.getState().user;
 
-      // To JSON
-      const form = {
+      // withCredentials : autorisation d'accéder au cookie
+      axios.put(`http://localhost:8000/api/v0/users/${currentUser()}/edit`, {
         email,
         lastname,
         firstname,
-        avatar,
         password,
-      };
-
-      const json = JSON.stringify(form);
-
-      const imageInput = document.querySelector('#profile-field-input.profile-image');
-      const file = imageInput.files[0];
-      console.log(file);
-
-      const formData = new FormData();
-      formData.append('file', file);
-      formData.append('document', json);
-
-      const config = {
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'multipart/form-data',
-        },
-      };
-
-      // withCredentials : autorisation d'accéder au cookie
-      axios.patch(`http://localhost:8000/api/v0/users/${currentUser()}/edit`,
-        formData,
-        config)
+      })
         .then((response) => {
           console.log(response);
           store.dispatch(toastSuccess('Modifications effectuées'));
@@ -150,6 +125,7 @@ const userMiddleware = (store) => (next) => (action) => {
       next(action);
       break;
     }
+
     case CHECK_AUTHENTICATION: {
       const token = window.localStorage.getItem('authToken');
       // If token still valid
@@ -183,6 +159,38 @@ const userMiddleware = (store) => (next) => (action) => {
 
       store.dispatch(logOutUser());
 
+      next(action);
+      break;
+    }
+
+    case EDIT_USER_IMAGE: {
+      const imageInput = document.querySelector('#profile-field-input.profile-image');
+      const file = imageInput.files[0];
+      console.log(file);
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const config = {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'multipart/form-data',
+        },
+      };
+
+      // withCredentials : autorisation d'accéder au cookie
+      axios.put(`http://localhost:8000/api/v0/users/${currentUser()}/upload`,
+        formData,
+        config)
+        .then((response) => {
+          console.log(response);
+          store.dispatch(toastSuccess('Photo sauvegardée !'));
+          // save new avatar URL in store.
+          // store.dispatch(updateUserImage(response.data))
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
       next(action);
       break;
     }

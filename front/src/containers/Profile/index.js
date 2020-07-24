@@ -34,6 +34,10 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(editUser());
   },
 
+  handleEditUserImage: () => {
+    dispatch(editUserImage());
+  },
+
   changeField: (newValue, name) => {
     dispatch(updateUserField(newValue, name));
   },
