@@ -74,7 +74,6 @@ const Profile = ({
               onChange={changeField}
             />
             <ProfileField
-              className="password"
               name="password"
               value={password}
               userTitle="Mot de passe"
@@ -148,7 +147,7 @@ Profile.propTypes = {
 
 Profile.defaultProps = {
   avatar: AvatarDefault,
-  password: null,
+  password: '',
 };
 
 export default Profile;

@@ -60,7 +60,7 @@
           width:100%;
           margin: 2rem auto;
         }
-    }
+    
 
     form{
 
@@ -80,12 +80,20 @@
           width: 20%
         }
       }
-
+   
       .last-input{
         margin-bottom: 0;
 
+        
       }
+      
     }
+    &:nth-child(0n+4){
+      background-color: red;
+    }
+    }
+   
+   
   }
 
 
