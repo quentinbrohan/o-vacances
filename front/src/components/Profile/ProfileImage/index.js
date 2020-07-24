@@ -7,7 +7,14 @@ import { ReactComponent as AvatarDefault } from 'src/assets/svg/user.svg';
 
 import './profileImage.scss';
 
-const ProfileImage = ({ avatar, name, firstname, onChangeImage, onChange, handleEditUser }) => {
+const ProfileImage = ({
+  avatar,
+  name,
+  firstname,
+  onChangeImage,
+  onChange,
+  handleEditUser,
+}) => {
   Modal.setAppElement('div');
   const [modalIsOpen, setIsOpen] = useState(false);
   const openModal = () => {
@@ -39,6 +46,8 @@ const ProfileImage = ({ avatar, name, firstname, onChangeImage, onChange, handle
 
     reader.readAsDataURL(file);
   };
+
+  console.log(avatar);
   return (
     <div className="profile-head-img">
       { avatar === null ? (<AvatarDefault className="profile-head-img-picture" />) : (<img className="profile-head-img-picture" src={avatar} alt={firstname} />)}
@@ -88,12 +97,12 @@ ProfileImage.propTypes = {
   firstname: PropTypes.string.isRequired,
   onChangeImage: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
-  avatar: PropTypes.string.isRequired,
   handleEditUser: PropTypes.func.isRequired,
 };
 
 ProfileImage.defaultProps = {
   name: AvatarDefault,
+
 };
 
 export default ProfileImage;

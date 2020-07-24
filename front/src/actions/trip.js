@@ -9,6 +9,7 @@ export const NEW_TRIP = 'NEW_TRIP';
 export const UPDATE_ACTIVITY_FIELD = 'UPDATE_ACTIVITY_FIELD';
 export const ADD_ACTIVITY = 'ADD_ACTIVITY';
 export const DELETE_ACTIVITY = 'DELETE_ACTIVITY';
+export const EDIT_ACTIVITY = 'EDIT_ACTIVITY';
 export const CLEAR_SUGGESTION_FIELD = 'CLEAR_SUGGESTION_FIELD';
 export const FETCH_SUGGESTIONS = 'FETCH_SUGGESTIONS';
 export const SAVE_SUGGESTIONS = 'SAVE_SUGGESTIONS';
@@ -24,6 +25,11 @@ export const SAVE_TRIP_EDIT = 'SAVE_TRIP_EDIT';
 export const MODIFY_TRIP = 'MODIFY_TRIP';
 export const FETCH_DISPONIBILITIES = 'FETCH_DISPONIBILITIES';
 export const SAVE_DISPONIBILITIES = 'SAVE_DISPONIBILITIES';
+export const CHECK_ACTIVITY = 'CHECK_ACTIVITY';
+export const LOADING = 'LOADING';
+export const REMOVE_ACTIVITY = 'REMOVE_ACTIVITY';
+export const SAVE_USER_DISPONIBILITIES = 'SAVE_USER_DISPONIBILITIES';
+export const CHECK_TRIP_AUTH = 'CHECK_TRIP_AUTH';
 
 export const updateSuggestionField = (newValue, name) => ({
   type: UPDATE_SUGGESTION_FIELD,
@@ -79,10 +85,6 @@ export const deleteActivity = () => ({
   type: DELETE_ACTIVITY,
 });
 
-export const clearSuggestionField = () => ({
-  type: CLEAR_SUGGESTION_FIELD,
-});
-
 export const fetchSuggestions = () => ({
   type: FETCH_SUGGESTIONS,
 });
@@ -116,6 +118,9 @@ export const updateTripFormField = (newValue, name) => ({
   name,
 });
 
+export const editActivity = () => ({
+  type: EDIT_ACTIVITY,
+});
 export const deleteTrip = () => ({
   type: DELETE_TRIP,
 });
@@ -147,4 +152,28 @@ export const fetchDisponibilities = () => ({
 export const saveDisponibilities = (disponibilities) => ({
   type: SAVE_DISPONIBILITIES,
   disponibilities,
+});
+
+export const checkActivity = (id) => ({
+  type: CHECK_ACTIVITY,
+  id,
+});
+
+export const loading = (isLoading) => ({
+  type: LOADING,
+  isLoading,
+});
+
+export const removeActivity = () => ({
+  type: REMOVE_ACTIVITY,
+});
+
+export const saveUserDisponibilities = (userDisponibilities) => ({
+  type: SAVE_USER_DISPONIBILITIES,
+  userDisponibilities,
+});
+
+export const checkTripAuth = (tripId) => ({
+  type: CHECK_TRIP_AUTH,
+  tripId,
 });

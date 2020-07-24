@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'src/components/elements/Button';
-import { Link } from 'react-router-dom';
 
 import ActivityForm from 'src/containers/ActivityForm';
 
 import ActivityCard from './ActivityCard';
 import './activities.scss';
 
-const Activities = ({ activities }) => {
+const Activities = ({ activities, deleteActivity, checkActivityId, }) => {
   const handleDelete = (selected) => {
     console.log(`Suppression des activités ${selected}`);
   };
@@ -27,7 +26,7 @@ const Activities = ({ activities }) => {
           <Button
             color="primary"
             size="sm"
-            onClick={() => handleDelete()}
+            onClick={handleDelete}
           >
             Supprimer des activités
           </Button>
@@ -39,6 +38,8 @@ const Activities = ({ activities }) => {
             {...activity}
             key={activity.id}
             manageDelete={handleDelete}
+            deleteActivity={deleteActivity}
+            checkActivityId={checkActivityId}
           />
         ))}
       </div>
@@ -48,6 +49,8 @@ const Activities = ({ activities }) => {
 
 Activities.propTypes = {
   activities: PropTypes.array.isRequired,
+  deleteActivity: PropTypes.func.isRequired,
+  checkActivityId: PropTypes.func.isRequired,
 };
 
 export default Activities;

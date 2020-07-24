@@ -1,15 +1,20 @@
 import { connect } from 'react-redux';
-import { deleteActivity } from 'src/actions/trip';
+import { deleteActivity, checkActivity } from 'src/actions/trip';
 
 import Activities from 'src/components/Activities';
 
 const mapStateToProps = (state) => ({
   activities: state.trip.trip.activities,
+  activityId: state.trip.activityId,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  handleDelete: () => {
+  deleteActivity: () => {
     dispatch(deleteActivity());
+  },
+
+  checkActivityId: (id) => {
+    dispatch(checkActivity(id));
   },
 
 });

@@ -9,6 +9,7 @@ import { addImagePreview } from 'src/actions/settings';
 const mapStateToProps = (state) => ({
   file: state.settings.file,
   title: state.trip.title,
+  name: state.trip.name,
   description: state.trip.description,
   startDate: state.trip.startDate,
   endDate: state.trip.endDate,

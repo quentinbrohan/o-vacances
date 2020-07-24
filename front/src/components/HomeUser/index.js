@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import userTrips from 'src/data/homeUserTripsData';
-import userOldTrips from 'src/data/homeUserOldTripsData';
 import Loading from 'src/components/Loading';
+import moment from 'moment';
 import TripCard from './TripCard';
 
 import './homeUser.scss';
@@ -16,8 +15,10 @@ const HomeUser = ({
   useEffect(() => {
     fetchTrips();
   }, []);
-  console.log(trips);
-  // TODO: Filter trips => if Date's passed = oldTrip
+
+  const futureTrips = trips.filter((trip) => moment(trip.endDate) > moment());
+  // Filter trips => if endDate < actual Date = oldTrip
+  const oldTrips = trips.filter((trip) => moment(trip.endDate) < moment());
 
   return (
     <main className="home-user">
@@ -26,14 +27,14 @@ const HomeUser = ({
       <>
         <h1>Mes Voyages</h1>
         <div className="my-trips">
-          {trips.map((trip) => (
+          {futureTrips.map((trip) => (
             <TripCard {...trip} key={trip.id} />
           ))}
         </div>
 
         <h2>Mes anciens voyages</h2>
         <div className="my-trips">
-          {userOldTrips.map((trip) => (
+          {oldTrips.map((trip) => (
             <TripCard {...trip} key={trip.id} />
           ))}
         </div>
