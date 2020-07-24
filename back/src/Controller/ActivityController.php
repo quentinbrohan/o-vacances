@@ -192,7 +192,7 @@ class ActivityController extends AbstractController
                     $em->remove($activity);
                     $em->persist($trip);
                     $em->flush();
-                    return $this->json($activity, 201, [], ['groups' => 'apiV0-activity']);
+                    return $this->json($activity, 200, [], ['groups' => 'apiV0-activity']);
                 } catch (NotEncodableValueException $e) {
                     return $this->json([
                         'status' => 400,
