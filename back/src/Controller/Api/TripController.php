@@ -43,12 +43,14 @@ class TripController extends AbstractController
     public function new(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, ValidatorInterface $validator, UserRepository $userRepository, $id)
     {
         $user = $userRepository->find($id);
+        $trip = new Trip;
         // On extrait de la requête le json reçu
-        $jsonText = $request->getContent();
+        $jsontext = $request->get('document');
+        $image = $request->files->get('file');
 
         try {
             // on crée une nouvelle entité Trip avec le serializer
-            $trip = $serializer->deserialize($jsonText, Trip::class, 'json');
+            $trip = $serializer->deserialize($jsontext, Trip::class, 'json');
             
             // validation des données de $trips en fonction des Asserts des entités
             $errors = $validator->validate($trip);
@@ -57,6 +59,16 @@ class TripController extends AbstractController
             if(count($errors) > 0){
                 return $this->json($errors, 400);
             }
+
+            // On génère un nouveau nom de fichier
+            $fichier = '/uploads/'. md5(uniqid()).'.'.$image->guessExtension();
+            
+            // On copie le fichier dans le dossier uploads
+            $image->move(
+                $this->getParameter('images_directory'),
+                $fichier
+            );
+            $trip->setImage($fichier);
           
             $trip->addUsers($user);
             $trip->setCreator($user);
@@ -193,26 +205,45 @@ class TripController extends AbstractController
         $user = $userRepository->find($idUser);
         $userId = $user->getId();
         $creatorId = $trip->getCreator()->getId();
+      
  
         if (!empty($trip)) {
             // seul le créateur du voyage à le droit de modifier ces informations
             if ($userId === $creatorId) {
 
                 // On extrait de la requête le json reçu
+                //$jsonText = $request->get('document');
                 $jsonText = $request->getContent();
+                $image = $request->files->get('file');
 
+                
                 try {
                     // on crée une nouvelle entité Trip avec le serializer
                     $newTrip = $serializer->deserialize($jsonText, Trip::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $trip]);
-                
+                    
                     // validation des données de $trips en fonction des Asserts des entités
                     $errors = $validator->validate($newTrip);
-
+                    
                     // s'il y a des erreurs
                     if (count($errors) > 0) {
                         return $this->json($errors, 400);
                     }
-                    
+                
+                    if (empty($image)){
+                        $oldImage = $trip->getImage();
+                        $trip->setImage($oldImage);
+                    }else {
+                        // On génère un nouveau nom de fichier
+                        $fichier = '/uploads/'. md5(uniqid()).'.'.$image->guessExtension();
+                        
+                        // On copie le fichier dans le dossier uploads
+                        $image->move(
+                            $this->getParameter('images_directory'),
+                            $fichier
+                        );
+                        $trip->setImage($fichier);
+                    }
+
                     $em->flush();
                     return $this->json($newTrip, 201, [], ['groups' => 'apiV0_trip']);
                 } catch (NotEncodableValueException $e) {
@@ -274,10 +305,12 @@ class TripController extends AbstractController
     /**
      * @Route("api/v0/users/{idUser}/trips/{id}", name="api_v0_trips_users_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, EntityManagerInterface $em, UserRepository $userRepository, TripRepository $tripRepository, $idUser, Trip $trip)
+    public function delete(Request $request, EntityManagerInterface $em, UserRepository $userRepository, TripRepository $tripRepository, $idUser, $id)
     {
         //$trip = $tripRepository->find($id);
         $user = $userRepository->findAllTripsByUser($idUser);
+        $trip = $tripRepository->find($id);
+        
         if (!empty($trip)) {
             $creator = $trip->getCreator();
             $creatorId = $creator->getId();
@@ -334,4 +367,5 @@ class TripController extends AbstractController
         
     }
 
+    
 }

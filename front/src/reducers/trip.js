@@ -3,9 +3,19 @@ import {
   ADD_SUGGESTION,
   SAVE_TRIPS,
   SAVE_TRIP,
-  CLEAR_SUGGESTION_FIELD,
+  UPDATE_ACTIVITY_FIELD,
   SAVE_SUGGESTIONS,
   UPDATE_USER_DISPONIBILITIES,
+  UPDATE_TRIP_FORM_FIELD,
+  REMOVE_TRIP,
+  SAVE_TRIP_EDIT,
+  UPDATE_TRIP_EDIT_FIELD,
+  SAVE_DISPONIBILITIES,
+  CHECK_ACTIVITY,
+  LOADING,
+  REMOVE_ACTIVITY,
+  SAVE_USER_DISPONIBILITIES,
+  SAVE_TRIP_AUTH,
 } from 'src/actions/trip';
 
 const initialState = {
@@ -17,8 +27,21 @@ const initialState = {
   isLoading: true,
   isCreator: false,
   isOwnUser: false,
+  activityTitle: '',
+  activityDescription: '',
+  activityStartDate: '',
+  activityEndDate: '',
+  activityCategory: '',
+  activityId: '',
   tripPassword: '',
-  userDisponibilities: {},
+  userDisponibilities: [],
+  title: '',
+  description: '',
+  startDate: '',
+  endDate: '',
+  password: '',
+  location: '',
+  haveTripAccess: false,
 };
 
 const trip = (state = initialState, action = {}) => {
@@ -32,13 +55,16 @@ const trip = (state = initialState, action = {}) => {
     case ADD_SUGGESTION:
       return {
         ...state,
-        suggestionContent: '',
+        suggestionTitle: '',
+        suggestionDescription: '',
       };
 
     case SAVE_TRIPS:
       return {
         ...state,
         trips: action.trips,
+        trip: [],
+        userDisponibilities: [],
         isLoading: false,
       };
 
@@ -46,35 +72,109 @@ const trip = (state = initialState, action = {}) => {
       return {
         ...state,
         trip: action.trip,
-        isLoading: false,
         isCreator: action.isCreator,
         tripPassword: action.trip.password,
         userDisponibilities: action.userDisponibilities,
-      };
-
-    case CLEAR_SUGGESTION_FIELD:
-      return {
-        ...state,
-        suggestionTitle: '',
-        suggestionDescription: '',
       };
 
     case SAVE_SUGGESTIONS:
       return {
         ...state,
         trip: {
-          ...state,
-          suggestion: action.suggestion,
+          ...state.trip,
+          suggestion: action.suggestions,
         },
       };
+
     case UPDATE_USER_DISPONIBILITIES:
-      console.log(action);
       return {
         ...state,
         userDisponibilities: {
-          startDate: action.startDate,
-          endDate: action.endDate,
+          ...state.userDisponibilities,
+          [action.name]: action.newValue,
         },
+      };
+
+    case UPDATE_TRIP_FORM_FIELD:
+      return {
+        ...state,
+        [action.name]: action.newValue,
+      };
+
+    case UPDATE_ACTIVITY_FIELD:
+      return {
+        ...state,
+        [action.name]: action.newValue,
+      };
+
+    case REMOVE_TRIP:
+      return {
+        ...state,
+        trip: undefined,
+      };
+
+    case UPDATE_TRIP_EDIT_FIELD:
+      return {
+        ...state,
+        trip: {
+          ...state.trip,
+          [action.name]: action.newValue,
+        },
+      };
+
+    case SAVE_TRIP_EDIT:
+      return {
+        ...state,
+        isLoading: false,
+        isCreator: action.isCreator,
+        tripPassword: action.trip.password,
+        title: action.trip.title,
+        description: action.trip.description,
+        startDate: action.trip.startDate,
+        endDate: action.trip.endDate,
+        password: action.trip.password,
+        location: action.trip.location,
+        image: action.trip.image,
+      };
+
+    case SAVE_DISPONIBILITIES:
+      return {
+        ...state,
+        isLoading: false,
+        trip: {
+          ...state.trip,
+          disponibility: action.disponibilities,
+        },
+      };
+
+    case CHECK_ACTIVITY:
+      return {
+        ...state,
+        activityId: action.id,
+      };
+
+    case LOADING:
+      return {
+        ...state,
+        isLoading: action.isLoading,
+      };
+
+    case REMOVE_ACTIVITY:
+      return {
+        ...state,
+      };
+
+    case SAVE_USER_DISPONIBILITIES:
+      return {
+        ...state,
+        isLoading: false,
+        userDisponibilities: action.userDisponibilities,
+      };
+
+    case SAVE_TRIP_AUTH:
+      return {
+        ...state,
+        haveTripAccess: action.haveTripAccess,
       };
 
     default: return state;

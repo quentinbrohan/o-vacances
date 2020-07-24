@@ -23,7 +23,6 @@ const Header = ({
   };
 
   const manageLogout = () => {
-    console.log('levrette');
     handleLogout();
   };
 

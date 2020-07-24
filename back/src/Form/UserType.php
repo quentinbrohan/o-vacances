@@ -31,7 +31,6 @@ class UserType extends AbstractType
             ->add('password')
             ->add('lastname',)
             ->add('firstname',)
-            ->add('avatar',)
             ->add('suggestions',
                 EntityType::class, [
                     "class" => Suggestion::class,

@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import 'moment/locale/fr';
 
+// import Button from 'src/components/elements/Button';
+// import { Edit } from 'react-feather';
+
 import './suggestion.scss';
 
 const Suggestion = ({
   user,
-  // avatar,
   date,
   description,
   title,
@@ -31,19 +33,20 @@ const Suggestion = ({
             {moment(date).format('lll')}
           </span>
         </p>
-
       </div>
     </header>
     <div className="suggestion-body">
       <p className="suggestion-description">
         {description}
       </p>
+      {/* <Button color="secondary" size="sm" haveClassName="suggestion-button--edit">
+          <Edit onClick={() => manageEdit()} />
+        </Button> */}
     </div>
   </div>
 );
 
 Suggestion.propTypes = {
-  // avatar: PropTypes.string.isRequired,
   user: PropTypes.objectOf(
     PropTypes.shape({
       avatar: PropTypes.string.isRequired,

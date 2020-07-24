@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Button from 'src/components/elements/Button';
 import Modal from 'react-modal';
 
@@ -8,7 +9,15 @@ import FieldSelect from './FieldSelect';
 
 import './activityForm.scss';
 
-const ActivityForm = () => {
+const ActivityForm = ({
+  changeField,
+  activityTitle,
+  activityDescription,
+  activityStartDate,
+  activityEndDate,
+  activityCategory,
+  handleAddActivity,
+}) => {
   Modal.setAppElement('div');
   let subtitle;
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -17,6 +26,10 @@ const ActivityForm = () => {
   };
   const closeModal = () => {
     setIsOpen(false);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
   };
 
   return (
@@ -37,47 +50,70 @@ const ActivityForm = () => {
         <span className="activity-form-button-close" onClick={closeModal}>x</span>
         <h2 ref={subtitle}>Nouvelle activité</h2>
 
-        <form className="activity-form-element" onSubmit="">
+        <form className="activity-form-element" onSubmit={handleSubmit}>
           <Field
-            name="Activity"
+            name="activityTitle"
             placeholder="Activité"
-
+            onChange={changeField}
+            value={activityTitle}
+            type="text"
           />
           <FieldSelect
-            name="Category"
+            name="activityCategory"
             placeholder="Catégorie"
+            onChange={changeField}
+            value={activityCategory}
           />
           <Field
-            name="start-date"
+            name="activityStartDate"
             placeholder="Date de début"
             type="date"
+            onChange={changeField}
+            value={activityStartDate}
           />
 
           <Field
-            name="end-date"
+            name="activityEndDate"
             placeholder="Date de fin"
             type="date"
+            onChange={changeField}
+            value={activityEndDate}
           />
           <Field
-            name="lieux"
-            type="adress"
-            placeholder="Lieu"
-            // onChange={changeField}
-            // value={password}
-          />
-          <Field
-            name="description"
+            name="activityDescription"
             type="textarea"
             placeholder="On fait quoi?"
-            // onChange={changeField}
-            // value={password}
+            onChange={changeField}
+            value={activityDescription}
           />
         </form>
-        <Button className="activity-form-button" onClick={closeModal}>j'ajoute</Button>
+        <Button
+          className="activity-form-button"
+          onClick={() => {
+            handleAddActivity();
+            closeModal();
+          }}
+        >j'ajoute
+        </Button>
       </Modal>
     </div>
 
   );
+};
+
+ActivityForm.propTypes = {
+  changeField: PropTypes.func.isRequired,
+  activityTitle: PropTypes.string.isRequired,
+  activityCategory: PropTypes.string.isRequired,
+  activityStartDate: PropTypes.string.isRequired,
+  activityEndDate: PropTypes.string.isRequired,
+  activityDescription: PropTypes.string,
+  handleAddActivity: PropTypes.func.isRequired,
+
+};
+
+ActivityForm.defaultProps = {
+  activityDescription: '',
 };
 
 export default ActivityForm;

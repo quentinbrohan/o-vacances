@@ -164,7 +164,7 @@ class SuggestionController extends AbstractController
                     $em->remove($suggestion);
                     $em->persist($trip);
                     $em->flush();
-                    return $this->json($suggestion, 201, [], ['groups' => 'apiV0-suggestion']);
+                    return $this->json($suggestion, 200, [], ['groups' => 'apiV0-suggestion']);
                 } catch (NotEncodableValueException $e) {
                     return $this->json([
                     'status' => 400,

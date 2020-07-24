@@ -5,8 +5,11 @@ import Trip from 'src/components/Trip';
 import {
   fetchTrip,
   saveTrip,
-  updateUserDisponibilities,
+  // updateUserDisponibilities,
   modifyUserDisponibilities,
+  newUserDisponibilities,
+  deleteTrip,
+  checkTripAuth,
 } from 'src/actions/trip';
 
 const mapStateToProps = (state) => ({
@@ -16,20 +19,30 @@ const mapStateToProps = (state) => ({
   isOwnUser: state.trip.isOwnUser,
   tripPassword: state.trip.tripPassword,
   userDisponibilities: state.trip.userDisponibilities,
+  haveTripAccess: state.trip.haveTripAccess,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   fetchTrip: (tripId) => {
     dispatch(fetchTrip(tripId));
   },
+  checkTripAuth: (tripId) => {
+    dispatch(checkTripAuth(tripId));
+  },
   saveTrip: () => {
     dispatch(saveTrip());
   },
-  changeDisponibilities: (startDate, endDate) => {
-    dispatch(updateUserDisponibilities(startDate, endDate));
+  // changeUserDisponibilities: (startDate, endDate) => {
+  //   dispatch(updateUserDisponibilities(startDate, endDate));
+  // },
+  reviseUserDisponibilities: (startDate, endDate) => {
+    dispatch(modifyUserDisponibilities(startDate, endDate));
   },
-  reviseDisponibilities: () => {
-    dispatch(modifyUserDisponibilities());
+  addUserDisponibilities: (startDate, endDate) => {
+    dispatch(newUserDisponibilities(startDate, endDate));
+  },
+  handleDelete: () => {
+    dispatch(deleteTrip());
   },
 });
 

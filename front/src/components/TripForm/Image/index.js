@@ -10,13 +10,13 @@ import './image.scss';
 const Image = ({ onChangeImage }) => {
   const [image, setImage] = useState({
     file: '',
+    name: '',
     imagePreviewUrl: '',
   });
   const { imagePreviewUrl } = image;
 
   const handleChange = (evt) => {
-    onChangeImage(evt.target.value);
-
+    onChangeImage(evt.target.files[0]);
     const reader = new FileReader();
     const file = evt.target.files[0];
 
@@ -50,6 +50,7 @@ const Image = ({ onChangeImage }) => {
         type="file"
         className="field-input"
         onChange={handleChange}
+        id="tripForm-image"
       />
     </div>
 
