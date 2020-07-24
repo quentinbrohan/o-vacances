@@ -44,11 +44,15 @@ class TripController extends AbstractController
     {
         $user = $userRepository->find($id);
         // On extrait de la requête le json reçu
-        $jsonText = $request->getContent();
+        $content = $request->getContent();
+
+        $form = $this->createForm(TripType::class, $user);
+        $jsonArray=json_decode($content, true);
+        $form->submit($jsonArray)
 
         try {
             // on crée une nouvelle entité Trip avec le serializer
-            $trip = $serializer->deserialize($jsonText, Trip::class, 'json');
+            $trip = $serializer->deserialize($content, Trip::class, 'json');
             
             // validation des données de $trips en fonction des Asserts des entités
             $errors = $validator->validate($trip);
@@ -336,4 +340,5 @@ class TripController extends AbstractController
         
     }
 
+    
 }
