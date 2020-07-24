@@ -19,6 +19,7 @@ const mapStateToProps = (state) => ({
   isOwnUser: state.trip.isOwnUser,
   tripPassword: state.trip.tripPassword,
   userDisponibilities: state.trip.userDisponibilities,
+  haveTripAccess: state.trip.haveTripAccess,
 });
 
 const mapDispatchToProps = (dispatch) => ({
