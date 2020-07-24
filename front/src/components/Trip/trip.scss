@@ -2,6 +2,7 @@
 
 .trip-details {
   img.trip-photo {
+    min-height: 400px;
     height: 400px;
     width: 100%;
     padding: 0;
@@ -165,7 +166,7 @@
   section.activities {
     margin-top: $gutter * 2;
     h2 span {
-      font-size: 1.5rem;
+      font-size: 1.8rem;
     }
     .trip-activities {
       display: flex;

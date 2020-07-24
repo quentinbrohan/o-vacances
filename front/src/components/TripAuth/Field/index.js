@@ -3,13 +3,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './fieldSelect.scss';
-
 // == Import : local
+import './field.scss';
 
 // == Composant
-const FieldSelect = ({
+const Field = ({
   value,
+  type,
   name,
   placeholder,
   onChange,
@@ -25,27 +25,37 @@ const FieldSelect = ({
       <label
         htmlFor={inputId}
         className="field-label"
-      >{placeholder}
-        <select value={value} onChange={handleChange}>
-          <option defaultValue="" selected disabled> Choisir une catégorie</option>
-          <option value="1">restaurant</option>
-          <option value="2">sortie nocturne</option>
-          <option value="3">sport</option>""
-          <option value="4">visite culturelle</option>
-          <option value="5">point d'eau</option>
-        </select>
+      >
+        {placeholder}
       </label>
+      <input
+        // React - state
+        value={value}
+        onChange={handleChange}
+        // infos de base
+        id={inputId}
+        type={type}
+        className="field-input"
+        placeholder={placeholder}
+        name={name}
+      />
     </div>
   );
 };
 
-FieldSelect.propTypes = {
-  value: PropTypes.string.isRequired,
+Field.propTypes = {
+  value: PropTypes.string,
+  type: PropTypes.string,
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
 };
 
-// Valeurs par défaut pour les pro
+// Valeurs par défaut pour les props
+Field.defaultProps = {
+  value: '',
+  type: 'text',
+};
+
 // == Export
-export default FieldSelect;
+export default Field;

@@ -1,25 +1,26 @@
-import { DELETE_DISABLED_INPUT, ADD_IMAGE_PREVIEW } from 'src/actions/settings';
+import {
+  SUCCESS_MESSAGE,
+  ERROR_MESSAGE,
+} from 'src/actions/error';
 
 const initialState = {
   // ici l'état initial
-  isDisabled: true,
-  file: {},
-  name: '',
-  imagePreviewUrl: '',
+  success: {},
+  error: {},
 };
 
 const settings = (state = initialState, action = {}) => {
   switch (action.type) {
-    case DELETE_DISABLED_INPUT:
+    case SUCCESS_MESSAGE:
       return {
         ...state,
-        isDisabled: action.status,
+        success: action.success,
       };
 
-    case ADD_IMAGE_PREVIEW:
+    case ERROR_MESSAGE:
       return {
         ...state,
-        file: action.url,
+        error: action.error,
       };
 
     default: return state;
