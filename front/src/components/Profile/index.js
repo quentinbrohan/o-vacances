@@ -74,6 +74,7 @@ const Profile = ({
               onChange={changeField}
             />
             <ProfileField
+              className="password"
               name="password"
               value={password}
               userTitle="Mot de passe"
