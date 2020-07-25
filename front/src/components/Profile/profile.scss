@@ -63,13 +63,19 @@
     }
 
     form{
+      display: flex;
+      flex-direction: column;
 
+      .button.button-secondary {
+        margin-top: 1rem;
+        align-self: flex-end;
+        padding: 1rem;
+      }
       .icon{
         color: $primaryColorDarker;
         display: block;
-        margin: 0 2*$gutter 0 auto;
-        width: 40px;
-        height: 40px;
+        width: 2rem;
+        height: 2rem;
     
         &:hover{
           color: $primaryColor;

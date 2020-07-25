@@ -159,6 +159,11 @@
             }
           }
         }
+
+        .activity-form {
+          display: inline;
+          margin-right: 1rem;
+        }
       }
     }
   }
@@ -171,6 +176,10 @@
     .trip-activities {
       display: flex;
       flex-wrap: wrap;
+      justify-content: center;
+      @media (min-width: $tablet) {
+        justify-content: flex-start;
+      }
     }
   }
 

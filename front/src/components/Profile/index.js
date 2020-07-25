@@ -83,24 +83,28 @@ const Profile = ({
               onChange={changeField}
             />
             {isDisabled && (
-            <Edit2
-              className="icon pen"
-              onClick={() => {
-                deleteDisabledInput(false);
-              }}
-            />
+              <Button color="secondary">
+                <Edit2
+                  className="icon pen"
+                  onClick={() => {
+                    deleteDisabledInput(false);
+                  }}
+                />
+
+              </Button>
             )}
             {!isDisabled && (
+              <Button color="secondary">
 
-            <Check
-              className="icon check"
-              type="submit"
-              onClick={() => {
-                deleteDisabledInput(true);
-                handleEditUser();
-              }}
-            />
-
+                <Check
+                  className="icon check"
+                  type="submit"
+                  onClick={() => {
+                    deleteDisabledInput(true);
+                    handleEditUser();
+                  }}
+                />
+              </Button>
             )}
           </form>
         </div>
@@ -144,7 +148,6 @@ Profile.propTypes = {
   avatar: PropTypes.string,
   addImagePreview: PropTypes.func.isRequired,
   handleEditUserImage: PropTypes.func.isRequired,
-
 
 };
 

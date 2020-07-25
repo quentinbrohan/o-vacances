@@ -49,7 +49,10 @@
         width: 80%;
       }
       a {
-        color: $primaryColor;
+        color: $primaryColorDarker;
+        &:hover {
+          color: lighten($primaryColor, 16%);
+        }
       }
     }
   
