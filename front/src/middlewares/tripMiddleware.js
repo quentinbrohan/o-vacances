@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // API_URL ENV
-const { API_URL } = process.env;
+import { API_URL } from 'src/helpers';
 
 import {
   FETCH_TRIPS,

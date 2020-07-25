@@ -5,6 +5,7 @@ import Modal from 'react-modal';
 
 import { ReactComponent as AvatarDefault } from 'src/assets/svg/user.svg';
 
+import { API_URL } from 'src/helpers';
 import './profileImage.scss';
 
 const ProfileImage = ({
@@ -56,7 +57,7 @@ const ProfileImage = ({
 
   return (
     <div className="profile-head-img">
-      { avatar === null ? (<AvatarDefault className="profile-head-img-picture" />) : (<img className="profile-head-img-picture" src={avatar} alt={firstname} />)}
+      { avatar === null || '' ? (<AvatarDefault className="profile-head-img-picture" />) : (<img className="profile-head-img-picture" src={API_URL + avatar} alt={firstname} />)}
       <Button color="primary" onClick={openModal}>Modifier la photo</Button>
 
       <Modal

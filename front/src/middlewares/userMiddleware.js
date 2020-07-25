@@ -2,7 +2,7 @@ import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 
 // API_URL ENV
-const { API_URL } = process.env;
+import { API_URL } from 'src/helpers';
 
 import {
   SIGN_IN,

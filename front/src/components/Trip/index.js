@@ -20,6 +20,7 @@ import Loading from 'src/components/Loading';
 import Modal from 'react-modal';
 
 import { MOMENT_FORMAT_DATE } from 'src/utils';
+import { API_URL } from 'src/helpers';
 
 // import tripData from 'src/data/tripData';
 import TripAuth from 'src/containers/Trip/TripAuth';
@@ -151,7 +152,7 @@ const Trip = ({
         <img
           className="trip-photo"
           alt={trip.title}
-          src={trip.image}
+          src={`${API_URL + trip.image}`}
         />
         <section className="trip-info">
           <div className="left">
@@ -189,7 +190,7 @@ const Trip = ({
                   {trip.users.map((user) => (
                     <img
                       key={user.firstname}
-                      src={user.avatar}
+                      src={user.avatar ? API_URL + user.avatar : null}
                       alt={user.firstname}
                       className="avatar"
                     />
