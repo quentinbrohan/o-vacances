@@ -25,6 +25,7 @@ import { API_URL } from 'src/helpers';
 // import tripData from 'src/data/tripData';
 import TripAuth from 'src/containers/Trip/TripAuth';
 import SuggestionForm from 'src/containers/Trip/SuggestionForm';
+import ActivityForm from 'src/containers/ActivityForm';
 import ActivityCard from './ActivityCard';
 import PlusCard from './PlusCard';
 import Suggestion from './Suggestion';
@@ -272,7 +273,7 @@ const Trip = ({
                 )}
                 {!haveDisponibilities && (
                 <Button
-                  color="secondary"
+                  color="primary"
                   size="sm"
                   type="submit"
                   onClick={createDisponibilities}
@@ -341,7 +342,12 @@ const Trip = ({
                   </div>
                 </Modal>
               </div>
-              {/* OnClick copy Link to Clipboard ? */}
+              <ActivityForm
+                color="primary"
+                size="sm"
+              >
+                Ajouter une activité
+              </ActivityForm>              {/* OnClick copy Link to Clipboard ? */}
               {/* If isCreator => Link to TripEdit !! Need currentTripID */}
               {isCreator && (
                 <>
