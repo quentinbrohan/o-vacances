@@ -40,7 +40,7 @@ const Login = ({
             <div>Vous êtes connecté</div>
             <p>Redirection automatiqument vers Accueil...</p>
             <p>
-              Si la redirection ne s'effectue pas après 5s, {''}
+              Si la redirection ne s'effectue pas automatiqument,
               <Link to="/" className="redirect">cliquer ici.</Link>
             </p>
           </div>
@@ -56,6 +56,8 @@ const Login = ({
               placeholder="Adresse Email"
               onChange={changeField}
               value={email}
+              type="email"
+              required
             />
             <Field
               name="password"
@@ -63,6 +65,7 @@ const Login = ({
               placeholder="Mot de passe"
               onChange={changeField}
               value={password}
+              required
             />
             <div>
               <Button color="primary">

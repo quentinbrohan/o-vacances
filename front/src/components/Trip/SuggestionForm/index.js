@@ -32,6 +32,7 @@ const SuggestionForm = ({
         placeholder="Description"
         onChange={changeField}
         value={suggestionDescription}
+        required
       />
       <Button color="secondary" size="sm" type="submit">
         Envoyer <Send />

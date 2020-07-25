@@ -42,6 +42,7 @@ const TripAuth = ({
                 placeholder="Mot de passe du voyage"
                 onChange={changeField}
                 value={password}
+                required
               />
               <Button
                 color="primary"

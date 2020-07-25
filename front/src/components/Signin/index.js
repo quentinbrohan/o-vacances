@@ -30,6 +30,7 @@ const Signin = ({
             placeholder="Prénom"
             onChange={changeField}
             value={firstname}
+            required
           />
           <Field
             name="lastname"
@@ -43,6 +44,7 @@ const Signin = ({
             placeholder="Adresse Email"
             onChange={changeField}
             value={email}
+            required
           />
           <Field
             name="password"
@@ -50,6 +52,7 @@ const Signin = ({
             placeholder="Mot de passe"
             onChange={changeField}
             value={password}
+            required
           />
           <Button
             color="primary"

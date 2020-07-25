@@ -16,6 +16,7 @@ import {
   logOutUser,
   EDIT_USER_IMAGE,
   updateUserImage,
+  loading,
 } from 'src/actions/user';
 
 import {
@@ -23,7 +24,6 @@ import {
   message as toastMessage,
   warning as toastWarning,
   success as toastSuccess,
-  info as toastInfo,
 } from 'react-toastify-redux';
 
 import currentUser from 'src/utils/getCurrentUser';
@@ -38,6 +38,7 @@ const userMiddleware = (store) => (next) => (action) => {
         password,
       } = store.getState().user;
 
+      store.dispatch(loading(true));
       // Endpoint API for user creation through Symfony
       axios.post(`${API_URL}/api/v0/users/register`, {
         firstname,
@@ -63,6 +64,7 @@ const userMiddleware = (store) => (next) => (action) => {
     case LOG_IN: {
       const { email, password } = store.getState().user;
 
+      store.dispatch(loading(true));
       // withCredentials : autorisation d'accéder au cookie
       axios.post(`${API_URL}/api/login_check`, {
         password,
