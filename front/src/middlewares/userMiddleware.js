@@ -1,6 +1,9 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 
+// API_URL ENV
+const { API_URL } = process.env;
+
 import {
   SIGN_IN,
   LOG_IN,
@@ -36,7 +39,7 @@ const userMiddleware = (store) => (next) => (action) => {
       } = store.getState().user;
 
       // Endpoint API for user creation through Symfony
-      axios.post('http://localhost:8000/api/v0/users/register', {
+      axios.post(`${API_URL}/api/v0/users/register`, {
         firstname,
         lastname,
         email,
@@ -61,7 +64,7 @@ const userMiddleware = (store) => (next) => (action) => {
       const { email, password } = store.getState().user;
 
       // withCredentials : autorisation d'accéder au cookie
-      axios.post('http://localhost:8000/api/login_check', {
+      axios.post(`${API_URL}/api/login_check`, {
         password,
         email,
       })
@@ -87,7 +90,7 @@ const userMiddleware = (store) => (next) => (action) => {
     }
     case FETCH_USER: {
       // Endpoint fetch User Profil
-      axios.get(`http://localhost:8000/api/v0/users/${currentUser()}/profil`)
+      axios.get(`${API_URL}/api/v0/users/${currentUser()}/profil`)
         .then((response) => {
           console.log(response);
 
@@ -109,7 +112,7 @@ const userMiddleware = (store) => (next) => (action) => {
       } = store.getState().user;
 
       // withCredentials : autorisation d'accéder au cookie
-      axios.put(`http://localhost:8000/api/v0/users/${currentUser()}/edit`, {
+      axios.put(`${API_URL}/api/v0/users/${currentUser()}/edit`, {
         email,
         lastname,
         firstname,
@@ -179,7 +182,7 @@ const userMiddleware = (store) => (next) => (action) => {
       };
 
       // withCredentials : autorisation d'accéder au cookie
-      axios.put(`http://localhost:8000/api/v0/users/${currentUser()}/upload`,
+      axios.put(`${API_URL}/api/v0/users/${currentUser()}/upload`,
         formData,
         config)
         .then((response) => {

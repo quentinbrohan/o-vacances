@@ -1,5 +1,8 @@
 import axios from 'axios';
 
+// API_URL ENV
+const { API_URL } = process.env;
+
 import {
   FETCH_TRIPS,
   saveTrips,
@@ -50,7 +53,7 @@ const tripMiddleware = (store) => (next) => (action) => {
       const user = currentUser();
       store.dispatch(loading(true));
       // Endpoint fetch Trips list from user
-      axios.get(`http://localhost:8000/api/v0/users/${user}/trips`)
+      axios.get(`${API_URL}/api/v0/users/${user}/trips`)
         .then((response) => {
           console.log(response);
 
@@ -70,7 +73,7 @@ const tripMiddleware = (store) => (next) => (action) => {
 
       store.dispatch(loading(true));
       // Endpoint fetch Trips from user
-      axios.get(`http://localhost:8000/api/v0/users/${user}/trips/${tripId}`)
+      axios.get(`${API_URL}/api/v0/users/${user}/trips/${tripId}`)
         .then((response) => {
           console.log(response);
           if (response.status === 401) {
@@ -148,7 +151,7 @@ const tripMiddleware = (store) => (next) => (action) => {
       };
 
       // Endpoint add new suggestion to trip
-      axios.post(`http://localhost:8000/api/v0/users/${user}/trips`,
+      axios.post(`${API_URL}/api/v0/users/${user}/trips`,
         formData,
         config)
         .then((response) => {
@@ -169,7 +172,7 @@ const tripMiddleware = (store) => (next) => (action) => {
       const { id } = store.getState().trip.trip;
 
       // Endpoint add new suggestion to trip
-      axios.post(`http://localhost:8000/api/v0/trips/${id}/suggestions/new`, {
+      axios.post(`${API_URL}/api/v0/trips/${id}/suggestions/new`, {
         // props,
         title: suggestionTitle,
         description: suggestionDescription,
@@ -192,7 +195,7 @@ const tripMiddleware = (store) => (next) => (action) => {
       const { id } = store.getState().trip.trip;
 
       // Endpoint fetch suggestions from trip
-      axios.get(`http://localhost:8000/api/v0/trips/${id}/suggestions`, {
+      axios.get(`${API_URL}/api/v0/trips/${id}/suggestions`, {
         // props,
       })
         .then((response) => {
@@ -214,7 +217,7 @@ const tripMiddleware = (store) => (next) => (action) => {
       const { startDate, endDate } = action;
 
       // Endpoint add new suggestion to trip
-      axios.patch(`http://localhost:8000/api/v0/users/${user}/disponibilities/${disponibilityId}`, {
+      axios.patch(`${API_URL}/api/v0/users/${user}/disponibilities/${disponibilityId}`, {
         // props,
         trip: tripId,
         startDate,
@@ -242,7 +245,7 @@ const tripMiddleware = (store) => (next) => (action) => {
       const { startDate, endDate } = action;
 
       // Endpoint add new suggestion to trip
-      axios.post(`http://localhost:8000/api/v0/users/${user}/disponibilities`, {
+      axios.post(`${API_URL}/api/v0/users/${user}/disponibilities`, {
         // props,
         trip: id,
         startDate,
@@ -273,7 +276,7 @@ const tripMiddleware = (store) => (next) => (action) => {
       const { id } = store.getState().trip.trip;
       const user = currentUser();
       // Endpoint add new suggestion to trip
-      axios.post(`http://localhost:8000/api/v0/trips/${id}/activities`, {
+      axios.post(`${API_URL}/api/v0/trips/${id}/activities`, {
         // props,
         title: activityTitle,
         description: activityDescription,
@@ -310,7 +313,7 @@ const tripMiddleware = (store) => (next) => (action) => {
       const user = currentUser();
 
       // Endpoint add new suggestion to trip
-      axios.patch(`http://localhost:8000/api/v0/trips/${id}/activities/${activityId}/edit`, {
+      axios.patch(`${API_URL}/api/v0/trips/${id}/activities/${activityId}/edit`, {
         // props,
         title: activityTitle,
         description: activityDescription,
@@ -339,7 +342,7 @@ const tripMiddleware = (store) => (next) => (action) => {
       const { id } = store.getState().trip.trip;
       store.dispatch(loading(true));
       // Endpoint add new suggestion to trip
-      axios.delete(`http://localhost:8000/api/v0/users/${user}/trips/${id}/`)
+      axios.delete(`${API_URL}/api/v0/users/${user}/trips/${id}/`)
         .then(() => {
           store.dispatch(removeTrip());
           store.dispatch(toastSuccess('Voyage supprimé'));
@@ -398,7 +401,7 @@ const tripMiddleware = (store) => (next) => (action) => {
       };
 
       // Endpoint fetch Trip from user
-      axios.patch(`http://localhost:8000/api/v0/users/${user}/trips/${id}`,
+      axios.patch(`${API_URL}/api/v0/users/${user}/trips/${id}`,
         formData,
         config)
         .then((response) => {
@@ -421,7 +424,7 @@ const tripMiddleware = (store) => (next) => (action) => {
       const { id } = store.getState().trip.trip;
 
       // Endpoint fetch disponibilities from trip
-      axios.get(`http://localhost:8000/api/v0/trips/${id}/disponibilities`, {
+      axios.get(`${API_URL}/api/v0/trips/${id}/disponibilities`, {
         // props,
       })
         .then((response) => {
@@ -442,7 +445,7 @@ const tripMiddleware = (store) => (next) => (action) => {
       const { activityId } = store.getState().trip;
       const user = currentUser();
       // Endpoint add new suggestion to trip
-      axios.delete(`http://localhost:8000/api/v0/users/${user}/trips/${id}/activities/${activityId}/delete`)
+      axios.delete(`${API_URL}/api/v0/users/${user}/trips/${id}/activities/${activityId}/delete`)
         .then(() => {
           store.dispatch(removeActivity());
         })
@@ -464,7 +467,7 @@ const tripMiddleware = (store) => (next) => (action) => {
 
       store.dispatch(loading(true));
       // Endpoint registration to trip with password
-      axios.post(`http://localhost:8000/api/v0/users/${user}/trips/${tripId}`, {
+      axios.post(`${API_URL}/api/v0/users/${user}/trips/${tripId}`, {
         password,
       })
         .then((response) => {
