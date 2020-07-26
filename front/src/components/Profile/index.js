@@ -25,6 +25,7 @@ const Profile = ({
   changeField,
   handleEditUser,
   addImagePreview,
+  handleEditUserImage,
 }) => {
   useEffect(() => {
     fetchUser();
@@ -45,7 +46,7 @@ const Profile = ({
           firstname={firstname}
           onChangeImage={addImagePreview}
           onChange={changeField}
-          handleEditUser={handleEditUser}
+          handleEditUserImage={handleEditUserImage}
         />
         <div className="profile-head-information">
           <form onSubmit={handleSubmit}>
@@ -82,24 +83,28 @@ const Profile = ({
               onChange={changeField}
             />
             {isDisabled && (
-            <Edit2
-              className="icon pen"
-              onClick={() => {
-                deleteDisabledInput(false);
-              }}
-            />
+              <Button color="secondary">
+                <Edit2
+                  className="icon pen"
+                  onClick={() => {
+                    deleteDisabledInput(false);
+                  }}
+                />
+
+              </Button>
             )}
             {!isDisabled && (
+              <Button color="secondary">
 
-            <Check
-              className="icon check"
-              type="submit"
-              onClick={() => {
-                deleteDisabledInput(true);
-                handleEditUser();
-              }}
-            />
-
+                <Check
+                  className="icon check"
+                  type="submit"
+                  onClick={() => {
+                    deleteDisabledInput(true);
+                    handleEditUser();
+                  }}
+                />
+              </Button>
             )}
           </form>
         </div>
@@ -142,6 +147,7 @@ Profile.propTypes = {
   handleEditUser: PropTypes.func.isRequired,
   avatar: PropTypes.string,
   addImagePreview: PropTypes.func.isRequired,
+  handleEditUserImage: PropTypes.func.isRequired,
 
 };
 

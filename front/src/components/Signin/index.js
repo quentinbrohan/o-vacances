@@ -13,6 +13,7 @@ const Signin = ({
   password,
   changeField,
   handleSignin,
+  error,
 }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -30,6 +31,7 @@ const Signin = ({
             placeholder="Prénom"
             onChange={changeField}
             value={firstname}
+            required
           />
           <Field
             name="lastname"
@@ -43,6 +45,7 @@ const Signin = ({
             placeholder="Adresse Email"
             onChange={changeField}
             value={email}
+            required
           />
           <Field
             name="password"
@@ -50,7 +53,11 @@ const Signin = ({
             placeholder="Mot de passe"
             onChange={changeField}
             value={password}
+            required
           />
+          {error && (
+          <p className="error-message">{error}</p>
+          )}
           <Button
             color="primary"
             type="submit"

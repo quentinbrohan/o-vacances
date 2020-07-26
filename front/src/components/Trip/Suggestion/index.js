@@ -6,6 +6,7 @@ import 'moment/locale/fr';
 // import Button from 'src/components/elements/Button';
 // import { Edit } from 'react-feather';
 
+import { API_URL } from 'src/helpers';
 import './suggestion.scss';
 
 const Suggestion = ({
@@ -19,7 +20,7 @@ const Suggestion = ({
       className="suggestion-header"
     >
       <img
-        src={user.avatar}
+        src={API_URL + user.avatar}
         alt="Avatar"
         className="suggestion-avatar"
       />

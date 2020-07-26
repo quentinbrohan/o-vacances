@@ -28,6 +28,9 @@
   .activity-form-button{
     display: block;
     margin:0 auto;
+    &-close {
+      cursor: pointer;
+    }
   }
   
 }
