@@ -32,6 +32,8 @@ export const SAVE_USER_DISPONIBILITIES = 'SAVE_USER_DISPONIBILITIES';
 export const CHECK_TRIP_AUTH = 'CHECK_TRIP_AUTH';
 export const SAVE_TRIP_AUTH = 'SAVE_TRIP_AUTH';
 export const SAVE_TRIP_ACTIVITIES = 'SAVE_TRIP_ACTIVITIES';
+export const FETCH_ACTIVITIES = 'FETCH_ACTIVITIES';
+export const SAVE_ACTIVITIES = 'SAVE_ACTIVITIES';
 
 export const updateSuggestionField = (newValue, name) => ({
   type: UPDATE_SUGGESTION_FIELD,
@@ -189,4 +191,13 @@ export const saveTripAuth = (haveTripAccess) => ({
 export const saveTripActivities = (tripActivity) => ({
   type: SAVE_TRIP_ACTIVITIES,
   tripActivity,
+});
+
+export const fetchActivities = () => ({
+  type: FETCH_ACTIVITIES,
+});
+
+export const saveActivities = (newActivities) => ({
+  type: SAVE_ACTIVITIES,
+  newActivities,
 });
