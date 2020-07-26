@@ -34,6 +34,8 @@ export const SAVE_TRIP_AUTH = 'SAVE_TRIP_AUTH';
 export const SAVE_TRIP_ACTIVITIES = 'SAVE_TRIP_ACTIVITIES';
 export const FETCH_ACTIVITIES = 'FETCH_ACTIVITIES';
 export const SAVE_ACTIVITIES = 'SAVE_ACTIVITIES';
+export const DELETE_SUGGESTION = 'DELETE_SUGGESTION';
+export const REMOVE_SUGGESTION = 'REMOVE_SUGGESTION';
 
 export const updateSuggestionField = (newValue, name) => ({
   type: UPDATE_SUGGESTION_FIELD,
@@ -200,4 +202,13 @@ export const fetchActivities = () => ({
 export const saveActivities = (newActivities) => ({
   type: SAVE_ACTIVITIES,
   newActivities,
+});
+
+export const deleteSuggestion = (suggestionId) => ({
+  type: DELETE_SUGGESTION,
+  suggestionId,
+});
+
+export const removeSuggestion = () => ({
+  type: REMOVE_SUGGESTION,
 });

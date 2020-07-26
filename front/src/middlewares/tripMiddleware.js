@@ -36,6 +36,7 @@ import {
   loading,
   saveTripAuth,
   saveTripActivities,
+  DELETE_SUGGESTION,
 } from 'src/actions/trip';
 
 import {
@@ -341,7 +342,7 @@ const tripMiddleware = (store) => (next) => (action) => {
           store.dispatch(fetchActivities());
           store.dispatch(toastSuccess('Activité modifiée !'));
 
-        // TODO: newTrip = cleForm inputs DONE
+          // TODO: newTrip = cleForm inputs DONE
 
         // Add suggestion to state or directly refresh Trip component afterward (?)
         })
@@ -536,6 +537,31 @@ const tripMiddleware = (store) => (next) => (action) => {
       next(action);
       break;
     }
+
+    case DELETE_SUGGESTION: {
+      const { id } = store.getState().trip.trip;
+      const user = currentUser();
+      const { suggestionId } = action;
+      // Endpoint add delete suggestion to trip
+      axios.delete(`${API_URL}/api/v0/users/${user}/trips/${id}/suggestions/${suggestionId}`)
+        .then(() => {
+          store.dispatch(removeActivity());
+
+          store.dispatch(toastSuccess('Suggestion supprimée'));
+          store.dispatch(fetchSuggestions());
+        })
+        .then(() => {
+          // Redirect to HomeUser
+        })
+        .catch((error) => {
+          console.warn(error);
+          store.dispatch(toastError(error.response.data.message));
+        });
+
+      next(action);
+      break;
+    }
+
     default:
       // on passe l'action au suivant (middleware suivant ou reducer)
       next(action);

@@ -18,6 +18,7 @@ import {
   SAVE_TRIP_AUTH,
   SAVE_TRIP_ACTIVITIES,
   SAVE_ACTIVITIES,
+  REMOVE_SUGGESTION,
 } from 'src/actions/trip';
 
 const initialState = {

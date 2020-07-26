@@ -60,9 +60,10 @@ const Trip = ({
   // changeUserDisponibilities,
   reviseUserDisponibilities,
   addUserDisponibilities,
-  handleDelete,
+  handleTripDelete,
   checkTripAuth,
   haveTripAccess,
+  handleSuggestionDelete,
 }) => {
   const currentTrip = useParams().id;
   const tripId = Number(currentTrip);
@@ -127,8 +128,12 @@ const Trip = ({
     addSuggestion();
   };
 
-  const manageDelete = () => {
-    handleDelete();
+  const manageTripDelete = () => {
+    handleTripDelete();
+  };
+
+  const manageSuggestionDelete = (suggestionId) => {
+    handleSuggestionDelete(suggestionId);
   };
 
   // Merge trip.disponibility + trip.users for <select> options
@@ -362,7 +367,7 @@ const Trip = ({
                     color="secondary"
                     size="sm"
                     type="submit"
-                    onClick={() => manageDelete()}
+                    onClick={() => manageTripDelete()}
                   >Supprimer mon voyage
                   </Button>
                 </>
@@ -393,7 +398,11 @@ const Trip = ({
           <div className="trip-suggestions">
             {(trip.suggestion.length >= 1) && (
               trip.suggestion.map((sugg) => (
-                <Suggestion {...sugg} key={sugg.id} />
+                <Suggestion
+                  {...sugg}
+                  key={sugg.id}
+                  handleSuggestionDelete={manageSuggestionDelete}
+                />
               ))
             )}
           </div>
@@ -432,8 +441,9 @@ Trip.propTypes = {
   changeUserDisponibilities: PropTypes.func.isRequired,
   reviseUserDisponibilities: PropTypes.func.isRequired,
   addUserDisponibilities: PropTypes.func.isRequired,
-  handleDelete: PropTypes.func.isRequired,
+  handleTripDelete: PropTypes.func.isRequired,
   haveTripAccess: PropTypes.bool.isRequired,
+  handleSuggestionDelete: PropTypes.func.isRequired,
 };
 
 // Trip.defaultProps = {

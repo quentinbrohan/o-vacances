@@ -58,7 +58,7 @@ const TripAuth = ({
           )}
           {!isAuthenticated && (
             <p>
-              Déjà un compte ? <Link to="/signin">Connexion</Link>.
+              Déjà un compte ? <Link to="/login">Connexion</Link>.
             </p>
 
           )}
