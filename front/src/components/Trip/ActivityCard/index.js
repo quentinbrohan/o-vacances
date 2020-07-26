@@ -5,6 +5,7 @@ import { Calendar } from 'react-feather';
 import moment from 'moment';
 import 'moment/locale/fr';
 
+import { API_URL } from 'src/helpers';
 import './activityCard.scss';
 
 const ActivityCard = ({
@@ -19,7 +20,7 @@ const ActivityCard = ({
   >
     <article className="activity-card">
       <header
-        style={{ backgroundImage: `url(${category.image})` }}
+        style={{ backgroundImage: `url(${API_URL + category.image})` }}
         className="activity-card-header"
       />
       <div className="activity-card-body">

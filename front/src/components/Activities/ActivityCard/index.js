@@ -11,6 +11,7 @@ import {
 import Button from 'src/components/elements/Button';
 
 import ActivityEdit from 'src/containers/ActivityEdit';
+import { API_URL } from 'src/helpers';
 
 import './activityCard.scss';
 
@@ -50,7 +51,7 @@ const ActivityCard = ({
   return (
     <article className="activity-card" id={`activite-${id}`}>
       <header
-        style={{ backgroundImage: `url(${image})` }}
+        style={{ backgroundImage: `url(${API_URL + image})` }}
         className="activity-card-header"
       />
       <div className="activity-card-body">

@@ -34,12 +34,12 @@ const TripEdit = ({
       <h1>Je modifie mon voyage</h1>
       <form className="trip-edit-element" onSubmit={handleSubmit}>
         <div className="div">
-          {image && (
+          {/* {image && (
           <>
             <p>Photo de couverture actuelle</p>
             <img src={image} alt="Couverture du voyage" />
           </>
-          )}
+          )} */}
           {!image && (
           <p> Pas de photo de couverture actuellement</p>
           )}
@@ -47,6 +47,7 @@ const TripEdit = ({
         <Image
           className="trip-edit-image"
           onChangeImage={addImagePreview}
+          image={image}
         />
         <Field
           name="title"

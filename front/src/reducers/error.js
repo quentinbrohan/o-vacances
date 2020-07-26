@@ -1,26 +1,24 @@
 import {
-  SUCCESS_MESSAGE,
-  ERROR_MESSAGE,
+  ADD_ERROR,
+  CLEAR_ERROR,
 } from 'src/actions/error';
 
 const initialState = {
   // ici l'état initial
-  success: {},
-  error: {},
+  error: [],
 };
 
 const settings = (state = initialState, action = {}) => {
   switch (action.type) {
-    case SUCCESS_MESSAGE:
-      return {
-        ...state,
-        success: action.success,
-      };
-
-    case ERROR_MESSAGE:
+    case ADD_ERROR:
       return {
         ...state,
         error: action.error,
+      };
+
+    case CLEAR_ERROR:
+      return {
+        error: [],
       };
 
     default: return state;

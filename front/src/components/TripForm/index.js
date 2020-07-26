@@ -39,6 +39,7 @@ const TripForm = ({
           placeholder="Nom du voyage"
           onChange={changeField}
           value={title}
+          required
 
         />
         <Field
@@ -47,6 +48,7 @@ const TripForm = ({
           type="text"
           onChange={changeField}
           value={description}
+          required
         />
         <Field
           name="location"
@@ -54,6 +56,7 @@ const TripForm = ({
           type="text"
           onChange={changeField}
           value={location}
+          required
         />
         <Field
           name="startDate"
@@ -61,6 +64,7 @@ const TripForm = ({
           placeholder="Date de départ prévue"
           onChange={changeField}
           value={startDate}
+          required
 
         />
         <Field
@@ -69,6 +73,7 @@ const TripForm = ({
           placeholder="Date de retour prévue"
           onChange={changeField}
           value={endDate}
+          required
 
         />
         <Field
@@ -77,6 +82,7 @@ const TripForm = ({
           placeholder="Mot de passe du voyage"
           onChange={changeField}
           value={password}
+          required
 
         />
         <Button
@@ -100,6 +106,11 @@ TripForm.propTypes = {
   password: PropTypes.string.isRequired,
   location: PropTypes.string.isRequired,
   addImagePreview: PropTypes.func.isRequired,
+  file: PropTypes.object,
+};
+
+TripForm.defaultProps = {
+  file: null,
 };
 
 export default TripForm;

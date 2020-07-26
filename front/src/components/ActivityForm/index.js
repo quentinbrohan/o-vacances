@@ -57,12 +57,14 @@ const ActivityForm = ({
             onChange={changeField}
             value={activityTitle}
             type="text"
+            required
           />
           <FieldSelect
             name="activityCategory"
             placeholder="Catégorie"
             onChange={changeField}
             value={activityCategory}
+            required
           />
           <Field
             name="activityStartDate"
@@ -70,6 +72,7 @@ const ActivityForm = ({
             type="date"
             onChange={changeField}
             value={activityStartDate}
+            required
           />
 
           <Field
@@ -78,6 +81,8 @@ const ActivityForm = ({
             type="date"
             onChange={changeField}
             value={activityEndDate}
+            required
+
           />
           <Field
             name="activityDescription"

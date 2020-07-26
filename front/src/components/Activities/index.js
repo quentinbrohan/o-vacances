@@ -7,7 +7,7 @@ import ActivityForm from 'src/containers/ActivityForm';
 import ActivityCard from './ActivityCard';
 import './activities.scss';
 
-const Activities = ({ activities, deleteActivity, checkActivityId, }) => {
+const Activities = ({ activities, deleteActivity, checkActivityId }) => {
   const handleDelete = (selected) => {
     console.log(`Suppression des activités ${selected}`);
   };

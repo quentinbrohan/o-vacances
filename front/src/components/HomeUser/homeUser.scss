@@ -9,5 +9,8 @@
     display: flex;
     justify-content: center;
     flex-flow: wrap;
+    @media (min-width: $tablet) {
+      justify-content: flex-start;
+    }
   }
 }

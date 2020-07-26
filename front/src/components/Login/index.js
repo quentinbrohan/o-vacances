@@ -13,6 +13,7 @@ const Login = ({
   changeField,
   handleLogin,
   isAuthenticated,
+  error,
 }) => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -40,7 +41,7 @@ const Login = ({
             <div>Vous êtes connecté</div>
             <p>Redirection automatiqument vers Accueil...</p>
             <p>
-              Si la redirection ne s'effectue pas après 5s, {''}
+              Si la redirection ne s'effectue pas automatiqument,
               <Link to="/" className="redirect">cliquer ici.</Link>
             </p>
           </div>
@@ -56,6 +57,8 @@ const Login = ({
               placeholder="Adresse Email"
               onChange={changeField}
               value={email}
+              type="email"
+              required
             />
             <Field
               name="password"
@@ -63,14 +66,17 @@ const Login = ({
               placeholder="Mot de passe"
               onChange={changeField}
               value={password}
+              required
             />
+            {error && (
+            <p className="error-message">{error}</p>
+            )}
             <div>
               <Button color="primary">
                 Connexion
               </Button>
             </div>
           </form>
-
           <div>
             <div className="login-layout">
               <p>J'ai oublié mon mot de passe</p>
@@ -94,10 +100,12 @@ Login.propTypes = {
   changeField: PropTypes.func.isRequired,
   handleLogin: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,
+  error: PropTypes.array,
 };
 
 Login.defaultProps = {
   isAuthenticated: false,
+  error: [],
 };
 
 export default Login;

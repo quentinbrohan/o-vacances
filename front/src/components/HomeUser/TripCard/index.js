@@ -5,6 +5,7 @@ import { Calendar, MapPin } from 'react-feather';
 import moment from 'moment';
 import 'moment/locale/fr';
 
+import { API_URL } from 'src/helpers';
 import './tripCard.scss';
 
 const TripCard = ({
@@ -20,7 +21,7 @@ const TripCard = ({
   >
     <article className="trip-card">
       <header
-        style={{ backgroundImage: `url(${image})` }}
+        style={{ backgroundImage: `url(${API_URL + image})` }}
         className="trip-card-header"
       />
       <div className="trip-card-body">
