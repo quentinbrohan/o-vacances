@@ -65,6 +65,7 @@
     "classnames": "^2.2.6",
     "connected-react-router": "^6.8.0",
     "dotenv": "^8.2.0",
+    "history": "4.10.1",
     "jwt-decode": "^2.2.0",
     "moment": "^2.27.0",
     "prop-types": "*",

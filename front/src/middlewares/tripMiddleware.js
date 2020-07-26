@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { push } from 'connected-react-router';
 
 // API_URL ENV
 import { API_URL } from 'src/helpers';
@@ -156,6 +157,7 @@ const tripMiddleware = (store) => (next) => (action) => {
         .then((response) => {
           console.log(response);
           store.dispatch(toastSuccess('Nouveau voyage créé'));
+          store.dispatch(push(`/voyage/${response.data.id}`));
         })
         .catch((error) => {
           console.warn(error);
@@ -354,6 +356,7 @@ const tripMiddleware = (store) => (next) => (action) => {
           store.dispatch(removeTrip());
           store.dispatch(toastSuccess('Voyage supprimé'));
           store.dispatch(loading(false));
+          store.dispatch(push('/'));
         })
         .then(() => {
           // Redirect to HomeUser
@@ -419,6 +422,7 @@ const tripMiddleware = (store) => (next) => (action) => {
           // Add suggestion to state or directly refresh Trip component afterward (?)
           store.dispatch(saveTripEdit(response.data));
           store.dispatch(toastSuccess('Modifications effectuées'));
+          store.dispatch(push(`/voyage/${id}`));
         })
         .catch((error) => {
           console.warn(error);

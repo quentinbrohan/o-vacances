@@ -1,14 +1,15 @@
 // == Import : npm
 import React from 'react';
 import { render } from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
+// import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { ConnectedRouter } from 'connected-react-router';
 
 // == Import : local
 // Composants
 import App from 'src/containers/App';
 // Store Redux
-import store from 'src/store';
+import store, { history } from 'src/store';
 // React Dates
 import 'react-dates/initialize';
 
@@ -17,9 +18,9 @@ import 'react-dates/initialize';
 //    => crée une structure d'objets imbriqués (DOM virtuel)
 const rootReactElement = (
   <Provider store={store}>
-    <Router>
+    <ConnectedRouter history={history}>
       <App />
-    </Router>
+    </ConnectedRouter>
   </Provider>
 );
 // 2. La cible du DOM (là où la structure doit prendre vie dans le DOM)

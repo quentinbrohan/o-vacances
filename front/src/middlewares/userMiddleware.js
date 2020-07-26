@@ -1,5 +1,6 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
+import { push } from 'connected-react-router';
 
 // API_URL ENV
 import { API_URL } from 'src/helpers';
@@ -52,6 +53,7 @@ const userMiddleware = (store) => (next) => (action) => {
           console.log(response);
           if (response.status === 201) {
             store.dispatch(toastSuccess('Inscription réussie'));
+            store.dispatch(push('/login'));
           }
         })
         .catch((error) => {
@@ -84,6 +86,7 @@ const userMiddleware = (store) => (next) => (action) => {
             // axios Global settings to forward header + token
             axios.defaults.withCredentials = true;
             axios.defaults.headers.Authorization = `Bearer ${token}`;
+            store.dispatch(push('/'));
           }
         })
         .catch((error) => {
