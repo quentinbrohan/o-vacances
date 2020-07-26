@@ -13,6 +13,7 @@ const Login = ({
   changeField,
   handleLogin,
   isAuthenticated,
+  error,
 }) => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -67,13 +68,15 @@ const Login = ({
               value={password}
               required
             />
+            {error && (
+            <p className="error-message">{error}</p>
+            )}
             <div>
               <Button color="primary">
                 Connexion
               </Button>
             </div>
           </form>
-
           <div>
             <div className="login-layout">
               <p>J'ai oublié mon mot de passe</p>
@@ -97,10 +100,12 @@ Login.propTypes = {
   changeField: PropTypes.func.isRequired,
   handleLogin: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,
+  error: PropTypes.array,
 };
 
 Login.defaultProps = {
   isAuthenticated: false,
+  error: [],
 };
 
 export default Login;

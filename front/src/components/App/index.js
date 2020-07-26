@@ -89,7 +89,7 @@ const App = ({
               component={Loading}
             />
             <Route
-              path="/qui-sommes-nous"
+              path="/equipe"
               render={() => <Team persons={persons} />}
             />
             <Route

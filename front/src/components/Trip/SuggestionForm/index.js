@@ -26,6 +26,7 @@ const SuggestionForm = ({
         placeholder="Titre"
         onChange={changeField}
         value={suggestionTitle}
+        required
       />
       <Field
         name="suggestionDescription"

@@ -34,13 +34,12 @@ import {
 } from 'src/actions/trip';
 
 import {
-  successMessage,
-  errorMessage,
+  addError,
 } from 'src/actions/error';
 
 import {
   error as toastError,
-  message as toastMessage,
+  warning as toastWarning,
   success as toastSuccess,
 } from 'react-toastify-redux';
 
@@ -61,6 +60,7 @@ const tripMiddleware = (store) => (next) => (action) => {
         })
         .catch((error) => {
           console.warn(error);
+          store.dispatch(toastError(error.response.data.message));
         });
 
       next(action);
@@ -96,9 +96,8 @@ const tripMiddleware = (store) => (next) => (action) => {
           store.dispatch(fetchDisponibilities(tripId));
         })
         .catch((error) => {
-          if (error.response) {
-            console.log(error.response);
-          }
+          console.warn(error);
+          store.dispatch(toastError(error.response.data.message));
         });
 
       next(action);
@@ -160,6 +159,7 @@ const tripMiddleware = (store) => (next) => (action) => {
         })
         .catch((error) => {
           console.warn(error);
+          store.dispatch(toastError(error.response.data.message));
         });
 
       next(action);
@@ -185,6 +185,7 @@ const tripMiddleware = (store) => (next) => (action) => {
         })
         .catch((error) => {
           console.warn(error);
+          store.dispatch(toastError(error.response.data.message));
         });
 
       next(action);
@@ -204,6 +205,7 @@ const tripMiddleware = (store) => (next) => (action) => {
         })
         .catch((error) => {
           console.warn(error);
+          store.dispatch(toastError(error.response.data.message));
         });
 
       next(action);
@@ -253,12 +255,13 @@ const tripMiddleware = (store) => (next) => (action) => {
       })
         .then((response) => {
           store.dispatch(saveUserDisponibilities(response.data));
-          store.dispatch(toastSuccess('Mise à jour des disponibilités'));
+          store.dispatch(toastSuccess('Mise à jour des disponibilités !'));
           // For refresh
           store.dispatch(fetchDisponibilities(id));
         })
         .catch((error) => {
           console.warn(error);
+          store.dispatch(toastError(error.response.data.message));
         });
 
       next(action);
@@ -289,11 +292,13 @@ const tripMiddleware = (store) => (next) => (action) => {
         .then((response) => {
           console.log(response);
 
+          store.dispatch(toastSuccess('Activité ajoutée !'));
           // TODO: newTrip = cleForm inputs DONE
           // Add suggestion to state or directly refresh Trip component afterward (?)
         })
         .catch((error) => {
           console.warn(error);
+          store.dispatch(toastError(error.response.data.message));
         });
 
       next(action);
@@ -325,12 +330,14 @@ const tripMiddleware = (store) => (next) => (action) => {
       })
         .then((response) => {
           console.log(response);
+          store.dispatch(toastSuccess('Activité modifiée !'));
 
         // TODO: newTrip = cleForm inputs DONE
         // Add suggestion to state or directly refresh Trip component afterward (?)
         })
         .catch((error) => {
           console.warn(error);
+          store.dispatch(toastError(error.response.data.message));
         });
 
       next(action);
@@ -353,6 +360,7 @@ const tripMiddleware = (store) => (next) => (action) => {
         })
         .catch((error) => {
           console.warn(error);
+          store.dispatch(toastError(error.response.data.message));
         });
 
       next(action);
@@ -414,6 +422,7 @@ const tripMiddleware = (store) => (next) => (action) => {
         })
         .catch((error) => {
           console.warn(error);
+          store.dispatch(toastError(error.response.data.message));
         });
 
       next(action);
@@ -434,6 +443,7 @@ const tripMiddleware = (store) => (next) => (action) => {
         })
         .catch((error) => {
           console.warn(error);
+          store.dispatch(toastError(error.response.data.message));
         });
 
       next(action);
@@ -448,12 +458,14 @@ const tripMiddleware = (store) => (next) => (action) => {
       axios.delete(`${API_URL}/api/v0/users/${user}/trips/${id}/activities/${activityId}/delete`)
         .then(() => {
           store.dispatch(removeActivity());
+          store.dispatch(toastSuccess('Activité supprimé !'));
         })
         .then(() => {
           // Redirect to HomeUser
         })
         .catch((error) => {
           console.warn(error);
+          store.dispatch(toastError(error.response.data.message));
         });
 
       next(action);
@@ -481,8 +493,7 @@ const tripMiddleware = (store) => (next) => (action) => {
         .catch((error) => {
           console.warn(error);
           if (error.response.status === 401) {
-            console.log(error.response.data.message);
-            // display error
+            store.dispatch(toastWarning(error.response.data.message));
             store.dispatch(saveTripAuth(false));
             store.dispatch(loading(false));
           }

@@ -19,6 +19,8 @@ import {
   loading,
 } from 'src/actions/user';
 
+import { addError } from 'src/actions/error';
+
 import {
   error as toastError,
   message as toastMessage,
@@ -49,13 +51,13 @@ const userMiddleware = (store) => (next) => (action) => {
         .then((response) => {
           console.log(response);
           if (response.status === 201) {
-            console.log('Inscription réussie');
             store.dispatch(toastSuccess('Inscription réussie'));
           }
         })
         .catch((error) => {
           console.warn(error);
           store.dispatch(toastError('Erreur lors de l\'inscription'));
+          store.dispatch(addError(error.response.data.message));
         });
 
       next(action);
@@ -75,6 +77,7 @@ const userMiddleware = (store) => (next) => (action) => {
           if (response.status === 200) {
             const { token } = response.data;
 
+            store.dispatch(toastSuccess('Connexion réussie'));
             store.dispatch(logInUser());
             // Store token in localStorage
             window.localStorage.setItem('authToken', token);
@@ -85,6 +88,13 @@ const userMiddleware = (store) => (next) => (action) => {
         })
         .catch((error) => {
           console.warn(error);
+          if (error.response.status === 401) {
+            store.dispatch(addError('Adresse email ou mot de passe invalide.'));
+            store.dispatch(toastError(error.response.data.message));
+          }
+          else {
+            store.dispatch(addError(error.response.data));
+          }
         });
 
       next(action);
@@ -100,6 +110,7 @@ const userMiddleware = (store) => (next) => (action) => {
         })
         .catch((error) => {
           console.warn(error);
+          store.dispatch(addError(error.response.data.message));
         });
 
       next(action);
@@ -126,6 +137,7 @@ const userMiddleware = (store) => (next) => (action) => {
         })
         .catch((error) => {
           console.warn(error);
+          store.dispatch(addError(error.response.data.message));
         });
       next(action);
       break;
@@ -195,6 +207,7 @@ const userMiddleware = (store) => (next) => (action) => {
         })
         .catch((error) => {
           console.warn(error);
+          store.dispatch(addError(error.response.data.message));
         });
       next(action);
       break;
