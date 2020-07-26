@@ -17,6 +17,7 @@ import {
   SAVE_USER_DISPONIBILITIES,
   SAVE_TRIP_AUTH,
   SAVE_TRIP_ACTIVITIES,
+  SAVE_ACTIVITIES,
 } from 'src/actions/trip';
 
 const initialState = {
@@ -187,6 +188,15 @@ const trip = (state = initialState, action = {}) => {
             ...state.trip.activities,
             action.tripActivity,
           ],
+        },
+      };
+
+    case SAVE_ACTIVITIES:
+      return {
+        ...state,
+        trip: {
+          ...state.trip,
+          activities: action.newActivities,
         },
       };
 

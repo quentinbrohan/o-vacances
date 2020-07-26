@@ -24,6 +24,9 @@ import {
   fetchSuggestions,
   DELETE_ACTIVITY,
   removeActivity,
+  FETCH_ACTIVITIES,
+  fetchActivities,
+  saveActivities,
   saveUserDisponibilities,
   CHECK_TRIP_AUTH,
   loading,
@@ -308,7 +311,6 @@ const tripMiddleware = (store) => (next) => (action) => {
       } = store.getState().trip;
       const { id } = store.getState().trip.trip;
       const user = currentUser();
-
       // Endpoint add new suggestion to trip
       axios.patch(`http://localhost:8000/api/v0/trips/${id}/activities/${activityId}/edit`, {
         // props,
@@ -322,8 +324,8 @@ const tripMiddleware = (store) => (next) => (action) => {
       })
         .then((response) => {
           console.log(response);
-
-        // TODO: newTrip = cleForm inputs DONE
+          // TODO: newTrip = cleForm inputs DONE
+          store.dispatch(fetchActivities());
         // Add suggestion to state or directly refresh Trip component afterward (?)
         })
         .catch((error) => {
@@ -421,9 +423,31 @@ const tripMiddleware = (store) => (next) => (action) => {
       axios.delete(`http://localhost:8000/api/v0/users/${user}/trips/${id}/activities/${activityId}/delete`)
         .then(() => {
           store.dispatch(removeActivity());
+          store.dispatch(toastSuccess('Activité supprimée'));
+          store.dispatch(fetchActivities());
         })
         .then(() => {
           // Redirect to HomeUser
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
+
+      next(action);
+      break;
+    }
+
+    case FETCH_ACTIVITIES: {
+      const { id } = store.getState().trip.trip;
+
+      // Endpoint fetch disponibilities from trip
+      axios.get(`http://localhost:8000/api/v0/trips/${id}/activities`, {
+        // props,
+      })
+        .then((response) => {
+          console.log(response);
+          console.log(response.data);
+          store.dispatch(saveActivities(response.data));
         })
         .catch((error) => {
           console.warn(error);
