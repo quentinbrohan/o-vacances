@@ -5,7 +5,7 @@
   @media (max-width: $tablet) {
     margin:0 auto
   }
-  
+
   .profile-field-label{
     display: block;
     width: 310px;
@@ -34,14 +34,16 @@
   
     }
 
+
     @media (max-width: $laptop) {
       width:220px;
     }
     @media (max-width: $tablet) {
       width: 80%
     }
-    
+
   }
- 
   
 }
+
+

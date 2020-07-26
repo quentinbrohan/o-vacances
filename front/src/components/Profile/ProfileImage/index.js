@@ -106,13 +106,15 @@ ProfileImage.propTypes = {
   avatar: PropTypes.string.isRequired,
   firstname: PropTypes.string.isRequired,
   onChangeImage: PropTypes.func.isRequired,
-  // onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  handleEditUser: PropTypes.func.isRequired,
+  avatar: PropTypes.string,
   handleEditUserImage: PropTypes.func.isRequired,
 };
 
 ProfileImage.defaultProps = {
   name: AvatarDefault,
-
+  avatar: false,
 };
 
 export default ProfileImage;
