@@ -62,14 +62,14 @@ const App = ({
         <meta charSet="utf-8" />
         <meta
           name="description"
-          content="O'Vacances est là pour t'aider à planifier tes vacances en groupe !
-          Que tu sois un Fabigeon à l'aile cassée, un ninja ou bien juste humain, créez ton voyage,
-          invite tes amis, Mme Michu, l'équipe O'Clock. Prépare tes activités et suggère des choses
-          à faire avec ta team. Enfile ton slip Gaétan et tu es fin prêt, ça va être \'feun\' !
-          Application React ⚛."
-          // content="Avec O'Vacances, partir en vacances en groupe n'a jamais été aussi facile !
-          // Créer votre voyage, inviter vos amis, voir/suggérer des suggestions/activités.
-          // Application React."
+          // content="O'Vacances est là pour t'aider à planifier tes vacances en groupe !
+          // Que tu sois un Fabigeon, un ninja ou bien juste humain, créez ton voyage,
+          // invite tes amis, Mme Michu, l'équipe O'Clock. Prépare tes activités et suggère des choses
+          // à faire avec ta team. Enfile ton slip Gaétan et tu es fin prêt, ça va être \'feun\' !
+          // Application React ⚛."
+          content="Avec O'Vacances, partir en vacances en groupe n'a jamais été aussi facile !
+          Créer votre voyage, inviter vos amis, voir/suggérer des suggestions/activités.
+          Application React. O'Clock, apothéose - Excalibur."
         />
       </Helmet>
       <Header />

@@ -313,12 +313,12 @@ const Trip = ({
                 </div>
                 <div className="trip-link">
                   <p>Lien du voyage:</p>
-                  <a
-                    href="http://o-vacances.fr/voyage/{trip.id}"
+                  <Link
+                    href={`localhost:8080/voyage/${trip.id}`}
                     className="link"
                   >
                     http://o-vacances.fr/voyage/{trip.id}
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="trip-help">
