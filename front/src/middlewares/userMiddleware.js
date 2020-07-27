@@ -43,14 +43,24 @@ const userMiddleware = (store) => (next) => (action) => {
         password,
       } = store.getState().user;
 
+            const config = {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'multipart/form-data',
+        },
+      };
+      console.log(firstname, lastname, email, password);
+      
+
       store.dispatch(loading(true));
       // Endpoint API for user creation through Symfony
-      axios.post(`${API_URL}/api/v0/users/register`, {
+      axios.post(`${API_URL}/users/register`, {
         firstname,
         lastname,
         email,
         password,
-      })
+      },
+      config)
         .then((response) => {
           console.log(response);
           if (response.status === 201) {

@@ -27,7 +27,7 @@ const ProfileImage = ({
 
   const [image, setImage] = useState({
     file: '',
-    imagePreviewUrl: '',
+    imagePreviewUrl: avatar.length !== '' ? avatar : '',
   });
   const { imagePreviewUrl } = image;
 
@@ -57,7 +57,7 @@ const ProfileImage = ({
 
   return (
     <div className="profile-head-img">
-      { avatar === null || '' ? (<AvatarDefault className="profile-head-img-picture" />) : (<img className="profile-head-img-picture" src={API_URL + avatar} alt={firstname} />)}
+      { avatar ?  (<img className="profile-head-img-picture" src={API_URL + avatar} alt={firstname} />) : (<AvatarDefault className="profile-head-img-picture" />)}
       <Button color="primary" onClick={openModal}>Modifier la photo</Button>
 
       <Modal
@@ -103,18 +103,17 @@ const ProfileImage = ({
 };
 ProfileImage.propTypes = {
   name: PropTypes.string,
-  avatar: PropTypes.string.isRequired,
+  avatar: PropTypes.string,
   firstname: PropTypes.string.isRequired,
   onChangeImage: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   handleEditUser: PropTypes.func.isRequired,
-  avatar: PropTypes.string,
   handleEditUserImage: PropTypes.func.isRequired,
 };
 
 ProfileImage.defaultProps = {
   name: AvatarDefault,
-  avatar: false,
+  avatar: '',
 };
 
 export default ProfileImage;
