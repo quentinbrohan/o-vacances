@@ -17,7 +17,7 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 class RegistrationController extends AbstractController
 {
     /**
-     * @Route("/api/v0/users/register", name="app_register", methods="POST")
+     * @Route("/users/register", name="app_register", methods="POST")
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, ObjectNormalizer $normalizer): Response
     {
