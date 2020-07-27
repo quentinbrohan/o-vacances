@@ -325,6 +325,16 @@ const tripMiddleware = (store) => (next) => (action) => {
         activityCategory,
         activityId,
       } = store.getState().trip;
+
+      console.log(
+        activityTitle,
+        activityDescription,
+        activityStartDate,
+        activityEndDate,
+        activityCategory,
+        activityId,
+      )
+
       const { id } = store.getState().trip.trip;
       const user = currentUser();
       // Endpoint add new suggestion to trip

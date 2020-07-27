@@ -7,7 +7,7 @@ import { updateActivityField, editActivity, checkActivity } from 'src/actions/tr
 const mapStateToProps = (state) => ({
   activities: state.trip.trip.activities,
   activityTitle: state.trip.activityTitle,
-  activityDescritption: state.trip.activityDescription,
+  activityDescription: state.trip.activityDescription,
   activityStartDate: state.trip.activityStartDate,
   activityEndDate: state.trip.activityEndDate,
   activityCategory: state.trip.activityCategory,

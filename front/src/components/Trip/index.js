@@ -51,7 +51,7 @@ const customStyles = {
     transform: 'translate(-50%, -50%)',
     display: 'flex',
     flexDirection: 'column',
-    // maxWidth: '560px',
+    maxWidth: '560px',
   },
 };
 
@@ -128,7 +128,7 @@ const Trip = ({
     if (userDisponibilities) {
       setHaveDisponibilities(true);
     }
-    if (userDisponibilities) {
+    if (!isLoading && userDisponibilities) {
       setState([
         {
           startDate: new Date(userDisponibilities.startDate),
