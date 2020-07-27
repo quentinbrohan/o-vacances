@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Calendar } from 'react-feather';
+import { toDate } from 'src/utils/format';
 
 import { API_URL } from 'src/helpers';
 import './activityCard.scss';
@@ -27,8 +28,8 @@ const ActivityCard = ({
           <div className="date">
             <Calendar />
             <p>
-              Du {startDate} <br />
-              au {endDate}
+              Du {toDate(startDate)} <br />
+              au {toDate(endDate)}
             </p>
           </div>
         </div>
@@ -46,8 +47,8 @@ ActivityCard.propTypes = {
   category: PropTypes.arrayOf(
     PropTypes.shape({
       image: PropTypes.string.isRequired,
-    })
-  )
+    }),
+  ),
 };
 
 export default ActivityCard;

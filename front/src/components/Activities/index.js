@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'src/components/elements/Button';
-
 import ActivityForm from 'src/containers/ActivityForm';
 
 import ActivityCard from './ActivityCard';

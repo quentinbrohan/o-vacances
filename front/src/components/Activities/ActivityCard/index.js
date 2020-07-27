@@ -10,6 +10,8 @@ import {
 import Button from 'src/components/elements/Button';
 
 import ActivityEdit from 'src/containers/ActivityEdit';
+import { toDate } from 'src/utils/format';
+
 import { API_URL } from 'src/helpers';
 
 import './activityCard.scss';
@@ -59,7 +61,7 @@ const ActivityCard = ({
           <div className="date">
             <Calendar />
             <p>
-              Du {startDate} au {endDate}
+              Du {toDate(startDate)} au {toDate(endDate)}
             </p>
           </div>
           {/* <div className="location">

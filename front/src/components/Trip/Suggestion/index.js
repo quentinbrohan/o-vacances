@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'src/components/elements/Button';
 
+import { toDate } from 'src/utils/format';
 import getCurrentUser from 'src/utils/getCurrentUser';
 
 import {
@@ -50,7 +51,7 @@ const Suggestion = ({
           <p className="suggestion-author">
             {user.firstname}
             <span className="suggestion-date">
-              {date}
+              {/* {toDate(date)} */}
             </span>
           </p>
         </div>
