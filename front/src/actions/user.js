@@ -11,6 +11,7 @@ export const LOG_OUT_USER = 'LOG_OUT_USER';
 export const LOG_IN_USER = 'LOG_IN_USER';
 export const EDIT_USER_IMAGE = 'EDIT_USER_IMAGE';
 export const UPDATE_USER_IMAGE = 'UPDATE_USER_IMAGE';
+export const LOADING = 'LOADING';
 
 export const updateUserField = (newValue, name) => ({
   type: UPDATE_USER_FIELD,
@@ -67,4 +68,9 @@ export const editUserImage = () => ({
 
 export const updateUserImage = () => ({
   type: UPDATE_USER_IMAGE,
+});
+
+export const loading = (isLoading) => ({
+  type: LOADING,
+  isLoading,
 });

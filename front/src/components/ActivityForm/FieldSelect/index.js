@@ -13,6 +13,7 @@ const FieldSelect = ({
   name,
   placeholder,
   onChange,
+  required,
 }) => {
   const handleChange = (evt) => {
     onChange(evt.target.value, name);
@@ -26,7 +27,12 @@ const FieldSelect = ({
         htmlFor={inputId}
         className="field-label"
       >{placeholder}
-        <select value={value} onChange={handleChange}>
+
+        <select
+          value={value}
+          onChange={handleChange}
+          required={required}
+        >
           <option defaultValue="" selected disabled> Choisir une catégorie</option>
           <option value="1">restaurant</option>
           <option value="2">sortie nocturne</option>
@@ -44,6 +50,11 @@ FieldSelect.propTypes = {
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  required: PropTypes.bool,
+};
+
+FieldSelect.defaultProps = {
+  required: false,
 };
 
 // Valeurs par défaut pour les pro

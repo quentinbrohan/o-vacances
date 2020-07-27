@@ -19,7 +19,7 @@ const Image = ({ onChangeImage }) => {
     // Check if filesize < 3 Mo
     const FileSize = evt.target.files[0].size / 1024 / 1024; // in MB
     if (FileSize > 3) {
-      alert('L\'image doti faire moins de 3 Mo !');
+      alert('L\'image doit faire moins de 3 Mo !');
       document.querySelector('#tripForm-image').value = null;
     }
     else {

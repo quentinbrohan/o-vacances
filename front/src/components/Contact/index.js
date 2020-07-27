@@ -1,12 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Button from 'src/components/elements/Button';
+import { Helmet } from 'react-helmet';
 
 import './contact.scss';
 
 // component to contact form
 const Contact = () => (
   <main className="contact">
+    <Helmet>
+      <title>Contact</title>
+      <meta name="description" content="Contact" />
+    </Helmet>
+    <div className="connection-container" />
     <h1>Contactez-nous</h1>
     <div className="contact-text">
       <h3>Vous souhaitez nous faire part d'une remarque? Vous avez besoin d'un renseignement? </h3>

@@ -35,13 +35,17 @@ const TripAuth = ({
         <div className="helper">
           <hr />
           {isAuthenticated && (
-            <form className="trip-auth-form-element" onSubmit={handleSubmit}>
+            <form
+              className="trip-auth-form-element"
+              onSubmit={handleSubmit}
+            >
               <Field
                 name="password"
                 type="password"
                 placeholder="Mot de passe du voyage"
                 onChange={changeField}
                 value={password}
+                required
               />
               <Button
                 color="primary"
@@ -51,6 +55,12 @@ const TripAuth = ({
                 Authentification
               </Button>
             </form>
+          )}
+          {!isAuthenticated && (
+            <p>
+              Déjà un compte ? <Link to="/login">Connexion</Link>.
+            </p>
+
           )}
           <hr />
           <p>
