@@ -19,12 +19,12 @@ import './activityCard.scss';
 const ActivityCard = ({
   id,
   title,
-  image,
   startDate,
   endDate,
   description,
   deleteActivity,
   checkActivityId,
+  category,
 }) => {
   // Selected activities
   const [selected, setSelected] = useState([]);
@@ -52,7 +52,7 @@ const ActivityCard = ({
   return (
     <article className="activity-card" id={`activite-${id}`}>
       <header
-        style={{ backgroundImage: `url(${API_URL + image})` }}
+        style={{ backgroundImage: `url(${API_URL + category.image})` }}
         className="activity-card-header"
       />
       <div className="activity-card-body">
@@ -116,12 +116,16 @@ const ActivityCard = ({
 ActivityCard.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
   startDate: PropTypes.string.isRequired,
   endDate: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   deleteActivity: PropTypes.func.isRequired,
   checkActivityId: PropTypes.func.isRequired,
+  category: PropTypes.objectOf(
+    PropTypes.shape({
+      image: PropTypes.string.isRequired,
+    }).isRequired,
+  ).isRequired,
 };
 
 export default ActivityCard;

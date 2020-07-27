@@ -15,6 +15,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   changeField: (newValue, name) => {
+    console.log('container');
     dispatch(updateActivityField(newValue, name));
   },
 

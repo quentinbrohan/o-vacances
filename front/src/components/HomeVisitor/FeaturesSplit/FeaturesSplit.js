@@ -18,7 +18,7 @@ const FeaturesSplit = () => (
       <div className="split-item">
         <div className="split-item-content">
           <h3>Organisation simplifiée</h3>
-          <p>Une fois mon voyage créé, j'invite mes amis et eux indiquent leurs disponibilités.</p>
+          <p>Une fois mon voyage créé, j'invite mes amis et ils indiquent leurs disponibilités.</p>
         </div>
         <div className="split-item-image">
           <img src={imgCalendar} alt="Calendrier" />
@@ -29,7 +29,7 @@ const FeaturesSplit = () => (
         <div className="split-item-content">
           <h3>Centralisation des informations</h3>
           <p>
-            J'ai accès en un clic à toutes les informations de mon voyages
+            J'ai accès en un clic à toutes les informations de mon voyage
             et ce que je compte faire.
           </p>
         </div>
@@ -41,7 +41,7 @@ const FeaturesSplit = () => (
       <div className="split-item">
         <div className="split-item-content">
           <h3>Suivi des activités</h3>
-          <p>Je peux consulter activité (date, lieu, description) et même en ajouter,
+          <p>Je peux consulter mes activités (dates, lieu, description) et même en ajouter,
             ainsi que des suggestions possibles afin de ne rien oublier lors de mes vacances.
           </p>
         </div>
@@ -54,7 +54,7 @@ const FeaturesSplit = () => (
         <div className="split-item-content">
           <h3>"Qui amène quoi ?" (prochainement)</h3>
           <p>Fini les listes papiers qui se perdent,
-            chacun peut écrire ce qu'il compte emmener
+            chacun peut écrire ce qu'il compte amener
             (jeux de sociétés, matériels, nourriture...).
           </p>
         </div>

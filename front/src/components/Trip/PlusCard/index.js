@@ -8,7 +8,7 @@ const PlusCard = ({
   id,
 }) => (
   <Link
-    to={`/voyages/${id}/activites`}
+    to={`/voyage/${id}/activites`}
   >
     <article className="activity-card activity-card-plus">
       <header

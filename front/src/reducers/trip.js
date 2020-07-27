@@ -106,6 +106,8 @@ const trip = (state = initialState, action = {}) => {
       };
 
     case UPDATE_ACTIVITY_FIELD:
+      console.log(action);
+      
       return {
         ...state,
         [action.name]: action.newValue,
