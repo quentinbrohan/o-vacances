@@ -2,6 +2,15 @@ const paths = require('./paths');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const DotenvPlugin = require('dotenv');
+// Récupération des variables stockées dans le fichier .env correspondant
+// à l'environnement courant.
+const env = DotenvPlugin.config({ path: '.env.' + process.env.NODE_ENV}).parsed;
+const envKeys = Object.keys(env).reduce((prev, next) => {
+  prev[`process.env.${next}`] = JSON.stringify(env[next]);
+  return prev;
+}, {});
+const webpack = require('webpack');
 
 module.exports = {
   entry: [
@@ -32,6 +41,7 @@ module.exports = {
       favicon: paths.assets + '/favicon.ico',
       template: paths.assets + '/index.html',
     }),
+    new webpack.DefinePlugin(envKeys),
   ],
 
   module: {

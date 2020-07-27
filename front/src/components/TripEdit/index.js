@@ -1,10 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import moment from 'moment';
-import 'moment/locale/fr';
-
-import { MOMENT_FORMAT_DATE } from 'src/utils';
+import { Helmet } from 'react-helmet';
 
 import Field from './Field';
 import Image from './Image';
@@ -31,15 +27,19 @@ const TripEdit = ({
 
   return (
     <main className="trip-edit">
+      <Helmet>
+        <title>Modifier mon voyage</title>
+        <meta name="description" content="Modifier mon voyage" />
+      </Helmet>
       <h1>Je modifie mon voyage</h1>
       <form className="trip-edit-element" onSubmit={handleSubmit}>
         <div className="div">
-          {image && (
+          {/* {image && (
           <>
             <p>Photo de couverture actuelle</p>
             <img src={image} alt="Couverture du voyage" />
           </>
-          )}
+          )} */}
           {!image && (
           <p> Pas de photo de couverture actuellement</p>
           )}
@@ -47,6 +47,7 @@ const TripEdit = ({
         <Image
           className="trip-edit-image"
           onChangeImage={addImagePreview}
+          image={image}
         />
         <Field
           name="title"
@@ -72,14 +73,14 @@ const TripEdit = ({
           name="startDate"
           type="date"
           placeholder="Date de départ prévue"
-          value={moment(startDate).format(MOMENT_FORMAT_DATE)}
+          value={startDate}
           onChange={changeField}
         />
         <Field
           name="endDate"
           type="date"
           placeholder="Date de retour prévue"
-          value={moment(endDate).format(MOMENT_FORMAT_DATE)}
+          value={endDate}
           onChange={changeField}
         />
         <Field

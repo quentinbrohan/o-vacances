@@ -5,6 +5,7 @@ import {
   LOG_IN_USER,
   LOG_OUT_USER,
   UPDATE_USER_IMAGE,
+  LOADING,
 } from 'src/actions/user';
 
 const initialState = {
@@ -68,6 +69,12 @@ const user = (state = initialState, action = {}) => {
       return {
         ...state,
         avatar: action.data,
+      };
+
+    case LOADING:
+      return {
+        ...state,
+        isLoading: action.isLoading,
       };
 
     default: return state;

@@ -52,12 +52,14 @@ Field.propTypes = {
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  labelTitle: PropTypes.string,
 };
 
 // Valeurs par défaut pour les props
 Field.defaultProps = {
   value: '',
   type: 'text',
+  labelTitle: '',
 };
 // == Export
 export default Field;

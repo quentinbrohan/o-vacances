@@ -3,9 +3,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './field.scss';
-
 // == Import : local
+import './field.scss';
 
 // == Composant
 const Field = ({
@@ -14,6 +13,7 @@ const Field = ({
   name,
   placeholder,
   onChange,
+  required,
 }) => {
   const handleChange = (evt) => {
     onChange(evt.target.value, name);
@@ -31,7 +31,7 @@ const Field = ({
       </label>
       <input
         // React - state
-        value={value.name}
+        value={value}
         onChange={handleChange}
         // infos de base
         id={inputId}
@@ -39,7 +39,7 @@ const Field = ({
         className="field-input"
         placeholder={placeholder}
         name={name}
-        list={inputId}
+        required={required}
       />
     </div>
   );
@@ -51,12 +51,15 @@ Field.propTypes = {
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  required: PropTypes.bool,
 };
 
 // Valeurs par défaut pour les props
 Field.defaultProps = {
   value: '',
   type: 'text',
+  required: false,
 };
+
 // == Export
 export default Field;

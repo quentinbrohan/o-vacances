@@ -26,6 +26,8 @@ const mapDispatchToProps = (dispatch) => ({
   checkActivityId: (id) => {
     dispatch(checkActivity(id));
   },
+
+  
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ActivityEdit);

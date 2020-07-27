@@ -10,6 +10,7 @@ import {
   newUserDisponibilities,
   deleteTrip,
   checkTripAuth,
+  deleteSuggestion,
 } from 'src/actions/trip';
 
 const mapStateToProps = (state) => ({
@@ -41,8 +42,11 @@ const mapDispatchToProps = (dispatch) => ({
   addUserDisponibilities: (startDate, endDate) => {
     dispatch(newUserDisponibilities(startDate, endDate));
   },
-  handleDelete: () => {
+  handleTripDelete: () => {
     dispatch(deleteTrip());
+  },
+  handleSuggestionDelete: (suggestionId) => {
+    dispatch(deleteSuggestion(suggestionId));
   },
 });
 

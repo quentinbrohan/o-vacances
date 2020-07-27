@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Calendar } from 'react-feather';
-import moment from 'moment';
-import 'moment/locale/fr';
+import { toDate } from 'src/utils/format';
 
+import { API_URL } from 'src/helpers';
 import './activityCard.scss';
 
 const ActivityCard = ({
@@ -19,7 +19,7 @@ const ActivityCard = ({
   >
     <article className="activity-card">
       <header
-        style={{ backgroundImage: `url(${category.image})` }}
+        style={{ backgroundImage: `url(${API_URL + category.image})` }}
         className="activity-card-header"
       />
       <div className="activity-card-body">
@@ -28,8 +28,8 @@ const ActivityCard = ({
           <div className="date">
             <Calendar />
             <p>
-              Du {moment(startDate).format('ll')} <br />
-              au {moment(endDate).format('ll')}
+              Du {toDate(startDate)} <br />
+              au {toDate(endDate)}
             </p>
           </div>
         </div>
@@ -47,8 +47,8 @@ ActivityCard.propTypes = {
   category: PropTypes.arrayOf(
     PropTypes.shape({
       image: PropTypes.string.isRequired,
-    })
-  )
+    }),
+  ),
 };
 
 export default ActivityCard;

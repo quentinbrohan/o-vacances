@@ -24,20 +24,21 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $users = [];
-        $userName = ['Alexandre', 'Audrey', 'Cécilia', 'Loic', 'Quentin'];
-        $pass = ['alexandre', 'audrey', 'cecilia', 'loic', 'quentin'];
+        $firstName = ['Fabio', 'Gaëtan', 'Christophe', 'Olivier', 'Sébastien', 'Luc', 'Djyp', 'Guillaume', 'Cécile', 'Loris', 'Jules', 'John'];
+        $lastName = ['Bigeon', 'FOF', 'Coriolis', 'Bloup', 'Croquant', 'BalMasqué', 'Milo', 'Rainbow', 'Vue', 'WP', 'Vernes', 'Smith'];
+        $pass = ['fabio', 'gaetan', 'christophe', 'olivier', 'sebastien', 'luc', 'djyp', 'guillaume', 'cecile', 'loris', 'jules', 'john'];
+        $mails = ['fabio@gmail.com', 'gaetan@gmail.com', 'christophe@gmail.com', 'olivier@gmail.com', 'sebastien@gmail.com', 'luc@gmail.com', 'djyp@gmail.com', 'guillaume@gmail.com', 'cecile@gmail.com', 'loris@gmail.com', 'jules@gmail.com', 'john@gmail.com'];
+        $avatar = ['/uploads/Fabio.jpg', '/uploads/Gaetan.png','/uploads/Christophe.png','/uploads/Olivier.png','/uploads/Sebastien.jpg','/uploads/Luc.png','/uploads/Djyp.png','/uploads/Guillaume.png','/uploads/Cecile.png','/uploads/Loris.png','/uploads/Jules.jpg','/uploads/John.jpg',];
 
-         $mails = ['alexandre@gmail.com', 'audrey@gmail.com', 'cecilia@gmail.com', 'loic@gmail.com', 'quentin@gmail.com'];
 
-
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 12; $i++) {
             $user = new User();
             $user->setEmail($mails[$i]);
-            $user->setFirstname($userName[$i]);
-            $user->setLastname($userName[$i]);
+            $user->setFirstname($firstName[$i]);
+            $user->setLastname($lastName[$i]);
             $user->setPassword($this->passwordEncoder->encodePassword($user, $pass[$i]));
             $user->setRoles(['ROLE_USER']);
-            $user->setAvatar('images/avatar.png');
+            $user->setAvatar($avatar[$i]);
 
             $users [] = $user;
             
@@ -45,82 +46,72 @@ class AppFixtures extends Fixture
         }
 
         $trips = [];
-        $tripTitle = ['Anniversaire', 'Eté 2020', 'EVG', 'Eté 2015'];
-        $descriptions = ['Le voyage à dos de dromadaires prendra 4 heures la matinée et 2 heures le soir.
-        Le matin, après le petit déjeuner, lorsque la caravane est prête, le départ vers le cœur du désert aura lieu. Après 3  heures de marche, avec quelques pauses de 15 ou 20 minutes pour prendre des photos, la caravane s\'arrête, les cuisiniers se chargent de préparer le déjeuner (couscous, soupe de blé, ...).'];
-        $locations = ['Londres', 'Ile de Ré', 'Croatie', 'Espagne' ];
-        $startTrip = ['10-08-2020', '25-07-2020', '01-09-2020', '01-08-2015'];
-        $endTrip = ['30-08-2020', '09-08-2020', '03-09-2020', '10-08-2015'];
+        $tripTitle = ['voyage au centre de la terre', 'Voyage dans le temps', 'Vis ma vinaigrette', 'Antilles', 'Kamelott', 'Qui êtes-vous?' ];
+        $descriptions = ['Je vous propose un voyage au centre de la terre. Je suis sûre qu’on peut y trouver un endroit sympa, calme, avec un petit point d’eau. Nous y trouverons peut être quelques animaux…\n Le seul inconvénient, c’est le temps de route...', 'Petit voyage sympa dans une boite (TARDIS) qui est plus grande à l’intérieur qu’à l’exterieur. ce voyage risque de durer plus longtemps que prevu', 'Des fois je vis des hauts, des fois je vis des bas, mais la plupart du temps, je vie ma vinaigrette.\n Des fois je Vivaldi, des fois je vichyssoise, mais la plupart du temps, je vis ma vinaigrette', 'je n\’y peux rien… j\’adore les Antilles, oh bal masqué ohé ohé', 'La promo Isengard.. euh non… Dragons… non.. EXCALIBUR va nous manquer à tous. Je vous propose donc ce pèlerinage sur les terres de Kaamelott et de faire la fête !', 'Qui êtes-vous?’, ‘Qui suis-je? Où vais-je? Dans quel état j’erre?'];
+        $passwordTrip = ['centre', 'tardis', 'vinaigrette', 'oups', 'TheBestPromo', 'Qui' ];
+        $locations = ['Islande', 'Temps', 'France', 'Antilles', 'France', 'Je sais pas' ];
+        $creator = [$users[10], $users[11], $users[1], $users[5], $users[3], $users[1]];
+        $startTrip = ['24-05-1863', '01-12-2000', '11-08-2020', '06-11-2020', '30-07-2020', '20-07-2020'];
+        $endTrip = ['27-08-1863', '01-01-2001', '12-08-2020', '30-06-2020', '10-08-2020', '28-07-2020'];
+        $imageTrip = ['/uploads/centreTerre.jpg', '/uploads/Tardis.jpg', '/uploads/Vinaigrette.jpg', '/uploads/antilles.jpg', '/uploads/Kaamelott.png', '/uploads/what.jpg'];
         
-        for ($i = 0; $i < 4; $i++) {
+        for ($i = 0; $i < 6; $i++) {
             $trip = new Trip();
             $trip->setTitle($tripTitle[$i]);
-            $trip->setDescription($descriptions[0]);
-            $trip->setPassword($tripTitle[$i]);
+            $trip->setDescription($descriptions[$i]);
+            $trip->setPassword($passwordTrip[$i]);
             $trip->setLocation($locations[$i]);
-            $trip->setCreator($users[mt_rand(0, 4)]);
+            $trip->setCreator($creator[$i]);
             $trip->addUsers($users[mt_rand(0, 4)]);
             $trip->addUsers($users[mt_rand(0, 4)]);
             $trip->setStartDate(new \DateTime($startTrip[$i]));
             $trip->setEndDate(new \DateTime($endTrip[$i]));
-            $trip->setImage('imageTrip.jpeg');
-            $trip->setPassword($tripTitle[$i]);
+            $trip->setImage($imageTrip[$i]);
             $trips[]=$trip;
     
             $manager->persist($trip);
         }
 
         $categories =[];
-        $categoryTitle = ['restaurant', 'sortie nocturne', 'sport', 'visite culturelle', 'point d\'eau' ];
-        for ($i = 0; $i < 5; $i++) {
+        $categoryTitle = ['Restaurant/bar', 'Sortie culturelle (ciné, musée, exposition...)', 'Visite guidée', 'Espace vert / parc', 'Plage / piscine / lac', 'Concert / spectacle', 'Shopping', 'Attraction touristique (village..)', 'Randonnée', 'sport (canoé, foot, ..)', 'Sortie nocturne', 'Parc d\'attraction', 'Autres'];
+        $categoryImage = ['/images/restaurant.jpg', '/images/culture.jpg', '/images/visite.jpg', '/images/vert.jpg', '/images/eau.jpg', '/images/concert.jpg', '/images/shopping.jpg', '/images/tourisme.jpg', '/images/randonnée.jpg', '/images/sport.jpg', '/images/nocturne.jpg', '/images/parc.jpg', '/images/autres.jpg'];
+        for ($i = 0; $i < 13; $i++) {
             $category = new Category();
             $category->setName($categoryTitle[$i]);
-            $category->setImage('category.jpeg');
+            $category->setImage($categoryImage[$i]);
             $categories[]=$category;
 
             $manager->persist($category);
         }
 
-        $activities = ['canoé', 'chateau', 'nightclub', 'bistrot de France', 'foot', 'plage', 'rando de 7h' ];
-        $startActivity = ['10-08-2020', '25-07-2020', '01-09-2020', '14-07-2015', '20-07-2015', '17-07-2015', '14-10-2015'];
-        $endActivity = ['10-08-2020', '25-08-2020', '01-09-2020', '14-07-2015', '20-07-2015', '17-07-2015', '15-10-2015'];
-        for ($i = 0; $i < 7; $i++) {
+        $activities = ['Epée', 'Fête', 'Randonnée', 'Coiffeur', 'Bon resto', 'Soirée Créole' ];
+        $activityDescription = ['On pourrait essayer de retirer l’épée du rocher?', 'grosse fete de prévue, je m\’occupe de la musique', 'j\’ai repéré une belle randonnée à faire c’est celle là : https://www.kaamelott.com/', 'Franchement on en a tous besoin, j’en peux plus de mettre des casquettes avec cette chaleur !\n Ca va etre FEUN!', 'J’ai trouvé ce petit resto : hummm gourmand et croquant : https://www.lebardespres.com/fr/', 'c’est prévu le jeudi soir au macumba club'];
+        $activityCreator = [$users[1], $users[2], $users[9], $users[4], $users[5], $users[6]];
+        $activityCategories = [$categories[2], $categories[5], $categories[8], $categories[12], $categories[0], $categories[5]];
+        $startActivity = [NULL, NULL, '01-08-2020', NULL, NULL, '06-08-2020'];
+        $endActivity = [NULL, NULL, '01-08-2020', NULL, NULL, '06-08-2020'];
+        for ($i = 0; $i < 6; $i++) {
             $activity = new Activity();
             $activity->setTitle($activities[$i]);
-            $activity->setDescription($descriptions[0]);
-            $activity->setCreator($users[mt_rand(0, 4)]);
-            $activity->setCategory($categories[mt_rand(0, 4)]);
-            $activity->setTrip($trips[mt_rand(0, 3)]);
+            $activity->setDescription($activityDescription[$i]);
+            $activity->setCreator($activityCreator[$i]);
+            $activity->setCategory($activityCategories[$i]);
+            $activity->setTrip($trips[4]);
             $activity->setStartDate(new \DateTime($startActivity[$i]));
             $activity->setEndDate(new \DateTime($endActivity[$i]));
 
-
             $manager->persist($activity);
         }
-
-        $disponibilities = [];
-        $start = ['10-08-2020', '25-07-2020', '01-09-2020', '14-07-2015'];
-        $end = ['15-08-2020', '02-08-2020', '03-09-2020', '24-07-2015'];
-        for ($i = 0; $i < 4; $i++) {
-            $disponibility = new Disponibility();
-            $disponibility->setStartDate(new \DateTime($start[$i]));
-            $disponibility->setEndDate(new \DateTime($end[$i]));
-            $disponibility->setTrip($trips[mt_rand(0, 3)]);
-            $disponibility->addUser($users[mt_rand(0, 4)]);
-            $disponibilities[] = $disponibility;
-
-            $manager->persist($disponibility);
-        }
-
         
-        $suggestions = ['jeux', 'raclette vendredi soir', 'on en parle à Gerard?', 'footing le matin pour ceux qui veulent'];
-        $descriptionsSuggestions = ['"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'Sed ut perspiciatis unde omnis iste natus error', 'Ut enim ad minima veniam, quis nostrum exercitationem', 'ally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exerc'];
-        for ($i = 0; $i < 4; $i++) {
+        $suggestions = ['Ambiance', 'Ambiance', 'Ambiance', 'Ambiance', 'Courses', 'Ambiance', 'question', '..'];
+        $descriptionsSuggestions = ['Et je prends de quoi faire un dessin! j’adore faire des petits dessins...', 'j’aime bien le dessin mais je préfère le 1-2-3 soleil !', 'Ca dépend...', 'WTF!', 'courses','j’amène des mouchoirs ! j\’ai une bonne réserve', 'un petit sondage : Vous etes d\’accord avec moi? \n oui \n oui', 'je peux amener Milo?', 'Ketchup'];
+        $suggestionCreator = [$users[1], $users[2], $users[3], $users[6], $users[2] ,$users[1], $users[6], $users[7]];
+        for ($i = 0; $i < 8; $i++) {
             $suggestion = new Suggestion();
             $suggestion->setTitle($suggestions[$i]);
             $suggestion->setDescription($descriptionsSuggestions[$i]);
-            $suggestion->setUser($users[mt_rand(0, 4)]);
-            $suggestion->setTrip($trips[mt_rand(0, 3)]);
+            $suggestion->setUser($suggestionCreator[$i]);
+            $suggestion->setTrip($trips[4]);
             $suggestion->setCreatedAt(new \Datetime('now'));
 
             $manager->persist($suggestion);
