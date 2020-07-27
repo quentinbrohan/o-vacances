@@ -11,6 +11,7 @@ import {
 import PropTypes from 'prop-types';
 import { ToastContainer } from 'react-toastify-redux';
 import 'react-toastify/dist/ReactToastify.css';
+import { Helmet } from 'react-helmet';
 
 // == Import
 // Layout
@@ -28,7 +29,7 @@ import TripEdit from 'src/containers/TripEdit';
 import LegacyMentions from 'src/components/LegacyMentions';
 import Loading from 'src/components/Loading';
 // TEMPO: For direct integration in Trip component
-import TripAuth from 'src/containers/TripAuth';
+import TripAuth from 'src/containers/Trip/TripAuth';
 
 // Data
 import persons from 'src/data/teamData';
@@ -56,6 +57,21 @@ const App = ({
 
   return (
     <div className="app">
+      <Helmet titleTemplate="%s - O'Vacances" defaultTitle="O'Vacances">
+        <title>O'Vacances</title>
+        <meta charSet="utf-8" />
+        <meta
+          name="description"
+          content="O'Vacances est là pour t'aider à planifier tes vacances en groupe !
+          Que tu sois un Fabigeon, un ninja ou bien juste humain, créez ton voyage,
+          invite tes amis, Mme Michu, l'équipe O'Clock. Prépare tes activités et suggère des choses
+          à faire avec ta team. Enfile ton slip Gaétan et tu es fin prêt, ça va être \'feun\' !
+          Application React ⚛."
+          // content="Avec O'Vacances, partir en vacances en groupe n'a jamais été aussi facile !
+          // Créer votre voyage, inviter vos amis, voir/suggérer des suggestions/activités.
+          // Application React. O'Clock, apothéose - Excalibur."
+        />
+      </Helmet>
       <Header />
       <div className="container">
         <ToastContainer />
@@ -89,7 +105,7 @@ const App = ({
               component={Loading}
             />
             <Route
-              path="/qui-sommes-nous"
+              path="/equipe"
               render={() => <Team persons={persons} />}
             />
             <Route

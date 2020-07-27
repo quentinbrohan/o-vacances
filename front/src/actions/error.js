@@ -1,12 +1,11 @@
-export const SUCCESS_MESSAGE = 'SUCCESS_MESSAGE';
-export const ERROR_MESSAGE = 'ERROR_MESSAGE';
-export const ERROR_PAGE = 'ERROR_PAGE';
+export const ADD_ERROR = 'ADD_ERROR';
+export const CLEAR_ERROR = 'CLEAR_ERROR';
 
-export const successMessage = () => ({
-  type: SUCCESS_MESSAGE,
+export const addError = (error) => ({
+  type: ADD_ERROR,
+  error,
 });
 
-export const errorMessage = (error) => ({
-  type: ERROR_MESSAGE,
-  error,
+export const clearError = () => ({
+  type: CLEAR_ERROR,
 });

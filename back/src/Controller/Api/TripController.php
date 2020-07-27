@@ -43,8 +43,12 @@ class TripController extends AbstractController
     public function new(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, ValidatorInterface $validator, UserRepository $userRepository, $id)
     {
         $user = $userRepository->find($id);
+        $trip = new Trip;
         // On extrait de la requête le json reçu
-        $jsonText = $request->getContent();
+
+        $jsonText = $request->get('document');
+
+        $image = $request->files->get('file');
 
         try {
             // on crée une nouvelle entité Trip avec le serializer
@@ -57,7 +61,20 @@ class TripController extends AbstractController
             if(count($errors) > 0){
                 return $this->json($errors, 400);
             }
-          
+            if (!empty($image)){
+             // On génère un nouveau nom de fichier
+             $fichier = '/uploads/'. md5(uniqid()).'.'.$image->guessExtension();
+             
+             // On copie le fichier dans le dossier uploads
+             $image->move(
+                 $this->getParameter('images_directory'),
+                 $fichier
+             );
+             
+            } else {
+                $fichier = '/images/voyage.jpg';
+            }
+            $trip->setImage($fichier);
             $trip->addUsers($user);
             $trip->setCreator($user);
             
@@ -73,7 +90,6 @@ class TripController extends AbstractController
             ], 400);
         }
     }
-
     /**
      * @Route("/api/v0/users/{idUser}/trips/{id}", name="api_v0_trips_registration", methods={"POST"})
      */
@@ -186,33 +202,53 @@ class TripController extends AbstractController
      */
     public function edit(TripRepository $tripRepository, SerializerInterface $serializer, Request $request, $id, $idUser, EntityManagerInterface $em, ValidatorInterface $validator, UserRepository $userRepository)
     {
-        // On demande à Doctrine le voyage
-        $trip = $tripRepository->find($id);
+       // On demande à Doctrine le voyage
+       $trip = $tripRepository->find($id);
         
+
         // je récupère l'id du créateur et celui de la personne qui fait l'action
         $user = $userRepository->find($idUser);
         $userId = $user->getId();
         $creatorId = $trip->getCreator()->getId();
+      
  
         if (!empty($trip)) {
             // seul le créateur du voyage à le droit de modifier ces informations
             if ($userId === $creatorId) {
 
                 // On extrait de la requête le json reçu
-                $jsonText = $request->getContent();
+                //$jsonText = $request->get('document');
+                $jsonText = $request->get('document');
+                $image = $request->files->get('file');
 
+          dump($jsonText, $image);      
                 try {
                     // on crée une nouvelle entité Trip avec le serializer
                     $newTrip = $serializer->deserialize($jsonText, Trip::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $trip]);
-                
+                    
                     // validation des données de $trips en fonction des Asserts des entités
                     $errors = $validator->validate($newTrip);
-
+                    
                     // s'il y a des erreurs
                     if (count($errors) > 0) {
                         return $this->json($errors, 400);
                     }
-                    
+                
+                    if (empty($image)){
+                        $oldImage = $trip->getImage();
+                        $trip->setImage($oldImage);
+                    }else {
+                        // On génère un nouveau nom de fichier
+                        $fichier = '/uploads/'. md5(uniqid()).'.'.$image->guessExtension();
+                        
+                        // On copie le fichier dans le dossier uploads
+                        $image->move(
+                            $this->getParameter('images_directory'),
+                            $fichier
+                        );
+                        $trip->setImage($fichier);
+                    }
+
                     $em->flush();
                     return $this->json($newTrip, 201, [], ['groups' => 'apiV0_trip']);
                 } catch (NotEncodableValueException $e) {
@@ -234,6 +270,7 @@ class TripController extends AbstractController
             ], 400);
         }
     
+
     }
 
     /**
@@ -272,12 +309,14 @@ class TripController extends AbstractController
     }
 
     /**
-     * @Route("api/v0/users/{idUser}/trip/{id}", name="api_v0_trips_users_delete", methods={"DELETE"})
+     * @Route("api/v0/users/{idUser}/trips/{id}", name="api_v0_trips_users_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, EntityManagerInterface $em, UserRepository $userRepository, TripRepository $tripRepository, $idUser, Trip $trip)
+    public function delete(Request $request, EntityManagerInterface $em, UserRepository $userRepository, TripRepository $tripRepository, $idUser, $id)
     {
         //$trip = $tripRepository->find($id);
         $user = $userRepository->findAllTripsByUser($idUser);
+        $trip = $tripRepository->find($id);
+        
         if (!empty($trip)) {
             $creator = $trip->getCreator();
             $creatorId = $creator->getId();
@@ -299,7 +338,7 @@ class TripController extends AbstractController
                     $user->removeTrip($trip);
                     $em->persist($user);
                     $em->flush();
-                    return $this->json($trip, 201, [], ['groups' => 'apiV0-trip']);
+                    return $this->json($trip, 200, [], ['groups' => 'apiV0-trip']);
                 } catch (NotEncodableValueException $e) {
                     return $this->json([
                         'status' => 400,
@@ -311,7 +350,7 @@ class TripController extends AbstractController
                     $user->removeTrip($trip);
                     $em->remove($trip);
                     $em->flush();
-                    return $this->json($trip, 201, [], ['groups' => 'apiV0-trip']);
+                    return $this->json($trip, 200, [], ['groups' => 'apiV0-trip']);
                 } catch (NotEncodableValueException $e) {
                     return $this->json([
                         'status' => 400,
@@ -334,4 +373,5 @@ class TripController extends AbstractController
         
     }
 
+    
 }

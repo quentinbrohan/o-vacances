@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Button from 'src/components/elements/Button';
+import { Helmet } from 'react-helmet';
 
 import Field from './Field';
 
@@ -13,39 +14,21 @@ const Login = ({
   changeField,
   handleLogin,
   isAuthenticated,
+  error,
 }) => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     handleLogin();
   };
 
-  // Redirect to Home ('/') after 5s when connected
-  const history = useHistory();
-  useEffect(() => {
-    if (isAuthenticated) {
-      const redirect = setTimeout(() => {
-        history.push('/');
-      }, 5000);
-      return () => clearTimeout(redirect);
-    }
-  });
-
   return (
-
     <main className="login">
+      <Helmet>
+        <title>Connexion</title>
+        <meta name="description" content="Connexion" />
+      </Helmet>
       <div className="connection-container">
         <h1>Bon retour parmi nous.</h1>
-        {isAuthenticated && (
-          <div className="is-authenticated">
-            <div>Vous êtes connecté</div>
-            <p>Redirection automatiqument vers Accueil...</p>
-            <p>
-              Si la redirection ne s'effectue pas après 5s, {''}
-              <Link to="/" className="redirect">cliquer ici.</Link>
-            </p>
-          </div>
-        )}
-
         {!isAuthenticated && (
         <div className="login-form">
           <form
@@ -56,6 +39,8 @@ const Login = ({
               placeholder="Adresse Email"
               onChange={changeField}
               value={email}
+              type="email"
+              required
             />
             <Field
               name="password"
@@ -63,14 +48,17 @@ const Login = ({
               placeholder="Mot de passe"
               onChange={changeField}
               value={password}
+              required
             />
+            {error && (
+            <p className="error-message">{error}</p>
+            )}
             <div>
               <Button color="primary">
                 Connexion
               </Button>
             </div>
           </form>
-
           <div>
             <div className="login-layout">
               <p>J'ai oublié mon mot de passe</p>
@@ -94,10 +82,12 @@ Login.propTypes = {
   changeField: PropTypes.func.isRequired,
   handleLogin: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,
+  error: PropTypes.array,
 };
 
 Login.defaultProps = {
   isAuthenticated: false,
+  error: [],
 };
 
 export default Login;

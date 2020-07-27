@@ -1,5 +1,9 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
+import { push } from 'connected-react-router';
+
+// API_URL ENV
+import { API_URL } from 'src/helpers';
 
 import {
   SIGN_IN,
@@ -11,14 +15,20 @@ import {
   LOG_OUT,
   logInUser,
   logOutUser,
+  EDIT_USER_IMAGE,
+  updateUserImage,
+  loading,
 } from 'src/actions/user';
+
+import { logOutTrip } from 'src/actions/trip';
+
+import { addError } from 'src/actions/error';
 
 import {
   error as toastError,
   message as toastMessage,
   warning as toastWarning,
   success as toastSuccess,
-  info as toastInfo,
 } from 'react-toastify-redux';
 
 import currentUser from 'src/utils/getCurrentUser';
@@ -33,6 +43,7 @@ const userMiddleware = (store) => (next) => (action) => {
         password,
       } = store.getState().user;
 
+      store.dispatch(loading(true));
       // Endpoint API for user creation through Symfony
       axios.post('http://localhost:8000/users/register', {
         firstname,
@@ -43,13 +54,14 @@ const userMiddleware = (store) => (next) => (action) => {
         .then((response) => {
           console.log(response);
           if (response.status === 201) {
-            console.log('Inscription réussie');
             store.dispatch(toastSuccess('Inscription réussie'));
+            store.dispatch(push('/login'));
           }
         })
         .catch((error) => {
           console.warn(error);
           store.dispatch(toastError('Erreur lors de l\'inscription'));
+          store.dispatch(addError(error.response.data.message));
         });
 
       next(action);
@@ -58,29 +70,36 @@ const userMiddleware = (store) => (next) => (action) => {
     case LOG_IN: {
       const { email, password } = store.getState().user;
 
+      store.dispatch(loading(true));
       // withCredentials : autorisation d'accéder au cookie
-      axios.post('http://localhost:8000/api/login_check', {
+      axios.post(`${API_URL}/api/login_check`, {
         password,
         email,
-      }, {
-        withCredentials: true,
-        // config,
       })
         .then((response) => {
           console.log(response);
           if (response.status === 200) {
             const { token } = response.data;
 
+            store.dispatch(toastSuccess('Connexion réussie'));
             store.dispatch(logInUser());
             // Store token in localStorage
             window.localStorage.setItem('authToken', token);
             // axios Global settings to forward header + token
             axios.defaults.withCredentials = true;
             axios.defaults.headers.Authorization = `Bearer ${token}`;
+            store.dispatch(push('/'));
           }
         })
         .catch((error) => {
           console.warn(error);
+          if (error.response.status === 401) {
+            store.dispatch(addError('Adresse email ou mot de passe invalide.'));
+            store.dispatch(toastError(error.response.data.message));
+          }
+          else {
+            store.dispatch(addError(error.response.data));
+          }
         });
 
       next(action);
@@ -88,7 +107,7 @@ const userMiddleware = (store) => (next) => (action) => {
     }
     case FETCH_USER: {
       // Endpoint fetch User Profil
-      axios.get(`http://localhost:8000/api/v0/users/${currentUser()}/profil`)
+      axios.get(`${API_URL}/api/v0/users/${currentUser()}/profil`)
         .then((response) => {
           console.log(response);
 
@@ -96,6 +115,7 @@ const userMiddleware = (store) => (next) => (action) => {
         })
         .catch((error) => {
           console.warn(error);
+          store.dispatch(addError(error.response.data.message));
         });
 
       next(action);
@@ -106,29 +126,29 @@ const userMiddleware = (store) => (next) => (action) => {
         email,
         lastname,
         firstname,
-        avatar,
         password,
       } = store.getState().user;
-      console.log(password, email, lastname, firstname, avatar);
+
       // withCredentials : autorisation d'accéder au cookie
-      axios.patch(`http://localhost:8000/api/v0/users/${currentUser()}/edit`, {
+      axios.put(`${API_URL}/api/v0/users/${currentUser()}/edit`, {
         email,
         lastname,
         firstname,
-        avatar,
         password,
-      }, {
       })
         .then((response) => {
           console.log(response);
           store.dispatch(toastSuccess('Modifications effectuées'));
+          store.dispatch(updateUserProfil(response.data));
         })
         .catch((error) => {
           console.warn(error);
+          store.dispatch(addError(error.response.data.message));
         });
       next(action);
       break;
     }
+
     case CHECK_AUTHENTICATION: {
       const token = window.localStorage.getItem('authToken');
       // If token still valid
@@ -161,7 +181,42 @@ const userMiddleware = (store) => (next) => (action) => {
       delete axios.defaults.headers.Authorization;
 
       store.dispatch(logOutUser());
+      store.dispatch(logOutTrip());
+      store.dispatch(push('/'));
 
+      next(action);
+      break;
+    }
+
+    case EDIT_USER_IMAGE: {
+      const imageInput = document.querySelector('#profile-field-input.profile-image');
+      const file = imageInput.files[0];
+      console.log(file);
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const config = {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'multipart/form-data',
+        },
+      };
+
+      // withCredentials : autorisation d'accéder au cookie
+      axios.put(`${API_URL}/api/v0/users/${currentUser()}/upload`,
+        formData,
+        config)
+        .then((response) => {
+          console.log(response);
+          store.dispatch(toastSuccess('Photo sauvegardée !'));
+          // save new avatar URL in store.
+          // store.dispatch(updateUserImage(response.data))
+        })
+        .catch((error) => {
+          console.warn(error);
+          store.dispatch(addError(error.response.data.message));
+        });
       next(action);
       break;
     }

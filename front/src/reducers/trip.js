@@ -15,6 +15,11 @@ import {
   LOADING,
   REMOVE_ACTIVITY,
   SAVE_USER_DISPONIBILITIES,
+  SAVE_TRIP_AUTH,
+  SAVE_TRIP_ACTIVITIES,
+  SAVE_ACTIVITIES,
+  REMOVE_SUGGESTION,
+  LOG_OUT_TRIP,
 } from 'src/actions/trip';
 
 const initialState = {
@@ -40,6 +45,7 @@ const initialState = {
   endDate: '',
   password: '',
   location: '',
+  haveTripAccess: false,
 };
 
 const trip = (state = initialState, action = {}) => {
@@ -167,6 +173,40 @@ const trip = (state = initialState, action = {}) => {
         ...state,
         isLoading: false,
         userDisponibilities: action.userDisponibilities,
+      };
+
+    case SAVE_TRIP_AUTH:
+      return {
+        ...state,
+        haveTripAccess: action.haveTripAccess,
+      };
+
+    case SAVE_TRIP_ACTIVITIES:
+      return {
+        ...state,
+        trip: {
+          ...state.trip,
+          activities: [
+            ...state.trip.activities,
+            action.tripActivity,
+          ],
+        },
+      };
+
+    case SAVE_ACTIVITIES:
+      return {
+        ...state,
+        trip: {
+          ...state.trip,
+          activities: action.newActivities,
+        },
+      };
+
+    case LOG_OUT_TRIP:
+      console.log(action);
+      
+      return {
+        state: null,
       };
 
     default: return state;

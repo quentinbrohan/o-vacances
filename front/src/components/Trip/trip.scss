@@ -57,6 +57,7 @@
 
       .trip-info-description {
         order: 0;
+        margin-top: 1rem;
         padding: 1rem;
         width: 100%;
         background-color: $greyColorLighter;
@@ -159,6 +160,12 @@
             }
           }
         }
+
+        .activity-form {
+          display: inline;
+          margin-right: 1rem;
+        }
+
       }
     }
   }
@@ -171,6 +178,10 @@
     .trip-activities {
       display: flex;
       flex-wrap: wrap;
+      justify-content: center;
+      @media (min-width: $tablet) {
+        justify-content: flex-start;
+      }
     }
   }
 
@@ -192,6 +203,12 @@
     margin: 1rem;
   }
   a {
-    color: $primaryColor;
+    color: $primaryColorDarker;
   }
 }
+
+.disponibilites-modal-button {
+  align-self: flex-end;
+  margin-bottom: 1rem;
+}
+

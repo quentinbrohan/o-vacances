@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Header from 'src/components/Header';
 
 import { logOut } from 'src/actions/user';
+import { logOutTrip } from 'src/actions/trip';
 
 const mapStateToProps = (state) => ({
   isAuthenticated: state.user.isAuthenticated,
@@ -12,6 +13,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   handleLogout: () => {
     dispatch(logOut());
+    dispatch(logOutTrip());
   },
 });
 

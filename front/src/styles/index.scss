@@ -25,3 +25,10 @@ body {
 p {
   line-height: 150%;
 }
+
+// Message
+.error-message {
+  color: $errorColor;
+  font-weight: bold;
+  text-align: center;
+}

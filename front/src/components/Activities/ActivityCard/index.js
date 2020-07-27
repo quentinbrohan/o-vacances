@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 import {
   Calendar,
   // MapPin,
@@ -11,6 +10,9 @@ import {
 import Button from 'src/components/elements/Button';
 
 import ActivityEdit from 'src/containers/ActivityEdit';
+import { toDate } from 'src/utils/format';
+
+import { API_URL } from 'src/helpers';
 
 import './activityCard.scss';
 
@@ -50,7 +52,7 @@ const ActivityCard = ({
   return (
     <article className="activity-card" id={`activite-${id}`}>
       <header
-        style={{ backgroundImage: `url(${image})` }}
+        style={{ backgroundImage: `url(${API_URL + image})` }}
         className="activity-card-header"
       />
       <div className="activity-card-body">
@@ -59,7 +61,7 @@ const ActivityCard = ({
           <div className="date">
             <Calendar />
             <p>
-              Du {moment(startDate).format('ll')} au {moment(endDate).format('ll')}
+              Du {toDate(startDate)} au {toDate(endDate)}
             </p>
           </div>
           {/* <div className="location">

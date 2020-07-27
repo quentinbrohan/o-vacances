@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Helmet } from 'react-helmet';
 
 import {
   GitHub,
@@ -14,6 +15,10 @@ import './Team.scss';
 
 const Team = ({ persons }) => (
   <main className="team">
+    <Helmet>
+      <title>L'équipe</title>
+      <meta name="description" content="L'équipe qui a réalisé O'Vacances" />
+    </Helmet>
     <h1>L'équipe</h1>
     <div className="team-cards">
       {persons.map((person) => (

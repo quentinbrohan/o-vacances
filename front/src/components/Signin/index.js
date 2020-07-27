@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Button from 'src/components/elements/Button';
+import { Helmet } from 'react-helmet';
 import Field from './Field';
 
 import './signin.scss';
@@ -13,6 +14,7 @@ const Signin = ({
   password,
   changeField,
   handleSignin,
+  error,
 }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -21,6 +23,10 @@ const Signin = ({
 
   return (
     <main className="signin">
+      <Helmet>
+        <title>Inscription</title>
+        <meta name="description" content="Inscription" />
+      </Helmet>
       <div className="connection-container">
 
         <h1>Bienvenue voyageur !</h1>
@@ -30,6 +36,7 @@ const Signin = ({
             placeholder="Prénom"
             onChange={changeField}
             value={firstname}
+            required
           />
           <Field
             name="lastname"
@@ -43,6 +50,7 @@ const Signin = ({
             placeholder="Adresse Email"
             onChange={changeField}
             value={email}
+            required
           />
           <Field
             name="password"
@@ -50,7 +58,11 @@ const Signin = ({
             placeholder="Mot de passe"
             onChange={changeField}
             value={password}
+            required
           />
+          {error && (
+          <p className="error-message">{error}</p>
+          )}
           <Button
             color="primary"
             type="submit"

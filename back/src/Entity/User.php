@@ -52,7 +52,7 @@ class User implements UserInterface
 
     /**
      * @var string The hashed password
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string")
      * 
      */
     private $password;
@@ -90,6 +90,7 @@ class User implements UserInterface
      * @Groups("apiV0-dispo")
      * @Groups("apiV0_tripByUser")
      * @Groups("apiV0_user")
+     * @Groups("apiV0_list")
      */
     private $avatar;
 
@@ -110,6 +111,7 @@ class User implements UserInterface
      * @ORM\ManyToMany(targetEntity=Trip::class, inversedBy="users")
      * @Groups("apiV0_tripByUser")
      * @Groups("apiV0_user")
+     * @Groups("apiV0_list")
      */
     private $trip;
 

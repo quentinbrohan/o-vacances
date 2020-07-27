@@ -4,6 +4,8 @@ import {
   UPDATE_USER_PROFIL,
   LOG_IN_USER,
   LOG_OUT_USER,
+  UPDATE_USER_IMAGE,
+  LOADING,
 } from 'src/actions/user';
 
 const initialState = {
@@ -43,7 +45,7 @@ const user = (state = initialState, action = {}) => {
         email: action.data.email,
         firstname: action.data.firstname,
         lastname: action.data.lastname,
-        avatar: action.data.avatar,
+        // avatar: action.data.avatar,
       };
 
     case LOG_IN_USER:
@@ -59,6 +61,20 @@ const user = (state = initialState, action = {}) => {
         ...state,
         isAuthenticated: false,
 
+      };
+
+    case UPDATE_USER_IMAGE:
+      console.log(action);
+
+      return {
+        ...state,
+        avatar: action.data,
+      };
+
+    case LOADING:
+      return {
+        ...state,
+        isLoading: action.isLoading,
       };
 
     default: return state;

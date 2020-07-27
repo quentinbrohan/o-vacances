@@ -20,7 +20,7 @@
       }
       p a.redirect {
         color: $primaryColorDarker;
-        :hover {
+        &:hover {
           color: lighten($primaryColor, 16%);
         }
       }
@@ -48,10 +48,10 @@
         margin: $gutter 0;
   
         a {
-          color: $primaryColor;
+          color: $primaryColorDarker;
   
           &:hover {
-            color: $primaryColorDarker;
+            color: lighten($primaryColor, 16%);
           }
         }
       }
