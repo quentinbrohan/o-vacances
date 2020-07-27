@@ -15,19 +15,26 @@ const Image = ({ onChangeImage }) => {
   const { imagePreviewUrl } = image;
 
   const handleChange = (evt) => {
-    onChangeImage(evt.target.value);
+    // Check if filesize < 3 Mo
+    const FileSize = evt.target.files[0].size / 1024 / 1024; // in MB
+    if (FileSize > 3) {
+      alert('L\'image doti faire moins de 3 Mo !');
+      document.querySelector('#tripForm-image').value = null;
+    }
+    else {
+      onChangeImage(evt.target.files[0]);
+      const reader = new FileReader();
+      const file = evt.target.files[0];
 
-    const reader = new FileReader();
-    const file = evt.target.files[0];
+      reader.onloadend = () => {
+        setImage({
+          file,
+          imagePreviewUrl: reader.result,
+        });
+      };
 
-    reader.onloadend = () => {
-      setImage({
-        file,
-        imagePreviewUrl: reader.result,
-      });
-    };
-
-    reader.readAsDataURL(file);
+      reader.readAsDataURL(file);
+    }
   };
 
   return (
@@ -50,6 +57,8 @@ const Image = ({ onChangeImage }) => {
         type="file"
         className="field-input"
         onChange={handleChange}
+        id="tripEdit-image"
+        accept="image/*"
       />
     </div>
 

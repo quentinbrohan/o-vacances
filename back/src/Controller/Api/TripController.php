@@ -61,7 +61,7 @@ class TripController extends AbstractController
             if(count($errors) > 0){
                 return $this->json($errors, 400);
             }
-
+            if (!empty($image)){
              // On génère un nouveau nom de fichier
              $fichier = '/uploads/'. md5(uniqid()).'.'.$image->guessExtension();
              
@@ -70,9 +70,11 @@ class TripController extends AbstractController
                  $this->getParameter('images_directory'),
                  $fichier
              );
-             $trip->setImage($fichier);
-
-          
+             
+            } else {
+                $fichier = '/images/voyage.jpg';
+            }
+            $trip->setImage($fichier);
             $trip->addUsers($user);
             $trip->setCreator($user);
             
@@ -216,10 +218,10 @@ class TripController extends AbstractController
 
                 // On extrait de la requête le json reçu
                 //$jsonText = $request->get('document');
-                $jsonText = $request->getContent();
+                $jsonText = $request->get('document');
                 $image = $request->files->get('file');
 
-                
+          dump($jsonText, $image);      
                 try {
                     // on crée une nouvelle entité Trip avec le serializer
                     $newTrip = $serializer->deserialize($jsonText, Trip::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $trip]);
