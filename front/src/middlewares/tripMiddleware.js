@@ -366,11 +366,8 @@ const tripMiddleware = (store) => (next) => (action) => {
         .then(() => {
           store.dispatch(removeTrip());
           store.dispatch(toastSuccess('Voyage supprimé'));
-          store.dispatch(loading(false));
           store.dispatch(push('/'));
-        })
-        .then(() => {
-          // Redirect to HomeUser
+          store.dispatch(loading(false));
         })
         .catch((error) => {
           console.warn(error);

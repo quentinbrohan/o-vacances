@@ -15,7 +15,7 @@ const PlusCard = ({
         className="activity-card-header"
       />
       <div className="activity-card-body">
-        <h2>Voir toutes les activités</h2>
+        <h2>Voir plus</h2>
       </div>
     </article>
   </Link>

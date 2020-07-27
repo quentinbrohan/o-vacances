@@ -128,7 +128,7 @@ const Trip = ({
     if (userDisponibilities) {
       setHaveDisponibilities(true);
     }
-    if (!isLoading &&userDisponibilities) {
+    if (userDisponibilities) {
       setState([
         {
           startDate: new Date(userDisponibilities.startDate),
@@ -373,14 +373,14 @@ const Trip = ({
                     size="sm"
                     type="submit"
                   >
-                    <Link to={`/modifier-un-voyage/${tripId}`}>Modifier mon voyage</Link>
+                    <Link to={`/modifier-un-voyage/${tripId}`}>Modifier</Link>
                   </Button>
                   <Button
                     color="secondary"
                     size="sm"
                     type="submit"
                     onClick={() => manageTripDelete()}
-                  >Supprimer mon voyage
+                  >Supprimer
                   </Button>
                 </>
               )}

@@ -27,7 +27,6 @@ const Login = ({
         <title>Connexion</title>
         <meta name="description" content="Connexion" />
       </Helmet>
-      <div className="connection-container" />
       <div className="connection-container">
         <h1>Bon retour parmi nous.</h1>
         {!isAuthenticated && (
