@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Calendar } from 'react-feather';
-import moment from 'moment';
-import 'moment/locale/fr';
 
 import { API_URL } from 'src/helpers';
 import './activityCard.scss';
@@ -29,8 +27,8 @@ const ActivityCard = ({
           <div className="date">
             <Calendar />
             <p>
-              Du {moment(startDate).format('ll')} <br />
-              au {moment(endDate).format('ll')}
+              Du {startDate} <br />
+              au {endDate}
             </p>
           </div>
         </div>

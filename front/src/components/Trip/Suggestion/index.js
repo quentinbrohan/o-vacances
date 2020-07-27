@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import moment from 'moment';
-import 'moment/locale/fr';
 import Button from 'src/components/elements/Button';
 
 import getCurrentUser from 'src/utils/getCurrentUser';
@@ -52,7 +50,7 @@ const Suggestion = ({
           <p className="suggestion-author">
             {user.firstname}
             <span className="suggestion-date">
-              {moment(date).format('lll')}
+              {date}
             </span>
           </p>
         </div>

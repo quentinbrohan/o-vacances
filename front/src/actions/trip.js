@@ -106,16 +106,14 @@ export const updateUserDisponibilities = (startDate, endDate) => ({
   endDate,
 });
 
-export const modifyUserDisponibilities = (startDate, endDate) => ({
+export const modifyUserDisponibilities = (dates) => ({
   type: MODIFY_USER_DISPONIBILITIES,
-  startDate,
-  endDate,
+  dates,
 });
 
-export const newUserDisponibilities = (startDate, endDate) => ({
+export const newUserDisponibilities = (dates) => ({
   type: NEW_USER_DISPONIBILITIES,
-  startDate,
-  endDate,
+  dates,
 });
 
 export const updateTripFormField = (newValue, name) => ({

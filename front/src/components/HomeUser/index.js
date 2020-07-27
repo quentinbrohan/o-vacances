@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import Loading from 'src/components/Loading';
-import moment from 'moment';
+import { isFuture, isPast, parseISO } from 'date-fns';
 import TripCard from './TripCard';
 
 import './homeUser.scss';
@@ -16,9 +16,10 @@ const HomeUser = ({
     fetchTrips();
   }, []);
 
-  const futureTrips = trips.filter((trip) => moment(trip.endDate) > moment());
+  const futureTrips = trips.filter((trip) => isFuture(parseISO(trip.endDate)));
+  const oldTrips = trips.filter((trip) => isPast(parseISO(trip.endDate)));
   // Filter trips => if endDate < actual Date = oldTrip
-  const oldTrips = trips.filter((trip) => moment(trip.endDate) < moment());
+  // const oldTrips = trips.filter((trip) => (trip.endDate) < new Date());
 
   return (
     <main className="home-user">

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 import {
   Calendar,
   // MapPin,
@@ -60,7 +59,7 @@ const ActivityCard = ({
           <div className="date">
             <Calendar />
             <p>
-              Du {moment(startDate).format('ll')} au {moment(endDate).format('ll')}
+              Du {startDate} au {endDate}
             </p>
           </div>
           {/* <div className="location">

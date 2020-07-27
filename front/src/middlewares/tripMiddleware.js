@@ -223,7 +223,8 @@ const tripMiddleware = (store) => (next) => (action) => {
       const user = currentUser();
       const { id: tripId } = store.getState().trip.trip;
       const { id: disponibilityId } = store.getState().trip.userDisponibilities;
-      const { startDate, endDate } = action;
+      const { startDate, endDate } = action.dates[0];
+      console.log(startDate, endDate);
 
       // Endpoint add new suggestion to trip
       axios.patch(`${API_URL}/api/v0/users/${user}/disponibilities/${disponibilityId}`, {
@@ -251,9 +252,10 @@ const tripMiddleware = (store) => (next) => (action) => {
     case NEW_USER_DISPONIBILITIES: {
       const user = currentUser();
       const { id } = store.getState().trip.trip;
-      const { startDate, endDate } = action;
+      const { startDate, endDate } = action.dates[0];
+      console.log(startDate, endDate);
 
-      // Endpoint add new suggestion to trip
+      // Endpoint add new user disponibilities to trip
       axios.post(`${API_URL}/api/v0/users/${user}/disponibilities`, {
         // props,
         trip: id,
@@ -451,7 +453,6 @@ const tripMiddleware = (store) => (next) => (action) => {
       })
         .then((response) => {
           console.log(response);
-          console.log(response.data.disponibility);
           store.dispatch(saveDisponibilities(response.data.disponibility));
         })
         .catch((error) => {
