@@ -31,6 +31,11 @@ export const REMOVE_ACTIVITY = 'REMOVE_ACTIVITY';
 export const SAVE_USER_DISPONIBILITIES = 'SAVE_USER_DISPONIBILITIES';
 export const CHECK_TRIP_AUTH = 'CHECK_TRIP_AUTH';
 export const SAVE_TRIP_AUTH = 'SAVE_TRIP_AUTH';
+export const SAVE_TRIP_ACTIVITIES = 'SAVE_TRIP_ACTIVITIES';
+export const FETCH_ACTIVITIES = 'FETCH_ACTIVITIES';
+export const SAVE_ACTIVITIES = 'SAVE_ACTIVITIES';
+export const DELETE_SUGGESTION = 'DELETE_SUGGESTION';
+export const REMOVE_SUGGESTION = 'REMOVE_SUGGESTION';
 
 export const updateSuggestionField = (newValue, name) => ({
   type: UPDATE_SUGGESTION_FIELD,
@@ -101,16 +106,14 @@ export const updateUserDisponibilities = (startDate, endDate) => ({
   endDate,
 });
 
-export const modifyUserDisponibilities = (startDate, endDate) => ({
+export const modifyUserDisponibilities = (dates) => ({
   type: MODIFY_USER_DISPONIBILITIES,
-  startDate,
-  endDate,
+  dates,
 });
 
-export const newUserDisponibilities = (startDate, endDate) => ({
+export const newUserDisponibilities = (dates) => ({
   type: NEW_USER_DISPONIBILITIES,
-  startDate,
-  endDate,
+  dates,
 });
 
 export const updateTripFormField = (newValue, name) => ({
@@ -183,4 +186,27 @@ export const checkTripAuth = (tripId, haveTripAccess) => ({
 export const saveTripAuth = (haveTripAccess) => ({
   type: SAVE_TRIP_AUTH,
   haveTripAccess,
+});
+
+export const saveTripActivities = (tripActivity) => ({
+  type: SAVE_TRIP_ACTIVITIES,
+  tripActivity,
+});
+
+export const fetchActivities = () => ({
+  type: FETCH_ACTIVITIES,
+});
+
+export const saveActivities = (newActivities) => ({
+  type: SAVE_ACTIVITIES,
+  newActivities,
+});
+
+export const deleteSuggestion = (suggestionId) => ({
+  type: DELETE_SUGGESTION,
+  suggestionId,
+});
+
+export const removeSuggestion = () => ({
+  type: REMOVE_SUGGESTION,
 });

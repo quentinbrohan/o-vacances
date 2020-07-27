@@ -1,5 +1,6 @@
 import imgQuentin from 'src/assets/images/team/quentin-brohan.jpg';
 import imgAlex from 'src/assets/images/team/alexandre-quezel.jpg';
+import imgAudrey from 'src/assets/images/team/audrey-chaigne.jpg';
 // Database to present the team
 export default [
   {
@@ -13,36 +14,38 @@ export default [
   },
   {
     name: 'Alexandre Quezel',
-    linkedin: ' ',
-    github: ' ',
-    portfolio: ' ',
-    autre: ' ',
-    role: 'Git Master - Front dev',
+    linkedin: '',
+    github: '',
+    portfolio: '',
+    autre: '',
+    role: 'Git Master - Front Dev',
     picture: imgAlex,
   },
   {
     name: 'Audrey Chaigne',
-    linkedin: ' ',
-    github: ' ',
-    portfolio: ' ',
-    autre: ' ',
-    role: 'Product owner - Back dev',
+    linkedin: 'https://www.linkedin.com/in/audrey-chaigne',
+    github: 'https://github.com/Audrey-Chaigne',
+    portfolio: '',
+    autre: '',
+    role: 'Product owner - Back Dev',
+    picture: imgAudrey,
+
   },
   {
     name: 'Cécilia Cavallini',
     linkedin: 'https://www.linkedin.com/in/ceciliacavallini/',
     github: 'https://github.com/CeciliaCavallini/Public',
-    portfolio: ' ',
+    portfolio: '',
     autre: 'Sommellerie',
     role: 'Scrum Master - Front Dev',
   },
   {
     name: 'Loïc Colluzato',
-    linkedin: ' ',
-    github: ' ',
-    portfolio: ' ',
-    autre: ' ',
-    role: 'Back lead - Back dev',
+    linkedin: '',
+    github: '',
+    portfolio: '',
+    autre: '',
+    role: 'Back lead - Back Dev',
   },
 
 ];

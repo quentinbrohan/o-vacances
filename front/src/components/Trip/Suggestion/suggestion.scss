@@ -7,9 +7,11 @@
         width: 100%;
         max-width: 768px;
         border-radius: 0.5rem;
-        overflow: hidden;
+        // overflow: hidden;
         // padding: 1rem;
         margin-bottom: 1rem;
+        display: flex;
+        flex-direction: column;
         
         .suggestion-header {
           padding: 0.5rem;
@@ -58,6 +60,26 @@
         }
         .suggestion-description {
           margin-left: 3rem;
+        }
+
+        .suggestion-cta {
+          align-self: flex-end;
+          button {
+            width: 2rem;
+            height: 2rem;
+            &.cta-delete {
+              // color: $errorColor;
+              &:hover {
+                color: $errorColor;
+              }
+            }
+            &.cta-edit {
+              // color: $warningColor;
+              &:hover {
+                color: $primaryColorDarker;
+              }
+            }
+          }
         }
       }
     }

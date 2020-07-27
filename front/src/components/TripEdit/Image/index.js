@@ -4,30 +4,41 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 // == Import : local
+import { API_URL } from 'src/helpers';
 import './image.scss';
 
 // == Composant
-const Image = ({ onChangeImage }) => {
-  const [image, setImage] = useState({
+const Image = ({
+  onChangeImage,
+  image,
+}) => {
+  const [currentImage, setCurrentImage] = useState({
     file: '',
-    imagePreviewUrl: '',
+    imagePreviewUrl: image ? (API_URL + image) : '',
   });
-  const { imagePreviewUrl } = image;
+  const { imagePreviewUrl } = currentImage;
 
   const handleChange = (evt) => {
-    onChangeImage(evt.target.value);
+    // Check if filesize < 3 Mo
+    const FileSize = evt.target.files[0].size / 1024 / 1024; // in MB
+    if (FileSize > 3) {
+      alert('L\'image doit faire moins de 3 Mo !');
+      document.querySelector('#tripForm-image').value = null;
+    }
+    else {
+      onChangeImage(evt.target.files[0]);
+      const reader = new FileReader();
+      const file = evt.target.files[0];
 
-    const reader = new FileReader();
-    const file = evt.target.files[0];
+      reader.onloadend = () => {
+        setCurrentImage({
+          file,
+          imagePreviewUrl: reader.result,
+        });
+      };
 
-    reader.onloadend = () => {
-      setImage({
-        file,
-        imagePreviewUrl: reader.result,
-      });
-    };
-
-    reader.readAsDataURL(file);
+      reader.readAsDataURL(file);
+    }
   };
 
   return (
@@ -50,6 +61,8 @@ const Image = ({ onChangeImage }) => {
         type="file"
         className="field-input"
         onChange={handleChange}
+        id="tripEdit-image"
+        accept="image/*"
       />
     </div>
 
@@ -58,5 +71,11 @@ const Image = ({ onChangeImage }) => {
 
 Image.propTypes = {
   onChangeImage: PropTypes.func.isRequired,
+  image: PropTypes.string,
 };
+
+Image.defaultProps = {
+  image: '',
+};
+
 export default Image;

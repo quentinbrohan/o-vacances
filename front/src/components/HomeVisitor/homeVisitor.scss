@@ -2,7 +2,7 @@
 
 .home-visitor {
   .cta-container {
-    background-color: $primaryColor;
+    background-color: $greyColorLighter;
     border-radius: 0.5rem;
     padding: 4rem;
     .button-home-signin {
@@ -13,6 +13,7 @@
 }
 
 #fonctionnalites {
+  padding-top: 2rem;
   height: 100%;
   width: 100%;
 }

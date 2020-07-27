@@ -156,7 +156,7 @@ button,
     }
   }
 
-  &:not(.button-dark):not(.button-primary):not(.button-secondary) {
+  &:not(.button-dark):not(.button-primary):not(.button-secondary):not(.rdrCalendarWrapper > *) {
     background: linear-gradient(
       65deg,
       $primaryColorLighter 0,
