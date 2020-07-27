@@ -118,7 +118,7 @@ const Trip = ({
   // React Date Range
   const [state, setState] = useState([
     {
-      startDate: userDisponibilities ? userDisponibilities.startDate : null,
+      startDate: null,
       endDate: null,
       key: 'selection',
     },
@@ -128,7 +128,7 @@ const Trip = ({
     if (userDisponibilities) {
       setHaveDisponibilities(true);
     }
-    if (userDisponibilities) {
+    if (!loading && userDisponibilities) {
       setState([
         {
           startDate: new Date(userDisponibilities.startDate),
