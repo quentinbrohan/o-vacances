@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Button from 'src/components/elements/Button';
+import { Helmet } from 'react-helmet';
 import Field from './Field';
 
 import './signin.scss';
@@ -22,6 +23,10 @@ const Signin = ({
 
   return (
     <main className="signin">
+      <Helmet>
+        <title>Inscription</title>
+        <meta name="description" content="Inscription" />
+      </Helmet>
       <div className="connection-container">
 
         <h1>Bienvenue voyageur !</h1>

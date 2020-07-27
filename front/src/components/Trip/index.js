@@ -23,6 +23,7 @@ import {
   formatDate,
 } from 'src/utils/format';
 import { parseISO } from 'date-fns';
+import { Helmet } from 'react-helmet';
 
 import { Link, useParams } from 'react-router-dom';
 import Loading from 'src/components/Loading';
@@ -133,8 +134,8 @@ const Trip = ({
           startDate: new Date(userDisponibilities.startDate),
           endDate: new Date(userDisponibilities.endDate),
           key: 'selection',
-        }
-      ])
+        },
+      ]);
     }
   }, [userDisponibilities]);
 
@@ -164,6 +165,10 @@ const Trip = ({
       {isLoading && <Loading />}
       {(!isLoading && trip.length !== 0) && (
       <>
+        <Helmet>
+          <title>{trip.title}</title>
+          <meta name="description" content="Un de mes voyages" />
+        </Helmet>
         <img
           className="trip-photo"
           alt={trip.title}

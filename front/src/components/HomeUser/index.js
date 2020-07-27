@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { Helmet } from 'react-helmet';
 
 import Loading from 'src/components/Loading';
 import { isFuture, isPast, parseISO } from 'date-fns';
@@ -23,6 +24,11 @@ const HomeUser = ({
 
   return (
     <main className="home-user">
+      <Helmet>
+        <title>Mes voyages</title>
+        <meta name="description" content="Homepage utilisateur, recense les voyages" />
+      </Helmet>
+      <div className="connection-container" />
       {isLoading && <Loading />}
       {!isLoading && (
       <>

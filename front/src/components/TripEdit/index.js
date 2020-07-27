@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import { FORMAT_DATE } from 'src/utils/format';
+import { Helmet } from 'react-helmet';
 
 import Field from './Field';
 import Image from './Image';
@@ -28,6 +27,10 @@ const TripEdit = ({
 
   return (
     <main className="trip-edit">
+      <Helmet>
+        <title>Modifier mon voyage</title>
+        <meta name="description" content="Modifier mon voyage" />
+      </Helmet>
       <h1>Je modifie mon voyage</h1>
       <form className="trip-edit-element" onSubmit={handleSubmit}>
         <div className="div">

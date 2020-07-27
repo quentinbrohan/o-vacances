@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Button from 'src/components/elements/Button';
 import { ReactComponent as AvatarDefault } from 'src/assets/svg/user.svg';
+import { Helmet } from 'react-helmet';
 
 import { Link } from 'react-router-dom';
 
@@ -38,6 +39,11 @@ const Profile = ({
   return (
 
     <main className="profile">
+      <Helmet>
+        <title>Mon profil</title>
+        <meta name="description" content="Mon profil" />
+      </Helmet>
+      <div className="connection-container" />
       <h1>Mon profil</h1>
       <div className="profile-head">
         <ProfileImage
