@@ -89,7 +89,7 @@ const Profile = ({
               onChange={changeField}
             />
             {isDisabled && (
-              <Button color="secondary">
+              <Button color="secondary" className="profil-button">
                 <Edit2
                   className="icon pen"
                   onClick={() => {
@@ -100,7 +100,7 @@ const Profile = ({
               </Button>
             )}
             {!isDisabled && (
-              <Button color="secondary">
+              <Button color="secondary" className="profil-button">
 
                 <Check
                   className="icon check"
