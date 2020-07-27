@@ -128,7 +128,7 @@ const Trip = ({
     if (userDisponibilities) {
       setHaveDisponibilities(true);
     }
-    if (!loading && userDisponibilities) {
+    if (!isLoading &&userDisponibilities) {
       setState([
         {
           startDate: new Date(userDisponibilities.startDate),
