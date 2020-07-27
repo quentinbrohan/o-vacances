@@ -51,6 +51,7 @@ import {
 
 import { checkIfCreator } from 'src/utils';
 import currentUser from 'src/utils/getCurrentUser';
+import { UserCheck } from 'react-feather';
 
 const tripMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
@@ -200,15 +201,18 @@ const tripMiddleware = (store) => (next) => (action) => {
     }
 
     case FETCH_SUGGESTIONS: {
-      const { id } = store.getState().trip.trip;
+      const user = currentUser();
+      const { id: tripId } = store.getState().trip.trip;
 
       // Endpoint fetch suggestions from trip
-      axios.get(`${API_URL}/api/v0/trips/${id}/suggestions`, {
+      // Need to pass from trip as suggestion endpoint don't have all
+      // axios.get(`${API_URL}/api/v0/trips/${id}/suggestions`, {
+      axios.get(`${API_URL}/api/v0/users/${user}/trips/${tripId}`)
+
         // props,
-      })
+      // })
         .then((response) => {
-          console.log(response);
-          store.dispatch(saveSuggestions(response.data));
+          store.dispatch(saveSuggestions(response.data.suggestion));
         })
         .catch((error) => {
           console.warn(error);
@@ -333,7 +337,7 @@ const tripMiddleware = (store) => (next) => (action) => {
         activityEndDate,
         activityCategory,
         activityId,
-      )
+      );
 
       const { id } = store.getState().trip.trip;
       const user = currentUser();
