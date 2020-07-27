@@ -24,20 +24,21 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $users = [];
-        $userName = ['Alexandre', 'Audrey', 'Cécilia', 'Loic', 'Quentin'];
-        $pass = ['alexandre', 'audrey', 'cecilia', 'loic', 'quentin'];
-
-         $mails = ['alexandre@gmail.com', 'audrey@gmail.com', 'cecilia@gmail.com', 'loic@gmail.com', 'quentin@gmail.com'];
+        $firstName = ['Fabio', 'Gaëtan', 'Christophe', 'Olivier', 'Sébastien', 'Luc', 'Djyp', 'Guillaume', 'Cécile', 'Loris', 'Jules', 'John'];
+        $lastName = ['Bigeon', 'FOF', 'Coriolis', 'Bloup', 'Croquant', 'BalMasqué', 'Milo', 'Rainbow', 'Vue', 'WP', 'Vernes', 'Smith'];
+        $pass = ['fabio', 'gaetan', 'christophe', 'olivier', 'sebastien', 'luc', 'djyp', 'guillaume', 'cecile', 'loris', 'jules', 'john'];
+        $mails = ['fabio@gmail.com', 'gaetan@gmail.com', 'christophe@gmail.com', 'olivier@gmail.com', 'sebastien@gmail.com', 'luc@gmail.com', 'djyp@gmail.com', 'guillaume@gmail.com', 'cecile@gmail.com', 'loris@gmail.com', 'jules@gmail.com', 'john@gmail.com'];
+        $avatar = ['uploads/Fabio.jpg', 'uploads/Gaetan.jpg','uploads/Christophe.jpg','uploads/Olivier.jpg','uploads/Sebastien.jpg','uploads/Luc.jpg','uploads/Djyp.jpg','uploads/Guillaume.jpg','uploads/Cecile.jpg','uploads/Loris.jpg','uploads/Jules.jpg','uploads/John.jpg',];
 
 
         for ($i = 0; $i < 5; $i++) {
             $user = new User();
             $user->setEmail($mails[$i]);
-            $user->setFirstname($userName[$i]);
-            $user->setLastname($userName[$i]);
+            $user->setFirstname($firstName[$i]);
+            $user->setLastname($lastName[$i]);
             $user->setPassword($this->passwordEncoder->encodePassword($user, $pass[$i]));
             $user->setRoles(['ROLE_USER']);
-            $user->setAvatar('images/avatar.png');
+            $user->setAvatar($avatar[$i]);
 
             $users [] = $user;
             
@@ -71,7 +72,7 @@ class AppFixtures extends Fixture
         }
 
         $categories =[];
-        $categoryTitle = ['restaurant', 'sortie nocturne', 'sport', 'visite culturelle', 'point d\'eau' ];
+        $categoryTitle = ['Restaurant/bar', 'Sortie culturelle (ciné, musée, exposition...)', 'Visite guidée', 'Randonnée', 'Espace vert / parc', 'Plage / piscine / lac', 'Concert / spectacle', 'Shopping', 'Attraction touristique (village..)', 'sport (canoé, foot, ..)', 'Sortie nocturne', 'Parc d\'attraction', 'Autres'];
         for ($i = 0; $i < 5; $i++) {
             $category = new Category();
             $category->setName($categoryTitle[$i]);
