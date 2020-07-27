@@ -15,6 +15,7 @@ const BackButton = ({
 }) => {
   const classes = classNames(
     'button',
+    'back-button',
     color && `button-${color}`,
     size && `button-${size}`,
     haveClassName && `${haveClassName}`,

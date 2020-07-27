@@ -37,6 +37,8 @@ import {
   saveTripAuth,
   saveTripActivities,
   DELETE_SUGGESTION,
+  LOG_OUT_TRIP,
+  logOutTrip,
 } from 'src/actions/trip';
 
 import {
@@ -413,9 +415,11 @@ const tripMiddleware = (store) => (next) => (action) => {
       formData.append('document', json);
 
       const config = {
+        method: 'patch',
         headers: {
           Accept: 'application/json',
-          'Content-Type': 'multipart/form-data',
+          'Content-Type': 'application/x-www-form-urlencoded',
+          // 'Content-Type': 'multipart/form-data',
         },
       };
 
@@ -559,6 +563,16 @@ const tripMiddleware = (store) => (next) => (action) => {
       next(action);
       break;
     }
+
+    // case LOG_OUT_TRIP: {
+    //   console.log(action);
+      
+    //   store.dispatch(logOutTrip());
+    //   store.dispatch(push('/'));
+
+    //   next(action);
+    //   break;
+    // }
 
     default:
       // on passe l'action au suivant (middleware suivant ou reducer)

@@ -20,6 +20,8 @@ import {
   loading,
 } from 'src/actions/user';
 
+import { logOutTrip } from 'src/actions/trip';
+
 import { addError } from 'src/actions/error';
 
 import {
@@ -179,6 +181,8 @@ const userMiddleware = (store) => (next) => (action) => {
       delete axios.defaults.headers.Authorization;
 
       store.dispatch(logOutUser());
+      store.dispatch(logOutTrip());
+      store.dispatch(push('/'));
 
       next(action);
       break;

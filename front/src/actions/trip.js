@@ -36,6 +36,7 @@ export const FETCH_ACTIVITIES = 'FETCH_ACTIVITIES';
 export const SAVE_ACTIVITIES = 'SAVE_ACTIVITIES';
 export const DELETE_SUGGESTION = 'DELETE_SUGGESTION';
 export const REMOVE_SUGGESTION = 'REMOVE_SUGGESTION';
+export const LOG_OUT_TRIP = 'LOG_OUT_TRIP';
 
 export const updateSuggestionField = (newValue, name) => ({
   type: UPDATE_SUGGESTION_FIELD,
@@ -209,4 +210,8 @@ export const deleteSuggestion = (suggestionId) => ({
 
 export const removeSuggestion = () => ({
   type: REMOVE_SUGGESTION,
+});
+
+export const logOutTrip = () => ({
+  type: LOG_OUT_TRIP,
 });
