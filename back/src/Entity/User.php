@@ -28,6 +28,7 @@ class User implements UserInterface
      * @Groups("apiV0_Suggestion")
      * @Groups("apiV0_user")
      * @Groups("apiV0_dispoByTrip")
+     * @Groups("apiV0_activity")
      */
     private $id;
 
@@ -40,6 +41,8 @@ class User implements UserInterface
      * @Groups("apiV0-dispo")
      * @Groups("apiV0_tripByUser")
      * @Groups("apiV0_user")
+     * @Groups("apiV0_activity")
+     * @Groups("apiV0_Suggestion")
      */
     private $email;
 
@@ -48,6 +51,7 @@ class User implements UserInterface
      * @Groups("apiV0_list")
      * @Groups("apiV0_trip")
      * @Groups("apiV0_user")
+     * @Groups("apiV0_activity")
      */
     private $roles = [];
 
@@ -64,10 +68,11 @@ class User implements UserInterface
      * @Groups("apiV0_dispoByTrip")
      * @Groups("apiV0_dispoByUser")
      * @Groups("apiV0-dispo")
-     * 
+     * @Groups("apiV0_activity")
      * @Groups("apiV0_tripByUser")
      * @Groups("apiV0_list")
      * @Groups("apiV0_user")
+     * @Groups("apiV0_Suggestion")
      */
     private $lastname;
 
@@ -81,6 +86,7 @@ class User implements UserInterface
      * @Groups("apiV0_Suggestion")
      * @Groups("apiV0_list")
      * @Groups("apiV0_user")
+     * @Groups("apiV0_activity")
      */
     private $firstname;
 
@@ -92,6 +98,8 @@ class User implements UserInterface
      * @Groups("apiV0_tripByUser")
      * @Groups("apiV0_user")
      * @Groups("apiV0_list")
+     * @Groups("apiV0_activity")
+     * @Groups("apiV0_Suggestion")
      */
     private $avatar;
 

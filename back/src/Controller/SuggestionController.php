@@ -10,6 +10,7 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,23 +18,23 @@ use Symfony\Component\Serializer\Exception\NotEncodableValueException;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class SuggestionController extends AbstractController
 {
     /**
     * @Route("/api/v0/trips/{id}/suggestions", name="api_v0_suggestions_list", methods="GET")
     */
-    public function list(TripRepository $tripRepository, SuggestionRepository $suggestionRepository, ObjectNormalizer $normalizer, $id)
+    public function list(TripRepository $tripRepository, SerializerInterface $serializer, SuggestionRepository $suggestionRepository, ObjectNormalizer $normalizer, $id)
     {
         $trip = $tripRepository->find($id);
         if (!empty($trip)) {
             $suggestions = $suggestionRepository->findAllSuggestionsByTrip($id);
 
-            // On instancie un serializer en lui précisant un normalizer adapté aux objets PHP
-            $serializer = new Serializer([$normalizer]);
-            // Parce qu'on a précisé le normalizer, on peut normaliser selon un groupe
-            $normalizedSuggestions = $serializer->normalize($suggestions, null, ['groups' => 'apiV0_Suggestion']);
-            return $this->json($normalizedSuggestions);
+            $json = $serializer->serialize($suggestions, 'json', ['groups' => 'apiV0_Suggestion']);
+            $response = new JsonResponse($json, 200, [], true);
+
+            return $response;
 
         } else {
             return $this->json([
