@@ -116,12 +116,12 @@ const ActivityCard = ({
 ActivityCard.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  startDate: PropTypes.string.isRequired,
-  endDate: PropTypes.string.isRequired,
+  startDate: PropTypes.array.isRequired,
+  endDate: PropTypes.array.isRequired,
   description: PropTypes.string.isRequired,
   deleteActivity: PropTypes.func.isRequired,
   checkActivityId: PropTypes.func.isRequired,
-  category: PropTypes.objectOf(
+  category: PropTypes.arrayOf(
     PropTypes.shape({
       image: PropTypes.string.isRequired,
     }).isRequired,

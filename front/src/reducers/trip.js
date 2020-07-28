@@ -78,7 +78,6 @@ const trip = (state = initialState, action = {}) => {
         trip: action.trip,
         isCreator: action.isCreator,
         tripPassword: action.trip.password,
-        userDisponibilities: action.userDisponibilities,
       };
 
     case SAVE_SUGGESTIONS:
@@ -106,8 +105,6 @@ const trip = (state = initialState, action = {}) => {
       };
 
     case UPDATE_ACTIVITY_FIELD:
-      console.log(action);
-      
       return {
         ...state,
         [action.name]: action.newValue,
@@ -151,6 +148,7 @@ const trip = (state = initialState, action = {}) => {
           ...state.trip,
           disponibility: action.disponibilities,
         },
+        userDisponibilities: action.userDisponibilities[0],
       };
 
     case CHECK_ACTIVITY:
@@ -205,8 +203,6 @@ const trip = (state = initialState, action = {}) => {
       };
 
     case LOG_OUT_TRIP:
-      console.log(action);
-      
       return {
         state: null,
       };

@@ -25,6 +25,7 @@ class Trip
      * @Groups("apiV0_tripByUser")
      * @Groups("apiV0_list")
      * @Groups("apiV0_Suggestion")
+     * @Groups("apiV0_activity")
      */
     private $id;
 
@@ -40,6 +41,7 @@ class Trip
      * @Groups("apiV0_list")
      * @Groups("apiV0_Suggestion")
      * @Groups("apiV0_user")
+     * @Groups("apiV0_activity")
      */
     private $title;
 
@@ -49,6 +51,7 @@ class Trip
      * @Groups("apiV0_list")
      * @Groups("apiV0_trip")
      * @Groups("apiV0_tripByUser")
+     * @Groups("apiV0_activity")
      *
      */
     private $description;
@@ -57,6 +60,7 @@ class Trip
      * @ORM\Column(type="date", nullable=true)
      * @Groups("apiV0_trip")
      * @Groups("apiV0_tripByUser")
+     * @Groups("apiV0_activity")
      */
     private $startDate;
 
@@ -64,6 +68,7 @@ class Trip
      * @ORM\Column(type="date", nullable=true)
      * @Groups("apiV0_trip")
      * @Groups("apiV0_tripByUser")
+     * @Groups("apiV0_activity")
      */
     private $endDate;
 
@@ -72,6 +77,7 @@ class Trip
      * @Assert\Length(max=255)
      * @Groups("apiV0_trip")
      * @Groups("apiV0_tripByUser")
+     * @Groups("apiV0_activity")
      */
     private $location;
 
@@ -80,6 +86,7 @@ class Trip
      * @Assert\Length(max=128)
      * @Groups("apiV0_trip")
      * @Groups("apiV0_tripByUser")
+     * @Groups("apiV0_activity")
      */
     private $image;
 

@@ -62,11 +62,10 @@ export const fetchTrip = (tripId) => ({
   tripId,
 });
 
-export const saveTrip = (trip, isCreator, userDisponibilities) => ({
+export const saveTrip = (trip, isCreator) => ({
   type: SAVE_TRIP,
   trip,
   isCreator,
-  userDisponibilities,
 });
 
 export const addTrip = (formData) => ({
@@ -154,9 +153,10 @@ export const fetchDisponibilities = () => ({
   type: FETCH_DISPONIBILITIES,
 });
 
-export const saveDisponibilities = (disponibilities) => ({
+export const saveDisponibilities = (disponibilities, userDisponibilities) => ({
   type: SAVE_DISPONIBILITIES,
   disponibilities,
+  userDisponibilities,
 });
 
 export const checkActivity = (id) => ({

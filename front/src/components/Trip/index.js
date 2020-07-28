@@ -121,7 +121,7 @@ const Trip = ({
   ]);
 
   useEffect(() => {
-    if (!isLoading && userDisponibilities.startDate) {
+    if (!isLoading && userDisponibilities) {
       setHaveDisponibilities(true);
       setState([
         {
@@ -221,19 +221,17 @@ const Trip = ({
                   // onChange={() => manageDisponibilities(disponibilities)}
                 >
                   <option disabled>Participants</option>
-                  {(!isLoading && trip.disponiblity) && (
-                    trip.disponibility.map((participant) => (
-                      <option
+                  {trip.disponibility.map((participant) => (
+                    <option
                     // Pass Object as JSON for value
                       // value={JSON.stringify(participant.disponibilities)}
-                        key={participant.id}
-                        disabled={!isOwnUser}
-                        defaultValue={!!isOwnUser}
-                      >
-                        {participant.users[0].firstname}: {participant.startDate} 🠒 {participant.endDate}
-                      </option>
-                    ))
-                  )}
+                      key={participant.id}
+                      disabled={!isOwnUser}
+                      defaultValue={isOwnUser}
+                    >
+                      {participant.users[0].firstname}: {toDate(participant.startDate)} 🠒 {toDate(participant.endDate)}
+                    </option>
+                  ))}
                 </select>
                 {/* if logged user => able to edit own disponibilities */}
                 <Button color="secondary" size="sm" onClick={openDispModal}>
