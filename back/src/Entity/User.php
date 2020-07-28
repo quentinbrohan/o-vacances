@@ -27,6 +27,7 @@ class User implements UserInterface
      * @Groups("apiV0_tripByUser")
      * @Groups("apiV0_Suggestion")
      * @Groups("apiV0_user")
+     * @Groups("apiV0_dispoByTrip")
      */
     private $id;
 
