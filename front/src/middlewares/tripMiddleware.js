@@ -89,15 +89,8 @@ const tripMiddleware = (store) => (next) => (action) => {
 
           // Check if creator
           const isCreator = checkIfCreator(response.data.creator, user);
-          // Get logged user disponibilities
-          // const userDisponibilities = response.data.disponibility.filter((x) => x.id === user);
 
-          // TODO: Delete  Temp userDisp === firstOne
-          // console.log(response.data.disponibility[0]);
-
-          const userDisponibilities = response.data.disponibility[0];
-
-          store.dispatch(saveTrip(response.data, isCreator, userDisponibilities));
+          store.dispatch(saveTrip(response.data, isCreator));
         })
         .then(() => {
           store.dispatch(fetchDisponibilities(tripId));
@@ -457,12 +450,16 @@ const tripMiddleware = (store) => (next) => (action) => {
       const user = currentUser();
 
       // Endpoint fetch disponibilities from trip
-      axios.get(`${API_URL}/api/v0/users/${user}/trips/${tripId}`, {
+      axios.get(`${API_URL}/api/v0/trips/${tripId}/disponibilities`, {
         // props,
       })
         .then((response) => {
-          console.log(response);
-          store.dispatch(saveDisponibilities(response.data.disponibility));
+          // console.log(response);
+
+          // const userDisponibilities = response.data.disponibility[0];
+          const userDisponibilities = response.data.disponibility.filter((participant) => participant.id === user);
+
+          store.dispatch(saveDisponibilities(response.data.disponibility, userDisponibilities));
         })
         .catch((error) => {
           console.warn(error);

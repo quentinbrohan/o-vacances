@@ -32,19 +32,18 @@ class ActivityController extends AbstractController
     /**
      * @Route("/api/v0/trips/{id}/activities", name="api_v0_activities_list", methods="GET")
      */
-    public function list(ActivityRepository $activityRepository, ObjectNormalizer $normalizer, $id, TripRepository $tripRepository)
+    public function list(ActivityRepository $activityRepository, SerializerInterface $serializer, $id, TripRepository $tripRepository)
     {
         $trip = $tripRepository->find($id);
         if(!empty($trip)){
 
             $activities = $activityRepository->findAllActivitiesByTrip($id);
     
-            // On instancie un serializer en lui précisant un normalizer adapté aux objets PHP
-            $serializer = new Serializer([$normalizer]);
-            // Parce qu'on a précisé le normalizer, on peut normaliser selon un groupe
-            $normalizedActivities = $serializer->normalize($activities, null, ['groups' => 'apiV0_activity']);
-    
-            return $this->json($normalizedActivities);
+            $json = $serializer->serialize($activities, 'json', ['groups' => 'apiV0_activity']);
+        
+            $response = new JsonResponse($json, 200, [], true);
+
+            return $response; 
 
         } else {
             return $this->json([

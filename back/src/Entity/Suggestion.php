@@ -50,6 +50,7 @@ class Suggestion
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups("apiV0_Suggestion")
      */
     private $createdAt;
 

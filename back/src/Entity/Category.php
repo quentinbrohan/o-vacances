@@ -18,6 +18,7 @@ class Category
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      * @Groups("apiV0_categories")
+     * @Groups("apiV0_activity")
      */
     private $id;
 
@@ -25,6 +26,8 @@ class Category
      * @ORM\Column(type="string", length=64)
      * @Groups("apiV0_trip")
      * @Groups("apiV0_categories")
+     * @Groups("apiV0_activity")
+     * 
      */
     private $name;
 
@@ -32,6 +35,7 @@ class Category
      * @ORM\Column(type="string", length=128)
      * @Groups("apiV0_trip")
      * @Groups("apiV0_categories")
+     * @Groups("apiV0_activity")
      */
     private $image;
 
