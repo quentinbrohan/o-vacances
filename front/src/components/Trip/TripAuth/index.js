@@ -23,7 +23,7 @@ const TripAuth = ({
       <div className="trip-auth-container">
         <h1>L'accès au voyage nécessite une autorisation !</h1>
         <p className="introduction">
-          La page auquelle vous tentez d'accéder nécessite une vérification.
+          La page à laquelle vous tentez d'accéder nécessite une vérification.
           Si c'est la première fois que vous vous connectez c'est normal:
           il est nécessaire d'entrer le mot de passe*
           défini par le modérateur du voyage.

@@ -143,7 +143,6 @@ const trip = (state = initialState, action = {}) => {
     case SAVE_DISPONIBILITIES:
       return {
         ...state,
-        isLoading: false,
         trip: {
           ...state.trip,
           disponibility: action.disponibilities,

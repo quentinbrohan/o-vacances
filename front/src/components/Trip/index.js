@@ -400,7 +400,7 @@ const Trip = ({
             <span>({trip.suggestion.length})</span>
           </h2>
           <div className="trip-suggestions">
-            {(trip.suggestion.length >= 1) && (
+            {(trip.suggestion.length >= 1 && !isLoading) && (
               trip.suggestion.map((sugg) => (
                 <Suggestion
                   {...sugg}

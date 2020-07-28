@@ -7,9 +7,14 @@ import {
 import { fr } from 'date-fns/locale';
 
 export const FORMAT_DATE = 'yyyy-MM-dd';
+export const FORMAT_DATE_SUGGESTION = 'dd/MM/yyyy';
 
 // Convert date ISO to string => yyyy-MM-dd
 export const toString = (date) => format(parseISO((date)), FORMAT_DATE, {
+  locale: fr,
+});
+
+export const toStringSuggestion = (date) => format(parseISO((date)), FORMAT_DATE_SUGGESTION, {
   locale: fr,
 });
 
@@ -21,7 +26,7 @@ export const toDate = (date) => format(parseISO(date), 'dd MMMM yyyy', {
   locale: fr,
 });
 
-// Convert string string to date (FR) => 11 septembre 2020
+// Convert string to date (FR) => yyyy-MM-dd
 export const formatDate = (date) => format(parseISO(date), FORMAT_DATE);
 
 // Convert string string to date (FR) => 11 septembre 2020
