@@ -20,6 +20,7 @@ import {
   SAVE_ACTIVITIES,
   REMOVE_SUGGESTION,
   LOG_OUT_TRIP,
+  CLEAR_ACTIVITY_FIELD,
 } from 'src/actions/trip';
 
 const initialState = {
@@ -205,6 +206,16 @@ const trip = (state = initialState, action = {}) => {
     case LOG_OUT_TRIP:
       return {
         state: null,
+      };
+
+    case CLEAR_ACTIVITY_FIELD:
+      return {
+        ...state,
+        activityTitle: '',
+        activityDescription: '',
+        activityStartDate: '',
+        activityEndDate: '',
+        activityCategory: '',
       };
 
     default: return state;

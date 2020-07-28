@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import ActivityForm from 'src/components/ActivityForm';
 
-import { updateActivityField, addActivity } from 'src/actions/trip';
+import { updateActivityField, addActivity, clearActivityField } from 'src/actions/trip';
 
 const mapStateToProps = (state) => ({
   activityTitle: state.trip.activityTitle,
@@ -21,6 +21,10 @@ const mapDispatchToProps = (dispatch) => ({
 
   handleAddActivity: () => {
     dispatch(addActivity());
+  },
+
+  clearField: () => {
+    dispatch(clearActivityField());
   },
 });
 

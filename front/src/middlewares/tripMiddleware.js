@@ -37,6 +37,7 @@ import {
   saveTripAuth,
   saveTripActivities,
   DELETE_SUGGESTION,
+  clearActivityField,
 } from 'src/actions/trip';
 
 import {
@@ -298,6 +299,7 @@ const tripMiddleware = (store) => (next) => (action) => {
           store.dispatch(saveTripActivities(response.data));
           store.dispatch(toastSuccess('Activité ajoutée !'));
           store.dispatch(fetchActivities(id));
+          store.dispatch(clearActivityField());
         })
         .catch((error) => {
           console.warn(error);
@@ -342,11 +344,10 @@ const tripMiddleware = (store) => (next) => (action) => {
       })
         .then((response) => {
           console.log(response);
-          // TODO: newTrip = cleForm inputs DONE
+
           store.dispatch(fetchActivities());
           store.dispatch(toastSuccess('Activité modifiée !'));
-
-          // TODO: newTrip = cleForm inputs DONE
+          store.dispatch(clearActivityField());
 
         // Add suggestion to state or directly refresh Trip component afterward (?)
         })
