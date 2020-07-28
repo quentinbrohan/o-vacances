@@ -2,8 +2,8 @@
 
 footer {
   background-color: $blackColor;
-  position: fixed;
-  bottom: -1px;
+  // position: fixed;
+  // bottom: -1px;
   width: 100%;
   padding: 1rem;
   .footer-container {
@@ -25,8 +25,12 @@ footer {
     .footer-nav-item{
 
       display: inline-block;
-      margin-right: 2rem;
       line-height: 125%;
+      @media (min-width: $lg-mobile) {
+        &:not(:last-child) {
+          margin-right: 2rem;
+        }
+      }
       
       a{ 
         font-size: 1rem;

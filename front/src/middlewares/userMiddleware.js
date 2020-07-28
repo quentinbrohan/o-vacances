@@ -53,7 +53,6 @@ const userMiddleware = (store) => (next) => (action) => {
       };
 
       store.dispatch(loading(true));
-      console.log(firstname, lastname,email, password)
       // Endpoint API for user creation through Symfony
       axios.post(`${API_URL}/users/register`, {
         firstname,
