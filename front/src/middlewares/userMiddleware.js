@@ -151,7 +151,7 @@ const userMiddleware = (store) => (next) => (action) => {
           store.dispatch(toastSuccess('Modifications effectuées'));
           store.dispatch(updateUserProfil(response.data));
         })
-        .catch((error) => {s
+        .catch((error) => {
           console.warn(error);
           store.dispatch(addError(error.response.data.message));
         });
