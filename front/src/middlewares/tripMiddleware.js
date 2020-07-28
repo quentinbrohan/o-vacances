@@ -454,11 +454,10 @@ const tripMiddleware = (store) => (next) => (action) => {
         // props,
       })
         .then((response) => {
-          console.log(response);
+          // console.log(response);
 
           // const userDisponibilities = response.data.disponibility[0];
           const userDisponibilities = response.data.disponibility.filter((participant) => participant.id === user);
-          console.log(userDisponibilities);
 
           store.dispatch(saveDisponibilities(response.data.disponibility, userDisponibilities));
         })
