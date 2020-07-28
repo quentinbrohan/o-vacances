@@ -52,7 +52,6 @@ import {
 
 import { checkIfCreator } from 'src/utils';
 import currentUser from 'src/utils/getCurrentUser';
-import { UserCheck } from 'react-feather';
 
 const tripMiddleware = (store) => (next) => (action) => {
   switch (action.type) {

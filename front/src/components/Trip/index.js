@@ -364,6 +364,7 @@ const Trip = ({
                     color="secondary"
                     size="sm"
                     type="submit"
+                    className="trip-button"
                   >
                     <Link to={`/modifier-un-voyage/${tripId}`}>Modifier</Link>
                   </Button>
@@ -371,8 +372,9 @@ const Trip = ({
                     color="secondary"
                     size="sm"
                     type="submit"
+                    className="trip-button"
                     onClick={() => manageTripDelete()}
-                  >Supprimer
+                  > <a href="#">Supprimer</a>
                   </Button>
                 </>
               )}
