@@ -143,12 +143,6 @@ const tripMiddleware = (store) => (next) => (action) => {
       formData.append('file', file);
       formData.append('document', json);
 
-      // // Appear as empty
-      // console.log(formData);
-      // // but isn't !
-      // console.log(formData.get('file'));
-      // console.log(formData.get('document'));
-
       const config = {
         headers: {
           Accept: 'application/json',
@@ -289,8 +283,11 @@ const tripMiddleware = (store) => (next) => (action) => {
         activityEndDate,
         activityCategory,
       } = store.getState().trip;
+
       const { id } = store.getState().trip.trip;
       const user = currentUser();
+
+      store.dispatch(loading(true));
       // Endpoint add new suggestion to trip
       axios.post(`${API_URL}/api/v0/trips/${id}/activities`, {
         // props,
@@ -307,9 +304,7 @@ const tripMiddleware = (store) => (next) => (action) => {
 
           store.dispatch(saveTripActivities(response.data));
           store.dispatch(toastSuccess('Activité ajoutée !'));
-
-          // TODO: newTrip = cleForm inputs DONE
-          // Add suggestion to state or directly refresh Trip component afterward (?)
+          store.dispatch(fetchActivities(id));
         })
         .catch((error) => {
           console.warn(error);
@@ -458,10 +453,11 @@ const tripMiddleware = (store) => (next) => (action) => {
     }
 
     case FETCH_DISPONIBILITIES: {
-      const { id } = store.getState().trip.trip;
+      const { id: tripId } = store.getState().trip.trip;
+      const user = currentUser();
 
       // Endpoint fetch disponibilities from trip
-      axios.get(`${API_URL}/api/v0/trips/${id}/disponibilities`, {
+      axios.get(`${API_URL}/api/v0/users/${user}/trips/${tripId}`, {
         // props,
       })
         .then((response) => {
@@ -510,7 +506,6 @@ const tripMiddleware = (store) => (next) => (action) => {
       })
         .then((response) => {
           console.log(response);
-          console.log(response.data);
           store.dispatch(saveActivities(response.data));
         })
         .catch((error) => {

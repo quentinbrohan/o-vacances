@@ -78,11 +78,7 @@ const Trip = ({
 }) => {
   const currentTrip = useParams().id;
   const tripId = Number(currentTrip);
-  const [focus, setFocus] = useState(null);
-  const [haveDisponibilities, setHaveDisponibilities] = useState(
-    !!(!isLoading && userDisponibilities
-    ),
-  );
+  const [haveDisponibilities, setHaveDisponibilities] = useState(false);
 
   useEffect(() => {
     checkTripAuth(tripId);
@@ -125,10 +121,8 @@ const Trip = ({
   ]);
 
   useEffect(() => {
-    if (userDisponibilities) {
+    if (!isLoading && userDisponibilities.startDate) {
       setHaveDisponibilities(true);
-    }
-    if (!isLoading && userDisponibilities) {
       setState([
         {
           startDate: new Date(userDisponibilities.startDate),
@@ -227,7 +221,7 @@ const Trip = ({
                   // onChange={() => manageDisponibilities(disponibilities)}
                 >
                   <option disabled>Participants</option>
-                  {trip.disponiblity && (
+                  {(!isLoading && trip.disponiblity) && (
                     trip.disponibility.map((participant) => (
                       <option
                     // Pass Object as JSON for value
@@ -275,7 +269,7 @@ const Trip = ({
                     endDatePlaceholder="Fin disponibilités"
                   />
                   {/* CTA Add/Edit user disponiblities */}
-                  {haveDisponibilities && (
+                  {(!isLoading && haveDisponibilities) && (
                   <Button
                     color="secondary"
                     size="sm"
