@@ -84,9 +84,7 @@ class UserController extends AbstractController
     {
         $user = $userRepository->find($id);
      
-        $oldPassword = $user->getPassword();
-    
-dd($request);        
+        $oldPassword = $user->getPassword();      
         
         if (!empty($user)) {
             $form = $this->createForm(UserType::class, $user);
