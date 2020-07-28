@@ -143,12 +143,15 @@ class UserController extends AbstractController
     public function uploadAvatar(UserPasswordEncoderInterface $passwordEncoder, Request $request, User $user, UserRepository $userRepository, $id, ObjectNormalizer $normalizer): Response
     {
         $user = $userRepository->find($id);
-     
+  /*       $oldAvatar = $user->getAvatar();
+        dd($oldAvatar); */
+        
+        
         
         if (!empty($user)) {
             $form = $this->createForm(UploadType::class, $user);
 
-            // recuper
+            // recuperation
             $avatar = $request->files->get('file');
             $form->submit($avatar);
             
