@@ -2,7 +2,12 @@ import { connect } from 'react-redux';
 
 import ActivityEdit from 'src/components/ActivityEdit';
 
-import { updateActivityField, editActivity, checkActivity } from 'src/actions/trip';
+import {
+  updateActivityField,
+  editActivity,
+  checkActivity,
+  clearActivityField,
+} from 'src/actions/trip';
 
 const mapStateToProps = (state) => ({
   activities: state.trip.trip.activities,
@@ -27,7 +32,10 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(checkActivity(id));
   },
 
-  
+  clearField: () => {
+    dispatch(clearActivityField());
+  },
+
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ActivityEdit);

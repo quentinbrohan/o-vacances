@@ -17,6 +17,7 @@ const ActivityForm = ({
   activityEndDate,
   activityCategory,
   handleAddActivity,
+  clearField,
 }) => {
   Modal.setAppElement('div');
   let subtitle;
@@ -26,6 +27,7 @@ const ActivityForm = ({
   };
   const closeModal = () => {
     setIsOpen(false);
+    clearField();
   };
 
   const handleSubmit = (event) => {
@@ -114,6 +116,7 @@ ActivityForm.propTypes = {
   activityEndDate: PropTypes.string.isRequired,
   activityDescription: PropTypes.string,
   handleAddActivity: PropTypes.func.isRequired,
+  clearField: PropTypes.func.isRequired,
 
 };
 

@@ -22,6 +22,7 @@ const ActivityEdit = ({
   handleEditActivity,
   activities,
   checkActivityId,
+  clearField,
 }) => {
   Modal.setAppElement('div');
   let subtitle;
@@ -31,6 +32,7 @@ const ActivityEdit = ({
   };
   const closeModal = () => {
     setIsOpen(false);
+    clearField();
   };
 
   const handleSubmit = (event) => {
@@ -144,6 +146,7 @@ ActivityEdit.propTypes = {
   activities: PropTypes.array.isRequired,
   Id: PropTypes.number.isRequired,
   checkActivityId: PropTypes.func.isRequired,
+  clearField: PropTypes.func.isRequired,
 };
 
 ActivityEdit.defaultProps = {
