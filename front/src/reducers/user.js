@@ -64,7 +64,6 @@ const user = (state = initialState, action = {}) => {
       };
 
     case UPDATE_USER_IMAGE:
-      console.log(action);
       return {
         ...state,
         avatar: action.data,

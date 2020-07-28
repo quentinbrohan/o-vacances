@@ -121,7 +121,7 @@ const Trip = ({
   ]);
 
   useEffect(() => {
-    if (!isLoading && userDisponibilities.startDate) {
+    if (!isLoading && userDisponibilities) {
       setHaveDisponibilities(true);
       setState([
         {
