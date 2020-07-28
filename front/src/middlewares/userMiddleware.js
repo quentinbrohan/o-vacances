@@ -20,6 +20,8 @@ import {
   loading,
 } from 'src/actions/user';
 
+import { logOutTrip } from 'src/actions/trip';
+
 import { addError } from 'src/actions/error';
 
 import {
@@ -41,14 +43,24 @@ const userMiddleware = (store) => (next) => (action) => {
         password,
       } = store.getState().user;
 
+      const config = {
+        headers: {
+          crossDomain: true,
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          withCredentials: false,
+        },
+      };
+
       store.dispatch(loading(true));
+      console.log(firstname, lastname,email, password)
       // Endpoint API for user creation through Symfony
-      axios.post(`${API_URL}/api/v0/users/register`, {
+      axios.post(`${API_URL}/users/register`, {
         firstname,
         lastname,
         email,
         password,
-      })
+      }, config)
         .then((response) => {
           console.log(response);
           if (response.status === 201) {
@@ -128,7 +140,7 @@ const userMiddleware = (store) => (next) => (action) => {
       } = store.getState().user;
 
       // withCredentials : autorisation d'accéder au cookie
-      axios.put(`${API_URL}/api/v0/users/${currentUser()}/edit`, {
+      axios.patch(`${API_URL}/api/v0/users/${currentUser()}/edit`, {
         email,
         lastname,
         firstname,
@@ -139,7 +151,7 @@ const userMiddleware = (store) => (next) => (action) => {
           store.dispatch(toastSuccess('Modifications effectuées'));
           store.dispatch(updateUserProfil(response.data));
         })
-        .catch((error) => {
+        .catch((error) => {s
           console.warn(error);
           store.dispatch(addError(error.response.data.message));
         });
@@ -179,6 +191,8 @@ const userMiddleware = (store) => (next) => (action) => {
       delete axios.defaults.headers.Authorization;
 
       store.dispatch(logOutUser());
+      store.dispatch(logOutTrip());
+      store.dispatch(push('/'));
 
       next(action);
       break;

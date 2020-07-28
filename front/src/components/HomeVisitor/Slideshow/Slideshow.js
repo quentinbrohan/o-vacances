@@ -49,7 +49,7 @@ const Slideshow = () => {
           ))}
         </div>
         <div className="slideshow-content">
-          <h1 className="intro-title">Plannifer vos vacances{' '}
+          <h1 className="intro-title">Planifier vos vacances{' '}
             <a href="#" onClick={() => changeType()}>
               <div
                 ref={ref}

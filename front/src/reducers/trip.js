@@ -19,6 +19,7 @@ import {
   SAVE_TRIP_ACTIVITIES,
   SAVE_ACTIVITIES,
   REMOVE_SUGGESTION,
+  LOG_OUT_TRIP,
 } from 'src/actions/trip';
 
 const initialState = {
@@ -105,6 +106,8 @@ const trip = (state = initialState, action = {}) => {
       };
 
     case UPDATE_ACTIVITY_FIELD:
+      console.log(action);
+      
       return {
         ...state,
         [action.name]: action.newValue,
@@ -199,6 +202,13 @@ const trip = (state = initialState, action = {}) => {
           ...state.trip,
           activities: action.newActivities,
         },
+      };
+
+    case LOG_OUT_TRIP:
+      console.log(action);
+      
+      return {
+        state: null,
       };
 
     default: return state;

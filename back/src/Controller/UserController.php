@@ -92,7 +92,7 @@ class UserController extends AbstractController
             $form = $this->createForm(UserType::class, $user);
 
             // On extrait de la requête le json reçu
-            $jsonText = $request->getContent;
+            $jsonText = $request->getContent();
    
             // On transforme ce json en array
             $jsonArray = json_decode($jsonText, true);
@@ -143,12 +143,15 @@ class UserController extends AbstractController
     public function uploadAvatar(UserPasswordEncoderInterface $passwordEncoder, Request $request, User $user, UserRepository $userRepository, $id, ObjectNormalizer $normalizer): Response
     {
         $user = $userRepository->find($id);
-     
+  /*       $oldAvatar = $user->getAvatar();
+        dd($oldAvatar); */
+        
+        
         
         if (!empty($user)) {
             $form = $this->createForm(UploadType::class, $user);
 
-            // recuper
+            // recuperation
             $avatar = $request->files->get('file');
             $form->submit($avatar);
             

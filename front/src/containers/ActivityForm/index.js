@@ -6,7 +6,7 @@ import { updateActivityField, addActivity } from 'src/actions/trip';
 
 const mapStateToProps = (state) => ({
   activityTitle: state.trip.activityTitle,
-  activityDescritption: state.trip.activityDescription,
+  activityDescription: state.trip.activityDescription,
   activityStartDate: state.trip.activityStartDate,
   activityEndDate: state.trip.activityEndDate,
   activityCategory: state.trip.activityCategory,
@@ -15,6 +15,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   changeField: (newValue, name) => {
+    console.log('container');
     dispatch(updateActivityField(newValue, name));
   },
 

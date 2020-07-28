@@ -51,7 +51,7 @@ const customStyles = {
     transform: 'translate(-50%, -50%)',
     display: 'flex',
     flexDirection: 'column',
-    // maxWidth: '560px',
+    maxWidth: '560px',
   },
 };
 
@@ -78,11 +78,7 @@ const Trip = ({
 }) => {
   const currentTrip = useParams().id;
   const tripId = Number(currentTrip);
-  const [focus, setFocus] = useState(null);
-  const [haveDisponibilities, setHaveDisponibilities] = useState(
-    !!(!isLoading && userDisponibilities
-    ),
-  );
+  const [haveDisponibilities, setHaveDisponibilities] = useState(false);
 
   useEffect(() => {
     checkTripAuth(tripId);
@@ -118,17 +114,15 @@ const Trip = ({
   // React Date Range
   const [state, setState] = useState([
     {
-      startDate: userDisponibilities ? userDisponibilities.startDate : null,
+      startDate: null,
       endDate: null,
       key: 'selection',
     },
   ]);
 
   useEffect(() => {
-    if (userDisponibilities) {
+    if (!isLoading && userDisponibilities.startDate) {
       setHaveDisponibilities(true);
-    }
-    if (userDisponibilities) {
       setState([
         {
           startDate: new Date(userDisponibilities.startDate),
@@ -227,7 +221,7 @@ const Trip = ({
                   // onChange={() => manageDisponibilities(disponibilities)}
                 >
                   <option disabled>Participants</option>
-                  {trip.disponiblity && (
+                  {(!isLoading && trip.disponiblity) && (
                     trip.disponibility.map((participant) => (
                       <option
                     // Pass Object as JSON for value
@@ -275,7 +269,7 @@ const Trip = ({
                     endDatePlaceholder="Fin disponibilités"
                   />
                   {/* CTA Add/Edit user disponiblities */}
-                  {haveDisponibilities && (
+                  {(!isLoading && haveDisponibilities) && (
                   <Button
                     color="secondary"
                     size="sm"
@@ -313,12 +307,12 @@ const Trip = ({
                 </div>
                 <div className="trip-link">
                   <p>Lien du voyage:</p>
-                  <a
-                    href="http://o-vacances.fr/voyage/{trip.id}"
+                  <Link
+                    href={`localhost:8080/voyage/${trip.id}`}
                     className="link"
                   >
                     http://o-vacances.fr/voyage/{trip.id}
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="trip-help">
@@ -373,14 +367,14 @@ const Trip = ({
                     size="sm"
                     type="submit"
                   >
-                    <Link to={`/modifier-un-voyage/${tripId}`}>Modifier mon voyage</Link>
+                    <Link to={`/modifier-un-voyage/${tripId}`}>Modifier</Link>
                   </Button>
                   <Button
                     color="secondary"
                     size="sm"
                     type="submit"
                     onClick={() => manageTripDelete()}
-                  >Supprimer mon voyage
+                  >Supprimer
                   </Button>
                 </>
               )}

@@ -51,6 +51,7 @@ import {
 
 import { checkIfCreator } from 'src/utils';
 import currentUser from 'src/utils/getCurrentUser';
+import { UserCheck } from 'react-feather';
 
 const tripMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
@@ -142,12 +143,6 @@ const tripMiddleware = (store) => (next) => (action) => {
       formData.append('file', file);
       formData.append('document', json);
 
-      // // Appear as empty
-      // console.log(formData);
-      // // but isn't !
-      // console.log(formData.get('file'));
-      // console.log(formData.get('document'));
-
       const config = {
         headers: {
           Accept: 'application/json',
@@ -200,15 +195,18 @@ const tripMiddleware = (store) => (next) => (action) => {
     }
 
     case FETCH_SUGGESTIONS: {
-      const { id } = store.getState().trip.trip;
+      const user = currentUser();
+      const { id: tripId } = store.getState().trip.trip;
 
       // Endpoint fetch suggestions from trip
-      axios.get(`${API_URL}/api/v0/trips/${id}/suggestions`, {
+      // Need to pass from trip as suggestion endpoint don't have all
+      // axios.get(`${API_URL}/api/v0/trips/${id}/suggestions`, {
+      axios.get(`${API_URL}/api/v0/users/${user}/trips/${tripId}`)
+
         // props,
-      })
+      // })
         .then((response) => {
-          console.log(response);
-          store.dispatch(saveSuggestions(response.data));
+          store.dispatch(saveSuggestions(response.data.suggestion));
         })
         .catch((error) => {
           console.warn(error);
@@ -285,8 +283,11 @@ const tripMiddleware = (store) => (next) => (action) => {
         activityEndDate,
         activityCategory,
       } = store.getState().trip;
+
       const { id } = store.getState().trip.trip;
       const user = currentUser();
+
+      store.dispatch(loading(true));
       // Endpoint add new suggestion to trip
       axios.post(`${API_URL}/api/v0/trips/${id}/activities`, {
         // props,
@@ -303,9 +304,7 @@ const tripMiddleware = (store) => (next) => (action) => {
 
           store.dispatch(saveTripActivities(response.data));
           store.dispatch(toastSuccess('Activité ajoutée !'));
-
-          // TODO: newTrip = cleForm inputs DONE
-          // Add suggestion to state or directly refresh Trip component afterward (?)
+          store.dispatch(fetchActivities(id));
         })
         .catch((error) => {
           console.warn(error);
@@ -325,6 +324,16 @@ const tripMiddleware = (store) => (next) => (action) => {
         activityCategory,
         activityId,
       } = store.getState().trip;
+
+      console.log(
+        activityTitle,
+        activityDescription,
+        activityStartDate,
+        activityEndDate,
+        activityCategory,
+        activityId,
+      );
+
       const { id } = store.getState().trip.trip;
       const user = currentUser();
       // Endpoint add new suggestion to trip
@@ -366,11 +375,8 @@ const tripMiddleware = (store) => (next) => (action) => {
         .then(() => {
           store.dispatch(removeTrip());
           store.dispatch(toastSuccess('Voyage supprimé'));
-          store.dispatch(loading(false));
           store.dispatch(push('/'));
-        })
-        .then(() => {
-          // Redirect to HomeUser
+          store.dispatch(loading(false));
         })
         .catch((error) => {
           console.warn(error);
@@ -416,9 +422,11 @@ const tripMiddleware = (store) => (next) => (action) => {
       formData.append('document', json);
 
       const config = {
+        method: 'patch',
         headers: {
           Accept: 'application/json',
-          'Content-Type': 'multipart/form-data',
+          'Content-Type': 'application/x-www-form-urlencoded',
+          // 'Content-Type': 'multipart/form-data',
         },
       };
 
@@ -445,10 +453,11 @@ const tripMiddleware = (store) => (next) => (action) => {
     }
 
     case FETCH_DISPONIBILITIES: {
-      const { id } = store.getState().trip.trip;
+      const { id: tripId } = store.getState().trip.trip;
+      const user = currentUser();
 
       // Endpoint fetch disponibilities from trip
-      axios.get(`${API_URL}/api/v0/trips/${id}/disponibilities`, {
+      axios.get(`${API_URL}/api/v0/users/${user}/trips/${tripId}`, {
         // props,
       })
         .then((response) => {
@@ -497,7 +506,6 @@ const tripMiddleware = (store) => (next) => (action) => {
       })
         .then((response) => {
           console.log(response);
-          console.log(response.data);
           store.dispatch(saveActivities(response.data));
         })
         .catch((error) => {
