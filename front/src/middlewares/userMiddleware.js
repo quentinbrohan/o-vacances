@@ -48,13 +48,14 @@ const userMiddleware = (store) => (next) => (action) => {
           crossDomain: true,
           Accept: 'application/json',
           'Content-Type': 'application/json',
-          withCredentials: true,
+          withCredentials: false,
         },
       };
 
       store.dispatch(loading(true));
+      console.log(firstname, lastname,email, password)
       // Endpoint API for user creation through Symfony
-      axios.post(`${API_URL}/user/register`, {
+      axios.post(`${API_URL}/users/register`, {
         firstname,
         lastname,
         email,
@@ -150,7 +151,7 @@ const userMiddleware = (store) => (next) => (action) => {
           store.dispatch(toastSuccess('Modifications effectuées'));
           store.dispatch(updateUserProfil(response.data));
         })
-        .catch((error) => {
+        .catch((error) => {s
           console.warn(error);
           store.dispatch(addError(error.response.data.message));
         });
