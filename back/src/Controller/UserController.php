@@ -92,7 +92,7 @@ class UserController extends AbstractController
             $form = $this->createForm(UserType::class, $user);
 
             // On extrait de la requête le json reçu
-            $jsonText = $request->getContent;
+            $jsonText = $request->getContent();
    
             // On transforme ce json en array
             $jsonArray = json_decode($jsonText, true);
