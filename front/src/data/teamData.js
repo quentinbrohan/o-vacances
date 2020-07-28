@@ -2,6 +2,7 @@ import imgQuentin from 'src/assets/images/team/quentin-brohan.jpg';
 import imgAlex from 'src/assets/images/team/alexandre-quezel.jpg';
 import imgAudrey from 'src/assets/images/team/audrey-chaigne.jpg';
 import imgCecilia from 'src/assets/images/team/cecilia-cavallini.jpg';
+import imgLoic from 'src/assets/images/team/loic-collatuzo.jpg';
 // Database to present the team
 export default [
   {
@@ -29,7 +30,7 @@ export default [
     portfolio: '',
     autre: '',
     role: 'Back lead - Back Dev',
-    picture: '',
+    picture: imgLoic,
   },
   {
     name: 'Alexandre Quezel',

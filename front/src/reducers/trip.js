@@ -205,8 +205,6 @@ const trip = (state = initialState, action = {}) => {
       };
 
     case LOG_OUT_TRIP:
-      console.log(action);
-      
       return {
         state: null,
       };
