@@ -127,7 +127,7 @@ const ActivityEdit = ({
             handleEditActivity();
             closeModal();
           }}
-        >j'ajoute
+        >Modifier
         </Button>
       </Modal>
     </div>
