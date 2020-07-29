@@ -221,7 +221,7 @@ const Trip = ({
                   // onChange={() => manageDisponibilities(disponibilities)}
                 >
                   <option disabled>Participants</option>
-                  {trip.disponibility.length > 1 && (
+                  {/* {(!isLoading && trip.disponibility.length >= 1) && (
                     trip.disponibility.map((participant) => (
                       <option
                     // Pass Object as JSON for value
@@ -234,7 +234,7 @@ const Trip = ({
                       </option>
                     ))
 
-                  )}
+                  )} */}
                 </select>
                 {/* if logged user => able to edit own disponibilities */}
                 <Button color="secondary" size="sm" onClick={openDispModal}>

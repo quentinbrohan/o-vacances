@@ -142,6 +142,8 @@ const trip = (state = initialState, action = {}) => {
       };
 
     case SAVE_DISPONIBILITIES:
+      console.log(action);
+      
       return {
         ...state,
         trip: {
@@ -204,7 +206,7 @@ const trip = (state = initialState, action = {}) => {
 
     case LOG_OUT_TRIP:
       return {
-        state: null,
+        ...initialState,
       };
 
     case CLEAR_ACTIVITY_FIELD:

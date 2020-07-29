@@ -17,6 +17,10 @@ const HomeUser = ({
     fetchTrips();
   }, []);
 
+  useEffect(() => {
+    fetchTrips();
+  }, []);
+
   const futureTrips = trips.filter((trip) => isFuture(parseISO(trip.endDate)));
   const oldTrips = trips.filter((trip) => isPast(parseISO(trip.endDate)));
   // Filter trips => if endDate < actual Date = oldTrip
@@ -30,7 +34,7 @@ const HomeUser = ({
       </Helmet>
       <div className="connection-container" />
       {isLoading && <Loading />}
-      {!isLoading && (
+      {(!isLoading && futureTrips) && (
       <>
         <h1>Mes Voyages</h1>
         <div className="my-trips">

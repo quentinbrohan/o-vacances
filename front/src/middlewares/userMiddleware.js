@@ -70,7 +70,7 @@ const userMiddleware = (store) => (next) => (action) => {
         .catch((error) => {
           console.warn(error);
           store.dispatch(toastError('Erreur lors de l\'inscription'));
-          store.dispatch(addError(error.response.data.message));
+          // store.dispatch(addError(error.response.data.message));
         });
 
       next(action);
