@@ -33,12 +33,12 @@ const FieldSelect = ({
           onChange={handleChange}
           required={required}
         >
-          <option defaultValue="" selected disabled> Choisir une catégorie</option>
-          <option value="1">restaurant</option>
-          <option value="2">sortie nocturne</option>
-          <option value="3">sport</option>""
-          <option value="4">visite culturelle</option>
-          <option value="5">point d'eau</option>
+          <option selected hidden> Choisir une catégorie</option>
+          <option value="1">Restaurant</option>
+          <option value="2">Sortie nocturne</option>
+          <option value="3">Sport</option>
+          <option value="4">Visite culturelle</option>
+          <option value="5">Point d'eau</option>
         </select>
       </label>
     </div>

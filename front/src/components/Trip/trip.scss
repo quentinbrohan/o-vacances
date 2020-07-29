@@ -60,7 +60,7 @@
         margin-top: 1rem;
         padding: 1rem;
         width: 100%;
-        background-color: $greyColorLighter;
+        background-color: $whiteColor;
         border-radius: 0.5rem;
         @media (min-width: $tablet) {
           order: 1;
@@ -214,7 +214,8 @@
   }
 }
 
-.disponibilites-modal-button {
+.disponibilites-modal-button,
+.help-modal-button {
   align-self: flex-end;
   margin-bottom: 1rem;
 }

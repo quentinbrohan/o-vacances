@@ -51,7 +51,7 @@ const Suggestion = ({
           <p className="suggestion-author">
             {user.firstname}
             <span className="suggestion-date">
-              {toStringSuggestion(createdAt)}
+              {/* {toStringSuggestion(createdAt)} */}
             </span>
           </p>
         </div>

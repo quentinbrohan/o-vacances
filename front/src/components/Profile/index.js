@@ -120,7 +120,7 @@ const Profile = ({
         <h2>J'organise un voyage</h2>
         <div className="profile-trip-information">
           <p>Je crée un voyage. J'invite mes amis ou ma famille.
-            On s'organise ensemble avec O'Vacances!
+            On s'organise ensemble avec O'Vacances !
             <br />
             Agenda, lieux, activités, suggestions...
           </p>

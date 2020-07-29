@@ -37,7 +37,13 @@ const ActivityForm = ({
   return (
 
     <div className="activity-form">
-      <Button onClick={openModal}>Ajouter une activité</Button>
+      <Button
+        color="primary"
+        size="sm"
+        onClick={openModal}
+      >
+        Ajouter une activité
+      </Button>
       <Modal
         className="activity-form-modal"
         isOpen={modalIsOpen}
@@ -89,13 +95,15 @@ const ActivityForm = ({
           <Field
             name="activityDescription"
             type="textarea"
-            placeholder="On fait quoi?"
+            placeholder="On fait quoi ?"
             onChange={changeField}
             value={activityDescription}
           />
         </form>
         <Button
           className="activity-form-button"
+          color="primary"
+          size="sm"
           onClick={() => {
             handleAddActivity();
             closeModal();

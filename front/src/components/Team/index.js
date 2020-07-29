@@ -1,19 +1,22 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 
-import {
-  GitHub,
-  Linkedin,
-  Link,
-} from 'react-feather';
+// import {
+//   GitHub,
+//   Linkedin,
+//   Link,
+// } from 'react-feather';
+
+import teamData from 'src/data/teamData';
+import Card from './Card';
 
 import './Team.scss';
 
 // Component to present the team
 
-const Team = ({ persons }) => (
+const Team = () => (
   <main className="team">
     <Helmet>
       <title>L'équipe</title>
@@ -21,7 +24,10 @@ const Team = ({ persons }) => (
     </Helmet>
     <h1>L'équipe</h1>
     <div className="team-cards">
-      {persons.map((person) => (
+      {teamData.map((dev) => (
+        <Card {...dev} key={dev.name} />
+      ))}
+      {/* {persons.map((person) => (
         <article className="team-card" key={person.name}>
           <header
             style={{ backgroundImage: `url(${person.picture})` }}
@@ -54,17 +60,17 @@ const Team = ({ persons }) => (
             </div>
           </div>
         </article>
-      ))}
+      ))} */}
     </div>
   </main>
 );
 
 Team.propTypes = {
-  persons: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
+  // persons: PropTypes.arrayOf(
+  //   PropTypes.shape({
+  //     name: PropTypes.string.isRequired,
+  //   }),
+  // ).isRequired,
 
 };
 export default Team;

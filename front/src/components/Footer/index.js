@@ -11,7 +11,7 @@ const Footer = () => (
           <Link to="/contact">Contact</Link>
         </li>
         <li className="footer-nav-item">
-          <Link to="/equipe">Qui sommes nous ?</Link>
+          <Link to="/equipe">L'équipe</Link>
         </li>
         <li className="footer-nav-item">
           <Link to="/mentions-legales">Mentions Légales</Link>

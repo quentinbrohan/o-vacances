@@ -3,28 +3,28 @@
 .team {
   h1 {
     text-align: center;
-    margin-bottom: 2 * $gutter;
+    margin-bottom: 3 * $gutter;
   }
   .team-cards {
     display: flex;
     justify-content: center;
     flex-flow: wrap;
-    .team-card {
-      width:280px;
-      height: 360px;
-      display: block;
-      margin: $gutter;
-      @include transitionMedium;
-      border: 1px solid $greyColorLighter;
-      border-radius: 0.5rem;
-      overflow: hidden;
-      background-color: $greyColorLighter;
+    // .team-card {
+    //   width:280px;
+    //   height: 360px;
+    //   display: block;
+    //   margin: $gutter;
+    //   @include transitionMedium;
+    //   border: 1px solid $greyColorLighter;
+    //   border-radius: 0.5rem;
+    //   overflow: hidden;
+    //   background-color: $greyColorLighter;
       
-      &:hover {
-        // cursor: pointer;
-        box-shadow:  -0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.3);
-        transform: scale(1.04);
-      }
+    //   &:hover {
+    //     // cursor: pointer;
+    //     box-shadow:  0rem 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    //     transform: scale(1.04);
+    //   }
     }
     
     .team-card-header {
@@ -74,5 +74,5 @@
     
   }
 
-}
+
 
