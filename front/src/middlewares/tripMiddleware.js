@@ -52,7 +52,6 @@ import {
 
 import { checkIfCreator } from 'src/utils';
 import currentUser from 'src/utils/getCurrentUser';
-import { UserCheck } from 'react-feather';
 
 const tripMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
@@ -91,14 +90,17 @@ const tripMiddleware = (store) => (next) => (action) => {
           // Check if creator
           const isCreator = checkIfCreator(response.data.creator, user);
 
+          // Need promise
           store.dispatch(saveTrip(response.data, isCreator));
+          store.dispatch(fetchDisponibilities(tripId));
+          store.dispatch(fetchSuggestions(tripId));
         })
         .then(() => {
-          store.dispatch(fetchDisponibilities(tripId));
+          store.dispatch(loading(false));
         })
         .catch((error) => {
           console.warn(error);
-          store.dispatch(toastError(error.response.data.message));
+          // store.dispatch(toastError(error.response.data.message));
         });
 
       next(action);
@@ -189,18 +191,16 @@ const tripMiddleware = (store) => (next) => (action) => {
     }
 
     case FETCH_SUGGESTIONS: {
-      const user = currentUser();
       const { id: tripId } = store.getState().trip.trip;
 
       // Endpoint fetch suggestions from trip
-      // Need to pass from trip as suggestion endpoint don't have all
-      // axios.get(`${API_URL}/api/v0/trips/${id}/suggestions`, {
-      axios.get(`${API_URL}/api/v0/users/${user}/trips/${tripId}`)
+      axios.get(`${API_URL}/api/v0/trips/${tripId}/suggestions`)
 
         // props,
       // })
         .then((response) => {
-          store.dispatch(saveSuggestions(response.data.suggestion));
+          // console.log(response);
+          store.dispatch(saveSuggestions(response.data));
         })
         .catch((error) => {
           console.warn(error);
@@ -455,16 +455,16 @@ const tripMiddleware = (store) => (next) => (action) => {
         // props,
       })
         .then((response) => {
-          // console.log(response);
+          console.log(response);
 
-          // const userDisponibilities = response.data.disponibility[0];
           const userDisponibilities = response.data.disponibility.filter((participant) => participant.id === user);
+          console.log(userDisponibilities);
 
           store.dispatch(saveDisponibilities(response.data.disponibility, userDisponibilities));
         })
         .catch((error) => {
           console.warn(error);
-          store.dispatch(toastError(error.response.data.message));
+          // store.dispatch(toastError(error.response.data.message));
         });
 
       next(action);

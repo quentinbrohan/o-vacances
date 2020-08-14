@@ -49,8 +49,12 @@
           border-radius: 0.1*$gutter;
           background-color: $whiteColor;
           padding: 0.3*$gutter;
+          &:focus {
+            outline-color: $greyColorDarker;
+          }
 
-          &::placeholder{
+          input::placeholder,
+          textarea::placeholder {
             color: $greyColorDarker;
             font-style: $fontBody;
           }

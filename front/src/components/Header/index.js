@@ -58,7 +58,10 @@ const Header = ({
 
               )
                 : (
-                  <NavLink to="/contact" onClick={() => handleMenuState()} activeClassName="nav--active">Contact</NavLink>
+                  <>
+                    <NavLink to="/equipe" activeClassName="nav--active">Équipe</NavLink>
+                    <NavLink to="/contact" onClick={() => handleMenuState()} activeClassName="nav--active">Contact</NavLink>
+                  </>
                 )}
 
               <div className="connection-mobile">
@@ -96,6 +99,7 @@ const Header = ({
             )
               : (
                 <ul>
+                  <li><NavLink to="/equipe" activeClassName="nav--active">Équipe</NavLink></li>
                   <li><NavLink to="/contact" activeClassName="nav--active">Contact</NavLink></li>
                 </ul>
               )}

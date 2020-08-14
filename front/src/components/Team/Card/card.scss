@@ -1,0 +1,114 @@
+@import "src/styles/vars";
+
+.team {
+  .team-cards {
+    .team-card {
+      display: flex;
+      width: 100%;
+      max-width: 640px;
+      height: 400px;
+      margin: auto;
+      margin-bottom: $gutter * 4;
+      justify-content: space-between;
+      flex-wrap: nowrap;
+      align-items: stretch;
+      align-content: space-around;
+      align-self: center;
+      // border-radius: 0.5rem;
+      // border-top-right-radius: 0.5rem;
+      // border-bottom-right-radius: 0.5rem;
+      // border-bottom-left-radius: 0.5rem;
+      background-color: $whiteColor;
+      box-shadow: 0.5rem 2rem 1.5rem -1.5rem rgba(0, 0, 0, 0.5);
+      // overflow: hidden;
+
+      &-image-container {
+        position: relative;
+        display: flex;
+        width: 100%;
+        max-width: 310px;
+        justify-content: center;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        align-self: stretch;
+        flex: 0 0 auto;
+        grid-auto-columns: 1fr;
+        grid-column-gap: 0.25rem;
+        grid-row-gap: 0.5rem;
+        grid-template-columns: 0.25fr 1.5fr 0.25fr;
+        grid-template-rows: auto auto auto auto auto;
+        // background-color: #ffffff00;
+        opacity: 0.9;
+        .image-container {
+          img.image {
+            z-index: 9999;
+            height: 25rem;
+            width: 25rem;
+            position: relative;
+            margin-top: -2.75rem;
+            margin-right: 9.5rem;
+            margin-left: -3.25rem;
+            border-radius: 0.1rem;
+            box-shadow: 1.5rem 1.5rem 0.75rem -1.5rem
+            rgba(42, 44, 52, 0.8);
+            max-width: 100%;
+            vertical-align: middle;
+            object-fit: cover;
+            display: inline-block;
+          }
+        }
+      }
+
+      &-info {
+        margin-left: 2.25rem;
+        flex: 0 auto;
+        border-right: 0.25rem solid rgb(142, 192, 182, 1);
+        h1,
+        h2,
+        h3 {
+          // text-align: left;
+          font-family: $fontBody;
+        }
+        h1.name {
+          position: relative;
+          margin-top: 3.25rem;
+          margin-bottom: 0;
+          color: $blackColor;
+          font-size: 3rem;
+          line-height: 125%;
+          font-weight: 700;
+          text-align: left;
+        }
+        h2.role {
+          margin-top: 1rem;
+          margin-bottom: 0;
+          text-align: center;
+          align-self: center;
+          color: $greyColor;
+          font-size: 1rem;
+          font-weight: 600;
+          text-indent: 1px;
+          text-align: left;
+        }
+
+        ul.links {
+          margin-top: $gutter;
+          font-size: 1rem;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          a {
+            color: $blackColor;
+            @include transitionFast;
+            cursor: pointer;
+            margin-right: 2rem;
+            
+            &:hover {
+              color: $primaryColor;
+            }    
+          }
+        }
+      }
+    }
+  }
+}

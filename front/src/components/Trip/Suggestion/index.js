@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'src/components/elements/Button';
 
-import { toDate } from 'src/utils/format';
+import { toStringSuggestion } from 'src/utils/format';
 import getCurrentUser from 'src/utils/getCurrentUser';
 
 import {
@@ -19,7 +19,7 @@ import './suggestion.scss';
 const Suggestion = ({
   id,
   user,
-  date,
+  createdAt,
   description,
   title,
   handleSuggestionDelete,
@@ -51,7 +51,7 @@ const Suggestion = ({
           <p className="suggestion-author">
             {user.firstname}
             <span className="suggestion-date">
-              {/* {toDate(date)} */}
+              {/* {toStringSuggestion(createdAt)} */}
             </span>
           </p>
         </div>
@@ -96,7 +96,7 @@ Suggestion.propTypes = {
     }).isRequired,
   ).isRequired,
   firstname: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired,
+  createdAt: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,

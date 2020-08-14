@@ -31,9 +31,6 @@ import Loading from 'src/components/Loading';
 // TEMPO: For direct integration in Trip component
 import TripAuth from 'src/containers/Trip/TripAuth';
 
-// Data
-import persons from 'src/data/teamData';
-
 import './styles.scss';
 
 // Lazy Loading
@@ -106,7 +103,7 @@ const App = ({
             />
             <Route
               path="/equipe"
-              render={() => <Team persons={persons} />}
+              render={() => <Team />}
             />
             <Route
               path="/mentions-legales"

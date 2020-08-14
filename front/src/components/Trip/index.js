@@ -221,17 +221,20 @@ const Trip = ({
                   // onChange={() => manageDisponibilities(disponibilities)}
                 >
                   <option disabled>Participants</option>
-                  {trip.disponibility.map((participant) => (
-                    <option
+                  {/* {(!isLoading && trip.disponibility.length >= 1) && (
+                    trip.disponibility.map((participant) => (
+                      <option
                     // Pass Object as JSON for value
                       // value={JSON.stringify(participant.disponibilities)}
-                      key={participant.id}
-                      disabled={!isOwnUser}
-                      defaultValue={isOwnUser}
-                    >
-                      {participant.users[0].firstname}: {toDate(participant.startDate)} 🠒 {toDate(participant.endDate)}
-                    </option>
-                  ))}
+                        key={participant.id}
+                        disabled={!isOwnUser}
+                        defaultValue={isOwnUser}
+                      >
+                        {participant.users[0].firstname}: {toDate(participant.startDate)} 🠒 {toDate(participant.endDate)}
+                      </option>
+                    ))
+
+                  )} */}
                 </select>
                 {/* if logged user => able to edit own disponibilities */}
                 <Button color="secondary" size="sm" onClick={openDispModal}>
@@ -324,7 +327,12 @@ const Trip = ({
                   style={customStyles}
                   contentLabel="Aide voyage"
                 >
-                  <Button color="secondary" size="sm" onClick={closeModal}>
+                  <Button
+                    color="secondary"
+                    size="sm"
+                    onClick={closeModal}
+                    haveClassName="help-modal-button"
+                  >
                     <XCircle />
                   </Button>
                   <h2>Besoin d'aide ?</h2>
@@ -364,6 +372,7 @@ const Trip = ({
                     color="secondary"
                     size="sm"
                     type="submit"
+                    className="trip-button"
                   >
                     <Link to={`/modifier-un-voyage/${tripId}`}>Modifier</Link>
                   </Button>
@@ -371,8 +380,9 @@ const Trip = ({
                     color="secondary"
                     size="sm"
                     type="submit"
+                    className="trip-button"
                     onClick={() => manageTripDelete()}
-                  >Supprimer
+                  > <a href="#">Supprimer</a>
                   </Button>
                 </>
               )}
@@ -400,7 +410,7 @@ const Trip = ({
             <span>({trip.suggestion.length})</span>
           </h2>
           <div className="trip-suggestions">
-            {(trip.suggestion.length >= 1) && (
+            {(trip.suggestion.length >= 1 && !isLoading) && (
               trip.suggestion.map((sugg) => (
                 <Suggestion
                   {...sugg}

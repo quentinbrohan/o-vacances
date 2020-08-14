@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Button from 'src/components/elements/Button';
 import { Helmet } from 'react-helmet';
@@ -15,6 +15,7 @@ const Signin = ({
   changeField,
   handleSignin,
   error,
+  isAuthenticated,
 }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -23,6 +24,7 @@ const Signin = ({
 
   return (
     <main className="signin">
+      {isAuthenticated && <Redirect to="/" />}
       <Helmet>
         <title>Inscription</title>
         <meta name="description" content="Inscription" />
@@ -89,6 +91,7 @@ Signin.propTypes = {
   password: PropTypes.string.isRequired,
   changeField: PropTypes.func.isRequired,
   handleSignin: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
 };
 
 export default Signin;
