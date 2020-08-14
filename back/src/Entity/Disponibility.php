@@ -54,6 +54,7 @@ class Disponibility
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="disponibility")
+     * @Groups("apiV0_trip")
      * @Groups("apiV0_dispoByTrip")
      * @Groups("apiV0-dispo")
      * @Groups("apiV0_list")
