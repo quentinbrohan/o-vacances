@@ -53,7 +53,6 @@ const userMiddleware = (store) => (next) => (action) => {
       };
 
       store.dispatch(loading(true));
-      console.log(firstname, lastname,email, password)
       // Endpoint API for user creation through Symfony
       axios.post(`${API_URL}/users/register`, {
         firstname,
@@ -71,7 +70,7 @@ const userMiddleware = (store) => (next) => (action) => {
         .catch((error) => {
           console.warn(error);
           store.dispatch(toastError('Erreur lors de l\'inscription'));
-          store.dispatch(addError(error.response.data.message));
+          // store.dispatch(addError(error.response.data.message));
         });
 
       next(action);

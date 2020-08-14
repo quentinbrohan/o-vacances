@@ -24,12 +24,12 @@ export default [
     picture: imgCecilia,
   },
   {
-    name: 'Loïc Colluzato',
+    name: 'Loïc Collatuzo',
     linkedin: 'https://www.linkedin.com/in/loïc-collatuzo-5223841b3',
     github: 'https://github.com/loic777',
     portfolio: '',
     autre: '',
-    role: 'Back lead - Back Dev',
+    role: 'Back Lead - Back Dev',
     picture: imgLoic,
   },
   {
@@ -38,7 +38,7 @@ export default [
     github: 'https://github.com/AQuezel',
     portfolio: '',
     autre: '',
-    role: 'Git Master - Front Dev',
+    role: 'Git Master - Back Dev',
     picture: imgAlex,
   },
   {
@@ -47,7 +47,7 @@ export default [
     github: 'https://github.com/Audrey-Chaigne',
     portfolio: '',
     autre: '',
-    role: 'Product owner - Back Dev',
+    role: 'Product Owner - Back Dev',
     picture: imgAudrey,
   },
 ];

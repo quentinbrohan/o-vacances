@@ -222,7 +222,10 @@ class TripController extends AbstractController
                 $jsonText = $request->get('document');
                 $image = $request->files->get('file');
 
-               
+/*                 $trip->setImage(
+                    new File($this->getParameter('images_directory').'/'.$trip->getImage())
+                );
+ */               
                 try {
                     // on crée une nouvelle entité Trip avec le serializer
                     $newTrip = $serializer->deserialize($jsonText, Trip::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $trip]);

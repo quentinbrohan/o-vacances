@@ -52,7 +52,8 @@ const FeaturesSplit = () => (
 
       <div className="split-item-inverted">
         <div className="split-item-content">
-          <h3>"Qui amène quoi ?" (prochainement)</h3>
+          <h3>"Qui amène quoi ?"</h3>
+          <p className="coming-soon">Prochainement</p>
           <p>Fini les listes papiers qui se perdent,
             chacun peut écrire ce qu'il compte amener
             (jeux de sociétés, matériels, nourriture...).
@@ -65,7 +66,9 @@ const FeaturesSplit = () => (
 
       <div className="split-item">
         <div className="split-item-content">
-          <h3>Gestion du budget (prochainement)</h3>
+          <h3>Gestion du budget</h3>
+          <p className="coming-soon">Prochainement</p>
+
           <p>
             Car trouver et gérer son montant de dépenses parmi le groupe n'est pas toujours évident.
           </p>

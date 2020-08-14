@@ -6,6 +6,7 @@ import {
   LOG_OUT_USER,
   UPDATE_USER_IMAGE,
   LOADING,
+  SIGN_IN,
 } from 'src/actions/user';
 
 const initialState = {
@@ -73,6 +74,13 @@ const user = (state = initialState, action = {}) => {
       return {
         ...state,
         isLoading: action.isLoading,
+      };
+
+    case SIGN_IN:
+      return {
+        ...state,
+        email: '',
+        password: '',
       };
 
     default: return state;
