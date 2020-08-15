@@ -52,6 +52,7 @@ const customStyles = {
     display: 'flex',
     flexDirection: 'column',
     maxWidth: '560px',
+    zIndex: 4,
   },
 };
 
