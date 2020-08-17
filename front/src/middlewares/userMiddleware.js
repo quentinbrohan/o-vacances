@@ -26,8 +26,8 @@ import { addError } from 'src/actions/error';
 
 import {
   error as toastError,
-  message as toastMessage,
-  warning as toastWarning,
+  // message as toastMessage,
+  // warning as toastWarning,
   success as toastSuccess,
 } from 'react-toastify-redux';
 
@@ -61,7 +61,7 @@ const userMiddleware = (store) => (next) => (action) => {
         password,
       }, config)
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           if (response.status === 201) {
             store.dispatch(toastSuccess('Inscription réussie'));
             store.dispatch(push('/login'));
@@ -86,7 +86,7 @@ const userMiddleware = (store) => (next) => (action) => {
         email,
       })
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           if (response.status === 200) {
             const { token } = response.data;
 
@@ -97,7 +97,7 @@ const userMiddleware = (store) => (next) => (action) => {
             // axios Global settings to forward header + token
             axios.defaults.withCredentials = true;
             axios.defaults.headers.Authorization = `Bearer ${token}`;
-            store.dispatch(push('/'));
+            store.dispatch(push('/mes-voyages'));
           }
         })
         .catch((error) => {
@@ -118,7 +118,7 @@ const userMiddleware = (store) => (next) => (action) => {
       // Endpoint fetch User Profil
       axios.get(`${API_URL}/api/v0/users/${currentUser()}/profil`)
         .then((response) => {
-          console.log(response);
+          // console.log(response);
 
           store.dispatch(updateUserProfil(response.data));
         })
@@ -146,7 +146,7 @@ const userMiddleware = (store) => (next) => (action) => {
         password,
       })
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           store.dispatch(toastSuccess('Modifications effectuées'));
           store.dispatch(updateUserProfil(response.data));
         })
@@ -168,13 +168,13 @@ const userMiddleware = (store) => (next) => (action) => {
           // Add to Axios global config:
           axios.defaults.withCredentials = true;
           axios.defaults.headers.Authorization = `Bearer ${token}`;
-          // console.log('Token valide');
           store.dispatch(logInUser());
           next(action);
           break;
         }
         else {
           store.dispatch(logOutUser());
+          store.dispatch(push('/login'));
           next(action);
           break;
         }
@@ -200,7 +200,7 @@ const userMiddleware = (store) => (next) => (action) => {
     case EDIT_USER_IMAGE: {
       const imageInput = document.querySelector('#profile-field-input.profile-image');
       const file = imageInput.files[0];
-      console.log(file);
+      // console.log(file);
 
       const formData = new FormData();
       formData.append('file', file);
@@ -217,7 +217,7 @@ const userMiddleware = (store) => (next) => (action) => {
         formData,
         config)
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           store.dispatch(toastSuccess('Photo sauvegardée !'));
           // save new avatar URL in store.
           // store.dispatch(updateUserImage(response.data))

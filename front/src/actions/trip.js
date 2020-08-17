@@ -38,6 +38,8 @@ export const DELETE_SUGGESTION = 'DELETE_SUGGESTION';
 export const REMOVE_SUGGESTION = 'REMOVE_SUGGESTION';
 export const LOG_OUT_TRIP = 'LOG_OUT_TRIP';
 export const CLEAR_ACTIVITY_FIELD = 'CLEAR_ACTIVITY_FIELD';
+export const SAVE_SUGGESTION = 'SAVE_SUGGESTION';
+export const SAVE_ACTIVITY = 'SAVE_ACTIVITY';
 
 export const updateSuggestionField = (newValue, name) => ({
   type: UPDATE_SUGGESTION_FIELD,
@@ -63,10 +65,11 @@ export const fetchTrip = (tripId) => ({
   tripId,
 });
 
-export const saveTrip = (trip, isCreator) => ({
+export const saveTrip = (trip, isCreator, userDisponibilities) => ({
   type: SAVE_TRIP,
   trip,
   isCreator,
+  userDisponibilities,
 });
 
 export const addTrip = (formData) => ({
@@ -84,8 +87,9 @@ export const updateActivityField = (newValue, name) => ({
   name,
 });
 
-export const addActivity = () => ({
+export const addActivity = (activity) => ({
   type: ADD_ACTIVITY,
+  activity,
 });
 
 export const deleteActivity = () => ({
@@ -170,8 +174,9 @@ export const loading = (isLoading) => ({
   isLoading,
 });
 
-export const removeActivity = () => ({
+export const removeActivity = (activityId) => ({
   type: REMOVE_ACTIVITY,
+  activityId,
 });
 
 export const saveUserDisponibilities = (userDisponibilities) => ({
@@ -209,8 +214,9 @@ export const deleteSuggestion = (suggestionId) => ({
   suggestionId,
 });
 
-export const removeSuggestion = () => ({
+export const removeSuggestion = (suggestionId) => ({
   type: REMOVE_SUGGESTION,
+  suggestionId,
 });
 
 export const logOutTrip = () => ({
@@ -219,4 +225,14 @@ export const logOutTrip = () => ({
 
 export const clearActivityField = () => ({
   type: CLEAR_ACTIVITY_FIELD,
+});
+
+export const saveSuggestion = (suggestion) => ({
+  type: SAVE_SUGGESTION,
+  suggestion,
+});
+
+export const saveActivity = (activity) => ({
+  type: SAVE_ACTIVITY,
+  activity,
 });

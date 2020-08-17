@@ -51,7 +51,7 @@ const Suggestion = ({
           <p className="suggestion-author">
             {user.firstname}
             <span className="suggestion-date">
-              {/* {toStringSuggestion(createdAt)} */}
+              {toStringSuggestion(createdAt)}
             </span>
           </p>
         </div>
@@ -91,11 +91,11 @@ const Suggestion = ({
 Suggestion.propTypes = {
   user: PropTypes.objectOf(
     PropTypes.shape({
+      id: PropTypes.number.isRequired,
       avatar: PropTypes.string.isRequired,
       firstname: PropTypes.string.isRequired,
     }).isRequired,
   ).isRequired,
-  firstname: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,

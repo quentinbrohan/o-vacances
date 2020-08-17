@@ -16,13 +16,13 @@ import './dateRange_overrides.scss'; // Overrides default theme
 import { DateRange } from 'react-date-range';
 import { fr } from 'date-fns/locale';
 import {
-  dateToString,
+  // dateToString,
   toDate,
-  toString,
-  ISOToString,
-  formatDate,
+  // toString,
+  // ISOToString,
+  // formatDate,
 } from 'src/utils/format';
-import { parseISO } from 'date-fns';
+// import { parseISO } from 'date-fns';
 import { Helmet } from 'react-helmet';
 
 import { Link, useParams } from 'react-router-dom';
@@ -60,16 +60,12 @@ const customStyles = {
 Modal.setAppElement('#root');
 
 const Trip = ({
-  changeSuggestion,
-  suggestionContent,
   trip,
   isLoading,
-  addSuggestion,
   isCreator,
   tripPassword,
   isOwnUser,
   userDisponibilities,
-  // changeUserDisponibilities,
   reviseUserDisponibilities,
   addUserDisponibilities,
   handleTripDelete,
@@ -122,8 +118,7 @@ const Trip = ({
   ]);
 
   useEffect(() => {
-    if (!isLoading && userDisponibilities) {
-      setHaveDisponibilities(true);
+    if (userDisponibilities) {
       setState([
         {
           startDate: new Date(userDisponibilities.startDate),
@@ -131,6 +126,7 @@ const Trip = ({
           key: 'selection',
         },
       ]);
+      setHaveDisponibilities(true);
     }
   }, [userDisponibilities]);
 
@@ -142,9 +138,9 @@ const Trip = ({
     addUserDisponibilities(state);
   };
 
-  const handleSuggestion = () => {
-    addSuggestion();
-  };
+  // const handleSuggestion = () => {
+  //   addSuggestion();
+  // };
 
   const manageTripDelete = () => {
     handleTripDelete();
@@ -200,7 +196,7 @@ const Trip = ({
           <div className="right">
             <div className="trip-info-aside">
               <div className="participants">
-                <p className="text">{`${trip.users.length} participants`}</p>
+                <p className="text">{trip.users.length > 1 ? `${trip.users.length} participants` : '1 participant'}</p>
                 <div className="avatars">
                   {trip.users.map((user) => (
                     <img
@@ -214,28 +210,25 @@ const Trip = ({
               </div>
 
               <div className="disponibilities">
-                {/* Liste ? Intégration calendrier avec selector */}
                 <p htmlFor="disponibilities">Calendrier des disponibilités</p>
                 <select
                   name="disponibilities"
                   id="disponibilities"
-                  // onChange={() => manageDisponibilities(disponibilities)}
                 >
                   <option disabled>Participants</option>
-                  {/* {(!isLoading && trip.disponibility.length >= 1) && (
+                  {(!isLoading && trip.disponibility.length >= 1) && (
                     trip.disponibility.map((participant) => (
                       <option
-                    // Pass Object as JSON for value
-                      // value={JSON.stringify(participant.disponibilities)}
                         key={participant.id}
-                        disabled={!isOwnUser}
+                        disabled={isOwnUser}
                         defaultValue={isOwnUser}
                       >
-                        {participant.users[0].firstname}: {toDate(participant.startDate)} 🠒 {toDate(participant.endDate)}
+                        {participant.users[0].firstname}: {''}
+                        {toDate(participant.startDate)} 🠒 {toDate(participant.endDate)}
                       </option>
                     ))
 
-                  )} */}
+                  )}
                 </select>
                 {/* if logged user => able to edit own disponibilities */}
                 <Button color="secondary" size="sm" onClick={openDispModal}>
@@ -292,8 +285,6 @@ const Trip = ({
                   </Button>
                   )}
                 </Modal>
-                {/* If Calendar === user ++ select === user: show button => axios post new dates */}
-                {/* {isOwnUser && ( */}
               </div>
 
               <div className="trip-access">
@@ -313,6 +304,7 @@ const Trip = ({
                     href={`localhost:8080/voyage/${trip.id}`}
                     className="link"
                   >
+                    {/* Shall be prod url */}
                     http://o-vacances.fr/voyage/{trip.id}
                   </Link>
                 </div>
@@ -366,7 +358,6 @@ const Trip = ({
               >
                 Ajouter une activité
               </ActivityForm>              {/* OnClick copy Link to Clipboard ? */}
-              {/* If isCreator => Link to TripEdit !! Need currentTripID */}
               {isCreator && (
                 <>
                   <Button
@@ -421,11 +412,7 @@ const Trip = ({
               ))
             )}
           </div>
-          <SuggestionForm
-            onChange={changeSuggestion}
-            suggestionContent={suggestionContent}
-            manageSuggestion={handleSuggestion}
-          />
+          <SuggestionForm />
         </section>
       </>
       )}
@@ -434,26 +421,15 @@ const Trip = ({
 };
 
 Trip.propTypes = {
-  changeSuggestion: PropTypes.func.isRequired,
-  handleSuggestion: PropTypes.func.isRequired,
-  manageSuggestion: PropTypes.func.isRequired,
-  suggestionContent: PropTypes.string.isRequired,
   checkTripAuth: PropTypes.func.isRequired,
   trip: PropTypes.PropTypes.oneOfType([
     PropTypes.array,
     PropTypes.object]).isRequired,
   isLoading: PropTypes.bool.isRequired,
-  addSuggestion: PropTypes.func.isRequired,
   isCreator: PropTypes.bool.isRequired,
   tripPassword: PropTypes.string.isRequired,
   isOwnUser: PropTypes.bool.isRequired,
-  userDisponibilities: PropTypes.objectOf(
-    PropTypes.shape({
-      startDate: PropTypes.string,
-      endDate: PropTypes.string,
-    }),
-  ),
-  changeUserDisponibilities: PropTypes.func.isRequired,
+  userDisponibilities: PropTypes.array,
   reviseUserDisponibilities: PropTypes.func.isRequired,
   addUserDisponibilities: PropTypes.func.isRequired,
   handleTripDelete: PropTypes.func.isRequired,
@@ -461,11 +437,8 @@ Trip.propTypes = {
   handleSuggestionDelete: PropTypes.func.isRequired,
 };
 
-// Trip.defaultProps = {
-//   userDisponibilities: {
-//     startDate: null,
-//     endDate: null,
-//   },
-// };
+Trip.defaultProps = {
+  userDisponibilities: [],
+};
 
 export default Trip;

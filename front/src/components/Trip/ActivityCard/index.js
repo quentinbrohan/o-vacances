@@ -44,11 +44,9 @@ ActivityCard.propTypes = {
   title: PropTypes.string.isRequired,
   startDate: PropTypes.string.isRequired,
   endDate: PropTypes.string.isRequired,
-  category: PropTypes.arrayOf(
-    PropTypes.shape({
-      image: PropTypes.string.isRequired,
-    }),
-  ),
+  category: PropTypes.shape({
+    image: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default ActivityCard;
