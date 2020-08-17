@@ -1,13 +1,35 @@
 # O'Vacances - Front
 
-### Lancement du serveur de dev
+## Lancement du serveur de dev
 
-* Cloner le repo avec `git@github.com:O-clock-Excalibur/o-vacances.git`
+* Git clone `git@github.com:quentinbrohan/o-vacances.git`
 
-* Se déplacer dans le dossier **front**
+* Move inside folder **front**
   
-* Lancer `yarn` pour installer les dépendances listées dans le package.json
+* Launch `yarn` to install dependancies
 
-* Lancez la commande `yarn start`
+* `yarn start` to launch project
 
-* Ouvrir l'URL `http://localhost:8080` dans le navigateur pour [accéder à l'application](http://localhost:8080).
+* In browser, open `http://localhost:8080` to access [website's local page](http://localhost:8080).
+
+## Default Login info (email/password):
+```
+quentin@gmail.com
+quentin
+```
+```
+cecilia@gmail.com
+cecilia
+```
+```
+loic@gmail.com
+loic
+```
+```
+alexandre@gmail.com
+alexandre
+```
+```
+audrey@gmail.com
+audrey
+```
