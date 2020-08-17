@@ -15,7 +15,6 @@ import {
   EDIT_ACTIVITY,
   FETCH_SUGGESTIONS,
   saveSuggestions,
-  fetchTrip,
   MODIFY_USER_DISPONIBILITIES,
   NEW_USER_DISPONIBILITIES,
   DELETE_TRIP,
@@ -25,7 +24,6 @@ import {
   FETCH_DISPONIBILITIES,
   saveDisponibilities,
   fetchDisponibilities,
-  fetchSuggestions,
   DELETE_ACTIVITY,
   removeActivity,
   FETCH_ACTIVITIES,
@@ -35,14 +33,12 @@ import {
   CHECK_TRIP_AUTH,
   loading,
   saveTripAuth,
-  saveTripActivities,
   DELETE_SUGGESTION,
   clearActivityField,
+  removeSuggestion,
+  saveSuggestion,
+  saveActivity,
 } from 'src/actions/trip';
-
-import {
-  addError,
-} from 'src/actions/error';
 
 import {
   error as toastError,
@@ -61,7 +57,7 @@ const tripMiddleware = (store) => (next) => (action) => {
       // Endpoint fetch Trips list from user
       axios.get(`${API_URL}/api/v0/users/${user}/trips`)
         .then((response) => {
-          console.log(response);
+          // console.log(response);
 
           store.dispatch(saveTrips(response.data.trip));
         })
@@ -82,18 +78,15 @@ const tripMiddleware = (store) => (next) => (action) => {
       // Endpoint fetch Trips from user
       axios.get(`${API_URL}/api/v0/users/${user}/trips/${tripId}`)
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           if (response.status === 401) {
-            console.log(response.data.message);
+            // console.log(response.data.message);
           }
 
           // Check if creator
           const isCreator = checkIfCreator(response.data.creator, user);
 
-          // Need promise
           store.dispatch(saveTrip(response.data, isCreator));
-          store.dispatch(fetchDisponibilities(tripId));
-          store.dispatch(fetchSuggestions(tripId));
         })
         .then(() => {
           store.dispatch(loading(false));
@@ -121,7 +114,7 @@ const tripMiddleware = (store) => (next) => (action) => {
 
       const imageInput = document.querySelector('#tripForm-image');
       const file = imageInput.files[0];
-      console.log(file);
+      // console.log(file);
 
       const form = {
         title,
@@ -151,7 +144,7 @@ const tripMiddleware = (store) => (next) => (action) => {
         formData,
         config)
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           store.dispatch(toastSuccess('Nouveau voyage créé'));
           store.dispatch(push(`/voyage/${response.data.id}`));
         })
@@ -177,9 +170,11 @@ const tripMiddleware = (store) => (next) => (action) => {
         user,
         trip: id,
       })
-        .then(() => {
+        .then((response) => {
+          // console.log(response);
+
           store.dispatch(toastSuccess('Suggestion ajoutée !'));
-          store.dispatch(fetchSuggestions(id));
+          store.dispatch(saveSuggestion(response.data));
         })
         .catch((error) => {
           console.warn(error);
@@ -216,7 +211,6 @@ const tripMiddleware = (store) => (next) => (action) => {
       const { id: tripId } = store.getState().trip.trip;
       const { id: disponibilityId } = store.getState().trip.userDisponibilities;
       const { startDate, endDate } = action.dates[0];
-      console.log(startDate, endDate);
 
       // Endpoint add new suggestion to trip
       axios.patch(`${API_URL}/api/v0/users/${user}/disponibilities/${disponibilityId}`, {
@@ -226,7 +220,7 @@ const tripMiddleware = (store) => (next) => (action) => {
         endDate,
       })
         .then((response) => {
-          console.log(response);
+          // console.log(response);
 
           store.dispatch(saveUserDisponibilities(response.data));
           store.dispatch(toastSuccess('Disponibilités mise à jour'));
@@ -245,7 +239,6 @@ const tripMiddleware = (store) => (next) => (action) => {
       const user = currentUser();
       const { id } = store.getState().trip.trip;
       const { startDate, endDate } = action.dates[0];
-      console.log(startDate, endDate);
 
       // Endpoint add new user disponibilities to trip
       axios.post(`${API_URL}/api/v0/users/${user}/disponibilities`, {
@@ -294,12 +287,11 @@ const tripMiddleware = (store) => (next) => (action) => {
         creator: user,
       })
         .then((response) => {
-          console.log(response);
+          // console.log(response);
 
-          store.dispatch(saveTripActivities(response.data));
+          store.dispatch(saveActivity(response.data));
           store.dispatch(toastSuccess('Activité ajoutée !'));
-          store.dispatch(fetchActivities(id));
-          store.dispatch(clearActivityField());
+          store.dispatch(loading(false));
         })
         .catch((error) => {
           console.warn(error);
@@ -320,14 +312,14 @@ const tripMiddleware = (store) => (next) => (action) => {
         activityId,
       } = store.getState().trip;
 
-      console.log(
-        activityTitle,
-        activityDescription,
-        activityStartDate,
-        activityEndDate,
-        activityCategory,
-        activityId,
-      );
+      // console.log(
+      //   activityTitle,
+      //   activityDescription,
+      //   activityStartDate,
+      //   activityEndDate,
+      //   activityCategory,
+      //   activityId,
+      // );
 
       const { id } = store.getState().trip.trip;
       const user = currentUser();
@@ -343,7 +335,7 @@ const tripMiddleware = (store) => (next) => (action) => {
         creator: user,
       })
         .then((response) => {
-          console.log(response);
+          // console.log(response);
 
           store.dispatch(fetchActivities());
           store.dispatch(toastSuccess('Activité modifiée !'));
@@ -395,7 +387,7 @@ const tripMiddleware = (store) => (next) => (action) => {
 
       const imageInput = document.querySelector('#tripEdit-image');
       const file = imageInput.files[0];
-      console.log(file);
+      // console.log(file);
 
       const form = {
         id,
@@ -406,10 +398,10 @@ const tripMiddleware = (store) => (next) => (action) => {
         endDate,
         password,
       };
-      console.log(form);
+      // console.log(form);
 
       const json = JSON.stringify(form);
-      console.log(json);
+      // console.log(json);
 
       const formData = new FormData();
       formData.append('file', file);
@@ -429,10 +421,8 @@ const tripMiddleware = (store) => (next) => (action) => {
         formData,
         config)
         .then((response) => {
-          console.log(response);
+          // console.log(response);
 
-          // TODO: newTrip = cleForm inputs DONE
-          // Add suggestion to state or directly refresh Trip component afterward (?)
           store.dispatch(saveTripEdit(response.data));
           store.dispatch(toastSuccess('Modifications effectuées'));
           store.dispatch(push(`/voyage/${id}`));
@@ -455,10 +445,10 @@ const tripMiddleware = (store) => (next) => (action) => {
         // props,
       })
         .then((response) => {
-          console.log(response);
+          // console.log(response);
 
-          const userDisponibilities = response.data.disponibility.filter((participant) => participant.id === user);
-          console.log(userDisponibilities);
+          const userDisponibilities = response.data.disponibility.filter((participant) => (
+            participant.users[0].id === user));
 
           store.dispatch(saveDisponibilities(response.data.disponibility, userDisponibilities));
         })
@@ -478,10 +468,8 @@ const tripMiddleware = (store) => (next) => (action) => {
       // Endpoint add new suggestion to trip
       axios.delete(`${API_URL}/api/v0/users/${user}/trips/${id}/activities/${activityId}/delete`)
         .then(() => {
-          store.dispatch(removeActivity());
-
+          store.dispatch(removeActivity(id));
           store.dispatch(toastSuccess('Activité supprimée'));
-          store.dispatch(fetchActivities());
         })
         .then(() => {
           // Redirect to HomeUser
@@ -503,7 +491,7 @@ const tripMiddleware = (store) => (next) => (action) => {
         // props,
       })
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           store.dispatch(saveActivities(response.data));
         })
         .catch((error) => {
@@ -525,11 +513,19 @@ const tripMiddleware = (store) => (next) => (action) => {
         password,
       })
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           // IF Password OK || user already authenticated
           if (response.status === 200) {
             store.dispatch(saveTripAuth(true));
-            store.dispatch(fetchTrip(tripId));
+            // Check if creator
+            const isCreator = checkIfCreator(response.data.creator, user);
+
+            // Check if logged user have disponibilities
+            const userDisponibilities = response.data.disponibility.filter((participant) => (
+              participant.users[0].id === user));
+
+            store.dispatch(saveTrip(response.data, isCreator, userDisponibilities));
+            store.dispatch(loading(false));
           }
         })
         .catch((error) => {
@@ -552,13 +548,8 @@ const tripMiddleware = (store) => (next) => (action) => {
       // Endpoint add delete suggestion to trip
       axios.delete(`${API_URL}/api/v0/users/${user}/trips/${id}/suggestions/${suggestionId}`)
         .then(() => {
-          store.dispatch(removeActivity());
-
+          store.dispatch(removeSuggestion(id));
           store.dispatch(toastSuccess('Suggestion supprimée'));
-          store.dispatch(fetchSuggestions());
-        })
-        .then(() => {
-          // Redirect to HomeUser
         })
         .catch((error) => {
           console.warn(error);

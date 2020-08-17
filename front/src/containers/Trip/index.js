@@ -33,9 +33,6 @@ const mapDispatchToProps = (dispatch) => ({
   saveTrip: () => {
     dispatch(saveTrip());
   },
-  // changeUserDisponibilities: (startDate, endDate) => {
-  //   dispatch(updateUserDisponibilities(startDate, endDate));
-  // },
   reviseUserDisponibilities: (startDate, endDate) => {
     dispatch(modifyUserDisponibilities(startDate, endDate));
   },

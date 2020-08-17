@@ -21,6 +21,8 @@ import {
   REMOVE_SUGGESTION,
   LOG_OUT_TRIP,
   CLEAR_ACTIVITY_FIELD,
+  SAVE_SUGGESTION,
+  SAVE_ACTIVITY,
 } from 'src/actions/trip';
 
 const initialState = {
@@ -60,8 +62,6 @@ const trip = (state = initialState, action = {}) => {
     case ADD_SUGGESTION:
       return {
         ...state,
-        suggestionTitle: '',
-        suggestionDescription: '',
       };
 
     case SAVE_TRIPS:
@@ -79,6 +79,8 @@ const trip = (state = initialState, action = {}) => {
         trip: action.trip,
         isCreator: action.isCreator,
         tripPassword: action.trip.password,
+        userDisponibilities: action.userDisponibilities[0],
+
       };
 
     case SAVE_SUGGESTIONS:
@@ -142,8 +144,6 @@ const trip = (state = initialState, action = {}) => {
       };
 
     case SAVE_DISPONIBILITIES:
-      console.log(action);
-      
       return {
         ...state,
         trip: {
@@ -168,6 +168,10 @@ const trip = (state = initialState, action = {}) => {
     case REMOVE_ACTIVITY:
       return {
         ...state,
+        trip: {
+          ...state.trip,
+          activities: state.trip.activities.filter((activity) => activity.id !== action.activityId),
+        },
       };
 
     case SAVE_USER_DISPONIBILITIES:
@@ -217,6 +221,40 @@ const trip = (state = initialState, action = {}) => {
         activityStartDate: '',
         activityEndDate: '',
         activityCategory: '',
+      };
+
+    case SAVE_SUGGESTION:
+      return {
+        ...state,
+        trip: {
+          ...state.trip,
+          suggestion: [...state.trip.suggestion, action.suggestion],
+        },
+        suggestionTitle: '',
+        suggestionDescription: '',
+      };
+
+    case SAVE_ACTIVITY:
+      return {
+        ...state,
+        trip: {
+          ...state.trip,
+          activities: [...state.trip.activities, action.activity],
+        },
+        activityTitle: '',
+        activityDescription: '',
+        activityStartDate: '',
+        activityEndDate: '',
+        activityCategory: '',
+      };
+
+    case REMOVE_SUGGESTION:
+      return {
+        ...state,
+        trip: {
+          ...state.trip,
+          suggestion: state.trip.suggestion.filter((sugg) => sugg.id !== action.suggestionId),
+        },
       };
 
     default: return state;
