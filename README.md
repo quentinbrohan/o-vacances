@@ -6,23 +6,23 @@
 
 :pushpin: O'Vacances allows user to plan trip with friends by centralizing all informations about a trip: destination, dates, participants and their disponibilities. And also to show and add for each their own suggestions and activities + disponibilities.
 
+### :alien:	Our team was composed of 5 people:
 
-:alien:	 Our team was composed of 5 people:
-Front:
+#### Front:
 - Quentin B. (me) as Lead Dev and React Referent
 - Cécilia C. as Scrum Master and React Dev
   
-Back:
+#### Back:
 - Loïc C. as Back Lead
 - Alexandre Q. as Git Master and Back Dev
 - Audrey as Product Owner and Back Dev
 
-:computer: Stack:
+### :computer: Stack:
 - React and Redux for front interface and state management
 - Symfony as RESTful API using Doctrine for back-end with a MYSQL database
 
-Deployment on AWS EC2 (no public release yet).
+:rocket: Deployment on AWS EC2 (no public release yet).
 
 :warning: As were's still on working on it, bugs can occur.
 
-Instructions to launch the project in branch front and back.
+:pencil: Instructions to launch the project in branch front and back.
