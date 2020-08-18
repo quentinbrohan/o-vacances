@@ -24,3 +24,5 @@ Back:
 Deployment on AWS EC2 (no public release yet).
 
 :warning: As were's still on working on it, bugs can occur.
+
+Instructions to launch the project in branch front and back.
