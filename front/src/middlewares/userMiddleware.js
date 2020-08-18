@@ -174,7 +174,7 @@ const userMiddleware = (store) => (next) => (action) => {
         }
         else {
           store.dispatch(logOutUser());
-          store.dispatch(push('/login'));
+          // store.dispatch(push('/'));
           next(action);
           break;
         }

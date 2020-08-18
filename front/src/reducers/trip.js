@@ -69,7 +69,6 @@ const trip = (state = initialState, action = {}) => {
         ...state,
         trips: action.trips,
         trip: [],
-        userDisponibilities: [],
         isLoading: false,
       };
 
@@ -80,6 +79,7 @@ const trip = (state = initialState, action = {}) => {
         isCreator: action.isCreator,
         tripPassword: action.trip.password,
         userDisponibilities: action.userDisponibilities[0],
+        isLoading: false,
 
       };
 
