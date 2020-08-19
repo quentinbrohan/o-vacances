@@ -5,6 +5,7 @@ import tripReducer from 'src/reducers/trip';
 import {
   saveTrips,
   saveTrip,
+  saveSuggestion,
 } from 'src/actions/trip';
 
 should();
@@ -111,6 +112,35 @@ describe('reducer for trips', () => {
       isCreator: true,
       tripPassword: tripData.password,
       userDisponibilities: userDisponibilitiesData[0],
+    };
+
+    tripReducer(stateBefore, action).should.deep.equal(expectedResult);
+  });
+
+  it('handles action SAVE_SUGGESTION', () => {
+    const stateBefore = {
+      trip: {
+        suggestion: [],
+      },
+      suggestionTitle: '',
+      suggestionDescription: '',
+    };
+
+    const suggestionData = {
+      title: 'MonSuperTitre',
+      description: 'Message de suggestion',
+      user: 1,
+      trip: 1,
+    };
+
+    const action = saveSuggestion(suggestionData);
+
+    const expectedResult = {
+      trip: {
+        suggestion: [suggestionData],
+      },
+      suggestionTitle: '',
+      suggestionDescription: '',
     };
 
     tripReducer(stateBefore, action).should.deep.equal(expectedResult);
