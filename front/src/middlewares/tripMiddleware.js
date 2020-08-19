@@ -525,7 +525,6 @@ const tripMiddleware = (store) => (next) => (action) => {
               participant.users[0].id === user));
 
             store.dispatch(saveTrip(response.data, isCreator, userDisponibilities));
-            store.dispatch(loading(false));
           }
         })
         .catch((error) => {
