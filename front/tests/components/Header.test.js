@@ -12,18 +12,34 @@ import { logOut } from 'src/actions/user';
 
 describe('<Header />', () => {
   describe('when connected', () => {
-    it('show logout buttons', () => {
+    it('should render 2 logout buttons', () => {
       const isAuthenticated = true;
 
       const wrapper = shallow(
         <Header
           isAuthenticated={isAuthenticated}
-          handleLougout={logOut()}
+          handleLogout={logOut()}
         />,
       );
 
       const buttonComponents = wrapper.find(Button);
       expect(buttonComponents).to.have.lengthOf(2);
+    });
+  });
+
+  describe('when not connected', () => {
+    it('should render 4 buttons: 2 login, 2 signin', () => {
+      const isAuthenticated = false;
+
+      const wrapper = shallow(
+        <Header
+          isAuthenticated={isAuthenticated}
+          handleLogout={logOut()}
+        />,
+      );
+
+      const buttonComponents = wrapper.find(Button);
+      expect(buttonComponents).to.have.lengthOf(4);
     });
   });
 });
