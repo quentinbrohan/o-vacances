@@ -9,7 +9,7 @@ use App\Entity\Suggestion;
 use App\Entity\Trip;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Persistence\ObjectManager;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
@@ -41,7 +41,7 @@ class AppFixtures extends Fixture
             $user->setAvatar($avatar[$i]);
 
             $users [] = $user;
-
+            
             $manager->persist($user);
         }
 
@@ -54,7 +54,7 @@ class AppFixtures extends Fixture
         $startTrip = ['24-05-1863', '01-12-2000', '11-08-2020', '06-11-2020', '30-07-2020', '20-07-2020'];
         $endTrip = ['27-08-1863', '01-01-2001', '12-08-2020', '30-06-2020', '10-08-2020', '28-07-2020'];
         $imageTrip = ['/uploads/centreTerre.jpg', '/uploads/Tardis.jpg', '/uploads/Vinaigrette.jpg', '/uploads/antilles.jpg', '/uploads/Kaamelott.png', '/uploads/what.jpg'];
-
+        
         for ($i = 0; $i < 6; $i++) {
             $trip = new Trip();
             $trip->setTitle($tripTitle[$i]);
@@ -68,7 +68,7 @@ class AppFixtures extends Fixture
             $trip->setEndDate(new \DateTime($endTrip[$i]));
             $trip->setImage($imageTrip[$i]);
             $trips[]=$trip;
-
+    
             $manager->persist($trip);
         }
 
@@ -102,7 +102,7 @@ class AppFixtures extends Fixture
 
             $manager->persist($activity);
         }
-
+        
         $suggestions = ['Ambiance', 'Ambiance', 'Ambiance', 'Ambiance', 'Courses', 'Ambiance', 'question', '..'];
         $descriptionsSuggestions = ['Et je prends de quoi faire un dessin! j’adore faire des petits dessins...', 'j’aime bien le dessin mais je préfère le 1-2-3 soleil !', 'Ca dépend...', 'WTF!', 'courses','j’amène des mouchoirs ! j\’ai une bonne réserve', 'un petit sondage : Vous etes d\’accord avec moi? \n oui \n oui', 'je peux amener Milo?', 'Ketchup'];
         $suggestionCreator = [$users[1], $users[2], $users[3], $users[6], $users[2] ,$users[1], $users[6], $users[7]];
@@ -118,7 +118,7 @@ class AppFixtures extends Fixture
         }
 
 
-
+ 
 
         $manager->flush();
     }
