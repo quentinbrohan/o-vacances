@@ -17,7 +17,7 @@ const Footer = () => (
           <Link to="/mentions-legales">Mentions Légales</Link>
         </li>
         <li className="footer-nav-item copyright">
-          &copy; O'vacances
+          &copy; O'Vacances
         </li>
       </ul>
     </div>

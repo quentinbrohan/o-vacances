@@ -18,9 +18,9 @@
       margin-left: 1rem;
     }
   }
-  .button-header {
-    height: 100%;
-  }
+  // .button-header {
+  //   height: 100%;
+  // }
 
   .logo {
     width: 10rem;
@@ -38,23 +38,23 @@
 
   .navigation .menu {
     li a {
-      padding-bottom: 2.25rem;
+      padding-bottom: 2.55rem;
       border-bottom: 0.25rem solid transparent;
       @include transitionFast;
     }
     nav a:hover, li a:hover {
       color: lighten($blackColor, 20%);
-      padding-bottom: 2.25rem;
+      padding-bottom: 2.55rem;
       border-bottom: 0.25rem solid lighten($blackColor, 20%);
     }
     a.nav--active {
       color: $primaryColorDarker;
-      padding-bottom: 2.25rem;
+      padding-bottom: 2.55rem;
       border-bottom: 0.25rem solid $primaryColorDarker;
 
       &:hover {
         color: lighten($primaryColorDarker, 20);
-        padding-bottom: 2.25rem;
+        padding-bottom: 2.55rem;
         border-bottom: 0.25rem solid lighten($primaryColorDarker, 20%);
       }
     }

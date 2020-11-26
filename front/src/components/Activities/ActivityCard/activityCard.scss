@@ -6,14 +6,11 @@
     flex-direction: column;
 
     .activity-card {
+      @include activityCardLarge;
       width: 100%;
       height: 360px;
       display: flex;
-      margin: 1rem 0;
       @include transitionMedium;
-      border: 1px solid $greyColorLighter;
-      border-radius: 0.5rem;
-      overflow: hidden;
 
       header.activity-card-header {
         height: 100%;
@@ -52,6 +49,7 @@
         .location {
           margin-top: 0.5rem;
           display: flex;
+          align-items: center;
           font-size: 1rem;
           p {
             width: 100%;
@@ -80,37 +78,37 @@
       }
 
       .activity-cta {
-        bottom: 0;
         align-self: flex-end;
         button {
-          all: unset;
-          cursor: pointer;
-          margin-right: 1rem;
-          svg {
-            height: 2rem;
-            width: 2rem;
-          }
-          svg.selector {
-            color: $greyColor;
-            &--selected {
-              color: $warningColor;
-              &:hover {
-                color: $greyColor;
-              }
-            }
+          width: 2rem;
+          height: 2rem;
+          &.cta-unselect {
+            // color: $errorColor;
             &:hover {
               color: $warningColor;
             }
           }
-          svg.delete {
-            color: $greyColor;
+          &.cta-select {
+            color: $warningColor;
+            &:hover {
+              color: $warningColor;
+            }
+          }
+          &.cta-edit {
+            // color: $warningColor;
+            &:hover {
+              color: $primaryColorDarker;
+            }
+          }
+          &.cta-delete {
+            // color: $warningColor;
             &:hover {
               color: $errorColor;
             }
           }
-         
         }
       }
+
     }
   }
 }

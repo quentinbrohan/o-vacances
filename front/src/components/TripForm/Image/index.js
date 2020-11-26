@@ -45,7 +45,7 @@ const Image = ({ onChangeImage }) => {
         htmlFor="field-image"
         className="field-label"
       >
-        Image de couverture voyage
+        Couverture
       </label>
       {(imagePreviewUrl) && (
       <img

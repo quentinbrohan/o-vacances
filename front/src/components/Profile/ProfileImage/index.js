@@ -5,7 +5,7 @@ import Modal from 'react-modal';
 
 import { ReactComponent as AvatarDefault } from 'src/assets/svg/user.svg';
 
-import { API_URL } from 'src/helpers';
+import { API_URL } from 'src/constants';
 import './profileImage.scss';
 
 const ProfileImage = ({
@@ -27,7 +27,7 @@ const ProfileImage = ({
 
   const [image, setImage] = useState({
     file: '',
-    imagePreviewUrl: avatar.length !== '' ? avatar : '',
+    imagePreviewUrl: avatar || '',
   });
   const { imagePreviewUrl } = image;
 
@@ -35,7 +35,7 @@ const ProfileImage = ({
     // Check if filesize < 3 Mo
     const FileSize = evt.target.files[0].size / 1024 / 1024; // in MB
     if (FileSize > 3) {
-      alert('L\'image doti faire moins de 3 Mo !');
+      alert("L'image doit faire moins de 3 Mo !");
       document.querySelector('#profile-field-input.profile-image').value = null;
     }
     else {
@@ -57,8 +57,18 @@ const ProfileImage = ({
 
   return (
     <div className="profile-head-img">
-      { avatar ?  (<img className="profile-head-img-picture" src={API_URL + avatar} alt={firstname} />) : (<AvatarDefault className="profile-head-img-picture" />)}
-      <Button color="primary" onClick={openModal}>Modifier la photo</Button>
+      {avatar ? (
+        <img
+          className="profile-head-img-picture"
+          src={API_URL + avatar}
+          alt={firstname}
+        />
+      ) : (
+        <AvatarDefault className="profile-head-img-picture" />
+      )}
+      <Button color="secondary" onClick={openModal}>
+        Modifier la photo
+      </Button>
 
       <Modal
         className="profile-image-modal"
@@ -71,15 +81,16 @@ const ProfileImage = ({
           },
         }}
       >
-        <span className="profile-image-button-close" onClick={closeModal}>x</span>
-        <h4>Previsualiser sa photo</h4>
+        <span className="profile-image-button-close" onClick={closeModal}>
+          x
+        </span>
         <div className="field">
-          {(imagePreviewUrl) && (
-          <img
-            src={imagePreviewUrl}
-            alt="Prévisualisation"
-            className="preview"
-          />
+          {imagePreviewUrl && (
+            <img
+              src={imagePreviewUrl}
+              alt="Prévisualisation"
+              className="preview"
+            />
           )}
           <input
             type="file"
@@ -95,7 +106,8 @@ const ProfileImage = ({
             handleEditUserImage();
             closeModal();
           }}
-        >MODIFIER LA PHOTO
+        >
+          MODIFIER LA PHOTO
         </Button>
       </Modal>
     </div>

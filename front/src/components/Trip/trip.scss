@@ -40,6 +40,7 @@
           margin-top: 0.5rem;
           margin-bottom: 1rem;
           display: flex;
+          align-items: center;
           font-size: 1.2rem;
           svg {
             height: 2rem;
@@ -70,13 +71,17 @@
     }
 
     .right {
+      margin-top: 3rem;
+      padding: 1rem;
+      @include boxShadowLight();
+      border-radius: 0.5rem;
       @media (min-width: $tablet) {
         display: flex;
         flex-direction: column;
       }
       .trip-info-aside {
         order: 1;
-        margin-top: $gutter;
+        // margin-top: $gutter;
         .participants {
           margin-bottom: 1rem;
           .text {
@@ -141,10 +146,32 @@
           }
         }
 
+        .trip-buttons {
+          display: flex;
+          align-items: center;
+        }
+        .trip-button {
+          button > a {
+            padding: initial;
+          }
+        }
+
+        .trip-password,
+        .trip-link {
+          display: flex;
+          align-items: center;
+        }
+
         .trip-access {
           margin-bottom: 1rem;
           display: flex;
           flex-direction: column;
+          .trip-password,
+          .trip-link {
+            > svg {
+              margin-right: 0.5rem;
+            }
+          }
           .trip-password {
             margin-bottom: 1rem;
             font-size: 1.2rem;
@@ -160,6 +187,7 @@
             font-weight: bold;
             .link {
               font-size: 1rem;
+              white-space: nowrap;
             }
           }
         }
@@ -168,10 +196,8 @@
           display: inline;
           margin-right: 1rem;
         }
-        .trip-button{ 
+        .trip-button {
           padding: 0;
-
-        
         }
       }
     }
@@ -179,8 +205,13 @@
 
   section.activities {
     margin-top: $gutter * 2;
+    .activity-header {
+      display: flex;
+      align-items: baseline;
+    }
     h2 span {
       font-size: 1.8rem;
+      margin-right: 1rem;
     }
     .trip-activities {
       display: flex;
@@ -219,4 +250,3 @@
   align-self: flex-end;
   margin-bottom: 1rem;
 }
-

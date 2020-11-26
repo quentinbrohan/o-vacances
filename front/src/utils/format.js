@@ -9,7 +9,7 @@ import {
 import { fr } from 'date-fns/locale';
 
 export const FORMAT_DATE = 'yyyy-MM-dd';
-export const FORMAT_DATE_SUGGESTION = 'dd/MM/yyyy';
+export const FORMAT_DATE_SUGGESTION = 'dd MMM yyyy';
 
 // Convert date ISO to string => yyyy-MM-dd
 export const toString = (date) => format(parseISO((date)), FORMAT_DATE, {

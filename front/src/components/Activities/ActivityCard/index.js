@@ -3,17 +3,16 @@ import PropTypes from 'prop-types';
 import {
   Calendar,
   // MapPin,
+  Circle,
+  CheckCircle,
+  Edit,
   Trash2 as Thrash,
-  Circle as Select,
-  CheckCircle as Unselect,
 } from 'react-feather';
-import Button from 'src/components/elements/Button';
 
+import Button from 'src/components/elements/Button';
 import ActivityEdit from 'src/containers/ActivityEdit';
 import { toDate } from 'src/utils/format';
-
-import { API_URL } from 'src/helpers';
-
+import { API_URL } from 'src/constants';
 import './activityCard.scss';
 
 const ActivityCard = ({
@@ -34,7 +33,7 @@ const ActivityCard = ({
   // Handle selector (add/remove) activity from selected
   const manageSelect = (activityId) => {
     if (isSelected(activityId)) {
-      setSelected(selected.filter((selectedIds) => (selectedIds !== activityId)));
+      setSelected(selected.filter((selectedIds) => selectedIds !== activityId));
     }
     else {
       setSelected(() => [...selected, activityId]);
@@ -45,9 +44,7 @@ const ActivityCard = ({
   //   console.log(`Suppression de l'activité ${id}`);
   // };
 
-  const handleCheckActivity = () => (
-    checkActivityId(id)
-  );
+  const handleCheckActivity = () => checkActivityId(id);
 
   return (
     <article className="activity-card" id={`activite-${id}`}>
@@ -73,40 +70,44 @@ const ActivityCard = ({
           <p className="description">{description}</p>
         </div>
         <div className="activity-cta">
-          <Button color="secondary" size="sm">
-            {isSelected(id) ? (
-              <Unselect
-                className="selector--selected"
-                onClick={() => manageSelect(id)}
-              />
-            )
-              : (
+          {isSelected(id) ? (
+            <Button
+              color="secondary"
+              className="cta-select"
+              onClick={() => manageSelect(id)}
+            >
+              <CheckCircle />
+            </Button>
+          ) : (
+            <Button
+              color="secondary"
+              className="cta-unselect"
+              onClick={() => manageSelect(id)}
+            >
+              <Circle />
+            </Button>
+          )}
 
-                <Select
-                  className="selector"
-                  onClick={() => manageSelect(id)}
-                />
-
-              )}
-          </Button>
-          <Button color="secondary" size="sm">
-            <Thrash
-              className="delete"
-              onClick={() => {
-                handleCheckActivity();
-                deleteActivity();
-              }}
-            />
-          </Button>
-          <Button>
-            <ActivityEdit
-              className="edit"
+          <Button color="secondary" className="cta-edit">
+            {/* TODO: Rewrite ActivityEdit */}
+            {/* <ActivityEdit
               color="secondary"
               size="sm"
               Id={id}
-            />
+            /> */}
+            <Edit />
           </Button>
 
+          <Button
+            color="secondary"
+            className="cta-delete"
+            onClick={() => {
+              handleCheckActivity();
+              deleteActivity();
+            }}
+          >
+            <Thrash />
+          </Button>
         </div>
       </div>
     </article>
@@ -116,8 +117,8 @@ const ActivityCard = ({
 ActivityCard.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  startDate: PropTypes.array.isRequired,
-  endDate: PropTypes.array.isRequired,
+  startDate: PropTypes.string.isRequired,
+  endDate: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   deleteActivity: PropTypes.func.isRequired,
   checkActivityId: PropTypes.func.isRequired,

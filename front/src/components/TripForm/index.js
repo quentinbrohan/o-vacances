@@ -33,23 +33,19 @@ const TripForm = ({
         <title>Créer un voyage</title>
         <meta name="description" content="Créer un voyage" />
       </Helmet>
-      <h1>Mon nouveau voyage</h1>
+      <h1>Créer un voyage</h1>
       <form className="trip-edit-element" onSubmit={handleSubmit}>
-        <Image
-          className="trip-edit-image"
-          onChangeImage={addImagePreview}
-        />
+        <Image className="trip-edit-image" onChangeImage={addImagePreview} />
         <Field
           name="title"
-          placeholder="Nom du voyage"
+          placeholder="Nom"
           onChange={changeField}
           value={title}
           required
-
         />
         <Field
           name="description"
-          placeholder="Description du voyage"
+          placeholder="Description"
           type="text"
           onChange={changeField}
           value={description}
@@ -57,7 +53,7 @@ const TripForm = ({
         />
         <Field
           name="location"
-          placeholder="Lieu du voyage"
+          placeholder="Lieu"
           type="text"
           onChange={changeField}
           value={location}
@@ -70,7 +66,6 @@ const TripForm = ({
           onChange={changeField}
           value={startDate}
           required
-
         />
         <Field
           name="endDate"
@@ -79,22 +74,17 @@ const TripForm = ({
           onChange={changeField}
           value={endDate}
           required
-
         />
         <Field
           name="password"
           type="password"
-          placeholder="Mot de passe du voyage"
+          placeholder="Mot de passe"
           onChange={changeField}
           value={password}
           required
-
         />
-        <Button
-          color="primary"
-          haveClassName="trip-form-button"
-        >
-          J'ajoute un voyage
+        <Button color="primary" haveClassName="trip-form-button">
+          Ajouter
         </Button>
       </form>
     </main>

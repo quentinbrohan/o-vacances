@@ -14,13 +14,12 @@ $whiteColor: #f3f5f9;
 $errorColor: #ee5860;
 $warningColor: #e8a658;
 $successColor: #17c297;
-// 
+//
 $gutter: 2rem;
 
 // Typo
-$fontTitle: 'Quicksand', sans-serif;
-$fontBody: 'Nunito', sans-serif;
-
+$fontTitle: "Quicksand", sans-serif;
+$fontBody: "Nunito", sans-serif;
 
 // Media Queries
 $sm-mobile: "320px";
@@ -42,4 +41,43 @@ $desktop: "1152px";
 
 @mixin transitionSlow {
   transition: all ease 0.3s;
+}
+
+@mixin boxShadowLight {
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.3);
+}
+
+@mixin boxShadowLightHover {
+  transform: translateY(-0.25rem);
+  box-shadow: 0 0.5rem 0.75rem rgba(0, 0, 0, 0.3);
+}
+
+@mixin tripAndActivityCardSmall {
+  &:first-child {
+    margin-left: 0;
+    @media (max-width: $mobile) {
+      margin-left: 2rem;
+    }
+  }
+  @include transitionMedium;
+  @include boxShadowLight;
+  display: block;
+  margin: ($gutter / 2) $gutter;
+  overflow: hidden;
+  border-radius: 0.5rem;
+
+  &:hover {
+    @include boxShadowLightHover;
+  }
+}
+
+@mixin activityCardLarge {
+  @include transitionMedium;
+  @include boxShadowLight;
+  @include transitionMedium;
+  margin: ($gutter / 2) 0;
+  overflow: hidden;
+  border-radius: 0.5rem;
+
+  display: flex;
 }

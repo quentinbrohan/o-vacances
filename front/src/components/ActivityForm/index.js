@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from 'src/components/elements/Button';
 import Modal from 'react-modal';
+import { Plus } from 'react-feather';
 
 import Field from './Field';
 
@@ -35,27 +36,29 @@ const ActivityForm = ({
   };
 
   return (
-
     <div className="activity-form">
       <Button
-        color="primary"
-        size="sm"
+        color="secondary"
+        // size="sm"
         onClick={openModal}
+        haveClassName="activity-form-main-button"
       >
-        Ajouter une activité
+        <Plus />
       </Button>
       <Modal
         className="activity-form-modal"
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
-        contentLabel="Example Modal"
+        contentLabel="Ajouter une activité"
         style={{
           overlay: {
             backgroundColor: 'rgba(255, 255, 255, 0.3)',
           },
         }}
       >
-        <span className="activity-form-button-close" onClick={closeModal}>x</span>
+        <span className="activity-form-button-close" onClick={closeModal}>
+          x
+        </span>
         <h2 ref={subtitle}>Nouvelle activité</h2>
 
         <form className="activity-form-element" onSubmit={handleSubmit}>
@@ -90,7 +93,6 @@ const ActivityForm = ({
             onChange={changeField}
             value={activityEndDate}
             required
-
           />
           <Field
             name="activityDescription"
@@ -108,11 +110,11 @@ const ActivityForm = ({
             handleAddActivity();
             closeModal();
           }}
-        >j'ajoute
+        >
+          j'ajoute
         </Button>
       </Modal>
     </div>
-
   );
 };
 

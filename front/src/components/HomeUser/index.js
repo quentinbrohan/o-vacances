@@ -30,26 +30,31 @@ const HomeUser = ({
     <main className="home-user">
       <Helmet>
         <title>Mes voyages</title>
-        <meta name="description" content="Homepage utilisateur, recense les voyages" />
+        <meta
+          name="description"
+          content="Homepage utilisateur, recense les voyages"
+        />
       </Helmet>
       <div className="connection-container" />
       {isLoading && <Loading />}
-      {(!isLoading && futureTrips) && (
-      <>
-        <h1>Mes Voyages</h1>
-        <div className="my-trips">
-          {futureTrips.map((trip) => (
-            <TripCard {...trip} key={trip.id} />
-          ))}
-        </div>
+      {!isLoading && futureTrips && (
+        <>
+          <h1>Mes Voyages</h1>
+          <div className="my-trips">
+            {futureTrips.map((trip) => (
+              <TripCard {...trip} key={trip.id} />
+            ))}
+          </div>
 
-        <h2>Mes anciens voyages</h2>
-        <div className="my-trips">
-          {oldTrips.map((trip) => (
-            <TripCard {...trip} key={trip.id} />
-          ))}
-        </div>
-      </>
+          <h2 style={{ opacity: 0.8 }}>
+            Mes anciens voyages
+          </h2>
+          <div className="my-trips" style={{ opacity: 0.6 }}>
+            {oldTrips.map((trip) => (
+              <TripCard {...trip} key={trip.id} />
+            ))}
+          </div>
+        </>
       )}
     </main>
   );

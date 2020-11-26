@@ -1,4 +1,4 @@
-@import 'src/styles/vars';
+@import "src/styles/vars";
 
 .trip-details {
   section.suggestions {
@@ -12,7 +12,11 @@
         margin-bottom: 1rem;
         display: flex;
         flex-direction: column;
-        
+
+        // background: rgba($greyColor, 0.1);
+        padding: 0.5rem;
+        box-shadow:  /** inset */ 0 0.25rem 0.75rem rgba(0, 0, 0, 0.2);
+
         .suggestion-header {
           padding: 0.5rem;
           display: flex;

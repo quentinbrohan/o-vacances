@@ -26,12 +26,15 @@
     border: none;
     border-radius: 0.5rem;
     padding: 0.5rem;
-    background-color: $whiteColor;
-   
-    
+    // background-color: $whiteColor;
+    border: 1px solid $greyColorDarker;
+    border-radius: .5rem;
+
+
     &:disabled{
       background-color: white;
-  
+      border: 1px solid transparent;
+
     }
 
 
@@ -43,7 +46,7 @@
     }
 
   }
-  
+
 }
 
 

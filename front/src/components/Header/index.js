@@ -107,11 +107,11 @@ const Header = ({
               {isAuthenticated ? (
                 <Button
                   color="secondary"
-                  size="sm"
+                  // size="sm"
                   haveClassName="button-header"
                   onClick={() => manageLogout()}
                 >
-                  Déconnexion
+                  <a>Déconnexion</a>
                 </Button>
               )
                 : (

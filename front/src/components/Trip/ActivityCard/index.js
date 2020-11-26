@@ -1,22 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { Calendar } from 'react-feather';
-import { toDate } from 'src/utils/format';
+import React from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import { Calendar } from "react-feather";
+import { toStringSuggestion } from "src/utils/format";
 
-import { API_URL } from 'src/helpers';
-import './activityCard.scss';
+import { API_URL } from "src/constants";
+import "./activityCard.scss";
 
-const ActivityCard = ({
-  id,
-  title,
-  startDate,
-  endDate,
-  category,
-}) => (
-  <Link
-    to={`/voyage/${id}/activites#activite-${id}`}
-  >
+const ActivityCard = ({ id, title, startDate, endDate, category }) => (
+  <Link to={`/voyage/${id}/activites#activite-${id}`}>
     <article className="activity-card">
       <header
         style={{ backgroundImage: `url(${API_URL + category.image})` }}
@@ -26,14 +18,11 @@ const ActivityCard = ({
         <h4>{title}</h4>
         <div className="body-content">
           <div className="date">
-            <Calendar />
             <p>
-              Du {toDate(startDate)} <br />
-              au {toDate(endDate)}
+              {toStringSuggestion(startDate)} 🡒 {toStringSuggestion(endDate)}
             </p>
           </div>
         </div>
-
       </div>
     </article>
   </Link>

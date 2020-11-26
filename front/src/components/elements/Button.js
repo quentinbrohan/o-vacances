@@ -12,6 +12,7 @@ const Button = ({
   tag,
   disabled,
   haveClassName,
+  children,
   ...props
 }) => {
   const classes = classNames(
@@ -27,11 +28,9 @@ const Button = ({
 
   const Component = tag;
   return (
-    <Component
-      {...props}
-      className={classes}
-      disabled={disabled}
-    />
+    <Component {...props} className={classes} disabled={disabled}>
+      {children}
+    </Component>
   );
 };
 
@@ -45,6 +44,10 @@ Button.propTypes = {
   wideMobile: PropTypes.bool,
   tag: PropTypes.elementType,
   disabled: PropTypes.bool,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
 };
 
 Button.defaultProps = {

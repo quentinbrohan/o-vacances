@@ -1,23 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { Calendar, MapPin } from 'react-feather';
-import { toDate } from 'src/utils/format';
+import React from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import { Calendar, MapPin } from "react-feather";
+import { toStringSuggestion } from "src/utils/format";
 
-import { API_URL } from 'src/helpers';
-import './tripCard.scss';
+import { API_URL } from "src/constants";
+import "./tripCard.scss";
 
-const TripCard = ({
-  id,
-  title,
-  startDate,
-  endDate,
-  image,
-  location,
-}) => (
-  <Link
-    to={`/voyage/${id}`}
-  >
+const TripCard = ({ id, title, startDate, endDate, image, location }) => (
+  <Link to={`/voyage/${id}`}>
     <article className="trip-card">
       <header
         style={{ backgroundImage: `url(${API_URL + image})` }}
@@ -29,18 +20,14 @@ const TripCard = ({
           <div className="date">
             <Calendar />
             <p>
-              Du {toDate(startDate)} <br />
-              au {toDate(endDate)}
+              {toStringSuggestion(startDate)} 🡒 {toStringSuggestion(endDate)}
             </p>
           </div>
           <div className="location">
             <MapPin />
-            <p>
-              {location}
-            </p>
+            <p>{location}</p>
           </div>
         </div>
-
       </div>
     </article>
   </Link>
@@ -56,7 +43,7 @@ TripCard.propTypes = {
 };
 
 TripCard.defaultProps = {
-  image: '',
+  image: "",
 };
 
 export default TripCard;

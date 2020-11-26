@@ -51,7 +51,7 @@ const ActivityEdit = ({
   return (
     <div className="activity-edit">
       <Edit2
-        className="edit"
+        // className="edit"
         onClick={() => {
           handleCheckActivity();
           openModal();

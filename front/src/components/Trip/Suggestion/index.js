@@ -13,7 +13,7 @@ import {
 // import Button from 'src/components/elements/Button';
 // import { Edit } from 'react-feather';
 
-import { API_URL } from 'src/helpers';
+import { API_URL } from 'src/constants';
 import './suggestion.scss';
 
 const Suggestion = ({
@@ -36,18 +36,14 @@ const Suggestion = ({
 
   return (
     <div className="suggestion">
-      <header
-        className="suggestion-header"
-      >
+      <header className="suggestion-header">
         <img
           src={API_URL + user.avatar}
           alt="Avatar"
           className="suggestion-avatar"
         />
         <div className="suggestion-header-info">
-          <p className="suggestion-title">
-            {title}
-          </p>
+          <p className="suggestion-title">{title}</p>
           <p className="suggestion-author">
             {user.firstname}
             <span className="suggestion-date">
@@ -57,32 +53,28 @@ const Suggestion = ({
         </div>
       </header>
       <div className="suggestion-body">
-        <p className="suggestion-description">
-          {description}
-        </p>
+        <p className="suggestion-description">{description}</p>
         {/* <Button color="secondary" size="sm" haveClassName="suggestion-button--edit">
           <Edit onClick={() => manageEdit()} />
         </Button> */}
       </div>
       {user.id === currentUser && (
-      <div className="suggestion-cta">
-        {/* <Button
+        <div className="suggestion-cta">
+          {/* <Button
           color="secondary"
           className="cta-edit"
           onClick={() => manageEdit(id)}
         >
           <Edit />
         </Button> */}
-        <Button
-          color="secondary"
-          className="cta-delete"
-          onClick={() => manageDelete(id)}
-
-        >
-          <XSquare />
-        </Button>
-
-      </div>
+          <Button
+            color="secondary"
+            className="cta-delete"
+            onClick={() => manageDelete(id)}
+          >
+            <XSquare />
+          </Button>
+        </div>
       )}
     </div>
   );

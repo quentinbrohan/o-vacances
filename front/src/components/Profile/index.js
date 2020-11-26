@@ -129,7 +129,7 @@ const Profile = ({
               color="primary"
               haveClassName="profil-trip-button"
             >
-              GO !
+              Go !
             </Button>
           </Link>
         </div>
