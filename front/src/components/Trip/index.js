@@ -12,6 +12,8 @@ import {
   Settings,
   XSquare,
 } from 'react-feather';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import ReactTooltip from 'react-tooltip';
 import Button from 'src/components/elements/Button';
 // React Date Range
 import 'react-date-range/dist/styles.css'; // main style file
@@ -34,7 +36,7 @@ import { Link, useParams } from 'react-router-dom';
 import Loading from 'src/components/Loading';
 import Modal from 'react-modal';
 
-import { API_URL } from 'src/constants';
+import { API_URL, REACT_APP_URL } from 'src/constants';
 
 // import tripData from 'src/data/tripData';
 import TripAuth from 'src/containers/Trip/TripAuth';
@@ -47,7 +49,6 @@ import './trip.scss';
 import AddModal from './AddModal';
 
 import { modalStyles } from 'src/utils/modal';
-
 
 // Bind modal to App element
 Modal.setAppElement('#root');
@@ -109,6 +110,11 @@ const Trip = ({
       key: 'selection',
     },
   ]);
+
+  const [copied, setCopied] = useState({
+    password: false,
+    link: false,
+  });
 
   useEffect(() => {
     if (userDisponibilities.length !== 0) {
@@ -281,7 +287,21 @@ const Trip = ({
                 <div className="trip-access">
                   <div className="trip-password">
                     {/* <p>Mot de passe voyage:</p> */}
-                    <Lock />
+                    <CopyToClipboard
+                      text={tripPassword}
+                      onCopy={() => setCopied({ ...copied, password: true })}
+                    >
+                      <Lock
+                        data-tip
+                        data-for="passwordTip"
+                        style={{ cursor: 'pointer' }}
+                      />
+                    </CopyToClipboard>
+                    <ReactTooltip id="passwordTip" place="top" effect="float">
+                      {copied.password
+                        ? '✅ Copier le mot de passe'
+                        : 'Copier le mot de passe'}
+                    </ReactTooltip>
                     <input
                       type="text"
                       name="trip-password"
@@ -292,13 +312,27 @@ const Trip = ({
                   </div>
                   <div className="trip-link">
                     {/* <p>Lien du voyage:</p> */}
-                    <Share />
+                    <CopyToClipboard
+                      text={`${REACT_APP_URL}/voyage/${trip.id}`}
+                      onCopy={() => setCopied({ ...copied, link: true })}
+                    >
+                      <Share
+                        data-tip
+                        data-for="linkTip"
+                        style={{ cursor: 'pointer' }}
+                      />
+                    </CopyToClipboard>
+                    <ReactTooltip id="linkTip" place="top" effect="float">
+                      {copied.link
+                        ? '✅ Copier le lien'
+                        : 'Copier le lien'}
+                    </ReactTooltip>
                     <Link
-                      href={`localhost:8080/voyage/${trip.id}`}
+                      href={`${REACT_APP_URL}/voyage/${trip.id}`}
                       className="link"
                     >
                       {/* Shall be prod url */}
-                      http://o-vacances.fr/voyage/{trip.id}
+                      {`${REACT_APP_URL}/voyage/${trip.id}`}
                     </Link>
                   </div>
                 </div>
