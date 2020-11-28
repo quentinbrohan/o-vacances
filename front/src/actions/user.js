@@ -19,12 +19,14 @@ export const updateUserField = (newValue, name) => ({
   name,
 });
 
-export const signIn = () => ({
+export const signIn = (formValues) => ({
   type: SIGN_IN,
+  formValues,
 });
 
-export const logIn = () => ({
+export const logIn = (formValues) => ({
   type: LOG_IN,
+  formValues,
 });
 
 export const saveUser = (data, isAuthenticated) => ({

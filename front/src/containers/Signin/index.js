@@ -17,8 +17,8 @@ const mapDispatchToProps = (dispatch) => ({
   changeField: (newValue, name) => {
     dispatch(updateUserField(newValue, name));
   },
-  handleSignin: () => {
-    dispatch(signIn());
+  handleSignin: (formValues) => {
+    dispatch(signIn(formValues));
   },
 });
 

@@ -1,6 +1,7 @@
 @import "src/styles/vars";
 
-.signin-form-element {
+.rhf-form {
+  margin: 1rem;
   .field {
     margin: 0.25rem;
     position: relative;
@@ -10,10 +11,12 @@
       font-weight: bold;
       color: $blackColor;
       display: block;
+      // margin-left: 0.75rem;
       margin-bottom: 0.25rem;
     }
 
     &-input {
+      margin-top: 0.25rem;
       width: 100%;
       height: 2.5rem;
       padding: 0.75rem;
@@ -32,4 +35,18 @@
       }
     }
   }
+
+  // Message
+p.error-message {
+//   &::before {
+//     display: inline;
+//     content: "⚠ ";
+// }
+@include transitionFast;
+  margin-top: 0.25rem;
+  // margin-left: 0.75rem;
+  color: $errorColor;
+  // font-weight: bold;
+  // text-align: center;
+}
 }
