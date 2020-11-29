@@ -4,21 +4,26 @@ import { Helmet } from 'react-helmet';
 import { Link, Redirect } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { logIn } from 'src/features/user';
+
 import Button from 'src/components/elements/Button';
 // import Field from './Field';
 import 'src/components/elements/rhf/rhfField.scss';
 import './login.scss';
+import { EMAIL_REGEX } from 'src/constants/patterns';
 
 const Login = ({
-  handleLogin,
   isAuthenticated,
 }) => {
+  const dispatch = useDispatch();
+  const { isLoading } = useSelector((state) => state.user);
+
   const {
     register, handleSubmit, watch, errors,
   } = useForm();
   const onSubmit = (formValues) => {
-    console.log(formValues);
-    handleLogin(formValues);
+    dispatch(logIn(formValues));
   };
 
   return (
@@ -28,7 +33,7 @@ const Login = ({
         <meta name="description" content="Connexion" />
       </Helmet>
       <div className="connection-container">
-        <h1>Bon retour parmi nous.</h1>
+        <h1>Connexion</h1>
         {!isAuthenticated ? (
           <>
             <form className="rhf-form" onSubmit={handleSubmit(onSubmit)}>
@@ -43,7 +48,7 @@ const Login = ({
                   ref={register({
                     required: 'Requis',
                     pattern: {
-                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                      value: EMAIL_REGEX,
                       message: 'Email invalide.',
                     },
                   })}
@@ -73,8 +78,9 @@ const Login = ({
               <Button
                 color="primary"
                 type="submit"
+                loading={isLoading}
               >
-                S'inscrire
+                Se connecter
               </Button>
             </form>
 
@@ -83,7 +89,7 @@ const Login = ({
                 <p>J'ai oublié mon mot de passe</p>
                 <hr />
                 <p>
-                  Pas encore de compte ? <Link to="/signin">Inscription</Link>
+                  Pas encore de compte ? <Link to="/signin">Inscription</Link>.
                 </p>
               </div>
             </div>
@@ -97,7 +103,6 @@ const Login = ({
 };
 
 Login.propTypes = {
-  handleLogin: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,
 };
 

@@ -79,7 +79,7 @@ const userMiddleware = (store) => (next) => (action) => {
       break;
     }
     case LOG_IN: {
-      console.log(action)
+      console.log(action);
       const { email, password } = action.formValues;
 
       store.dispatch(loading(true));

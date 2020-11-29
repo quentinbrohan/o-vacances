@@ -2,7 +2,6 @@
 
 .team {
   h1 {
-    text-align: center;
     margin-bottom: 3 * $gutter;
   }
   .team-cards {
@@ -19,14 +18,14 @@
     //   border-radius: 0.5rem;
     //   overflow: hidden;
     //   background-color: $greyColorLighter;
-      
+
     //   &:hover {
     //     // cursor: pointer;
     //     box-shadow:  0rem 0.5rem 1rem rgba(0, 0, 0, 0.15);
     //     transform: scale(1.04);
     //   }
     }
-    
+
     .team-card-header {
       height: 200px;
       width: 100%;
@@ -37,7 +36,7 @@
       color: $whiteColor;
       overflow: hidden;
     }
-    
+
     .team-card-body {
       text-align: center;
       padding: 1rem;
@@ -49,7 +48,7 @@
         margin-bottom: 1.5rem;
       }
     }
-    
+
     .links {
       margin-top: 1.5rem;
       font-size: 1rem;
@@ -62,16 +61,16 @@
         cursor: pointer;
         &:hover {
           color: $whiteColor;
-        }    
+        }
       }
     }
-    
+
     .body-content {
       padding-bottom: 2.5rem;
       font-size: 1rem;
       line-height: 150%;
     }
-    
+
   }
 
 

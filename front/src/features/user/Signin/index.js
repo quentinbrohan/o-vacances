@@ -11,13 +11,20 @@ import Button from 'src/components/elements/Button';
 import 'src/components/elements/rhf/rhfField.scss';
 import './signin.scss';
 
-const Signin = ({ handleSignin, isAuthenticated }) => {
+import { useDispatch, useSelector } from 'react-redux';
+import { signIn } from 'src/features/user';
+import { EMAIL_REGEX } from 'src/constants/patterns';
+
+const Signin = ({ isAuthenticated }) => {
+  const dispatch = useDispatch();
+  const { isLoading } = useSelector((state) => state.user);
+
   const {
     register, handleSubmit, watch, errors,
   } = useForm();
+
   const onSubmit = (formValues) => {
-    // console.log(formValues);
-    handleSignin(formValues);
+    dispatch(signIn(formValues));
   };
 
   return (
@@ -28,7 +35,7 @@ const Signin = ({ handleSignin, isAuthenticated }) => {
         <meta name="description" content="Inscription" />
       </Helmet>
       <div className="connection-container">
-        <h1>Bienvenue voyageur !</h1>
+        <h1>Inscription</h1>
         <form className="rhf-form" onSubmit={handleSubmit(onSubmit)}>
           <div className="field">
             <label className="field-label">Prénom</label>
@@ -81,7 +88,7 @@ const Signin = ({ handleSignin, isAuthenticated }) => {
               ref={register({
                 required: 'Requis',
                 pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  value: EMAIL_REGEX,
                   message: 'Email invalide.',
                 },
               })}
@@ -135,6 +142,7 @@ const Signin = ({ handleSignin, isAuthenticated }) => {
             color="primary"
             type="submit"
             haveClassName="signin-form-button"
+            loading={isLoading}
           >
             S'inscrire
           </Button>
@@ -143,7 +151,7 @@ const Signin = ({ handleSignin, isAuthenticated }) => {
         <div className="helper">
           <hr />
           <p>
-            Déjà un compte ? <Link to="/login">Connexion</Link>
+            Déjà un compte ? <Link to="/login">Connexion</Link>.
           </p>
         </div>
       </div>
@@ -152,7 +160,6 @@ const Signin = ({ handleSignin, isAuthenticated }) => {
 };
 
 Signin.propTypes = {
-  handleSignin: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
 };
 

@@ -1,20 +1,27 @@
-// == Import : npm
+// RTK
 import React from 'react';
 import { render } from 'react-dom';
-// import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'connected-react-router';
+import { applyMiddleware, configureStore } from '@reduxjs/toolkit';
+import { ConnectedRouter, routerMiddleware } from 'connected-react-router';
+import { createBrowserHistory } from 'history';
+import thunk from 'redux-thunk';
 
-// == Import : local
-// Composants
 import App from 'src/containers/App';
-// Store Redux
-import store, { history } from 'src/store';
-// React Dates
+import rootReducer from './reducers';
 
-// == Render
-// 1. Élément React racine (celui qui contient l'ensemble de l'app)
-//    => crée une structure d'objets imbriqués (DOM virtuel)
+const history = createBrowserHistory();
+
+const store = configureStore({
+  reducer: rootReducer(history),
+  middleware: [routerMiddleware(history)],
+  enhancers: [
+    applyMiddleware(thunk),
+    applyMiddleware(routerMiddleware(history)),
+  ],
+  devTools: process.env.NODE_ENV === 'development',
+});
+
 const rootReactElement = (
   <Provider store={store}>
     <ConnectedRouter history={history}>
@@ -22,7 +29,6 @@ const rootReactElement = (
     </ConnectedRouter>
   </Provider>
 );
-// 2. La cible du DOM (là où la structure doit prendre vie dans le DOM)
+
 const target = document.getElementById('root');
-// 3. Déclenchement du rendu de React (virtuel) => DOM (page web)
 render(rootReactElement, target);

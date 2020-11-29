@@ -67,7 +67,7 @@ const ProfileImage = ({
         <AvatarDefault className="profile-head-img-picture" />
       )}
       <Button color="secondary" onClick={openModal}>
-        Modifier la photo
+        Modifier
       </Button>
 
       <Modal

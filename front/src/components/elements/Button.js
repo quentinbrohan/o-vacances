@@ -4,6 +4,7 @@ import classNames from 'classnames';
 
 const Button = ({
   className,
+  type,
   color,
   size,
   loading,
@@ -28,7 +29,7 @@ const Button = ({
 
   const Component = tag;
   return (
-    <Component {...props} className={classes} disabled={disabled}>
+    <Component {...props} className={classes} type={type} disabled={disabled}>
       {children}
     </Component>
   );
@@ -43,17 +44,16 @@ Button.propTypes = {
   wide: PropTypes.bool,
   wideMobile: PropTypes.bool,
   tag: PropTypes.elementType,
+  type: PropTypes.string,
   disabled: PropTypes.bool,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]).isRequired,
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
 };
 
 Button.defaultProps = {
   className: '',
   haveClassName: '',
   tag: 'button',
+  type: 'button',
   color: '',
   size: '',
   loading: false,

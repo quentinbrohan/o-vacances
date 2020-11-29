@@ -7,10 +7,10 @@ import { updateUserField, logIn } from 'src/actions/user';
 
 const mapStateToProps = (state) => ({
 
-  email: state.user.email,
-  password: state.user.password,
-  isAuthenticated: state.user.isAuthenticated,
-  error: state.error.error,
+  // email: state.user.email,
+  // password: state.user.password,
+  // isAuthenticated: state.user.isAuthenticated,
+  // error: state.error.error,
 });
 
 const mapDispatchToProps = (dispatch) => ({

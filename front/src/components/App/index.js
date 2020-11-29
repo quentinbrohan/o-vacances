@@ -19,37 +19,45 @@ import Footer from 'src/components/Footer';
 import Header from 'src/containers/Header';
 import PrivateRoute from 'src/utils/PrivateRoute';
 // Pages
-import Contact from 'src/components/Contact';
-import Signin from 'src/containers/Signin';
-import Login from 'src/containers/Login';
-import Profile from 'src/containers/Profile';
+import Profile from 'src/features/user/Profile';
 import Trip from 'src/containers/Trip';
-import ErrorPage from 'src/components/ErrorPage';
 import TripEdit from 'src/containers/TripEdit';
-import LegacyMentions from 'src/components/LegacyMentions';
+
 import Loading from 'src/components/Loading';
 // TEMPO: For direct integration in Trip component
 import TripAuth from 'src/containers/Trip/TripAuth';
 
+// RTK
+import { useDispatch } from 'react-redux';
+import { checkAuthentication } from 'src/features/user';
+
+import Signin from 'src/features/user/Signin';
+import Login from 'src/features/user/Login';
+import LegacyMentions from 'src/pages/LegacyMentions';
+import Contact from 'src/pages/Contact';
+import ErrorPage from 'src/pages/ErrorPage';
+
 import './styles.scss';
 
 // Lazy Loading
-const HomeUser = lazy(() => import('src/containers/HomeUser'));
+const HomeUser = lazy(() => import('src/pages/HomeUser'));
+const HomeVisitor = lazy(() => import('src/pages/HomeVisitor'));
+
 const Activities = lazy(() => import('src/containers/Activities'));
 const TripForm = lazy(() => import('src/containers/TripForm'));
 const ActivityForm = lazy(() => import('src/components/ActivityForm'));
-const Team = lazy(() => import('src/components/Team'));
-const HomeVisitor = lazy(() => import('src/components/HomeVisitor'));
+const Team = lazy(() => import('src/pages/Team'));
 
 // == Composant
 const App = ({
   isAuthenticated,
-  checkAuth,
+  // checkAuth,
 }) => {
-  checkAuth();
+  // checkAuth();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    checkAuth();
+    dispatch(checkAuthentication());
   }, [isAuthenticated]);
 
   return (
@@ -164,7 +172,6 @@ const App = ({
 
 App.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
-  checkAuth: PropTypes.func.isRequired,
 };
 
 // == Export

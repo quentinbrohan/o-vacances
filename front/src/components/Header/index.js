@@ -3,15 +3,20 @@ import PropTypes from 'prop-types';
 import { Link, NavLink } from 'react-router-dom';
 import { slide as Menu } from 'react-burger-menu';
 import { Menu as MenuIcon, X as CloseIcon } from 'react-feather';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { logOut } from 'src/features/user';
+
 import Button from 'src/components/elements/Button';
 import { ReactComponent as Logo } from 'src/assets/svg/logo.svg';
 
 import './header.scss';
 
 const Header = ({
-  isAuthenticated,
   handleLogout,
 }) => {
+  const dispatch = useDispatch();
+  const { isAuthenticated } = useSelector((state) => state.user);
   const [isOpen, setIsOpen] = useState(false);
   // Handle BurgerMenu close onClick
   useEffect(() => {
@@ -23,12 +28,12 @@ const Header = ({
   };
 
   const manageLogout = () => {
-    handleLogout();
+    dispatch(logOut());
   };
 
   const manageLogoutMobile = () => {
     setIsOpen(false);
-    handleLogout();
+    dispatch(logOut());
   };
 
   return (
@@ -133,7 +138,6 @@ const Header = ({
 };
 
 Header.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired,
   handleLogout: PropTypes.func.isRequired,
 };
 
