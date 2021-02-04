@@ -1,0 +1,57 @@
+@import 'src/styles/vars';
+
+.team {
+  h1 {
+    margin-bottom: 3 * $gutter;
+  }
+  .team-cards {
+    display: flex;
+    justify-content: center;
+    flex-flow: wrap;
+  }
+
+  .team-card-header {
+    height: 200px;
+    width: 100%;
+    padding: 1rem;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    color: $whiteColor;
+    overflow: hidden;
+  }
+
+  .team-card-body {
+    text-align: center;
+    padding: 1rem;
+    width: 100%;
+    height: 100%;
+    h4 {
+      font-size: 1.2rem;
+      margin: 0;
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  .links {
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    a {
+      color: $blackColor;
+      @include transitionFast;
+      cursor: pointer;
+      &:hover {
+        color: $whiteColor;
+      }
+    }
+  }
+
+  .body-content {
+    padding-bottom: 2.5rem;
+    font-size: 1rem;
+    line-height: 150%;
+  }
+}

@@ -1,0 +1,276 @@
+@import 'src/styles/vars';
+
+.trip-details {
+  img.trip-photo {
+    min-height: 400px;
+    height: 400px;
+    width: 100%;
+    padding: 0;
+    object-fit: cover;
+    object-position: center;
+    z-index: -1;
+    // Avoid container width restriction = full page photo for immersion
+    position: relative;
+    width: 100vw;
+    margin: -2rem -50vw 0;
+    left: 50%;
+    right: 50%;
+    // Mask bottom image
+    //     background: rgb(2,0,36);
+    // background: linear-gradient(90deg, rgba(2,0,36,0) 0%, rgba(255,255,255,1) 75%, rgba(255,255,255,1) 100%);
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 75%, rgba(0, 0, 0, 0));
+    -webkit-mask-image: -webkit-gradient(
+      linear,
+      left top,
+      left bottom,
+      from(rgba(0, 0, 0, 1)),
+      to(rgba(0, 0, 0, 0))
+    );
+  }
+
+  .trip-info {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    @media (min-width: $tablet) {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    .left {
+      width: 100%;
+      @media (min-width: $tablet) {
+        display: flex;
+        flex-direction: column;
+        margin-right: 4rem;
+      }
+      .trip-info-header {
+        order: -1;
+        width: 100%;
+        h1 {
+          overflow-wrap: break-word;
+        }
+        .date,
+        .location {
+          margin-top: 0.5rem;
+          margin-bottom: 1rem;
+          display: flex;
+          align-items: center;
+          font-size: 1.2rem;
+          svg {
+            // height: 2rem;
+            // width: 2rem;
+            margin-right: 0.5rem;
+            color: $primaryColor;
+          }
+        }
+        .creator {
+          p {
+            font-size: 1.2rem;
+          }
+        }
+      }
+
+      .trip-info-description {
+        order: 0;
+        margin-top: 1rem;
+        padding: 1rem;
+        width: 100%;
+        // background-color: $whiteColor;
+        border-top: 1px solid $greyColorLighter;
+        border-bottom: 1px solid $greyColorLighter;
+        // border-radius: 0.5rem;
+        @media (min-width: $tablet) {
+          order: 1;
+          margin-top: $gutter;
+        }
+      }
+    }
+
+    .right {
+      margin-top: 3rem;
+      padding: 1rem;
+      @include boxShadowLight();
+      border-radius: 0.5rem;
+      @media (min-width: $tablet) {
+        display: flex;
+        flex-direction: column;
+      }
+      .trip-info-aside {
+        order: 1;
+        // margin-top: $gutter;
+        .participants {
+          margin-bottom: 1rem;
+          .text {
+            font-size: 1.2rem;
+            font-weight: bold;
+          }
+          .avatars {
+            padding: 0;
+            // padding-left: 2.5rem;
+            display: flex;
+            overflow: hidden;
+            .avatar {
+              position: relative;
+              z-index: -1;
+              width: 2.5rem;
+              height: 2.5rem;
+              border-radius: 50%;
+              border: 4px solid white;
+              background: white;
+              object-fit: cover;
+            }
+            .avatar:not(:first-child) {
+              position: relative;
+              z-index: 0;
+              // left: -2rem;
+              margin-left: -1.25rem;
+              width: 2.5rem;
+              height: 2.5rem;
+              border-radius: 50%;
+              border: 4px solid white;
+              background: white;
+              object-fit: cover;
+            }
+          }
+        }
+
+        .disponibilities {
+          margin-bottom: 1rem;
+          font-weight: bold;
+
+          p {
+            font-size: 1.2em;
+            display: block;
+            margin-bottom: 0.5rem;
+          }
+          select {
+            margin-bottom: 0.5rem;
+            display: block;
+            width: 100%;
+            max-width: 286px;
+          }
+          button {
+            margin: 0.5rem;
+            color: $blackColor;
+            width: 100%;
+            max-width: calc(286px - 0.5rem);
+            box-sizing: border-box;
+            @media (min-width: $tablet) {
+              margin: 0.5rem 0 0 0;
+              max-width: 286px;
+            }
+          }
+        }
+
+        .trip-buttons {
+          display: flex;
+          align-items: center;
+        }
+        .trip-button {
+          button > a {
+            padding: initial;
+          }
+        }
+
+        .trip-password,
+        .trip-link {
+          display: flex;
+          align-items: center;
+        }
+
+        .trip-access {
+          margin-bottom: 1rem;
+          display: flex;
+          flex-direction: column;
+          .trip-password,
+          .trip-link {
+            > svg {
+              margin-right: 0.5rem;
+            }
+          }
+          .trip-password {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            input {
+              padding: 0.5rem;
+              font-weight: bold;
+              cursor: text;
+            }
+          }
+          .trip-link {
+            font-size: 1.2rem;
+            font-weight: bold;
+            .link {
+              font-size: 1rem;
+              white-space: nowrap;
+            }
+          }
+        }
+
+        .activity-form {
+          display: inline;
+          margin-right: 1rem;
+        }
+        .trip-button {
+          padding: 0;
+        }
+      }
+    }
+  }
+
+  section.activities {
+    margin-top: $gutter * 2;
+    .activity-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+    h2 span {
+      font-size: 1.8rem;
+      margin-right: 1rem;
+    }
+    // .trip-activities {
+    //   // display: flex;
+    //   // flex-wrap: wrap;
+    //   // justify-content: center;
+    //   @media (min-width: $tablet) {
+    //     justify-content: flex-start;
+    //   }
+    // }
+  }
+
+  section.suggestions {
+    margin-top: $gutter * 2;
+    justify-content: space-between;
+    // max-width: 768px;
+    .suggestions-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+    h2 span {
+      font-size: 1.5rem;
+    }
+    .trip-suggestions {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+
+.ReactModalPortal {
+  line-height: 125%;
+  hr {
+    margin: 1rem;
+  }
+  a {
+    color: $primaryColorDarker;
+  }
+}
+
+.disponibilites-modal-button,
+.help-modal-button {
+  align-self: flex-end;
+  margin-bottom: 1rem;
+}

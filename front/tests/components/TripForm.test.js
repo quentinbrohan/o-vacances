@@ -1,14 +1,9 @@
-import React from 'react';
-
-import { shallow, mount } from 'enzyme';
-
 import { expect } from 'chai';
-
+import { mount } from 'enzyme';
+import React from 'react';
 import TripForm from 'src/components/TripForm';
 import Field from 'src/components/TripForm/Field';
 import Image from 'src/components/TripForm/Image';
-
-import { addTrip } from 'src/actions/trip';
 
 const chai = require('chai');
 const sinon = require('sinon');
@@ -18,18 +13,14 @@ chai.use(sinonChai);
 
 describe('<TripForm />', () => {
   it('should render 6 Field inputs', () => {
-    const wrapper = mount(
-      <TripForm />,
-    );
+    const wrapper = mount(<TripForm />);
 
     const fieldComponents = wrapper.find(Field);
     expect(fieldComponents).to.have.lengthOf(6);
   });
 
   it('should render 1 Image input', () => {
-    const wrapper = mount(
-      <TripForm />,
-    );
+    const wrapper = mount(<TripForm />);
 
     const imageComponent = wrapper.find(Image);
     expect(imageComponent).to.have.lengthOf(1);
@@ -46,9 +37,7 @@ describe('<TripForm />', () => {
       password: 'test',
     };
 
-    const wrapper = mount(
-      <TripForm onSubmit={callback} />,
-    );
+    const wrapper = mount(<TripForm onSubmit={callback} />);
 
     const formSubmit = wrapper.find('form');
     formSubmit.simulate('submit');

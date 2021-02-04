@@ -1,0 +1,89 @@
+@import 'src/styles/vars';
+
+.profile {
+  h1 {
+    margin-bottom: 2.5rem;
+
+    @media (max-width: $tablet) {
+      text-align: center;
+    }
+  }
+
+  .profile-container {
+    display: flex;
+    justify-content: center;
+
+    .profile-avatar-default {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+      @media (max-width: $tablet) {
+        flex-direction: column;
+      }
+
+      .profile-avatar-default-img {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-bottom: 1rem;
+
+        @media (max-width: $tablet) {
+          width: 100%;
+        }
+
+        .profile-avatar-default-img-picture {
+          max-width: 200px;
+          max-height: 200px;
+          width: 8rem;
+          height: 8rem;
+          object-fit: cover;
+          object-position: center;
+          display: block;
+          margin: 0 auto 1rem;
+          border-radius: 50%;
+          overflow: hidden;
+        }
+
+        button {
+          font-size: 0.8rem;
+          display: block;
+          margin: 0 auto;
+          text-align: center;
+        }
+      }
+
+      .profile-avatar-default-information {
+        width: 100%;
+        @media (max-width: $tablet) {
+          width: 100%;
+          margin: 2rem auto;
+        }
+
+        .cta-form {
+          display: flex;
+          align-items: center;
+          > button {
+            margin-right: 1rem;
+          }
+        }
+        .icon {
+          color: $primaryColorDarker;
+          margin-right: 0.5rem;
+          &.cancel {
+            color: $blackColor;
+          }
+
+          &.confirm {
+            color: $primaryColorDarker;
+          }
+
+          &.edit {
+            color: $blackColor;
+          }
+        }
+      }
+    }
+  }
+}

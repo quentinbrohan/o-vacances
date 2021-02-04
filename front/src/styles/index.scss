@@ -3,6 +3,7 @@
 @import 'vars';
 @import 'typography';
 @import './elements/buttons';
+@import './elements/modal';
 
 html,
 body {
@@ -10,25 +11,22 @@ body {
   height: 100%;
 }
 
+#root {
+  height: 100%;
+}
+
 body {
   font-family: $fontBody;
   color: $blackColor;
-  height: 100%;
-  min-height: 100%;
   overflow-x: hidden;
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: inherit;
 }
 
 p {
   line-height: 150%;
-}
-
-// Message
-.error-message {
-  color: $errorColor;
-  font-weight: bold;
-  text-align: center;
 }

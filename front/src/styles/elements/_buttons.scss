@@ -1,4 +1,4 @@
-@import "src/styles/vars";
+@import 'src/styles/vars';
 // Settings
 // Buttons & Forms
 // $button-form--height: 			3rem;		// height of buttons & forms
@@ -34,7 +34,7 @@ $button--bg: (
 $button--border: (
   button-light: transparent,
   // button-light is default (.button), so if it's transparent you can set all other values to null
-    button-light-hover: null,
+  button-light-hover: null,
   button-dark: null,
   button-dark-hover: null,
   button-primary: null,
@@ -128,7 +128,7 @@ button,
   margin: 0.25rem 0;
   height: $button-form--height;
   text-decoration: none !important;
-  text-transform: $button--transform;
+  // text-transform: $button--transform;
   color: $blackColor;
   background-color: $primaryColorLighter;
   border-width: $button-form--border-width;
@@ -148,9 +148,9 @@ button,
     display: flex;
     justify-content: center;
     align-items: center;
-  height: $button-form--height;
+    height: $button-form--height;
     padding: (($button-form--height - 1 - ($button-form--border-width * 2)) / 2)
-    ($button--padding-h - $button-form--border-width);
+      ($button--padding-h - $button-form--border-width);
     svg {
       margin: 0 0.5rem;
     }
@@ -177,7 +177,16 @@ button,
     background-color: lighten($primaryColorLighter, 16%);
     border-color: lighten($primaryColorLighter, 16%);
     transform: translateY(-2px);
-    box-shadow: 0 0.5rem 1rem rgba(0,0,0, 0.3);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
+  }
+
+  &.back {
+    position: absolute;
+    top: 5.5rem;
+  }
+
+  &.inline {
+    margin-left: 0.5rem;
   }
 
   &.is-loading {
@@ -186,17 +195,18 @@ button,
     pointer-events: none;
 
     &::after {
-      content: "";
+      content: '';
       display: block;
       position: absolute;
-      width: 1;
-      height: 1;
-      margin-left: -(1 / 2);
-      margin-top: -(1 / 2);
+      width: 1rem;
+      height: 1rem;
+      margin-left: -(1rem / 2);
+      margin-top: -(1rem / 2);
       top: 50%;
       left: 50%;
       border: $button-loading--thickness solid $primaryColorLighter;
       border-radius: 50%;
+      border-color: $blackColor !important;
       border-right-color: transparent !important;
       border-top-color: transparent !important;
       z-index: 1;
@@ -206,7 +216,7 @@ button,
 
   &[disabled] {
     cursor: not-allowed;
-    color: $greyColor;
+    // color: $greyColor;
     background-color: $greyColor !important;
     border-color: $greyColor;
 
@@ -219,9 +229,7 @@ button,
 }
 
 .button-sm {
-  padding: (
-      ($button-form-sm--height - 1 - ($button-form--border-width * 2)) / 2
-    )
+  padding: (($button-form-sm--height - 1 - ($button-form--border-width * 2)) / 2)
     ($button-sm--padding-h - $button-form--border-width);
   height: $button-form-sm--height;
 }
@@ -260,11 +268,28 @@ button,
   }
 }
 
+.button-delete {
+  color: $whiteColor;
+  background-color: $errorColor;
+  border-color: $errorColor;
+
+  &:hover {
+    background-color: lighten($errorColor, 6%);
+    border-color: lighten($errorColor, 6%);
+  }
+
+  &.is-loading {
+    &::after {
+      border-color: $errorColor;
+    }
+  }
+}
+
 .button-secondary {
   color: $blackColor;
   background-color: $whiteColor;
   border-color: $whiteColor;
-  box-shadow:   0 0.25rem 0.25rem rgba($blackColor, 0.15); 
+  box-shadow: 0 0.25rem 0.25rem rgba($blackColor, 0.15);
 
   &:hover {
     background-color: lighten($whiteColor, 6%);
@@ -299,7 +324,7 @@ button,
     margin-bottom: ($button-group-padding / 2);
   }
 
-  > [class*="button"] {
+  > [class*='button'] {
     margin: $button-group-padding / 2;
   }
 }

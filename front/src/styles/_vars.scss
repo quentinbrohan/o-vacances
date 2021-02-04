@@ -14,21 +14,20 @@ $whiteColor: #f3f5f9;
 $errorColor: #ee5860;
 $warningColor: #e8a658;
 $successColor: #17c297;
-// 
+//
 $gutter: 2rem;
 
 // Typo
 $fontTitle: 'Quicksand', sans-serif;
 $fontBody: 'Nunito', sans-serif;
 
-
 // Media Queries
-$sm-mobile: "320px";
-$mobile: "480px";
-$lg-mobile: "576px";
-$tablet: "768px";
-$laptop: "960px";
-$desktop: "1152px";
+$sm-mobile: '320px';
+$mobile: '480px';
+$lg-mobile: '576px';
+$tablet: '768px';
+$laptop: '960px';
+$desktop: '1152px';
 // $widescreen: "1440px";
 
 // Transitions
@@ -42,4 +41,58 @@ $desktop: "1152px";
 
 @mixin transitionSlow {
   transition: all ease 0.3s;
+}
+
+// Shadow
+@mixin boxShadowLight {
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.3);
+}
+
+@mixin boxShadowLightHover {
+  transform: translateY(-0.25rem);
+  box-shadow: 0 0.5rem 0.75rem rgba(0, 0, 0, 0.3);
+}
+
+// Components
+@mixin loginSigninContainer {
+  margin: auto;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.5rem 1rem 0 rgba(60, 66, 87, 0.12), 0 0.5rem 0.75rem 0 rgba(0, 0, 0, 0.12);
+  width: 100%;
+  min-width: 360px;
+  max-width: 576px;
+}
+
+@mixin cardsContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@mixin tripAndActivityCardSmall {
+  min-width: 320px;
+  max-width: 480px;
+  width: 100%;
+  min-height: 360px;
+  max-height: 640px;
+  @include transitionMedium;
+  @include boxShadowLight;
+  display: block;
+  margin: ($gutter / 2) $gutter;
+  overflow: hidden;
+  border-radius: 0.5rem;
+
+  &:hover {
+    @include boxShadowLightHover;
+  }
+}
+
+@mixin activityCardLarge {
+  @include transitionMedium;
+  @include boxShadowLight;
+  @include transitionMedium;
+  margin: ($gutter / 2) 0;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  display: flex;
 }

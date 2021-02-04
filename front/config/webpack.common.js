@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const DotenvPlugin = require('dotenv');
 // Récupération des variables stockées dans le fichier .env correspondant
 // à l'environnement courant.
-const env = DotenvPlugin.config({ path: '.env.' + process.env.NODE_ENV}).parsed;
+const env = DotenvPlugin.config({ path: `.env.${process.env.NODE_ENV}` }).parsed;
 const envKeys = Object.keys(env).reduce((prev, next) => {
   prev[`process.env.${next}`] = JSON.stringify(env[next]);
   return prev;
@@ -15,9 +15,9 @@ const webpack = require('webpack');
 module.exports = {
   entry: [
     // SCSS
-    paths.src + '/styles/index.scss',
+    `${paths.src}/styles/index.scss`,
     // JS
-    paths.src + '/index.js',
+    `${paths.src}/index.js`,
   ],
 
   resolve: {
@@ -30,23 +30,23 @@ module.exports = {
     new CleanWebpackPlugin(),
     new CopyWebpackPlugin({
       patterns: [
-        { 
+        {
           from: paths.static,
           to: '',
-        }
+        },
       ],
     }),
 
     new HtmlWebpackPlugin({
-      favicon: paths.assets + '/favicon.ico',
-      template: paths.assets + '/index.html',
+      favicon: `${paths.assets}/favicon.ico`,
+      template: `${paths.assets}/index.html`,
     }),
     new webpack.DefinePlugin(envKeys),
   ],
 
   module: {
     rules: [
-      //JS
+      // JS
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -77,7 +77,7 @@ module.exports = {
             loader: '@svgr/webpack',
             options: {
               svgo: false,
-            }
+            },
           },
           {
             loader: 'file-loader',

@@ -1,0 +1,31 @@
+@import 'src/styles/vars';
+
+.scrollTop {
+  position: fixed;
+  height: 2.5rem;
+  bottom: 3.5rem;
+  right: 1.5rem;
+  color: $blackColor;
+  z-index: 1000;
+  cursor: pointer;
+  mix-blend-mode: exclusion;
+  animation: fadeIn 0.3s;
+  transition: opacity 0.4s;
+
+  @media (min-width: $tablet) {
+    right: 5rem;
+  }
+}
+
+.scrollTop:hover {
+  opacity: 1;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

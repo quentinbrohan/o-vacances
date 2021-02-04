@@ -1,0 +1,43 @@
+@import 'src/styles/vars';
+
+.trip-auth {
+  .trip-auth-container {
+    padding: 1rem 0;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem 0 rgba(60, 66, 87, 0.12), 0 0.5rem 0.75rem 0 rgba(0, 0, 0, 0.12);
+    width: 100%;
+    margin: auto;
+    padding-inline: 1rem;
+    @media (min-width: $tablet) {
+      max-width: 50%;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      line-height: 125%;
+    }
+
+    .rhf-form {
+      margin: 1rem auto;
+    }
+
+    hr {
+      margin-top: 2rem;
+    }
+
+    .helper {
+      width: 100%;
+      text-align: center;
+      p {
+        margin: $gutter 0;
+      }
+      hr {
+        width: 80%;
+      }
+      a {
+        color: $primaryColorDarker;
+      }
+    }
+  }
+}

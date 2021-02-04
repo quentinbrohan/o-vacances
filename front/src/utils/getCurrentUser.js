@@ -1,6 +1,8 @@
+// TODO: DELETE FILE.
 import jwtDecode from 'jwt-decode';
 
-export default () => {
+// eslint-disable-next-line consistent-return
+const getCurrentUser = () => {
   const token = window.localStorage.getItem('authToken');
   if (token) {
     const jwtData = jwtDecode(token);
@@ -8,3 +10,6 @@ export default () => {
     return currentUser;
   }
 };
+
+// eslint-disable-next-line import/prefer-default-export
+export const currentUserId = getCurrentUser();

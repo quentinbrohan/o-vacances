@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import './Footer.scss';
 
 const Footer = () => (
-
   <footer>
     <div className="footer-container">
       <ul className="footer-nav">
@@ -16,10 +15,8 @@ const Footer = () => (
         <li className="footer-nav-item">
           <Link to="/mentions-legales">Mentions Légales</Link>
         </li>
-        <li className="footer-nav-item copyright">
-          &copy; O'vacances
-        </li>
       </ul>
+      <div className="copyright">&copy; O'Vacances</div>
     </div>
   </footer>
 );

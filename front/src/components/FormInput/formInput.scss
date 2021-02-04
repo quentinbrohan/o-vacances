@@ -1,0 +1,73 @@
+@import 'src/styles/vars';
+
+.rhf-form {
+  margin: 1rem auto;
+  max-width: 480px;
+  .tripFormImage-input,
+  .form-input-item {
+    margin: 0.25rem;
+    margin-bottom: 1rem;
+    position: relative;
+    width: 100%;
+    label {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: $blackColor;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    select,
+    option,
+    input,
+    textarea {
+      width: 100%;
+      margin-top: 0.25rem;
+      width: 100%;
+      height: 2.5rem;
+      padding: 0.75rem;
+      font-size: 1rem;
+      border: 1px solid $greyColorDarker;
+      border-radius: 0.5rem;
+      &:focus {
+        border-color: $blackColor;
+      }
+      &::placeholder {
+        color: $blackColor;
+      }
+    }
+
+    select,
+    option {
+      height: 100%;
+    }
+
+    textarea {
+      height: 3 * $gutter;
+    }
+
+    input[type='checkbox'] {
+      width: initial;
+      height: initial;
+    }
+
+    .chars-counter {
+      margin-top: 0.25rem;
+      font-size: 0.75rem;
+    }
+
+    img.preview {
+      width: 100%;
+      height: auto;
+      max-height: 400px;
+      object-fit: cover;
+      object-position: center;
+      border: 1px solid $greyColorLighter;
+    }
+  }
+  .error {
+    @include transitionFast;
+    margin-top: 0.25rem;
+    color: $errorColor;
+  }
+}

@@ -1,54 +1,61 @@
-@import "src/styles/vars";
+@import 'src/styles/vars';
 
 footer {
   background-color: $blackColor;
-  // position: fixed;
-  // bottom: -1px;
+  color: white;
   width: 100%;
   padding: 1rem;
   .footer-container {
     max-width: 1152px;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    @media (min-width: $lg-mobile) {
+      flex-direction: row;
+    }
   }
 
-  .footer-nav{
-    color: white;
+  .footer-nav {
     font-size: 0.8rem;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    justify-content: flex-start;
+
     @media (min-width: $lg-mobile) {
-      display: block;
+      display: flex;
+      flex-direction: row;
     }
 
-    .footer-nav-item{
-
+    .footer-nav-item {
       display: inline-block;
       line-height: 125%;
+      margin-bottom: 0.5rem;
       @media (min-width: $lg-mobile) {
         &:not(:last-child) {
           margin-right: 2rem;
         }
       }
-      
-      a{ 
+
+      a {
         font-size: 1rem;
-
       }
-      &:hover{
+      &:hover {
         color: rgb(167, 167, 167);
-
-       }
-    } 
-
-    .copyright{
-      margin-top: 0.5rem;
-      float: right;
-      font-size: 1rem;
-      @media (min-width: $lg-mobile) {
-        margin-top: 0;
       }
+    }
+  }
+
+  .copyright {
+    align-self: center;
+    margin-top: 0.5rem;
+    width: 7.5rem;
+    text-align: center;
+    @media (min-width: $lg-mobile) {
+      margin-top: 0;
+      text-align: end;
     }
   }
 }

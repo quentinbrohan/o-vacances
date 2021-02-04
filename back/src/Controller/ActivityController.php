@@ -38,12 +38,12 @@ class ActivityController extends AbstractController
         if(!empty($trip)){
 
             $activities = $activityRepository->findAllActivitiesByTrip($id);
-    
+
             $json = $serializer->serialize($activities, 'json', ['groups' => 'apiV0_activity']);
-        
+
             $response = new JsonResponse($json, 200, [], true);
 
-            return $response; 
+            return $response;
 
         } else {
             return $this->json([
@@ -71,7 +71,7 @@ class ActivityController extends AbstractController
 
             $idTrip = $jsonArray['trip'];
             $trip = $tripRepository->find($idTrip);
-            
+
             $idCategory = $jsonArray['category'];
             $category = $categoryRepository->find($idCategory);
 
@@ -117,7 +117,7 @@ class ActivityController extends AbstractController
 
         $jsonText = $request->getContent();
         $jsonArray = json_decode($jsonText, true);
-        
+
         $activity = $activityRepository->find($id);
 
         $idUser = $jsonArray['creator'];
@@ -125,16 +125,16 @@ class ActivityController extends AbstractController
 
         $idTrip = $jsonArray['trip'];
         $trip = $tripRepository->find($idTrip);
-        
+
         $idCategory = $jsonArray['category'];
         $category = $categoryRepository->find($idCategory);
-        
+
 
         if ((!empty($activity)) && (!empty($trip))) {
-            
+
             // On extrait de la requête le json reçu
             $jsonText = $request->getContent();
-            
+
 
             try {
                 // on crée une nouvelle entité Activity avec le serializer
@@ -179,8 +179,8 @@ class ActivityController extends AbstractController
         $trip = $tripRepository->find($idTrip);
         $user = $userRepository->find($idUser);
         $userId = $user->getId();
-        
-   
+
+
         // comparaison des id pour déterminer l'accès à la commande de suppression d'activité.
         if ((!empty($trip)) && (!empty($activity))) {
             // si c'est bon alors :

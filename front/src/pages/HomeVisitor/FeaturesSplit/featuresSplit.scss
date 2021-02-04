@@ -1,0 +1,112 @@
+@import 'src/styles/vars';
+
+.home-visitor {
+  .features-split {
+    margin: 0 auto;
+    h2.title {
+      text-align: center;
+    }
+
+    p {
+      margin-top: 1rem;
+      margin-bottom: $gutter * 3;
+      @media (min-width: $tablet) {
+        margin-bottom: 6rem;
+      }
+      font-size: 1.2rem;
+      text-align: center;
+    }
+
+    .split {
+      margin-top: 1rem;
+      padding-bottom: $gutter;
+
+      .split-item:last-of-type,
+      .split-item-inverted:last-of-type {
+        margin-bottom: $gutter;
+      }
+
+      .split-item,
+      .split-item-inverted {
+        margin-top: 1rem;
+        margin-bottom: $gutter * 2;
+        display: flex;
+        flex-direction: column;
+        @media (min-width: $tablet) {
+          flex-direction: row;
+          flex-wrap: nowrap;
+          align-items: center;
+        }
+
+        .split-item-content {
+          text-align: center;
+          margin-bottom: 0;
+          width: 100%;
+          @media (min-width: $tablet) {
+            margin-right: 4rem;
+            h3,
+            p {
+              text-align: left;
+            }
+          }
+          .coming-soon {
+            margin: 0 0 0.25rem;
+            padding: 0 1.2rem;
+            height: 2.4rem;
+            width: fit-content;
+            box-sizing: border-box;
+            font-size: 1rem;
+            color: white;
+            text-size-adjust: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            align-self: center;
+            cursor: default;
+            background-color: $greyColorDarker;
+            border-radius: 2rem;
+          }
+
+          p {
+            font-size: 1.2rem;
+          }
+        }
+
+        .split-item-image {
+          position: relative;
+          margin: 0 auto;
+
+          img,
+          svg,
+          video {
+            border-radius: 0.5rem;
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            overflow: visible;
+          }
+        }
+        @media (min-width: $tablet) {
+          &-inverted {
+            flex-direction: row-reverse;
+
+            .split-item-content {
+              margin-right: 0;
+              margin-left: 4rem;
+            }
+          }
+
+          &-inverted {
+            @media (min-width: $tablet) {
+              flex-direction: row-reverse;
+            }
+            .split-item-content {
+              margin-right: 0;
+              margin-left: 4rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
