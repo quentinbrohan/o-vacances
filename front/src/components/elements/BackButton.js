@@ -4,15 +4,7 @@ import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { ChevronLeft } from 'react-feather';
 
-const BackButton = ({
-  className,
-  color,
-  size,
-  tag,
-  haveClassName,
-  link,
-  ...props
-}) => {
+const BackButton = ({ className, color, size, tag, haveClassName, link, ...props }) => {
   const classes = classNames(
     'button',
     'back-button',
@@ -24,10 +16,7 @@ const BackButton = ({
 
   const Component = tag;
   return (
-    <Component
-      {...props}
-      className={classes}
-    >
+    <Component {...props} className={classes}>
       <Link to={link}>
         <ChevronLeft />
       </Link>

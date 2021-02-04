@@ -1,12 +1,6 @@
 import { should } from 'chai';
-
+// import { saveSuggestion, saveTrip, saveTrips } from 'src/actions/trip';
 import tripReducer from 'src/reducers/trip';
-
-import {
-  saveTrips,
-  saveTrip,
-  saveSuggestion,
-} from 'src/actions/trip';
 
 should();
 
@@ -97,7 +91,6 @@ describe('reducer for trips', () => {
 
     const userDisponibilitiesData = [
       {
-
         startDate: '2020-11-10',
         enDate: '2020-11-15',
       },

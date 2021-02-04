@@ -1,21 +1,26 @@
-import React from 'react';
-
-import { shallow } from 'enzyme';
-
 import { expect } from 'chai';
-
-import TripCard from 'src/components/HomeUser/TripCard';
-
+import { shallow } from 'enzyme';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import Card from 'src/components/Card';
 
-describe('<TripCard />', () => {
+describe('<Card />', () => {
   it('Uses information given as props', () => {
     const testTitle = 'Voyage Colombie';
     const id = 1;
     const startDate = '2020-05-24T00:00:00+00:53';
     const endDate = '2020-05-24T00:00:00+00:53';
 
-    const wrapper = shallow(<TripCard id={id} title={testTitle} thumbnail="img1.jpg" location="Bogota" startDate={startDate} endDate={endDate} />);
+    const wrapper = shallow(
+      <Card
+        id={id}
+        title={testTitle}
+        thumbnail="img1.jpg"
+        location="Bogota"
+        startDate={startDate}
+        endDate={endDate}
+      />,
+    );
 
     const elementsH4 = wrapper.find('h4');
     expect(elementsH4).to.have.lengthOf(1);

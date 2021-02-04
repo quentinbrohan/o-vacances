@@ -1,0 +1,98 @@
+@import 'src/styles/vars';
+
+.cards-container {
+  @include cardsContainer;
+
+  .card {
+    @include tripAndActivityCardSmall;
+    image.card-header,
+    header.card-header {
+      height: 200px;
+      width: 100%;
+      padding: 1rem;
+      background-size: cover;
+      background-position: center;
+      color: $whiteColor;
+      overflow: hidden;
+
+      @media (min-width: $tablet) {
+        height: 280px;
+      }
+    }
+
+    .card-body {
+      padding: 1rem;
+      h3 {
+        margin: 0;
+      }
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .body-content {
+        padding-bottom: 2.5rem;
+        font-size: 1rem;
+        line-height: 150%;
+        display: flex;
+        flex-direction: column;
+
+        .date,
+        .location {
+          margin-top: 0.25rem;
+          display: flex;
+          font-size: 1rem;
+          color: $greyColorDarker;
+          svg {
+            height: 1lh;
+            width: 1lh;
+            margin-right: 0.5rem;
+            color: $primaryColor;
+          }
+        }
+
+        p.description {
+          margin-top: 1.5rem;
+          height: 60px;
+        }
+      }
+    }
+
+    .cta {
+      align-self: flex-end;
+
+      .linkto {
+        align-self: flex-end;
+      }
+
+      svg,
+      button {
+        height: 2.5rem;
+        width: 2.5rem;
+      }
+      button {
+        margin-left: 0.5rem;
+        &.cta-unselect {
+          &:hover {
+            color: $warningColor;
+          }
+        }
+        &.cta-select {
+          color: $warningColor;
+          &:hover {
+            color: $warningColor;
+          }
+        }
+        &.cta-edit {
+          &:hover {
+            color: $primaryColorDarker;
+          }
+        }
+        &.cta-delete {
+          &:hover {
+            color: $errorColor;
+          }
+        }
+      }
+    }
+  }
+}

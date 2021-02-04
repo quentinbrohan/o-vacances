@@ -1,13 +1,11 @@
 /* eslint-disable react/no-array-index-key */
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ArrowDownCircle } from 'react-feather';
 import Button from 'src/components/elements/Button';
-
-import slideshowData from 'src/data/homeVisitorData';
+import slideshowData from 'src/data/homeVisitorSlideshowData';
 import './slideshow.scss';
 
 const Slideshow = () => {
-  // console.log(slideshowData);
   // Duration in ms for each slide
   const time = 7000;
   const [index, setIndex] = useState(0);
@@ -15,7 +13,7 @@ const Slideshow = () => {
   // setIndex + reset Index onClick if on last type
   const changeType = () => {
     setIndex(index + 1);
-    if (index === (slideshowData.length - 1)) {
+    if (index === slideshowData.length - 1) {
       setIndex(0);
     }
   };
@@ -35,7 +33,6 @@ const Slideshow = () => {
 
   return (
     <>
-      {/* Slideshow Images/Text */}
       <section className="slideshow">
         <div className="slideshow-images">
           {slideshowData.map(({ image }, i) => (
@@ -49,12 +46,10 @@ const Slideshow = () => {
           ))}
         </div>
         <div className="slideshow-content">
-          <h1 className="intro-title">Planifier vos vacances{' '}
+          <h1 className="intro-title">
+            Planifier vos vacances{' '}
             <a href="#" onClick={() => changeType()}>
-              <div
-                ref={ref}
-                className="progress"
-              />
+              <div ref={ref} className="progress" />
               {slideshowData.map(({ name }, i) => (
                 <span
                   key={i}
@@ -63,27 +58,22 @@ const Slideshow = () => {
                 >
                   {name}
                 </span>
-
               ))}
-            </a>
-            {' '}
+            </a>{' '}
           </h1>
-          <h1 className="intro-title">
-            devient facile.
-          </h1>
-          <p className="intro-content">Partir seul ou à plusieurs, gérer ses activités, échanger entre amis avec O'Vacances. <br />
+          <h1 className="intro-title">devient facile.</h1>
+          <p className="intro-content">
+            Partir seul ou à plusieurs, gérer ses activités, échanger entre amis avec O'Vacances.{' '}
+            <br />
             Tomber amoureux du voyage à nouveau.
           </p>
         </div>
       </section>
 
       <Button color="secondary" size="sm" haveClassName="show-features">
-        <a
-          href="#fonctionnalites"
-        >
+        <a href="#fonctionnalites">
           <ArrowDownCircle />
         </a>
-
       </Button>
     </>
   );

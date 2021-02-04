@@ -1,23 +1,24 @@
 @import 'src/styles/vars';
 
-.contact{
+.contact {
   display: flex;
   flex-wrap: wrap;
   height: 100%;
   justify-content: space-between;
 
   h1 {
-    width:100%;
+    width: 100%;
   }
 
-  .contact-text{
+  .contact-text {
     width: 100%;
 
     @media (min-width: $tablet) {
-        width:50%
-      }
-    p, h3 {
-      margin-bottom: 0.5*$gutter;
+      width: 50%;
+    }
+    p,
+    h3 {
+      margin-bottom: 0.5 * $gutter;
     }
 
     h3 {
@@ -25,46 +26,28 @@
       line-height: 125%;
     }
 
-    a{
+    a {
       color: $primaryColorDarker;
-      &:hover{
+      &:hover {
         color: $primaryColor;
       }
     }
   }
 
-  .contact-form{
+  .contact-form {
     width: 100%;
 
     @media (min-width: $tablet) {
-        width:40%
+      width: 40%;
     }
     form > div {
       margin-bottom: 1rem;
     }
-        input, textarea {
-          width:100%;
-          border: none;
-          border-radius: 0.1*$gutter;
-          background-color: $whiteColor;
-          padding: 0.3*$gutter;
-          &:focus {
-            outline-color: $greyColorDarker;
-          }
-
-          input::placeholder,
-          textarea::placeholder {
-            color: $greyColorDarker;
-            font-style: $fontBody;
-          }
-        }
-
-        textarea{
-            height: 3*$gutter;
-        }
+    input,
+    textarea {
+      width: 100%;
+      border: none;
+      background-color: $whiteColor;
+    }
   }
 }
-
-
-
-

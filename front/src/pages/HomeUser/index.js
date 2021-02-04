@@ -1,92 +1,71 @@
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { Helmet } from 'react-helmet';
-
-import { connect, useDispatch, useSelector } from 'react-redux';
-
-import { fetchTrips, saveTrips } from 'src/actions/trip';
-import { getTrips } from 'src/features/trip';
-
-import Loading from 'src/components/Loading';
 import { isFuture, isPast, parseISO } from 'date-fns';
-import TripCard from './TripCard';
+import React from 'react';
+import { Helmet } from 'react-helmet';
+import { Link } from 'react-router-dom';
+import Card from 'src/components/Card';
+import Button from 'src/components/elements/Button';
+import Loading from 'src/components/Loading';
+import { useGetTripsByUserIdQuery } from 'src/services/trip';
 
-import './homeUser.scss';
+// TODO: filter search ?
+const HomeUser = () => {
+  const {
+    data: trips, error, isLoading, isFetching,
+  } = useGetTripsByUserIdQuery();
 
-const HomeUser = ({
-  // trips,
-  isLoading,
-}) => {
-  const dispatch = useDispatch();
-  const { trips } = useSelector((state) => state.trip);
+  const futureTrips = trips?.trip.filter((trip) => isFuture(parseISO(trip.endDate)));
+  const oldTrips = trips?.trip.filter((trip) => isPast(parseISO(trip.endDate)));
 
-  useEffect(() => {
-    dispatch(getTrips());
-  }, []);
-
-  const futureTrips = trips.filter((trip) => isFuture(parseISO(trip.endDate)));
-  const oldTrips = trips.filter((trip) => isPast(parseISO(trip.endDate)));
+  if (isLoading || isFetching) {
+    return <Loading />;
+  }
 
   if (trips) {
     return (
       <main className="home-user">
         <Helmet>
           <title>Mes voyages</title>
-          <meta
-            name="description"
-            content="Homepage utilisateur, recense les voyages"
-          />
+          <meta name="description" content="Homepage utilisateur, recense les voyages" />
         </Helmet>
-        <div className="connection-container" />
-        {isLoading && <Loading />}
-        {!isLoading && futureTrips && (
+        {futureTrips && oldTrips && (
           <>
             <h1>Mes Voyages</h1>
-            <div className="my-trips">
-              {futureTrips.map((trip) => (
-                <TripCard {...trip} key={trip.id} />
-              ))}
-            </div>
+            {futureTrips.length > 0 ? (
+              <div className="cards-container">
+                {futureTrips.map((trip) => (
+                  <Card trip={trip} key={trip.id} mode="LINK" />
+                ))}
+              </div>
+            ) : (
+              <>
+                <div>
+                  Pas de voyages prévus.
+                  <Link to="/creer-un-voyage">
+                    <Button color="primary" className="inline">
+                      Ajouter
+                    </Button>
+                  </Link>
+                </div>
+              </>
+            )}
 
-            <h2 style={{ opacity: 0.8 }}>
-              Mes anciens voyages
-            </h2>
-            <div className="my-trips" style={{ opacity: 0.6 }}>
-              {oldTrips.map((trip) => (
-                <TripCard {...trip} key={trip.id} />
-              ))}
-            </div>
+            <h2 style={{ opacity: 0.8 }}>Mes anciens voyages</h2>
+            {oldTrips.length > 0 ? (
+              <div className="cards-container" style={{ opacity: 0.6 }}>
+                {oldTrips.map((trip) => (
+                  <Card trip={trip} key={trip.id} mode="LINK" />
+                ))}
+              </div>
+            ) : (
+              <div>Pas d'anciens voyages.</div>
+            )}
           </>
         )}
       </main>
     );
   }
 
-  return <div>Erreur dans l'accès aux données.</div>;
+  return <div>Erreur dans la requête.</div>;
 };
 
-HomeUser.propTypes = {
-  fetchTrips: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-  trips: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-    }).isRequired,
-  ).isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  trips: state.trip.trips,
-  isLoading: state.trip.isLoading,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  fetchTrips: () => {
-    dispatch(fetchTrips());
-  },
-  saveTrips: () => {
-    dispatch(saveTrips());
-  },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomeUser);
+export default HomeUser;

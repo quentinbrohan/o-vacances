@@ -1,0 +1,47 @@
+@import 'src/styles/vars';
+
+.signin {
+  h1 {
+    margin-top: 1rem;
+  }
+  .connection-container {
+    @include loginSigninContainer;
+    h1 {
+      text-align: center;
+    }
+    .signin-form {
+      width: 100%;
+    }
+    .signin-form-element {
+      margin: 1rem 0;
+      width: 100%;
+      padding: 1rem;
+    }
+    .signin-form-button {
+      margin-top: $gutter;
+      display: block;
+      width: 100%;
+      @media (min-width: $tablet) {
+        width: initial;
+      }
+      margin: 2rem auto;
+    }
+
+    .helper {
+      width: 100%;
+      text-align: center;
+      p {
+        margin: $gutter 0;
+      }
+      hr {
+        width: 80%;
+      }
+      a {
+        color: $primaryColorDarker;
+        &:hover {
+          color: lighten($primaryColor, 16%);
+        }
+      }
+    }
+  }
+}

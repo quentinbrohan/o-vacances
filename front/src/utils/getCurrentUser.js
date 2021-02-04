@@ -1,3 +1,4 @@
+// TODO: DELETE FILE.
 import jwtDecode from 'jwt-decode';
 
 // eslint-disable-next-line consistent-return

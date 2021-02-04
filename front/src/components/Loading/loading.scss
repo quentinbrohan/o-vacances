@@ -1,24 +1,32 @@
 @import 'src/styles/vars';
 
-
 .loading-container {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   background-color: white;
+
+  &.small {
+    position: relative;
+    width: fit-content;
+    background-color: transparent;
+  }
 }
 
 #loading {
-  // width: 25em;
-  // height: 25em;
-    width: 16em;
-    height: 16em;
-    fill: $primaryColor;
-    @media (min-width: $tablet) {
-      width: 20em;
-      height: 20em;
-    }
+  width: 16em;
+  height: 16em;
+  fill: $primaryColor;
+  @media (min-width: $tablet) {
+    width: 20em;
+    height: 20em;
+  }
+
+  &.small {
+    width: 2em;
+    height: 2em;
+  }
 }
 
 #loadingCircle {

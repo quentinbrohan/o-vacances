@@ -1,34 +1,34 @@
 @import url(/var/www/html/Apo/o-vacances/front/src/styles/_reset.css);
 @font-face {
   font-family: 'Quicksand';
-  src: url("../assets/fonts/Quicksand-VariableFont_wght.ttf");
+  src: url('../assets/fonts/Quicksand-VariableFont_wght.ttf');
   font-variation-settings: 100 900;
 }
 
 @font-face {
   font-family: 'Nunito';
-  src: url("../assets/fonts/Nunito-Regular.ttf");
+  src: url('../assets/fonts/Nunito-Regular.ttf');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Nunito';
-  src: url("../assets/fonts/Nunito-Italic.ttf");
+  src: url('../assets/fonts/Nunito-Italic.ttf');
   font-weight: normal;
   font-style: italic;
 }
 
 @font-face {
   font-family: 'Nunito';
-  src: url("../assets/fonts/Nunito-Bold.ttf");
+  src: url('../assets/fonts/Nunito-Bold.ttf');
   font-weight: bold;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Nunito';
-  src: url("../assets/fonts/Nunito-BoldItalic.ttf");
+  src: url('../assets/fonts/Nunito-BoldItalic.ttf');
   font-weight: bold;
   font-style: italic;
 }
@@ -39,7 +39,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Quicksand", sans-serif;
+  font-family: 'Quicksand', sans-serif;
   font-weight: 700;
 }
 
@@ -74,15 +74,17 @@ body {
 }
 
 body {
-  font-family: "Nunito", sans-serif;
+  font-family: 'Nunito', sans-serif;
   color: #2a2c34;
   height: 100%;
   min-height: 100%;
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   -webkit-box-sizing: inherit;
-          box-sizing: inherit;
+  box-sizing: inherit;
 }
 
 p {

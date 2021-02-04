@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { history } from 'src/index';
 
 const Button = ({
   className,
@@ -34,6 +35,12 @@ const Button = ({
     </Component>
   );
 };
+
+export const BackButton = () => (
+  <Button color="secondary" size="small" className="back" onClick={() => history.goBack()}>
+    〈{/* 〈 Retour */}
+  </Button>
+);
 
 Button.propTypes = {
   className: PropTypes.string,

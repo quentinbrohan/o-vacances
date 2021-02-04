@@ -1,4 +1,4 @@
-@import "src/styles/vars";
+@import 'src/styles/vars';
 
 .team {
   h1 {
@@ -8,70 +8,50 @@
     display: flex;
     justify-content: center;
     flex-flow: wrap;
-    // .team-card {
-    //   width:280px;
-    //   height: 360px;
-    //   display: block;
-    //   margin: $gutter;
-    //   @include transitionMedium;
-    //   border: 1px solid $greyColorLighter;
-    //   border-radius: 0.5rem;
-    //   overflow: hidden;
-    //   background-color: $greyColorLighter;
-
-    //   &:hover {
-    //     // cursor: pointer;
-    //     box-shadow:  0rem 0.5rem 1rem rgba(0, 0, 0, 0.15);
-    //     transform: scale(1.04);
-    //   }
-    }
-
-    .team-card-header {
-      height: 200px;
-      width: 100%;
-      padding: 1rem;
-      width:100%;
-      background-size:cover;
-      background-position: center;
-      color: $whiteColor;
-      overflow: hidden;
-    }
-
-    .team-card-body {
-      text-align: center;
-      padding: 1rem;
-      width:100%;
-      height: 100%;
-      h4 {
-        font-size: 1.2rem;
-        margin: 0;
-        margin-bottom: 1.5rem;
-      }
-    }
-
-    .links {
-      margin-top: 1.5rem;
-      font-size: 1rem;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      a {
-        color: $blackColor;
-        @include transitionFast;
-        cursor: pointer;
-        &:hover {
-          color: $whiteColor;
-        }
-      }
-    }
-
-    .body-content {
-      padding-bottom: 2.5rem;
-      font-size: 1rem;
-      line-height: 150%;
-    }
-
   }
 
+  .team-card-header {
+    height: 200px;
+    width: 100%;
+    padding: 1rem;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    color: $whiteColor;
+    overflow: hidden;
+  }
 
+  .team-card-body {
+    text-align: center;
+    padding: 1rem;
+    width: 100%;
+    height: 100%;
+    h4 {
+      font-size: 1.2rem;
+      margin: 0;
+      margin-bottom: 1.5rem;
+    }
+  }
 
+  .links {
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    a {
+      color: $blackColor;
+      @include transitionFast;
+      cursor: pointer;
+      &:hover {
+        color: $whiteColor;
+      }
+    }
+  }
+
+  .body-content {
+    padding-bottom: 2.5rem;
+    font-size: 1rem;
+    line-height: 150%;
+  }
+}

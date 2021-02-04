@@ -1,0 +1,83 @@
+@import 'src/styles/vars';
+
+.trip-details {
+  section.suggestions {
+    .trip-suggestions {
+      .suggestion {
+        width: 100%;
+        border-radius: 0.5rem;
+        margin-bottom: 1rem;
+        display: flex;
+        flex-direction: column;
+        padding: 0.5rem;
+        box-shadow:  /** inset */ 0 0.25rem 0.75rem rgba(0, 0, 0, 0.2);
+
+        .suggestion-header {
+          padding: 0.5rem 0.5rem 0;
+          display: flex;
+          align-items: center;
+
+          .suggestion-header-info {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            .suggestion-title {
+              font-size: 1.2rem;
+              font-weight: 600;
+              color: $blackColor;
+              width: 100%;
+            }
+            .suggestion-author {
+              font-weight: 600;
+              color: $greyColor;
+              display: flex;
+              justify-content: space-between;
+            }
+            .suggestion-date {
+              color: $greyColor;
+              font-weight: 400;
+            }
+          }
+
+          img,
+          svg {
+            height: 2.5rem;
+            width: 2.5rem;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+            object-fit: cover;
+          }
+        }
+
+        .suggestion-body {
+          padding: 0.5rem;
+
+          .suggestion-button--edit {
+            display: block;
+          }
+        }
+        .suggestion-description {
+          margin-left: 3rem;
+        }
+
+        .suggestion-cta {
+          align-self: flex-end;
+          button {
+            width: 2rem;
+            height: 2rem;
+            &.cta-delete {
+              &:hover {
+                color: $errorColor;
+              }
+            }
+            &.cta-edit {
+              &:hover {
+                color: $primaryColorDarker;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

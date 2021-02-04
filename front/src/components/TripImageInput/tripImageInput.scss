@@ -1,0 +1,16 @@
+@import 'src/styles/vars';
+
+.tripFormImage-input {
+  .preview {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: cover;
+    object-position: center;
+    border: 1px solid $greyColorLighter;
+  }
+
+  .change-image-check {
+    margin: 1rem 0;
+  }
+}

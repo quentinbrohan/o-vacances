@@ -2,7 +2,6 @@
 
 .home-visitor {
   .slideshow {
-    // position: absolute;
     top: 0;
     left: 0;
     height: 90vh;
@@ -36,25 +35,28 @@
     }
     h1.intro-title {
       z-index: 1;
-      font-size: 4.4rem;
+      font-size: 3rem;
       font-weight: 500;
       display: initial;
       text-shadow: 0.15rem 0.15rem 0.25rem rgba(0, 0, 0, 0.4);
       @media (min-width: $desktop) {
         display: inherit;
+        font-size: 4.4rem;
       }
     }
     p.intro-content {
       margin-top: $gutter;
-      font-size: 2rem;
+      font-size: 1.6rem;
       text-shadow: 0.15rem 0.15rem 0.25rem rgba(0, 0, 0, 0.6);
+      @media (min-width: $desktop) {
+        display: inherit;
+        font-size: 2rem;
+      }
     }
     span.trip-type {
       font-weight: 900;
       text-shadow: 0.15rem 0.15rem 0.25rem rgba(0, 0, 0, 0.6);
 
-      // margin-left: 1rem;
-      // font-size: 5.2rem;
       @media (min-width: $mobile) {
         margin-left: 0;
       }
@@ -62,8 +64,6 @@
         margin-left: 1rem;
         display: inline-block;
         position: absolute;
-        // Avoid 2 lines span
-        // BUT word end out of layout
         white-space: nowrap;
       }
     }
@@ -73,7 +73,6 @@
       position: absolute;
       left: 0;
       top: -0.5rem;
-      // bottom: 0;
       height: 0.25rem;
       opacity: 0.5;
       background: $whiteColor;
@@ -87,30 +86,28 @@
         width: 100%;
       }
     }
-    
+
     .transition {
-      // display: inline-block;
       transition: all 0.5s ease;
       transition-property: opacity, transform;
       @media (min-width: $desktop) {
-      position: absolute !important;
+        position: absolute !important;
       }
     }
-    
+
     .transition.vertical[hidden] {
       transition-delay: 0s;
       opacity: 0;
       transform: translate3d(0, -20px, 0) !important;
     }
-    
+
     .transition.horizontal[hidden] {
       transition-delay: 0s;
       opacity: 0;
       transform: translate3d(30px, 0, 0) !important;
     }
-
   }
-  
+
   // See Features button
   .show-features {
     top: 80vh;
@@ -137,13 +134,14 @@
       color: $whiteColor;
     }
 
-      @keyframes featuresButton {
-    0%, 100% {
-      transform: translateX(-50%) translateY(0%);
-    }
-    50% {
-      transform: translateX(-50%) translateY(-16%);
+    @keyframes featuresButton {
+      0%,
+      100% {
+        transform: translateX(-50%) translateY(0%);
+      }
+      50% {
+        transform: translateX(-50%) translateY(-16%);
+      }
     }
   }
-  }  
 }

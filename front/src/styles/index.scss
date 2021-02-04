@@ -3,6 +3,7 @@
 @import 'vars';
 @import 'typography';
 @import './elements/buttons';
+@import './elements/modal';
 
 html,
 body {
@@ -20,7 +21,9 @@ body {
   overflow-x: hidden;
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: inherit;
 }
 
