@@ -68,17 +68,6 @@ export const tripApi = createApi({
         );
       },
     }),
-    getUnsplashRandomPhotoByKeyword: build.query({
-      query: (formValues) => {
-        const { tripType } = formValues;
-
-        return {
-          url: `https://source.unsplash.com/1920x1080/?${tripType}`,
-          method: 'GET',
-
-        };
-      },
-    }),
     addTrip: build.mutation({
       query: (formValues) => {
         const {

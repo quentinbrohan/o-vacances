@@ -14,9 +14,7 @@ import { parseDisplay, parseDisplaySameYear } from 'src/utils/dates';
 import { getCurrentUserId } from 'src/utils/user';
 import './card.scss';
 
-const Card = ({
-  trip, activity, tripId, isArchived, mode,
-}) => {
+const Card = ({ trip, activity, tripId, isArchived, mode }) => {
   const dispatch = useDispatch();
   const [
     deleteActivity,
@@ -44,13 +42,39 @@ const Card = ({
   };
   return (
     <article className="card">
-      <header
-        style={{ backgroundImage: `url(${trip ? trip.image : API_URL + activity.category.image})` }}
-        className="card-header"
-      />
+      {mode === 'LINK' ? (
+        <Link
+          to={`/voyage/${tripId || (trip ? trip.id : activity.trip.id)}${
+            activity ? '/activites/' : ''
+          }`}
+        >
+          <header
+            style={{
+              backgroundImage: `url(${trip ? trip.image : API_URL + activity.category.image})`,
+            }}
+            className="card-header"
+          />{' '}
+        </Link>
+      ) : (
+        <header
+          style={{
+            backgroundImage: `url(${trip ? trip.image : API_URL + activity.category.image})`,
+          }}
+          className="card-header"
+        />
+      )}
+
       <div className="card-body">
         <div className="body-content">
-          <h3>{trip ? trip.title : activity.title}</h3>
+          {mode === 'LINK' && (
+            <Link
+              to={`/voyage/${tripId || (trip ? trip.id : activity.trip.id)}${
+                activity ? '/activites/' : ''
+              }`}
+            >
+              <h3>{trip ? trip.title : activity.title}</h3>
+            </Link>
+          )}
           {trip && (
             <div className="location">
               <MapPin /> {trip.location}
@@ -82,10 +106,10 @@ const Card = ({
               <ChevronRight className="linkto" />
             </Link>
           )}
-          {activity
-            && mode === 'VIEW'
-            && !isArchived
-            && activity.creator.id === getCurrentUserId() && (
+          {activity &&
+            mode === 'VIEW' &&
+            !isArchived &&
+            activity.creator.id === getCurrentUserId() && (
               <>
                 <ModalActivityForm
                   tripId={tripId}
@@ -109,7 +133,7 @@ const Card = ({
                   Voulez-vous vraiment supprimer "{activity.title}" ?
                 </ModalWrapper>
               </>
-          )}
+            )}
         </div>
       </div>
     </article>
