@@ -45,7 +45,7 @@ const Card = ({
   return (
     <article className="card">
       <header
-        style={{ backgroundImage: `url(${API_URL}${trip ? trip.image : activity.category.image})` }}
+        style={{ backgroundImage: `url(${trip ? trip.image : API_URL + activity.category.image})` }}
         className="card-header"
       />
       <div className="card-body">

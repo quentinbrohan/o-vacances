@@ -133,7 +133,7 @@ const TripInfo = ({ trip, isArchived, isLoading }) => {
 
   return (
     <>
-      <img className="trip-photo" alt={trip.title} src={`${API_URL + trip.image}`} />
+      <img className="trip-photo" alt={trip.title} src={trip.image} />
       <section className="trip-info">
         <div className="left">
           <div className="trip-info-header">
