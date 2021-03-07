@@ -89,7 +89,6 @@ export const tripApi = createApi({
           password,
           image: tripImageInput,
         };
-        console.log({formValues, form})
 
         return {
           url: `users/${getCurrentUserId()}/trips`,
