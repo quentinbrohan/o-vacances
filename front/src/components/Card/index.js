@@ -14,7 +14,9 @@ import { parseDisplay, parseDisplaySameYear } from 'src/utils/dates';
 import { getCurrentUserId } from 'src/utils/user';
 import './card.scss';
 
-const Card = ({ trip, activity, tripId, isArchived, mode }) => {
+const Card = ({
+  trip, activity, tripId, isArchived, mode,
+}) => {
   const dispatch = useDispatch();
   const [
     deleteActivity,
@@ -92,8 +94,12 @@ const Card = ({ trip, activity, tripId, isArchived, mode }) => {
           </div>
           <p className="description">
             {trip
-              ? `${trip.description.slice(0, 160)}...`
-              : `${activity.description.slice(0, 160)}...`}
+              ? trip.description.length > 160
+                ? `${trip.description.slice(0, 160)}...`
+                : trip.description
+              : activity.description.length > 160
+                ? `${activity.description.slice(0, 160)}...`
+                : activity.description}
           </p>
         </div>
         <div className="cta">
@@ -106,10 +112,10 @@ const Card = ({ trip, activity, tripId, isArchived, mode }) => {
               <ChevronRight className="linkto" />
             </Link>
           )}
-          {activity &&
-            mode === 'VIEW' &&
-            !isArchived &&
-            activity.creator.id === getCurrentUserId() && (
+          {activity
+            && mode === 'VIEW'
+            && !isArchived
+            && activity.creator.id === getCurrentUserId() && (
               <>
                 <ModalActivityForm
                   tripId={tripId}
@@ -133,7 +139,7 @@ const Card = ({ trip, activity, tripId, isArchived, mode }) => {
                   Voulez-vous vraiment supprimer "{activity.title}" ?
                 </ModalWrapper>
               </>
-            )}
+          )}
         </div>
       </div>
     </article>

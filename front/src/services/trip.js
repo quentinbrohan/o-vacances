@@ -80,26 +80,18 @@ export const tripApi = createApi({
           tripImageInput,
         } = formValues;
 
-        const form = {
-          title,
-          description,
-          location,
-          startDate,
-          endDate,
-          password,
-          image: tripImageInput,
-        };
-
         return {
           url: `users/${getCurrentUserId()}/trips`,
           method: 'POST',
-          body:           {title,
-          description,
-          location,
-          startDate,
-          endDate,
-          password,
-          image: tripImageInput,}
+          body: {
+            title,
+            description,
+            location,
+            startDate,
+            endDate,
+            password,
+            image: tripImageInput,
+          },
         };
       },
       onSuccess(_, { dispatch }, result) {

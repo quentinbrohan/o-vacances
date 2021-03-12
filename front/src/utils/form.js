@@ -1,6 +1,6 @@
 import { isFuture, parseISO } from 'date-fns';
 
-import { EMAIL_REGEX } from 'src/constants/patterns';
+import { EMAIL_REGEX, PASSWORD_PATTERN } from 'src/constants/patterns';
 
 export const validateIsFutureStartDate = (startDate) => {
   if (!isFuture(parseISO(startDate))) {
@@ -46,6 +46,11 @@ export const rulesPassword = {
   minLength: {
     value: 8,
     message: 'Le mot de passe doit contenir au moins 8 caractères.',
+  },
+  pattern: {
+    value: new RegExp(PASSWORD_PATTERN),
+    message:
+      'Le mot de passe doit contenir au moins: 1 lettre majuscule, 1 lettre minuscule, 1 chiffre, 1 caractère spécial (#?!@$%^&*-/) et faire au moins 8 caractères.',
   },
 };
 
