@@ -82,8 +82,8 @@ class Trip
     private $location;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Length(max=255)
+     * @ORM\Column(type="text", length=512, nullable=true)
+     * @Assert\Length(max=512)
      * @Groups("apiV0_trip")
      * @Groups("apiV0_tripByUser")
      * @Groups("apiV0_activity")

@@ -14,5 +14,5 @@ services:
     volumes: ['./:/var/www/symfony:cached']
   nginx:
     build: ./docker/nginx
-    ports: ['80:80']
+    ports: ['8000:80']
     volumes: ['./:/var/www/symfony:cached']
