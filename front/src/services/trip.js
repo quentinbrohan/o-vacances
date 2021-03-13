@@ -1,28 +1,28 @@
 import { createApi, fetchBaseQuery } from '@rtk-incubator/rtk-query';
 import { API_URL } from 'src/constants';
-import { headersFormData } from 'src/services';
+// import { headersFormData } from 'src/services';
 import LocalStorageUtil from 'src/utils/LocalStorageUtil';
 import { getCurrentUserId, isAuthTokenStillValid } from 'src/utils/user';
 
 export const localStorageUtil = new LocalStorageUtil();
 
-const getBase64 = (file) => new Promise((resolve) => {
-  // let fileInfo;
-  let baseURL = '';
-  // Make new FileReader
-  const reader = new FileReader();
+// const getBase64 = (file) => new Promise((resolve) => {
+//   // let fileInfo;
+//   let baseURL = '';
+//   // Make new FileReader
+//   const reader = new FileReader();
 
-  // Convert the file to base64 text
-  reader.readAsDataURL(file);
+//   // Convert the file to base64 text
+//   reader.readAsDataURL(file);
 
-  // on reader load somthing...
-  reader.onload = () => {
-    // Make a fileInfo Object
-    baseURL = reader.result;
-    resolve(baseURL);
-  };
-  // console.log(fileInfo);
-});
+//   // on reader load somthing...
+//   reader.onload = () => {
+//     // Make a fileInfo Object
+//     baseURL = reader.result;
+//     resolve(baseURL);
+//   };
+//   // console.log(fileInfo);
+// });
 
 // Define a service using a base URL and expected endpoints
 export const tripApi = createApi({

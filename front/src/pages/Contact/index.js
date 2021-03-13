@@ -12,6 +12,7 @@ import './contact.scss';
 const Contact = () => {
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = (formValues) => {
+    console.log({ formValues });
   };
 
   return (

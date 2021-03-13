@@ -292,7 +292,7 @@ const ActivitiesSection = ({
     isFetching: isFetchingActivities,
   } = useGetActivitiesByTripIdQuery(tripId);
 
-  const sortedDescendingStartDateActivities = sortByAscStartDateActivities(data || activities);
+  const sortedDescendingStartDateActivities = sortByAscStartDateActivities(data);
 
   return (
     <section className="activities">
