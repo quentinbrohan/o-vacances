@@ -67,7 +67,14 @@
   }
   .error {
     @include transitionFast;
+    line-height: 1.25;
     margin-top: 0.25rem;
     color: $errorColor;
+  }
+    .success {
+    @include transitionFast;
+    line-height: 1.25;
+    margin-top: 0.25rem;
+    color: $successColor;
   }
 }

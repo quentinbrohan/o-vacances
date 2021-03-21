@@ -96,6 +96,9 @@
     "egulias/email-validator": {
         "version": "2.1.18"
     },
+    "laminas/laminas-zendframework-bridge": {
+        "version": "1.1.1"
+    },
     "lcobucci/jwt": {
         "version": "3.3.2"
     },
@@ -426,6 +429,9 @@
     },
     "symfony/property-info": {
         "version": "v5.1.2"
+    },
+    "symfony/proxy-manager-bridge": {
+        "version": "v5.1.11"
     },
     "symfony/routing": {
         "version": "5.1",

@@ -3,8 +3,9 @@
 main.trip-activities {
   .header {
     display: flex;
-    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    justify-content: space-between;
     @media (min-width: $tablet) {
       flex-direction: row;
       flex-wrap: wrap;

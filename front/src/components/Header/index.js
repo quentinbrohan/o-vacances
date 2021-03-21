@@ -6,7 +6,9 @@ import { Link, NavLink } from 'react-router-dom';
 import { ReactComponent as Logo } from 'src/assets/svg/logo.svg';
 import Button from 'src/components/elements/Button';
 import { logOutUser } from 'src/features/user';
+import { history } from 'src/index';
 import './header.scss';
+
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -23,11 +25,13 @@ const Header = () => {
 
   const manageLogout = () => {
     dispatch(logOutUser());
+    history.push('/');
   };
 
   const manageLogoutMobile = () => {
     setIsOpen(false);
     dispatch(logOutUser());
+    history.push('/');
   };
 
   return (

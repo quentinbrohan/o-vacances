@@ -17,9 +17,13 @@ import {
   rulesPassword,
   rulesTripFormDescription,
   rulesTripFormLocation,
-  rulesTripFormTitle, ValidateIsFutureEndDate, validateIsFutureStartDate,
+  rulesTripFormTitle,
+  ValidateIsFutureEndDate,
+  validateIsFutureStartDate,
 } from 'src/utils/form';
 import { getTripIdFromUrlParams } from 'src/utils/trip';
+
+const TRIP_TYPES = ['countryside, beach, mountain, international, camping, sports,'];
 
 const TripForm = () => {
   const dispatch = useDispatch();
@@ -43,29 +47,27 @@ const TripForm = () => {
   const [addTrip, { isLoading: isLoadingAddTrip }] = useAddTripMutation();
   const [editTrip, { isLoading: isLoadingEditTrip }] = useEditTripMutation();
 
-  const {
-    register, handleSubmit, watch, errors, getValues, reset,
-  } = useForm({
+  const { register, handleSubmit, watch, errors, getValues, reset, setValue } = useForm({
     shouldFocusError: true,
     defaultValues:
       isEditMode && trip
         ? {
-          // tripImageInput: trip.image,
-          title: trip.title,
-          description: trip.description,
-          location: trip.location,
-          startDate: parseInternal(trip.startDate),
-          endDate: parseInternal(trip.endDate),
-          password: trip.password,
-          passwordConfirm: '',
-        }
+            tripImageInput: trip.image,
+            title: trip.title,
+            description: trip.description,
+            location: trip.location,
+            startDate: parseInternal(trip.startDate),
+            endDate: parseInternal(trip.endDate),
+            password: trip.password,
+            passwordConfirm: '',
+          }
         : defaultValues,
   });
 
   useEffect(() => {
     if (isEditMode && trip) {
       reset({
-        // tripImageInput: trip.image,
+        tripImageInput: trip.image,
         title: trip.title,
         description: trip.description,
         location: trip.location,
@@ -82,7 +84,7 @@ const TripForm = () => {
 
   const onSubmit = (formValues) => {
     if (isEditMode) {
-      editTrip(formValues)
+      editTrip({ ...formValues, tripId })
         .then((response) => {
           if (response.data) {
             dispatch(toastSuccess('Voyage mis à jour.'));
@@ -90,13 +92,12 @@ const TripForm = () => {
           }
         })
         .catch((addTripError) => console.warn(addTripError));
-    }
-    else {
+    } else {
       addTrip(formValues)
         .then((response) => {
           if (response.data) {
             dispatch(toastSuccess('Voyage créé.'));
-            history.push(`/voyage/${response.data.result.id}`);
+            history.push(`/voyage/${response.data.id}`);
           }
         })
 
@@ -118,6 +119,7 @@ const TripForm = () => {
           error={errors.tripImageInput}
           image={trip?.image || ''}
           isEditForm={Boolean(tripId)}
+          setValue={setValue}
         />
         <FormInput
           id="title"
@@ -168,7 +170,7 @@ const TripForm = () => {
           placeholder="Retour"
           register={register({
             required: 'Date de retour requise.',
-            // TODO: PatternDate && Date >= startDate
+            valueAsDate: true,
             validate: (endDate) => ValidateIsFutureEndDate(endDate, getValues('startDate')),
           })}
           error={errors.endDate}
@@ -189,7 +191,8 @@ const TripForm = () => {
           label="Confirmer le mot de passe"
           placeholder="Confirmer le mot de passe"
           register={register({
-            validate: (value) => value === watch('password') || 'Les mots de passe saisis ne sont pas identiques.',
+            validate: (value) =>
+              value === watch('password') || 'Les mots de passe saisis ne sont pas identiques.',
           })}
           error={errors.passwordConfirm}
         />

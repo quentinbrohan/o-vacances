@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
@@ -10,8 +10,22 @@ import {
 import './contact.scss';
 
 const Contact = () => {
-  const { register, handleSubmit, errors } = useForm();
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccessfullySubmitted, setIsSuccessfullySubmitted] = useState(false);
+
+  const { register, handleSubmit, errors, reset } = useForm();
   const onSubmit = (formValues) => {
+    console.log({ formValues });
+
+    setIsLoading(true);
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        setIsLoading(false);
+        setIsSuccessfullySubmitted(true);
+        reset();
+        resolve();
+      }, 1000);
+    });
   };
 
   return (
@@ -22,9 +36,7 @@ const Contact = () => {
       </Helmet>
       <h1>Contactez-nous</h1>
       <div className="contact-text">
-        <h3>
-          Vous souhaitez nous faire part d'une remarque? Vous avez besoin d'un renseignement?
-        </h3>
+        <h3>Vous souhaitez nous faire part d'une remarque? Vous avez besoin d'un renseignement?</h3>
         <p>
           Vous pouvez joindre l'un des membres de l'équipe sur la page{' '}
           <Link to="/equipe">Qui sommes nous?</Link>
@@ -66,9 +78,14 @@ const Contact = () => {
             error={errors.message}
           />
 
-          <Button color="primary" type="submit">
+          <Button color="primary" type="submit" loading={isLoading}>
             Envoyer
           </Button>
+          {isSuccessfullySubmitted && (
+            <div className="success">
+              Message envoyé! Nous renviendrons vers vous prochainement.
+            </div>
+          )}
         </form>
       </div>
     </main>

@@ -42,6 +42,5 @@ describe('<TripForm />', () => {
     const formSubmit = wrapper.find('form');
     formSubmit.simulate('submit');
     expect(callback).to.have.been.calledWith(handleTripForm);
-    // done();
   });
 });

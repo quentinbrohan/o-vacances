@@ -45,7 +45,7 @@ class Trip
      */
     private $title;
 
-    
+
     /**
      * @ORM\Column(type="text", nullable=true)
      * @Groups("apiV0_list")
@@ -56,7 +56,7 @@ class Trip
      */
     private $description;
 
-    /**  
+    /**
      * @ORM\Column(type="date", nullable=true)
      * @Groups("apiV0_trip")
      * @Groups("apiV0_tripByUser")
@@ -82,8 +82,8 @@ class Trip
     private $location;
 
     /**
-     * @ORM\Column(type="string", length=128, nullable=true)
-     * @Assert\Length(max=128)
+     * @ORM\Column(type="text", length=512, nullable=true)
+     * @Assert\Length(max=512)
      * @Groups("apiV0_trip")
      * @Groups("apiV0_tripByUser")
      * @Groups("apiV0_activity")
@@ -93,7 +93,7 @@ class Trip
     /**
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="trip")
      * @Groups("apiV0_trip")
-     * 
+     *
      */
     private $users;
 
@@ -115,12 +115,12 @@ class Trip
      * @Groups("apiV0_trip")
      */
     private $suggestion;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="trips")
      * @ORM\JoinColumn(nullable=false)
      * @Groups("apiV0_trip")
-     * 
+     *
      */
     private $creator;
 
@@ -131,7 +131,7 @@ class Trip
     private $password;
 
 
-    
+
 
     public function __construct()
     {
@@ -144,12 +144,12 @@ class Trip
     // /**
     //  * @Groups("apiV0_trip")
     //  * je créé une fonction custom qui va parcourir mes entites2 et j'en ressort ce que j'en souhaite
-    //  * ci dessous un exemple possible mais tu es libre sur le retour 
-    //  * Note: groupe n'est pas uniquement applicable sur les propriété ;) 
+    //  * ci dessous un exemple possible mais tu es libre sur le retour
+    //  * Note: groupe n'est pas uniquement applicable sur les propriété ;)
     //  */
     // public function getUsersDetails(){
     //     $tableauAretourner = [];
-            
+
     //     foreach ($this->users as $user) {
     //         $tableauAretourner[] = $user->getEmail();
     //     };

@@ -1,10 +1,28 @@
 import { createApi, fetchBaseQuery } from '@rtk-incubator/rtk-query';
 import { API_URL } from 'src/constants';
-import { headersFormData } from 'src/services';
+// import { headersFormData } from 'src/services';
 import LocalStorageUtil from 'src/utils/LocalStorageUtil';
 import { getCurrentUserId, isAuthTokenStillValid } from 'src/utils/user';
 
 export const localStorageUtil = new LocalStorageUtil();
+
+// const getBase64 = (file) => new Promise((resolve) => {
+//   // let fileInfo;
+//   let baseURL = '';
+//   // Make new FileReader
+//   const reader = new FileReader();
+
+//   // Convert the file to base64 text
+//   reader.readAsDataURL(file);
+
+//   // on reader load somthing...
+//   reader.onload = () => {
+//     // Make a fileInfo Object
+//     baseURL = reader.result;
+//     resolve(baseURL);
+//   };
+//   // console.log(fileInfo);
+// });
 
 // Define a service using a base URL and expected endpoints
 export const tripApi = createApi({
@@ -62,27 +80,18 @@ export const tripApi = createApi({
           tripImageInput,
         } = formValues;
 
-        const form = {
-          title,
-          description,
-          location,
-          startDate,
-          endDate,
-          password,
-        };
-
-        const json = JSON.stringify(form);
-
-        const formData = new FormData();
-        formData.append('file', tripImageInput[0]);
-        formData.append('document', json);
-
-        // TODO FIXME: Argument 1 passed to Symfony\Component\Serializer\Serializer::decode() must be of the type string, null given,
         return {
           url: `users/${getCurrentUserId()}/trips`,
           method: 'POST',
-          body: formData,
-          headers: headersFormData,
+          body: {
+            title,
+            description,
+            location,
+            startDate,
+            endDate,
+            password,
+            image: tripImageInput,
+          },
         };
       },
       onSuccess(_, { dispatch }, result) {
@@ -107,29 +116,42 @@ export const tripApi = createApi({
           tripImageInput,
         } = formValues;
 
-        const form = {
-          title,
-          description,
-          location,
-          startDate,
-          endDate,
-          password,
-        };
+        // console.log({ tripImageInput });
+        // const fileAsBase64 = (tripImageInput !== undefined && URL.createObjectURL(tripImageInput[0])) || null;
+        // console.log({ fileAsBase64 });
 
-        const json = JSON.stringify(form);
+        // const form = {
+        //   title,
+        //   description,
+        //   location,
+        //   startDate,
+        //   endDate,
+        //   password,
+        //   image: tripImageInput,
+        // };
 
-        const formData = new FormData();
-        if (tripImageInput) {
-          formData.append('file', tripImageInput[0]);
-        }
-        formData.append('document', json);
+        // const json = JSON.stringify(form);
 
-        // TODO: FIXME: Argument 1 passed to Symfony\Component\Serializer\Serializer::decode() must be of the type string, null given,
+        // const formData = new FormData();
+        // formData.append('document', json);
+        // if (tripImageInput) {
+        //   formData.append('file', tripImageInput[0]);
+        // }
+
+        // // TODO: FIXME: Argument 1 passed to Symfony\Component\Serializer\Serializer::decode() must be of the type string, null given,
         return {
           url: `users/${getCurrentUserId()}/trips/${tripId}`,
           method: 'PATCH',
-          body: formData,
-          headers: headersFormData,
+          body: {
+            title,
+            description,
+            location,
+            startDate,
+            endDate,
+            password,
+            image: tripImageInput,
+          },
+          // headers: headersFormData,
         };
       },
       onSuccess({ tripId }, { dispatch }, result) {

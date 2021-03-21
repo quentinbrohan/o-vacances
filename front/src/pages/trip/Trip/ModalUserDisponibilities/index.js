@@ -31,7 +31,7 @@ const ModalUserDisponibilities = ({
   ]);
 
   useEffect(() => {
-    if (userDisponibilities) {
+    if (userDisponibilities?.length > 0) {
       setHasDisponibilities(true);
 
       setDateRangeUserDisponibilities([

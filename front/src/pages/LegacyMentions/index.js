@@ -1,7 +1,6 @@
 /* eslint-disable max-len */
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { REACT_APP_URL } from 'src/constants';
 import './legacyMentions.scss';
 
 const LegacyMentions = () => (
@@ -16,7 +15,7 @@ const LegacyMentions = () => (
       parcourir ses pages. En vous connectant sur ce site, vous acceptez sans réserves les présentes
       modalités. Aussi, conformément à l’article n°6 de la Loi n°2004-575 du 21 Juin 2004 pour la
       confiance dans l’économie numérique, les responsables du présent site internet{' '}
-      <a href={{ REACT_APP_URL }}>{REACT_APP_URL}</a> sont:
+      <a href="/">O'Vacances</a> sont:
     </p>
     <h2>Editeur du site</h2>
     <ul>
@@ -46,10 +45,10 @@ const LegacyMentions = () => (
     </p>
     <h2>Conditions d'utilisations</h2>
     <p>
-      Ce site <a href={REACT_APP_URL}>({REACT_APP_URL})</a> est proposé en différents langages web
-      (HTML, HTML5, Javascript, CSS, etc…) pour un meilleur confort d'utilisation et un graphisme
-      plus agréable, nous vous recommandons de recourir à des navigateurs modernes comme Internet
-      explorer, Safari, Firefox, Google Chrome, etc…
+      Ce site <a href="/">O'Vacances</a> est proposé en différents langages web (HTML, HTML5,
+      Javascript, CSS, etc…) pour un meilleur confort d'utilisation et un graphisme plus agréable,
+      nous vous recommandons de recourir à des navigateurs modernes comme Internet explorer, Safari,
+      Firefox, Google Chrome, etc…
     </p>
     <p>
       Les mentions légales ont été générées sur le site Générateur de mentions légales, offert par
@@ -66,24 +65,24 @@ const LegacyMentions = () => (
     </p>
     <br />
     <p>
-      <span>Cookies</span>: Le site {REACT_APP_URL}peut-être amené à vous demander l’acceptation
-      des cookies pour des besoins de statistiques et d'affichage. Un cookies est une information
-      déposée sur votre disque dur par le serveur du site que vous visitez. Il contient plusieurs
-      données qui sont stockées sur votre ordinateur dans un simple fichier texte auquel un serveur
-      accède pour lire et enregistrer des informations . Certaines parties de ce site ne peuvent
-      être fonctionnelles sans l’acceptation de cookies.
+      <span>Cookies</span>: Le site <a href="/">O'vacances</a> peut-être amené à vous demander
+      l’acceptation des cookies pour des besoins de statistiques et d'affichage. Un cookies est une
+      information déposée sur votre disque dur par le serveur du site que vous visitez. Il contient
+      plusieurs données qui sont stockées sur votre ordinateur dans un simple fichier texte auquel
+      un serveur accède pour lire et enregistrer des informations . Certaines parties de ce site ne
+      peuvent être fonctionnelles sans l’acceptation de cookies.
     </p>
     <br />
     <p>
       <span>Liens hypertextes</span>: Les sites internet de peuvent offrir des liens vers d’autres
-      sites internet ou d’autres ressources disponibles sur Internet.{' '}
-      <a href={REACT_APP_URL}>O-vacances</a> ne dispose d'aucun moyen pour contrôler les sites en
-      connexion avec ses sites internet. ne répond pas de la disponibilité de tels sites et sources
-      externes, ni ne la garantit. Elle ne peut être tenue pour responsable de tout dommage, de
-      quelque nature que ce soit, résultant du contenu de ces sites ou sources externes, et
-      notamment des informations, produits ou services qu’ils proposent, ou de tout usage qui peut
-      être fait de ces éléments. Les risques liés à cette utilisation incombent pleinement à
-      l'internaute, qui doit se conformer à leurs conditions d'utilisation.
+      sites internet ou d’autres ressources disponibles sur Internet. <a href="/">O'Vacances</a> ne
+      dispose d'aucun moyen pour contrôler les sites en connexion avec ses sites internet. ne répond
+      pas de la disponibilité de tels sites et sources externes, ni ne la garantit. Elle ne peut
+      être tenue pour responsable de tout dommage, de quelque nature que ce soit, résultant du
+      contenu de ces sites ou sources externes, et notamment des informations, produits ou services
+      qu’ils proposent, ou de tout usage qui peut être fait de ces éléments. Les risques liés à
+      cette utilisation incombent pleinement à l'internaute, qui doit se conformer à leurs
+      conditions d'utilisation.
     </p>
     <br />
     <p>
@@ -102,17 +101,17 @@ const LegacyMentions = () => (
     <h2>Service fournis</h2>
     <p>
       L'ensemble des activités de la société ainsi que ses informations sont présentés sur notre
-      site {REACT_APP_URL}.
+      site <a href="/">O'vacances</a>.
     </p>
     <br />
     <p>
-      <a href={REACT_APP_URL}>O-vacances</a> s’efforce de fournir sur le site
-      {REACT_APP_URL}des informations aussi précises que possible. les renseignements figurant sur
-      le site {REACT_APP_URL}ne sont pas exhaustifs et les photos non contractuelles. Ils sont
-      donnés sous réserve de modifications ayant été apportées depuis leur mise en ligne. Par
-      ailleurs, tous les informations indiquées sur le site
-      {REACT_APP_URL}sont données à titre indicatif, et sont susceptibles de changer ou d’évoluer
-      sans préavis.
+      <a href="/">O'vacances</a> s’efforce de fournir sur le site
+      <a href="/">O'vacances</a> des informations aussi précises que possible. les renseignements
+      figurant sur le site <a href="/">O'vacances</a> ne sont pas exhaustifs et les photos non
+      contractuelles. Ils sont donnés sous réserve de modifications ayant été apportées depuis leur
+      mise en ligne. Par ailleurs, tous les informations indiquées sur le site
+      <a href="/">O'vacances</a> sont données à titre indicatif, et sont susceptibles de changer ou
+      d’évoluer sans préavis.
     </p>
     <h2>Limitation contractuelles sur les données</h2>
     <p>
@@ -136,11 +135,11 @@ const LegacyMentions = () => (
     <p>
       Les liens hypertextes mis en place dans le cadre du présent site internet en direction
       d'autres ressources présentes sur le réseau Internet ne sauraient engager la responsabilité de{' '}
-      <a href={REACT_APP_URL}>O-vacances</a>.
+      <a href="/">O'vacances</a>.
     </p>
     <h2>Propriété intellectuelle</h2>
     <p>
-      Tout le contenu du présent sur le site {REACT_APP_URL}, incluant, de façon non limitative, les
+      Tout le contenu du présent sur le site O'Vacances, incluant, de façon non limitative, les
       graphismes, images, textes, vidéos, animations, sons, logos, gifs et icônes ainsi que leur
       mise en forme sont la propriété exclusive de la société à l'exception des marques, logos ou
       contenus appartenant à d'autres sociétés partenaires ou auteurs.
@@ -165,7 +164,7 @@ const LegacyMentions = () => (
     </p>
     <h2>Litiges</h2>
     <p>
-      Les présentes conditions du site {REACT_APP_URL}sont régies par les lois françaises et toute
+      Les présentes conditions du site O'Vacances sont régies par les lois françaises et toute
       contestation ou litiges qui pourraient naître de l'interprétation ou de l'exécution de
       celles-ci seront de la compétence exclusive des tribunaux dont dépend le siège social de la
       société. La langue de référence, pour le règlement de contentieux éventuels, est le français.
@@ -173,7 +172,7 @@ const LegacyMentions = () => (
     <h2>Données personnelles</h2>
     <p>
       De manière générale, vous n’êtes pas tenu de nous communiquer vos données personnelles lorsque
-      vous visitez notre site Internet <a href={REACT_APP_URL}>O-vacances</a>
+      vous visitez notre site Internet <a href="/">O'vacances</a>
     </p>
     <p>
       Cependant, ce principe comporte certaines exceptions. En effet, pour certains services

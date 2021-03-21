@@ -44,13 +44,39 @@ const Card = ({
   };
   return (
     <article className="card">
-      <header
-        style={{ backgroundImage: `url(${API_URL}${trip ? trip.image : activity.category.image})` }}
-        className="card-header"
-      />
+      {mode === 'LINK' ? (
+        <Link
+          to={`/voyage/${tripId || (trip ? trip.id : activity.trip.id)}${
+            activity ? '/activites/' : ''
+          }`}
+        >
+          <header
+            style={{
+              backgroundImage: `url(${trip ? trip.image : API_URL + activity.category.image})`,
+            }}
+            className="card-header"
+          />{' '}
+        </Link>
+      ) : (
+        <header
+          style={{
+            backgroundImage: `url(${trip ? trip.image : API_URL + activity.category.image})`,
+          }}
+          className="card-header"
+        />
+      )}
+
       <div className="card-body">
         <div className="body-content">
-          <h3>{trip ? trip.title : activity.title}</h3>
+          {mode === 'LINK' && (
+            <Link
+              to={`/voyage/${tripId || (trip ? trip.id : activity.trip.id)}${
+                activity ? '/activites/' : ''
+              }`}
+            >
+              <h3>{trip ? trip.title : activity.title}</h3>
+            </Link>
+          )}
           {trip && (
             <div className="location">
               <MapPin /> {trip.location}
@@ -68,8 +94,12 @@ const Card = ({
           </div>
           <p className="description">
             {trip
-              ? `${trip.description.slice(0, 160)}...`
-              : `${activity.description.slice(0, 160)}...`}
+              ? trip.description.length > 160
+                ? `${trip.description.slice(0, 160)}...`
+                : trip.description
+              : activity.description.length > 160
+                ? `${activity.description.slice(0, 160)}...`
+                : activity.description}
           </p>
         </div>
         <div className="cta">
