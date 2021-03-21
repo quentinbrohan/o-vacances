@@ -2,9 +2,7 @@ import { isSameYear, parseISO } from 'date-fns';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import {
-  Calendar, Lock, MapPin, Settings, Share,
-} from 'react-feather';
+import { Calendar, Lock, MapPin, Settings, Share } from 'react-feather';
 import { Helmet } from 'react-helmet';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
@@ -15,7 +13,7 @@ import Card, { CardSeeMore } from 'src/components/Card';
 import Button from 'src/components/elements/Button';
 import Loading from 'src/components/Loading';
 import ModalWrapper from 'src/components/ModalWrapper';
-import { API_URL, REACT_APP_URL } from 'src/constants';
+import { API_URL } from 'src/constants';
 import { history } from 'src/index';
 import ModalActivityForm from 'src/pages/trip/Trip/ModalActivityForm';
 import ModalSuggestionForm from 'src/pages/trip/Trip/ModalSuggestionForm';
@@ -37,9 +35,7 @@ const Trip = () => {
   const currentTrip = useParams().id;
   const tripId = Number(currentTrip);
 
-  const {
-    data: trip, isLoading, isFetching, error, refetch,
-  } = useGetTripByIdQuery(tripId);
+  const { data: trip, isLoading, isFetching, error, refetch } = useGetTripByIdQuery(tripId);
 
   const isArchived = isTripArchived(trip?.startDate, trip?.endDate);
   const { isAuthenticated } = useSelector((state) => state.user);
@@ -170,16 +166,18 @@ const TripInfo = ({ trip, isArchived, isLoading }) => {
               <div className="avatars">
                 {trip.users
                   .slice(0, 10)
-                  .map((user) => (user.avatar !== null ? (
-                    <img
-                      key={user.firstname}
-                      src={API_URL + user.avatar}
-                      alt={user.firstname}
-                      className="avatar"
-                    />
-                  ) : (
-                    <AvatarDefault className="avatar" />
-                  )))}
+                  .map((user) =>
+                    user.avatar !== null ? (
+                      <img
+                        key={user.firstname}
+                        src={API_URL + user.avatar}
+                        alt={user.firstname}
+                        className="avatar"
+                      />
+                    ) : (
+                      <AvatarDefault className="avatar" />
+                    ),
+                  )}
               </div>
             </div>
             <div className="disponibilities">
@@ -188,9 +186,9 @@ const TripInfo = ({ trip, isArchived, isLoading }) => {
                 <option value="participants" selected hidden>
                   Disponibilités des participants
                 </option>
-                {!isLoading
-                  && trip.disponibility.length > 0
-                  && trip.disponibility.map((participantDisponibilities) => (
+                {!isLoading &&
+                  trip.disponibility.length > 0 &&
+                  trip.disponibility.map((participantDisponibilities) => (
                     <option
                       key={participantDisponibilities.id}
                       disabled={isOwnUser}
@@ -232,7 +230,7 @@ const TripInfo = ({ trip, isArchived, isLoading }) => {
               </div>
               <div className="trip-link">
                 <CopyToClipboard
-                  text={`${REACT_APP_URL}/voyage/${trip.id}`}
+                  text={`${location.hostname}/voyage/${trip.id}`}
                   onCopy={() => setCopied({ ...copied, link: true })}
                 >
                   <Share data-tip data-for="linkTip" style={{ cursor: 'pointer' }} />
@@ -240,8 +238,8 @@ const TripInfo = ({ trip, isArchived, isLoading }) => {
                 <ReactTooltip id="linkTip" place="top" effect="float">
                   {copied.link ? '✅ Lien copié' : 'Copier le lien'}
                 </ReactTooltip>
-                <Link href={`${REACT_APP_URL}/voyage/${trip.id}`} className="link">
-                  {`${REACT_APP_URL}/voyage/${trip.id}`}
+                <Link href={`/voyage/${trip.id}`} className="link">
+                  {`${location.hostname}/voyage/${trip.id}`}
                 </Link>
               </div>
             </div>
@@ -283,16 +281,14 @@ TripInfo.propTypes = {
   isLoading: PropTypes.bool.isRequired,
 };
 
-const ActivitiesSection = ({
-  activities, tripId, isArchived, tripStartDate, tripEndDate,
-}) => {
+const ActivitiesSection = ({ activities, tripId, isArchived, tripStartDate, tripEndDate }) => {
   const {
     data,
     isLoading: isLoadingActivities,
     isFetching: isFetchingActivities,
   } = useGetActivitiesByTripIdQuery(tripId);
 
-  const sortedDescendingStartDateActivities = sortByAscStartDateActivities(data);
+  const sortedDescendingStartDateActivities = sortByAscStartDateActivities(data || activities);
 
   return (
     <section className="activities">
@@ -308,20 +304,20 @@ const ActivitiesSection = ({
           />
         )}
       </div>
-      {activities.length > 0 && (
+      {sortedDescendingStartDateActivities.length > 0 && (
         <div className="cards-container">
           {(isLoadingActivities || isFetchingActivities) && <Loading small />}
 
-          {sortedDescendingStartDateActivities
-            && sortedDescendingStartDateActivities
+          {sortedDescendingStartDateActivities &&
+            sortedDescendingStartDateActivities
               .slice(0, 5)
               .map((activity) => (
                 <Card activity={activity} key={activity.id} tripId={tripId} mode="LINK" />
               ))}
-          {activities.length > 5 && <CardSeeMore tripId={tripId} />}
+          {sortedDescendingStartDateActivities.length > 5 && <CardSeeMore tripId={tripId} />}
         </div>
       )}
-      {activities.length === 0 && <div>Pas d'activités.</div>}
+      {sortedDescendingStartDateActivities.length === 0 && <div>Pas d'activités.</div>}
     </section>
   );
 };
@@ -355,8 +351,8 @@ const SuggestionsSection = ({ tripId, suggestions, isArchived }) => {
       </div>
       <div className="trip-suggestions">
         {(isLoadingSuggestions || isFetchingSuggestions) && <Loading small />}
-        {sortedDescendingSuggestions
-          && sortedDescendingSuggestions.map((suggestion) => (
+        {sortedDescendingSuggestions &&
+          sortedDescendingSuggestions.map((suggestion) => (
             <Suggestion
               tripId={tripId}
               suggestion={suggestion}

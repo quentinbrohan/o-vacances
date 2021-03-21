@@ -3,7 +3,6 @@ module.exports = {
   verbose: false,
   globals: {
     API_URL: 'http://localhost:8000',
-    REACT_APP_URL: 'http://localhost:8000',
     localStorage: null,
   },
 };

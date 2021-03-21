@@ -1,8 +1,4 @@
 #!/bin/bash
-
-## Update tables schema in db
-composer-compose exec php bin/console doctrine:schema:update --force
-
 # JWT setup
 docker-compose exec php \
     composer require jwt-auth
